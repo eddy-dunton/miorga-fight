@@ -1,0 +1,175 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/bg/level_base.png" type="Texture" id=2]
+[ext_resource path="res://assets/bg/level_back2.png" type="Texture" id=3]
+[ext_resource path="res://assets/level/holytree/level_fore.png" type="Texture" id=4]
+[ext_resource path="res://assets/bg/level_back1.png" type="Texture" id=5]
+[ext_resource path="res://scenes/ui.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/MiorgaCamera.cs" type="Script" id=7]
+[ext_resource path="res://src/CameraTrack.cs" type="Script" id=8]
+[ext_resource path="res://src/HPBar.cs" type="Script" id=9]
+[ext_resource path="res://assets/level/holytree/particles/type 2/7.png" type="Texture" id=10]
+[ext_resource path="res://assets/level/holytree/particles/type 2/2.png" type="Texture" id=11]
+[ext_resource path="res://assets/level/holytree/particles/type 2/9.png" type="Texture" id=12]
+[ext_resource path="res://assets/level/holytree/particles/type 2/10.png" type="Texture" id=13]
+[ext_resource path="res://assets/level/holytree/particles/type 2/6.png" type="Texture" id=14]
+[ext_resource path="res://assets/level/holytree/particles/type 2/11.png" type="Texture" id=15]
+[ext_resource path="res://assets/level/holytree/particles/type 2/1.png" type="Texture" id=16]
+[ext_resource path="res://assets/level/holytree/particles/type 2/3.png" type="Texture" id=17]
+[ext_resource path="res://assets/level/holytree/particles/type 2/5.png" type="Texture" id=18]
+[ext_resource path="res://assets/level/holytree/particles/type 2/8.png" type="Texture" id=19]
+[ext_resource path="res://assets/level/holytree/particles/type 2/4.png" type="Texture" id=20]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 2
+emission_box_extents = Vector3( 400, 100, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 10.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 50.0
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle_random = 1.0
+anim_speed_random = 0.5
+anim_offset = 0.12
+anim_offset_random = 0.73
+
+[sub_resource type="AnimatedTexture" id=2]
+flags = 4
+frames = 11
+frame_0/texture = ExtResource( 16 )
+frame_1/texture = ExtResource( 11 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 17 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 20 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 18 )
+frame_4/delay_sec = 0.0
+frame_5/texture = ExtResource( 14 )
+frame_5/delay_sec = 0.0
+frame_6/texture = ExtResource( 10 )
+frame_6/delay_sec = 0.0
+frame_7/texture = ExtResource( 19 )
+frame_7/delay_sec = 0.0
+frame_8/texture = ExtResource( 12 )
+frame_8/delay_sec = 0.0
+frame_9/texture = ExtResource( 13 )
+frame_9/delay_sec = 0.0
+frame_10/texture = ExtResource( 15 )
+frame_10/delay_sec = 0.0
+
+[sub_resource type="LineShape2D" id=3]
+normal = Vector2( 1, 0 )
+
+[sub_resource type="LineShape2D" id=4]
+normal = Vector2( -1, 0 )
+
+[node name="scene" type="Node"]
+
+[node name="particles" type="Particles2D" parent="."]
+position = Vector2( 0, -200 )
+amount = 100
+lifetime = 2.75
+randomness = 1.0
+visibility_rect = Rect2( -5000, -5000, 9999, 9999 )
+local_coords = false
+process_material = SubResource( 1 )
+texture = SubResource( 2 )
+
+[node name="bg" type="ParallaxBackground" parent="."]
+
+[node name="bg_sky" type="ParallaxLayer" parent="bg"]
+motion_scale = Vector2( 0.08, 0.08 )
+
+[node name="sprite" type="Sprite" parent="bg/bg_sky"]
+texture = ExtResource( 3 )
+
+[node name="bg_islands" type="ParallaxLayer" parent="bg"]
+motion_scale = Vector2( 0.78, 0.78 )
+
+[node name="sprite" type="Sprite" parent="bg/bg_islands"]
+position = Vector2( 0, 100 )
+texture = ExtResource( 5 )
+
+[node name="bg_tree" type="ParallaxLayer" parent="bg"]
+
+[node name="sprite" type="Sprite" parent="bg/bg_tree"]
+texture = ExtResource( 2 )
+
+[node name="ui" parent="." instance=ExtResource( 6 )]
+
+[node name="health_p2" parent="ui" index="2"]
+script = ExtResource( 9 )
+
+[node name="en_player1" parent="." instance=ExtResource( 1 )]
+position = Vector2( -250, 150 )
+rotation = 0.0
+collision_layer = 2147483649
+collision/safe_margin = 0.001
+HP_BAR = "/root/scene/ui/health_p1"
+
+[node name="animate_sprite" parent="en_player1" index="1"]
+offsets = {
+"high_attack_alt": Vector2( 89, 0 ),
+"high_attack_main": Vector2( 89, -6 ),
+"low_attack_main": Vector2( 31, 0 ),
+"trans_high_alt->low": Vector2( 30, 0 ),
+"trans_high_main->low": Vector2( 27, 0 ),
+"walk": Vector2( 0, -5 )
+}
+
+[node name="en_player2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 250, 150 )
+rotation = 0.0
+collision_layer = 2147483649
+collision/safe_margin = 0.001
+DIRECTION = 1
+HP_BAR = "/root/scene/ui/health_p2"
+
+[node name="animate_sprite" parent="en_player2" index="1"]
+offsets = {
+"high_attack_alt": Vector2( 89, 0 ),
+"high_attack_main": Vector2( 89, -6 ),
+"low_attack_main": Vector2( 31, 0 ),
+"trans_high_alt->low": Vector2( 30, 0 ),
+"trans_high_main->low": Vector2( 27, 0 ),
+"walk": Vector2( 0, -5 )
+}
+
+[node name="arena" type="StaticBody2D" parent="."]
+
+[node name="ar_wall_left" type="CollisionShape2D" parent="arena"]
+position = Vector2( -520, 180 )
+shape = SubResource( 3 )
+
+[node name="ar_wall_right" type="CollisionShape2D" parent="arena"]
+position = Vector2( 520, 180 )
+shape = SubResource( 4 )
+
+[node name="fg" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+
+[node name="camera_track" type="Node2D" parent="."]
+position = Vector2( 0, 100 )
+script = ExtResource( 8 )
+trackNames = PoolStringArray( "/root/scene/en_player1", "/root/scene/en_player2" )
+moving = true
+
+[node name="camera" type="Camera2D" parent="camera_track"]
+offset = Vector2( 0, -19 )
+current = true
+limit_left = -500
+limit_right = 500
+smoothing_enabled = true
+smoothing_speed = 25.0
+script = ExtResource( 7 )
+
+[editable path="ui"]
+
+[editable path="en_player1"]
+
+[editable path="en_player2"]

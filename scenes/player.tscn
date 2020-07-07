@@ -1,0 +1,171 @@
+[gd_scene load_steps=63 format=2]
+
+[ext_resource path="res://src/Player.cs" type="Script" id=1]
+[ext_resource path="res://assets/player/sworddude/fight/low/standard/key2.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/sworddude/stances/high.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/sworddude/stances/low.png" type="Texture" id=4]
+[ext_resource path="res://assets/player/sworddude/stances/lax.png" type="Texture" id=5]
+[ext_resource path="res://resources/action/sworddude/Parry.tres" type="Resource" id=6]
+[ext_resource path="res://assets/player/sworddude/walk/walk1.png" type="Texture" id=7]
+[ext_resource path="res://assets/player/sworddude/walk/walk2.png" type="Texture" id=8]
+[ext_resource path="res://assets/player/sworddude/walk/walk3.png" type="Texture" id=9]
+[ext_resource path="res://assets/player/sworddude/walk/walk5.png" type="Texture" id=10]
+[ext_resource path="res://assets/player/sworddude/walk/walk7.png" type="Texture" id=11]
+[ext_resource path="res://assets/player/sworddude/walk/walk4.png" type="Texture" id=12]
+[ext_resource path="res://assets/player/sworddude/fight/low/alternate/key1.png" type="Texture" id=13]
+[ext_resource path="res://assets/player/sworddude/walk/walk8.png" type="Texture" id=14]
+[ext_resource path="res://assets/player/sworddude/walk/walk6.png" type="Texture" id=15]
+[ext_resource path="res://resources/action/sworddude/HighMain.tres" type="Resource" id=16]
+[ext_resource path="res://src/PlayerAnimation.cs" type="Script" id=17]
+[ext_resource path="res://assets/player/sworddude/fight/low/standard/key4_b.png" type="Texture" id=18]
+[ext_resource path="res://assets/player/sworddude/fight/low/standard/key5.png" type="Texture" id=19]
+[ext_resource path="res://assets/player/sworddude/fight/low/standard/key3.png" type="Texture" id=20]
+[ext_resource path="res://assets/player/sworddude/fight/low/alternate/key5.png" type="Texture" id=21]
+[ext_resource path="res://assets/player/sworddude/fight/low/standard/key4.png" type="Texture" id=22]
+[ext_resource path="res://assets/player/sworddude/fight/high/standard/key3.png" type="Texture" id=23]
+[ext_resource path="res://assets/player/sworddude/fight/low/alternate/key6.png" type="Texture" id=24]
+[ext_resource path="res://assets/player/sworddude/fight/high/standard/key6.png" type="Texture" id=25]
+[ext_resource path="res://assets/player/sworddude/fight/high/alternate/key5.png" type="Texture" id=26]
+[ext_resource path="res://assets/player/sworddude/fight/high/alternate/key3.png" type="Texture" id=27]
+[ext_resource path="res://assets/player/sworddude/fight/high/standard/key5_b.png" type="Texture" id=28]
+[ext_resource path="res://assets/player/sworddude/fight/high/alternate/key2.png" type="Texture" id=29]
+[ext_resource path="res://assets/player/sworddude/fight/high/standard/key2.png" type="Texture" id=30]
+[ext_resource path="res://assets/player/sworddude/fight/high/standard/key4.png" type="Texture" id=31]
+[ext_resource path="res://assets/player/sworddude/fight/high/alternate/key6.png" type="Texture" id=32]
+[ext_resource path="res://assets/player/sworddude/fight/low/alternate/key4.png" type="Texture" id=33]
+[ext_resource path="res://resources/action/sworddude/HighAlt.tres" type="Resource" id=34]
+[ext_resource path="res://assets/player/sworddude/fight/high/standard/key5.png" type="Texture" id=35]
+[ext_resource path="res://assets/player/sworddude/fight/high/alternate/key4.png" type="Texture" id=36]
+[ext_resource path="res://resources/action/sworddude/LowMain.tres" type="Resource" id=37]
+[ext_resource path="res://assets/player/sworddude/fight/low/alternate/key3.png" type="Texture" id=38]
+[ext_resource path="res://assets/player/sworddude/fight/low/alternate/key2.png" type="Texture" id=39]
+[ext_resource path="res://assets/player/sworddude/stances/transition/betweenguard/key1.png" type="Texture" id=40]
+[ext_resource path="res://assets/player/sworddude/stances/transition/betweenguard/key3.png" type="Texture" id=41]
+[ext_resource path="res://assets/player/sworddude/stances/transition/toguard.png" type="Texture" id=42]
+[ext_resource path="res://assets/player/sworddude/stances/transition/betweenguard/key2.png" type="Texture" id=43]
+[ext_resource path="res://assets/player/sworddude/fight/high/afterhit/key1.png" type="Texture" id=44]
+[ext_resource path="res://assets/player/sworddude/fight/high/afterhit/key2.png" type="Texture" id=45]
+[ext_resource path="res://assets/player/sworddude/fight/high/afterhit/key3.png" type="Texture" id=46]
+[ext_resource path="res://assets/player/sworddude/flinch/key3.png" type="Texture" id=47]
+[ext_resource path="res://assets/player/sworddude/flinch/key4.png" type="Texture" id=48]
+[ext_resource path="res://assets/player/sworddude/flinch/key2.png" type="Texture" id=49]
+[ext_resource path="res://assets/player/sworddude/flinch/key1.png" type="Texture" id=50]
+[ext_resource path="res://assets/player/sworddude/fight/high/afterhit/key4.png" type="Texture" id=51]
+[ext_resource path="res://assets/player/sworddude/flinch/key6.png" type="Texture" id=52]
+[ext_resource path="res://assets/player/sworddude/flinch/key12.png" type="Texture" id=53]
+[ext_resource path="res://assets/player/sworddude/flinch/key11.png" type="Texture" id=54]
+[ext_resource path="res://assets/player/sworddude/flinch/key7.png" type="Texture" id=55]
+[ext_resource path="res://assets/player/sworddude/flinch/key9.png" type="Texture" id=56]
+[ext_resource path="res://assets/player/sworddude/flinch/key8.png" type="Texture" id=57]
+[ext_resource path="res://assets/player/sworddude/flinch/key10.png" type="Texture" id=58]
+[ext_resource path="res://assets/player/sworddude/flinch/key5.png" type="Texture" id=59]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 23, 46 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": false,
+"name": "high",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 39 ), ExtResource( 38 ), ExtResource( 33 ), ExtResource( 21 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "low_parry_alt",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 20 ), ExtResource( 22 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 19 ) ],
+"loop": false,
+"name": "low_attack_main",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 40 ), ExtResource( 43 ) ],
+"loop": false,
+"name": "trans_low->high",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 50 ), ExtResource( 49 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 59 ), ExtResource( 52 ), ExtResource( 55 ), ExtResource( 57 ), ExtResource( 56 ), ExtResource( 58 ), ExtResource( 54 ), ExtResource( 53 ) ],
+"loop": false,
+"name": "flinch",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": false,
+"name": "low",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 30 ), ExtResource( 23 ), ExtResource( 31 ), ExtResource( 35 ), ExtResource( 28 ), ExtResource( 28 ), ExtResource( 25 ), ExtResource( 25 ) ],
+"loop": false,
+"name": "high_attack_main",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 42 ) ],
+"loop": false,
+"name": "trans_lax->high",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": false,
+"name": "lax",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 29 ), ExtResource( 27 ), ExtResource( 36 ), ExtResource( 26 ), ExtResource( 26 ), ExtResource( 32 ), ExtResource( 32 ), ExtResource( 32 ) ],
+"loop": false,
+"name": "high_attack_alt",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 41 ), ExtResource( 43 ) ],
+"loop": false,
+"name": "trans_high->low",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 15 ), ExtResource( 11 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "walk",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 51 ) ],
+"loop": false,
+"name": "trans_high_main->low",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 51 ) ],
+"loop": false,
+"name": "trans_high_alt->low",
+"speed": 10.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+
+[node name="en_player" type="KinematicBody2D"]
+rotation = -0.000480333
+script = ExtResource( 1 )
+LOW_MAIN = ExtResource( 37 )
+LOW_ALT = ExtResource( 6 )
+HIGH_MAIN = ExtResource( 16 )
+HIGH_ALT = ExtResource( 34 )
+SPEED = 100
+HP_MAX = 100
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2( 10, 37 )
+shape = SubResource( 1 )
+
+[node name="animate_sprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 2 )
+animation = "low_parry_alt"
+script = ExtResource( 17 )
+offsets = {
+"high_attack_alt": Vector2( 89, 0 ),
+"high_attack_main": Vector2( 89, -6 ),
+"low_attack_main": Vector2( 31, 0 ),
+"trans_high_alt->low": Vector2( 30, 0 ),
+"trans_high_main->low": Vector2( 27, 0 ),
+"walk": Vector2( 0, -5 )
+}
+
+[node name="TEMP" type="CollisionShape2D" parent="animate_sprite"]
+visible = false
+position = Vector2( 100, 0 )
+shape = SubResource( 3 )

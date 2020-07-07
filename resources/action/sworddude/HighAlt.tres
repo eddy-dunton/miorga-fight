@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://src/Attack.cs" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 46, 12 )
+
+[resource]
+script = ExtResource( 1 )
+animation = "high_attack_alt"
+movement = Vector2( -76, 0 )
+transition = "trans_high_alt->low"
+transitionTo = 1
+animateTransition = true
+hitbox = SubResource( 1 )
+hitboxoffset = Vector2( 9, 72 )
+hitframe = 2
+halt = true

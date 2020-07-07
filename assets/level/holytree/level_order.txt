@@ -1,0 +1,4 @@
+level_fore  = x1.000
+level_base  = x1.000
+level_back1 = x0.954
+level_back2 = x0.798
