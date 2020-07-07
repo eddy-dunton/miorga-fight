@@ -78,20 +78,15 @@ animations = [ {
 "name": "high_attack_alt",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 42 ) ],
+"frames": [ ExtResource( 40 ), ExtResource( 43 ) ],
 "loop": false,
-"name": "trans_lax->high",
-"speed": 10.0
+"name": "trans_low->high",
+"speed": 12.0
 }, {
-"frames": [ ExtResource( 5 ) ],
+"frames": [ ExtResource( 41 ), ExtResource( 43 ) ],
 "loop": false,
-"name": "lax",
-"speed": 1.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": false,
-"name": "low",
-"speed": 1.0
+"name": "trans_high->low",
+"speed": 12.0
 }, {
 "frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 15 ), ExtResource( 11 ), ExtResource( 14 ) ],
 "loop": true,
@@ -108,10 +103,15 @@ animations = [ {
 "name": "low_parry_alt",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 40 ), ExtResource( 43 ) ],
+"frames": [ ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 51 ) ],
 "loop": false,
-"name": "trans_low->high",
-"speed": 12.0
+"name": "trans_high_main->low",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": false,
+"name": "low",
+"speed": 1.0
 }, {
 "frames": [ ExtResource( 50 ), ExtResource( 49 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 59 ), ExtResource( 52 ), ExtResource( 55 ), ExtResource( 57 ), ExtResource( 56 ), ExtResource( 58 ), ExtResource( 54 ), ExtResource( 53 ) ],
 "loop": false,
@@ -123,20 +123,20 @@ animations = [ {
 "name": "high_attack_main",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 41 ), ExtResource( 43 ) ],
-"loop": false,
-"name": "trans_high->low",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 2 ), ExtResource( 20 ), ExtResource( 22 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 19 ) ],
 "loop": false,
 "name": "low_attack_main",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 51 ) ],
+"frames": [ ExtResource( 42 ) ],
 "loop": false,
-"name": "trans_high_main->low",
+"name": "trans_lax->high",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": false,
+"name": "lax",
+"speed": 1.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
@@ -150,7 +150,7 @@ gradient = SubResource( 4 )
 width = 512
 
 [sub_resource type="ParticlesMaterial" id=6]
-lifetime_randomness = 0.3
+lifetime_randomness = 1.0
 flag_disable_z = true
 direction = Vector3( 0, -1, 0 )
 spread = 90.0
@@ -166,8 +166,6 @@ damping = 75.0
 angle = 720.0
 angle_random = 1.0
 color_ramp = SubResource( 5 )
-anim_offset = 1.0
-anim_offset_random = 1.0
 
 [sub_resource type="AnimatedTexture" id=7]
 flags = 4
@@ -218,7 +216,8 @@ shape = SubResource( 3 )
 [node name="sparks" type="Particles2D" parent="animate_sprite"]
 position = Vector2( 53.2267, 0.0255665 )
 emitting = false
-amount = 16
+amount = 24
+lifetime = 0.8
 one_shot = true
 speed_scale = 2.0
 explosiveness = 1.0
