@@ -193,9 +193,9 @@ frame_3/delay_sec = 0.0
 [sub_resource type="SpriteFrames" id=8]
 animations = [ {
 "frames": [ ExtResource( 64 ), ExtResource( 60 ), ExtResource( 66 ), ExtResource( 61 ), ExtResource( 63 ), ExtResource( 68 ), ExtResource( 70 ), ExtResource( 65 ), ExtResource( 62 ) ],
-"loop": true,
+"loop": false,
 "name": "mid",
-"speed": 20.0
+"speed": 30.0
 } ]
 
 [node name="en_player" type="KinematicBody2D"]
@@ -244,9 +244,9 @@ process_material = SubResource( 6 )
 texture = SubResource( 7 )
 
 [node name="blood" type="AnimatedSprite" parent="animate_sprite"]
-visible = false
 position = Vector2( 56.5352, 33.3626 )
 frames = SubResource( 8 )
 animation = "mid"
-frame = 7
+frame = 8
+playing = true
 script = ExtResource( 71 )
