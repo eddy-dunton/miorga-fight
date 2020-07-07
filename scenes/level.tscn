@@ -122,6 +122,9 @@ offsets = {
 "walk": Vector2( 0, -5 )
 }
 
+[node name="blood" parent="en_player1/animate_sprite" index="2"]
+visible = false
+
 [node name="en_player2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 250, 150 )
 rotation = 0.0
@@ -139,6 +142,9 @@ offsets = {
 "trans_high_main->low": Vector2( 27, 0 ),
 "walk": Vector2( 0, -5 )
 }
+
+[node name="blood" parent="en_player2/animate_sprite" index="2"]
+visible = false
 
 [node name="arena" type="StaticBody2D" parent="."]
 

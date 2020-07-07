@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://src/Player.cs" type="Script" id=1]
 [ext_resource path="res://assets/player/sworddude/fight/low/standard/key2.png" type="Texture" id=2]
@@ -59,8 +59,18 @@
 [ext_resource path="res://assets/player/sworddude/flinch/key8.png" type="Texture" id=57]
 [ext_resource path="res://assets/player/sworddude/flinch/key10.png" type="Texture" id=58]
 [ext_resource path="res://assets/player/sworddude/flinch/key5.png" type="Texture" id=59]
+[ext_resource path="res://assets/player/particles/bloodmid/2.png" type="Texture" id=60]
+[ext_resource path="res://assets/player/particles/bloodmid/4.png" type="Texture" id=61]
+[ext_resource path="res://assets/player/particles/bloodmid/9.png" type="Texture" id=62]
+[ext_resource path="res://assets/player/particles/bloodmid/5.png" type="Texture" id=63]
+[ext_resource path="res://assets/player/particles/bloodmid/1.png" type="Texture" id=64]
+[ext_resource path="res://assets/player/particles/bloodmid/8.png" type="Texture" id=65]
+[ext_resource path="res://assets/player/particles/bloodmid/3.png" type="Texture" id=66]
 [ext_resource path="res://assets/player/particles/sparks/spark3_white.png" type="Texture" id=67]
+[ext_resource path="res://assets/player/particles/bloodmid/6.png" type="Texture" id=68]
 [ext_resource path="res://assets/player/particles/sparks/spark4_white.png" type="Texture" id=69]
+[ext_resource path="res://assets/player/particles/bloodmid/7.png" type="Texture" id=70]
+[ext_resource path="res://src/PlayerBlood.cs" type="Script" id=71]
 [ext_resource path="res://assets/player/particles/sparks/spark1_white.png" type="Texture" id=73]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -180,6 +190,14 @@ frame_2/delay_sec = 0.0
 frame_3/texture = ExtResource( 69 )
 frame_3/delay_sec = 0.0
 
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ ExtResource( 64 ), ExtResource( 60 ), ExtResource( 66 ), ExtResource( 61 ), ExtResource( 63 ), ExtResource( 68 ), ExtResource( 70 ), ExtResource( 65 ), ExtResource( 62 ) ],
+"loop": true,
+"name": "mid",
+"speed": 20.0
+} ]
+
 [node name="en_player" type="KinematicBody2D"]
 rotation = -0.000480333
 script = ExtResource( 1 )
@@ -196,8 +214,7 @@ shape = SubResource( 1 )
 
 [node name="animate_sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-animation = "low_parry_alt"
-frame = 1
+animation = "flinch"
 script = ExtResource( 17 )
 offsets = {
 "high_attack_alt": Vector2( 89, 0 ),
@@ -225,3 +242,11 @@ randomness = 0.5
 local_coords = false
 process_material = SubResource( 6 )
 texture = SubResource( 7 )
+
+[node name="blood" type="AnimatedSprite" parent="animate_sprite"]
+visible = false
+position = Vector2( 56.5352, 33.3626 )
+frames = SubResource( 8 )
+animation = "mid"
+frame = 7
+script = ExtResource( 71 )
