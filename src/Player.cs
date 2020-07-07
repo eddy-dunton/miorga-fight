@@ -52,6 +52,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public PlayerAnimation nodeAnimateSprite;
 	public CollisionShape2D nodeCollision;
 	public Player nodeEnemy;
+	public Particles2D nodeSparks;
 
 	private HPBar hpBar;
 	private Vector2 velocity;
@@ -72,6 +73,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public override void _Ready() {
 		this.nodeAnimateSprite = GetNode<AnimatedSprite>("animate_sprite") as PlayerAnimation;
 		this.nodeCollision = GetNode<CollisionShape2D>("collision");
+		this.nodeSparks = GetNode<Particles2D>("animate_sprite/sparks");
 
 		//Init hp bar
 		this.hpBar = GetNode<ProgressBar>(this.HP_BAR) as HPBar;

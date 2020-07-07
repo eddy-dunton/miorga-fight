@@ -36,6 +36,8 @@ public class Attack : Action
 			} else {
                 //Successful parry
                 this.Cut(player);
+                //Call the enemies parry success
+                player.nodeEnemy.parry.Success(player.nodeEnemy);
                 player.Knockback(player.nodeEnemy.parry.knockback);
             }
 		}

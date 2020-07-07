@@ -32,4 +32,8 @@ public class Parry : Action
 
 		player.parry = null;
     }
+
+    public void Success(Player player) {
+        player.nodeSparks.Emitting = true;
+    }
 }
