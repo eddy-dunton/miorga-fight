@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=2]
+[gd_scene load_steps=89 format=2]
 
 [ext_resource path="res://src/Player.cs" type="Script" id=1]
 [ext_resource path="res://assets/player/sworddude/fight/low/standard/key2.png" type="Texture" id=2]
@@ -76,6 +76,10 @@
 [ext_resource path="res://assets/player/sworddude/fight/low/standard/afterhit/return/key1.png" type="Texture" id=74]
 [ext_resource path="res://assets/player/sworddude/fight/low/standard/afterhit/return/key2.png" type="Texture" id=75]
 [ext_resource path="res://assets/player/sworddude/fight/low/standard/afterhit/return/key4.png" type="Texture" id=76]
+[ext_resource path="res://assets/player/particles/bloodmid/11.png" type="Texture" id=77]
+[ext_resource path="res://assets/player/particles/bloodmid/12.png" type="Texture" id=78]
+[ext_resource path="res://assets/player/particles/bloodmid/13.png" type="Texture" id=79]
+[ext_resource path="res://assets/player/particles/bloodmid/10.png" type="Texture" id=80]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23, 46 )
@@ -87,9 +91,9 @@ animations = [ {
 "name": "high_attack_alt",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 5 ) ],
 "loop": false,
-"name": "high",
+"name": "lax",
 "speed": 1.0
 }, {
 "frames": [ ExtResource( 13 ), ExtResource( 39 ), ExtResource( 38 ), ExtResource( 33 ), ExtResource( 21 ), ExtResource( 24 ) ],
@@ -97,10 +101,50 @@ animations = [ {
 "name": "low_parry_alt",
 "speed": 10.0
 }, {
+"frames": [ ExtResource( 42 ) ],
+"loop": false,
+"name": "trans_lax->high",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 74 ), ExtResource( 75 ), ExtResource( 72 ), ExtResource( 76 ) ],
+"loop": true,
+"name": "trans_low_main->high",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": false,
+"name": "high",
+"speed": 1.0
+}, {
+"frames": [ ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 51 ) ],
+"loop": false,
+"name": "trans_high_main->low",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 50 ), ExtResource( 49 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 59 ), ExtResource( 52 ), ExtResource( 55 ), ExtResource( 57 ), ExtResource( 56 ), ExtResource( 58 ), ExtResource( 54 ), ExtResource( 53 ) ],
+"loop": false,
+"name": "flinch",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 40 ), ExtResource( 43 ) ],
+"loop": false,
+"name": "trans_low->high",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": false,
+"name": "low",
+"speed": 1.0
+}, {
 "frames": [ ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 51 ) ],
 "loop": false,
 "name": "trans_high_alt->low",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 30 ), ExtResource( 23 ), ExtResource( 31 ), ExtResource( 35 ), ExtResource( 28 ), ExtResource( 28 ), ExtResource( 25 ), ExtResource( 25 ) ],
+"loop": false,
+"name": "high_attack_main",
+"speed": 12.0
 }, {
 "frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 15 ), ExtResource( 11 ), ExtResource( 14 ) ],
 "loop": true,
@@ -112,50 +156,10 @@ animations = [ {
 "name": "trans_high->low",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 74 ), ExtResource( 75 ), ExtResource( 72 ), ExtResource( 76 ) ],
-"loop": true,
-"name": "trans_low_main->high",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 42 ) ],
-"loop": false,
-"name": "trans_lax->high",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 51 ) ],
-"loop": false,
-"name": "trans_high_main->low",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 5 ) ],
-"loop": false,
-"name": "lax",
-"speed": 1.0
-}, {
-"frames": [ ExtResource( 40 ), ExtResource( 43 ) ],
-"loop": false,
-"name": "trans_low->high",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 2 ), ExtResource( 20 ), ExtResource( 22 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 19 ) ],
 "loop": false,
 "name": "low_attack_main",
 "speed": 12.0
-}, {
-"frames": [ ExtResource( 50 ), ExtResource( 49 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 59 ), ExtResource( 52 ), ExtResource( 55 ), ExtResource( 57 ), ExtResource( 56 ), ExtResource( 58 ), ExtResource( 54 ), ExtResource( 53 ) ],
-"loop": false,
-"name": "flinch",
-"speed": 20.0
-}, {
-"frames": [ ExtResource( 30 ), ExtResource( 23 ), ExtResource( 31 ), ExtResource( 35 ), ExtResource( 28 ), ExtResource( 28 ), ExtResource( 25 ), ExtResource( 25 ) ],
-"loop": false,
-"name": "high_attack_main",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": false,
-"name": "low",
-"speed": 1.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
@@ -201,7 +205,7 @@ frame_3/delay_sec = 0.0
 
 [sub_resource type="SpriteFrames" id=8]
 animations = [ {
-"frames": [ ExtResource( 64 ), ExtResource( 60 ), ExtResource( 66 ), ExtResource( 61 ), ExtResource( 63 ), ExtResource( 68 ), ExtResource( 70 ), ExtResource( 65 ), ExtResource( 62 ) ],
+"frames": [ ExtResource( 64 ), ExtResource( 60 ), ExtResource( 66 ), ExtResource( 61 ), ExtResource( 63 ), ExtResource( 68 ), ExtResource( 70 ), ExtResource( 65 ), ExtResource( 62 ), ExtResource( 62 ), ExtResource( 80 ), ExtResource( 77 ), ExtResource( 78 ), ExtResource( 79 ) ],
 "loop": false,
 "name": "mid",
 "speed": 30.0
@@ -224,7 +228,7 @@ shape = SubResource( 1 )
 [node name="animate_sprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0.00030259, -0.629959 )
 frames = SubResource( 2 )
-animation = "high_attack_alt"
+animation = "flinch"
 script = ExtResource( 17 )
 offsets = {
 "high_attack_alt": Vector2( 89, 0 ),
@@ -258,6 +262,7 @@ texture = SubResource( 7 )
 position = Vector2( 56.5352, 33.3626 )
 frames = SubResource( 8 )
 animation = "mid"
-frame = 8
+frame = 13
 playing = true
+offset = Vector2( -15, -5 )
 script = ExtResource( 71 )
