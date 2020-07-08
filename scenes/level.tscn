@@ -119,6 +119,7 @@ offsets = {
 "low_attack_main": Vector2( 31, 0 ),
 "trans_high_alt->low": Vector2( 30, 0 ),
 "trans_high_main->low": Vector2( 27, 0 ),
+"trans_low_main->high": Vector2( 39, 0 ),
 "walk": Vector2( 0, -5 )
 }
 
@@ -140,6 +141,7 @@ offsets = {
 "low_attack_main": Vector2( 31, 0 ),
 "trans_high_alt->low": Vector2( 30, 0 ),
 "trans_high_main->low": Vector2( 27, 0 ),
+"trans_low_main->high": Vector2( 39, 0 ),
 "walk": Vector2( 0, -5 )
 }
 
