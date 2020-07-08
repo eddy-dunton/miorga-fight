@@ -146,10 +146,6 @@ p2_attack_alt={
 
 debugger_agent/wait_timeout=5000
 
-[physics]
-
-common/physics_fps=120
-
 [rendering]
 
 quality/driver/fallback_to_gles2=true
