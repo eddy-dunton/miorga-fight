@@ -49,6 +49,6 @@ public class PlayerAnimation : AnimatedSprite {
     //Resets sprite to current stance
     public void Reset() {
         this.Play(this.parent.stance.sprite);
-        this.Stop();
+        //this.Stop();
     }
 }
