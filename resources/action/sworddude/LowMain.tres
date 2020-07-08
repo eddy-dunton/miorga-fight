@@ -8,10 +8,10 @@ extents = Vector2( 25, 47 )
 [resource]
 script = ExtResource( 1 )
 animation = "low_attack_main"
-movement = Vector2( 0, 0 )
-transition = null
-transitionTo = 0
-animateTransition = false
+movement = Vector2( -130, 0 )
+transition = "trans_low_main->high"
+transitionTo = 2
+animateTransition = true
 hitbox = SubResource( 1 )
 hitboxoffset = Vector2( -19, 28 )
 hitframe = 3
