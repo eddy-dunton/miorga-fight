@@ -4,25 +4,39 @@ using System.Collections.Generic;
 
 public class PlayerAnimation : AnimatedSprite {
 
-    [Export] Dictionary<String, Vector2> offsets;
+    [Export] Dictionary<String, AnimationData> data;
 
     private Player parent;
+
+    //Data for the current animation, will never be null
+    private AnimationData current;
 
     public override void _Ready() {
         this.Connect("animation_finished", this, nameof(_AnimationFinished));
         this.Connect("frame_changed", this, nameof(_FrameChanged));
 
         this.parent = GetParent() as Player;
+        this.current = new AnimationData();
     }
 
     //Applies offset then calls parent play
-    public new void Play(string anim = "", bool backwards = false) {
-        Vector2 off = new Vector2(); 
-        //Sets off to offset if there is one
-        offsets.TryGetValue(anim, out off);
-        
-        this.Position = off * parent.SCALEFACTOR;
+    public new void Play(string anim = "", bool backwards = false) {        
         base.Play(anim, backwards);
+        this.Frame = 0;
+
+        AnimationData data;
+        //Has animation data
+        if (this.data.TryGetValue(anim, out data)) {
+            this.current = data;
+        
+            this.UpdateHitbox();
+        } else {
+            //Does not have data, sets to defaults
+            this.current = new AnimationData();
+        }
+        
+        //Set this position
+        this.Position = this.current.offset * this.parent.SCALEFACTOR;
     }
 
     private void _AnimationFinished() {
@@ -44,8 +58,19 @@ public class PlayerAnimation : AnimatedSprite {
         if (this.parent.state == Player.State.ATTACK && this.Frame == this.parent.attack.hitframe) {
             this.parent.attack.Hit(this.parent);
         }
+
+        this.UpdateHitbox();
     }
     
+    private void UpdateHitbox() {
+        if (this.Frame < this.current.hitbox.Length) {
+            this.parent.nodeCollision.Position = 
+                    (this.current.offset + this.current.hitbox_offset[this.Frame]) * this.parent.SCALEFACTOR;
+
+            this.parent.nodeCollision.Shape = this.current.hitbox[this.Frame];
+        }
+    }
+
     //Resets sprite to current stance
     public void Reset() {
         this.Play(this.parent.stance.sprite);

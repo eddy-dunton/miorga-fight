@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=2]
+[gd_scene load_steps=104 format=2]
 
 [ext_resource path="res://src/Player.cs" type="Script" id=1]
 [ext_resource path="res://assets/player/sworddude/fight/low/standard/key2.png" type="Texture" id=2]
@@ -87,6 +87,14 @@
 [ext_resource path="res://assets/player/sworddude/stances/high idle/key3.png" type="Texture" id=85]
 [ext_resource path="res://assets/player/sworddude/stances/low idle/key3.png" type="Texture" id=86]
 [ext_resource path="res://assets/player/sworddude/stances/low idle/key2.png" type="Texture" id=87]
+[ext_resource path="res://resources/animations/walk.tres" type="Resource" id=88]
+[ext_resource path="res://resources/animations/high_attack_alt.tres" type="Resource" id=89]
+[ext_resource path="res://resources/animations/low_attack_main.tres" type="Resource" id=90]
+[ext_resource path="res://resources/animations/high_attack_main.tres" type="Resource" id=91]
+[ext_resource path="res://resources/animations/trans_high_alt-low.tres" type="Resource" id=92]
+[ext_resource path="res://resources/animations/trans_high_main-low.tres" type="Resource" id=93]
+[ext_resource path="res://resources/animations/trans_low_main-high.tres" type="Resource" id=94]
+[ext_resource path="res://resources/animations/lax.tres" type="Resource" id=95]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23, 46 )
@@ -102,31 +110,6 @@ animations = [ {
 "loop": true,
 "name": "lax",
 "speed": 1.5
-}, {
-"frames": [ ExtResource( 42 ) ],
-"loop": false,
-"name": "trans_lax->high",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 40 ), ExtResource( 43 ) ],
-"loop": false,
-"name": "trans_low->high",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 30 ), ExtResource( 23 ), ExtResource( 31 ), ExtResource( 35 ), ExtResource( 28 ), ExtResource( 28 ), ExtResource( 25 ), ExtResource( 25 ) ],
-"loop": false,
-"name": "high_attack_main",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 51 ) ],
-"loop": false,
-"name": "trans_high_main->low",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 15 ), ExtResource( 11 ), ExtResource( 14 ) ],
-"loop": true,
-"name": "walk",
-"speed": 8.0
 }, {
 "frames": [ ExtResource( 41 ), ExtResource( 43 ) ],
 "loop": false,
@@ -148,6 +131,11 @@ animations = [ {
 "name": "flinch",
 "speed": 20.0
 }, {
+"frames": [ ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 51 ) ],
+"loop": false,
+"name": "trans_high_main->low",
+"speed": 10.0
+}, {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 85 ), ExtResource( 82 ) ],
 "loop": true,
 "name": "high",
@@ -157,6 +145,26 @@ animations = [ {
 "loop": false,
 "name": "high_attack_alt",
 "speed": 12.0
+}, {
+"frames": [ ExtResource( 42 ) ],
+"loop": false,
+"name": "trans_lax->high",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 40 ), ExtResource( 43 ) ],
+"loop": false,
+"name": "trans_low->high",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 30 ), ExtResource( 23 ), ExtResource( 31 ), ExtResource( 35 ), ExtResource( 28 ), ExtResource( 28 ), ExtResource( 25 ), ExtResource( 25 ) ],
+"loop": false,
+"name": "high_attack_main",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 15 ), ExtResource( 11 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "walk",
+"speed": 8.0
 }, {
 "frames": [ ExtResource( 74 ), ExtResource( 75 ), ExtResource( 72 ), ExtResource( 76 ) ],
 "loop": true,
@@ -175,6 +183,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 11.6816, 30.13 )
 
 [sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0.25, 0.5, 0.75, 1 )
@@ -240,22 +249,21 @@ shape = SubResource( 1 )
 [node name="animate_sprite" type="AnimatedSprite" parent="."]
 position = Vector2( 6.24235e-05, -0.129959 )
 frames = SubResource( 2 )
-animation = ""
+animation = "lax"
 script = ExtResource( 17 )
-offsets = {
-"high_attack_alt": Vector2( 89, 0 ),
-"high_attack_main": Vector2( 89, -6 ),
-"low_attack_main": Vector2( 31, 0 ),
-"trans_high_alt->low": Vector2( 30, 0 ),
-"trans_high_main->low": Vector2( 27, 0 ),
-"trans_lax->low": Vector2( 0, 0 ),
-"trans_low_main->high": Vector2( 39, 0 ),
-"walk": Vector2( 0, -5 )
+data = {
+"high_attack_alt": ExtResource( 89 ),
+"high_attack_main": ExtResource( 91 ),
+"lax": ExtResource( 95 ),
+"low_attack_main": ExtResource( 90 ),
+"trans_high_alt->low": ExtResource( 92 ),
+"trans_high_main->low": ExtResource( 93 ),
+"trans_low_main->high": ExtResource( 94 ),
+"walk": ExtResource( 88 )
 }
 
 [node name="TEMP" type="CollisionShape2D" parent="animate_sprite"]
-visible = false
-position = Vector2( 100, 0 )
+position = Vector2( -103.783, 37.4549 )
 shape = SubResource( 3 )
 
 [node name="sparks" type="Particles2D" parent="animate_sprite"]
