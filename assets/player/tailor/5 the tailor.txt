@@ -1,0 +1,17 @@
+5 the tailor
+
+ PASSIVE(s): - 
+
+ Stances: Sept (low),  Hang (high)
+
+ Sept:
+  - Standard: parry low ends in Sept
+  - Alternate: parry high ends in Hang
+ 
+    FORBOTH{ Riposte - Mid cut taken whilst stepping back which end in Hang
+
+ Hang:
+  - Standard: quick cut with a merlinot leaning in, ends in Sept
+    - Continuation: Retreating dash which also parries, ends in sept
+
+  - Alternate: Feintable thrust with deflecting windup which also dodges (some) low attacks, ends in Hang

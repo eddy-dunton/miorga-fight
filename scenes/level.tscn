@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/bg/level_base.png" type="Texture" id=2]
@@ -20,14 +20,6 @@
 [ext_resource path="res://assets/level/holytree/particles/type 2/5.png" type="Texture" id=18]
 [ext_resource path="res://assets/level/holytree/particles/type 2/8.png" type="Texture" id=19]
 [ext_resource path="res://assets/level/holytree/particles/type 2/4.png" type="Texture" id=20]
-[ext_resource path="res://resources/animations/walk.tres" type="Resource" id=21]
-[ext_resource path="res://resources/animations/trans_high_main-low.tres" type="Resource" id=22]
-[ext_resource path="res://resources/animations/high_attack_alt.tres" type="Resource" id=23]
-[ext_resource path="res://resources/animations/low_attack_main.tres" type="Resource" id=24]
-[ext_resource path="res://resources/animations/trans_high_alt-low.tres" type="Resource" id=25]
-[ext_resource path="res://resources/animations/high_attack_main.tres" type="Resource" id=26]
-[ext_resource path="res://resources/animations/trans_low_main-high.tres" type="Resource" id=27]
-[ext_resource path="res://resources/animations/lax.tres" type="Resource" id=28]
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
@@ -121,18 +113,6 @@ collision_layer = 2147483649
 collision/safe_margin = 0.001
 HP_BAR = "/root/scene/ui/health_p1"
 
-[node name="animate_sprite" parent="en_player1" index="1"]
-data = {
-"high_attack_alt": ExtResource( 23 ),
-"high_attack_main": ExtResource( 26 ),
-"lax": ExtResource( 28 ),
-"low_attack_main": ExtResource( 24 ),
-"trans_high_alt->low": ExtResource( 25 ),
-"trans_high_main->low": ExtResource( 22 ),
-"trans_low_main->high": ExtResource( 27 ),
-"walk": ExtResource( 21 )
-}
-
 [node name="blood" parent="en_player1/animate_sprite" index="2"]
 visible = false
 
@@ -143,18 +123,6 @@ collision_layer = 2147483649
 collision/safe_margin = 0.001
 DIRECTION = 1
 HP_BAR = "/root/scene/ui/health_p2"
-
-[node name="animate_sprite" parent="en_player2" index="1"]
-data = {
-"high_attack_alt": ExtResource( 23 ),
-"high_attack_main": ExtResource( 26 ),
-"lax": ExtResource( 28 ),
-"low_attack_main": ExtResource( 24 ),
-"trans_high_alt->low": ExtResource( 25 ),
-"trans_high_main->low": ExtResource( 22 ),
-"trans_low_main->high": ExtResource( 27 ),
-"walk": ExtResource( 21 )
-}
 
 [node name="blood" parent="en_player2/animate_sprite" index="2"]
 visible = false
