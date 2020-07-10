@@ -8,5 +8,5 @@ extents = Vector2( 23, 46 )
 [resource]
 script = ExtResource( 1 )
 offset = Vector2( 0, 0 )
-hitbox_offset = PoolVector2Array( 10, 37 )
-hitbox = [ SubResource( 1 ) ]
+hitbox_offset = PoolVector2Array( 10, 37, 10, 36 )
+hitbox = [ SubResource( 1 ), SubResource( 1 ) ]
