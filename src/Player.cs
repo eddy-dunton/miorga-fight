@@ -61,7 +61,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	private Vector2 lastVelocity;
 
 	//These are declared based on the players direction
-	public string ACTION_UP, ACTION_DOWN, ACTION_LEFT, ACTION_RIGHT, ACTION_MAIN, ACTION_ALT; 
+	public string ACTION_UP, ACTION_DOWN, ACTION_LEFT, ACTION_RIGHT; 
 
 	//1 if the player is facing right and -1 if facing left
 	//Seems redundant but I couldn't get the enums to play nicely with the editor
@@ -136,7 +136,9 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 				this.ChangeState(State.LOW);
 			}
 			GetTree().SetInputAsHandled();
-		} 
+		} else if (inputEvent.IsActionPressed("debug")) {
+			String breakpoint = "this block is used as a breakpoint";  
+		}
 	}
 
 	public override void _PhysicsProcess(float delta) {
@@ -256,14 +258,16 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 
 	//Called when the player starts a transition
 	public void Transition(string animation,  bool backwards = false) {
-		this.endTrans = this.state;
+		//Ensures that player does not get stuck in transition if this called whilst the player is already transitioning
+		if (this.state != State.TRANS) this.endTrans = this.state;
 		this.state = State.TRANS;
 		this.nodeAnimateSprite.Play(animation, backwards);
 	}
 
 	//Called when the player starts a transition
 	public void TransitionTo(string animation, State state, bool backwards = false) {
-		this.endTrans = state;
+		//Ensures that player does not get stuck in transition if this called whilst the player is already transitioning
+		if (state != State.TRANS) this.endTrans = state;
 		this.state = State.TRANS;
 		this.nodeAnimateSprite.Play(animation, backwards);
 	}
