@@ -347,9 +347,9 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	}
 	
 	Node2D CameraTrack.Trackable.GetTrackingNode() {
-		//return this.nodeCollision;
 		//Gets camera to play nice
-		return this;
+		return this.nodeCollision;
+		//return this;
 	}
 
 	public class Stance {
