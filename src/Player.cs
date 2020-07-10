@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Players direction, also deciedes whether they are p1 or p2
@@ -14,14 +15,10 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//private static Vector2 NONFLIP = new Vector2(1, 1);
 
 	[Export] string LAX_SPRITE = "lax";
-
 	[Export] string LOW_SPRITE = "low";
-	[Export] Action LOW_MAIN;
-	[Export] Action LOW_ALT;
-
 	[Export] string HIGH_SPRITE = "high";
-	[Export] Action HIGH_MAIN;
-	[Export] Action HIGH_ALT;
+
+	[Export] List<Action> actions;
 
 	[Export] int SPEED;
 
@@ -56,6 +53,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public Particles2D nodeSparks;
 	public PlayerBlood nodeBlood;
 
+	public String prefix;
+
 	private HPBar hpBar;
 	private Vector2 velocity;
 	private Vector2 lastVelocity;
@@ -84,23 +83,21 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		this.ChangeHP(this.HP_MAX);
 
 		//Load stances
-		STANCE_LAX = new Stance(LAX_SPRITE, null, null);
+		STANCE_LAX = new Stance(LAX_SPRITE);
 		//Creates attacks if they exist
-		STANCE_LOW = new Stance(LOW_SPRITE, LOW_MAIN, LOW_ALT);
-		STANCE_HIGH = new Stance(HIGH_SPRITE, HIGH_MAIN, HIGH_ALT);
+		STANCE_LOW = new Stance(LOW_SPRITE);
+		STANCE_HIGH = new Stance(HIGH_SPRITE);
 
 		this.ChangeState(State.LAX);
 
 		this.SCALEFACTOR = new Vector2((this.DIRECTION == Direction.RIGHT) ? 1 : -1, 1);
 
 		//Set up actions
-		String prefix = (this.DIRECTION == Direction.RIGHT) ? "p1_" : "p2_";
-		this.ACTION_UP = prefix + "up";
-		this.ACTION_DOWN = prefix + "down";
-		this.ACTION_LEFT = prefix + "left";
-		this.ACTION_RIGHT = prefix + "right";
-		this.ACTION_MAIN = prefix + "attack_main";
-		this.ACTION_ALT = prefix + "attack_alt";
+		this.prefix = (this.DIRECTION == Direction.RIGHT) ? "p1_" : "p2_";
+		this.ACTION_UP = this.prefix + "up";
+		this.ACTION_DOWN = this.prefix + "down";
+		this.ACTION_LEFT = this.prefix + "left";
+		this.ACTION_RIGHT = this.prefix + "right";
 
 		//Flip if necessary
 		if (this.DIRECTION == Direction.LEFT) this.Flip();
@@ -110,7 +107,17 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	}
 
 	public override void _Input(InputEvent inputEvent) {
-		//You can't do shit if you're attacking
+		//Check for actions
+		foreach (Action action in this.actions) {
+			if (action.IsPossible(this, inputEvent)) {
+				action.Start(this);
+				//Mark input as dealt with
+				GetTree().SetInputAsHandled();
+				return;
+			}
+		}		
+
+		//Check for up / down calls
 		if (this.state == State.ATTACK || this.state == State.PARRY || this.state == State.TRANS) return;
 
 		if (inputEvent.IsActionPressed(this.ACTION_UP)) {
@@ -119,17 +126,15 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			} else {
 				this.ChangeState(State.HIGH);
 			}
+			GetTree().SetInputAsHandled();
 		} else if (inputEvent.IsActionPressed(this.ACTION_DOWN)) {
 			if (this.state == State.LOW) {
 				this.ChangeState(State.LAX);
 			} else {
 				this.ChangeState(State.LOW);
 			}
-		} else if (inputEvent.IsActionPressed(this.ACTION_MAIN)) {
-			this.ActionMain();
-		} else if (inputEvent.IsActionPressed(this.ACTION_ALT)) {
-			this.ActionAlt();
-		}
+			GetTree().SetInputAsHandled();
+		} 
 	}
 
 	public override void _PhysicsProcess(float delta) {
@@ -300,20 +305,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		}
 	}
 
-	//Performs the current stances main attack
-	private void ActionMain() {
-		if (this.stance.HasMain()) {
-			this.stance.main.Start(this);
-		}
-	}
-
-	//Performs the current stances main attack
-	private void ActionAlt() {
-		if (this.stance.HasAlt()) {
-			this.stance.alt.Start(this);
-		}
-	}
-
 	//Starts to walk 
 	private void WalkStart() {
 		this.nodeAnimateSprite.Play("walk", this.IsWalkingBackwards());
@@ -354,20 +345,9 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 
 	public class Stance {
 		public String sprite;
-		public Action main, alt;
 
-		public Stance(String sprite, Action main, Action alt) {
+		public Stance(String sprite) {
 			this.sprite = sprite;
-			this.main = main;
-			this.alt = alt;
-		}
-
-		public bool HasMain() {
-			return this.main != null;
-		}
-
-		public bool HasAlt() {
-			return this.alt != null;
 		}
 	}
 }
