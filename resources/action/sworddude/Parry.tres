@@ -4,6 +4,10 @@
 
 [resource]
 script = ExtResource( 1 )
+triggerInput = "action_alt"
+triggerAnimation = "low"
+triggerMinFrame = -1
+triggerMaxFrame = -1
 animation = "low_parry_alt"
 movement = Vector2( 0, 0 )
 transition = null

@@ -7,6 +7,10 @@ extents = Vector2( 51, 100 )
 
 [resource]
 script = ExtResource( 1 )
+triggerInput = "action_main"
+triggerAnimation = "high"
+triggerMinFrame = -1
+triggerMaxFrame = -1
 animation = "high_attack_main"
 movement = Vector2( 36, 0 )
 transition = "trans_high_main->low"
