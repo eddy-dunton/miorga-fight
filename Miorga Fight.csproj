@@ -59,7 +59,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\AnimationData.cs" />
-    <Compile Include="src\PlayerBlood.cs" />
+    <Compile Include="src\Overlay.cs" />
+    <Compile Include="src\PlayerOverlay.cs" />
     <Compile Include="src\Action.cs" />
     <Compile Include="src\Attack.cs" />
     <Compile Include="src\HPBar.cs" />

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Players direction, also deciedes whether they are p1 or p2
 	//Right is always p1 and left is always p2
-	public enum Direction{
+	public enum Direction {
 		RIGHT, LEFT
 	}
 
@@ -51,7 +51,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public CollisionShape2D nodeCollision;
 	public Player nodeEnemy;
 	public Particles2D nodeSparks;
-	public PlayerBlood nodeBlood;
+	public PlayerOverlay nodeOverlayTrack;
+	public PlayerOverlay nodeOverlayNoTrack;
 
 	public String prefix;
 
@@ -75,7 +76,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		this.nodeAnimateSprite = GetNode<AnimatedSprite>("animate_sprite") as PlayerAnimation;
 		this.nodeCollision = GetNode<CollisionShape2D>("collision");
 		this.nodeSparks = GetNode<Particles2D>("animate_sprite/sparks");
-		this.nodeBlood = GetNode<AnimatedSprite>("animate_sprite/blood") as PlayerBlood;
+		this.nodeOverlayTrack = GetNode<AnimatedSprite>("animate_sprite/overlay_track") as PlayerOverlay;
+		this.nodeOverlayNoTrack = GetNode<AnimatedSprite>("overlay_notrack") as PlayerOverlay;
 
 		//Init hp bar
 		this.hpBar = GetNode<ProgressBar>(this.HP_BAR) as HPBar;
@@ -227,7 +229,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			this.Knockback(damage);
 		}
 
-		this.nodeBlood.Start();
+		this.nodeOverlayTrack.Play("blood_mid");
 		this.ChangeHP(this.hp - damage);
 	}
 
@@ -325,6 +327,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		this.nodeCollision.Scale = SCALEFACTOR;
 		this.nodeCollision.Position *= SCALEFACTOR;
 		this.nodeAnimateSprite.Scale = SCALEFACTOR;
+		this.nodeOverlayNoTrack.Scale = SCALEFACTOR;
+		this.nodeOverlayTrack.Scale = SCALEFACTOR;
 	}
 
 	private void CalcMovement() {

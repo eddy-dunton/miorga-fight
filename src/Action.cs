@@ -1,11 +1,11 @@
 using Godot;
 using System;
 
-public abstract class Action : Resource
-{
-    public enum Type{
+public abstract class Action : Resource {
+    public enum Type {
         ATTACK,
         PARRY,
+        OVERLAY,
         VOID
     }
 

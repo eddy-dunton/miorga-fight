@@ -1,8 +1,7 @@
 using Godot;
 using System;
 
-public class Attack : Action
-{
+public class Attack : Action {
     [Export] public Shape2D hitbox;
 
     [Export] public Vector2 hitboxoffset;

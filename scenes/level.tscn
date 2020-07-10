@@ -135,8 +135,13 @@ data = {
 "walk": ExtResource( 21 )
 }
 
-[node name="blood" parent="en_player1/animate_sprite" index="2"]
-visible = false
+[node name="overlay_track" parent="en_player1/animate_sprite" index="2"]
+offsets = null
+
+[node name="overlay_notrack" parent="en_player1" index="2"]
+offsets = {
+"high_main_attack_feint": Vector2( 89, -6 )
+}
 
 [node name="en_player2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 250, 150 )
@@ -159,8 +164,13 @@ data = {
 "walk": ExtResource( 21 )
 }
 
-[node name="blood" parent="en_player2/animate_sprite" index="2"]
-visible = false
+[node name="overlay_track" parent="en_player2/animate_sprite" index="2"]
+offsets = null
+
+[node name="overlay_notrack" parent="en_player2" index="2"]
+offsets = {
+"high_main_attack_feint": Vector2( 89, -6 )
+}
 
 [node name="arena" type="StaticBody2D" parent="."]
 
