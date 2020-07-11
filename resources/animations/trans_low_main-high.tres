@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource( 1 )
-offset = Vector2( 27, 0 )
+offset = Vector2( 37, 0 )
 hitbox_offset = PoolVector2Array(  )
 hitbox = [  ]
