@@ -109,6 +109,10 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	}
 
 	public override void _Input(InputEvent inputEvent) {
+		if (inputEvent.IsActionPressed("debug")) {	
+			if (true) {}; //Debug breakpoint
+		}
+
 		//Check for actions
 		foreach (Action action in this.actions) {
 			if (action.IsPossible(this, inputEvent)) {
@@ -136,8 +140,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 				this.ChangeState(State.LOW);
 			}
 			GetTree().SetInputAsHandled();
-		} else if (inputEvent.IsActionPressed("debug")) {	
-			if (true) {}; //Debug breakpoint
 		}
 	}
 

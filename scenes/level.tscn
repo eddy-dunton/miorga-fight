@@ -136,7 +136,9 @@ data = {
 }
 
 [node name="overlay_track" parent="en_player1/animate_sprite" index="2"]
-offsets = null
+offsets = {
+"blood_mid": Vector2( 40, 38 )
+}
 
 [node name="overlay_notrack" parent="en_player1" index="2"]
 offsets = {
@@ -165,7 +167,9 @@ data = {
 }
 
 [node name="overlay_track" parent="en_player2/animate_sprite" index="2"]
-offsets = null
+offsets = {
+"blood_mid": Vector2( 40, 38 )
+}
 
 [node name="overlay_notrack" parent="en_player2" index="2"]
 offsets = {

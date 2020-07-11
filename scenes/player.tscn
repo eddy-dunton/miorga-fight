@@ -183,20 +183,20 @@ animations = [ {
 "name": "walk",
 "speed": 8.0
 }, {
-"frames": [ ExtResource( 41 ), ExtResource( 43 ) ],
-"loop": false,
-"name": "trans_high->low",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 30 ), ExtResource( 23 ), ExtResource( 31 ), ExtResource( 35 ), ExtResource( 28 ), ExtResource( 28 ), ExtResource( 25 ), ExtResource( 25 ) ],
 "loop": false,
 "name": "high_attack_main",
 "speed": 12.0
 }, {
+"frames": [ ExtResource( 41 ), ExtResource( 43 ) ],
+"loop": false,
+"name": "trans_high->low",
+"speed": 12.0
+}, {
 "frames": [ ExtResource( 102 ), ExtResource( 103 ), ExtResource( 106 ), ExtResource( 104 ), ExtResource( 105 ) ],
 "loop": true,
 "name": "low_parry_alt_riposte",
-"speed": 15.0
+"speed": 12.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
@@ -252,7 +252,7 @@ animations = [ {
 [sub_resource type="SpriteFrames" id=9]
 animations = [ {
 "frames": [ ExtResource( 97 ), ExtResource( 100 ), ExtResource( 98 ), ExtResource( 99 ) ],
-"loop": true,
+"loop": false,
 "name": "high_main_attack_feint",
 "speed": 15.0
 } ]
@@ -269,7 +269,6 @@ position = Vector2( 10, 37 )
 shape = SubResource( 1 )
 
 [node name="animate_sprite" type="AnimatedSprite" parent="."]
-position = Vector2( 6.24235e-05, -0.129959 )
 frames = SubResource( 2 )
 animation = "low_parry_alt_riposte"
 frame = 1
@@ -308,7 +307,6 @@ visible = false
 frames = SubResource( 8 )
 animation = "blood_mid"
 frame = 13
-playing = true
 script = ExtResource( 71 )
 offsets = {
 "blood_mid": Vector2( 40, 38 )
