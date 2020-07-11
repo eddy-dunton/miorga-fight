@@ -11,7 +11,7 @@
     FORBOTH{ Riposte - Mid cut taken whilst stepping back which end in Hang
 
  Hang:
-  - Standard: quick cut with a merlinot leaning in, ends in Sept
+  - Standard: quick cut with a merlinot leaning in, ends in Sept, attack high to mid
     - Continuation: Retreating dash which also parries, ends in sept
 
   - Alternate: Feintable thrust with deflecting windup which also dodges (some) low attacks, ends in Hang
