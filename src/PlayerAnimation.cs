@@ -36,7 +36,7 @@ public class PlayerAnimation : AnimatedSprite {
         }
         
         //Set this position
-        this.Position = this.current.offset * this.parent.SCALEFACTOR;
+        this.Position = this.current.offset;
     }
 
     private void _AnimationFinished() {
@@ -65,7 +65,7 @@ public class PlayerAnimation : AnimatedSprite {
     private void UpdateHitbox() {
         if (this.Frame < this.current.hitbox.Length) {
             this.parent.nodeCollision.Position = 
-                    (this.current.offset + this.current.hitbox_offset[this.Frame]) * this.parent.SCALEFACTOR;
+                    (this.current.offset + this.current.hitbox_offset[this.Frame]);
 
             this.parent.nodeCollision.Shape = this.current.hitbox[this.Frame];
         }

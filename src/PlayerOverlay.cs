@@ -33,7 +33,7 @@ public class PlayerOverlay : AnimatedSprite {
     public new void Play(String anim, bool backwards = false) {
         Vector2 off;
         this.offsets.TryGetValue(anim, out off);
-        if (off != null) this.Position = off * this.parent.SCALEFACTOR;
+        if (off != null) this.Position = off;
         else this.Position = new Vector2();  
 
         this.Visible = true;
