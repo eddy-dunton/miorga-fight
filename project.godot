@@ -147,6 +147,10 @@ debug={
  ]
 }
 
+[memory]
+
+limits/message_queue/max_size_kb=4096
+
 [mono]
 
 debugger_agent/wait_timeout=5000

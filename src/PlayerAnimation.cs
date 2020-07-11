@@ -16,7 +16,6 @@ public class PlayerAnimation : AnimatedSprite {
         this.Connect("frame_changed", this, nameof(_FrameChanged));
 
         this.parent = GetParent() as Player;
-        GD.Print(this.parent.GetPath());
         this.current = new AnimationData();
     }
 

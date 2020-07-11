@@ -26,7 +26,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 
 	[Export] int HP_MAX;
 
-	[Export] string HP_BAR;
+	[Export] NodePath HP_BAR;
 
 	Stance STANCE_LAX, STANCE_LOW, STANCE_HIGH;
 
@@ -136,8 +136,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 				this.ChangeState(State.LOW);
 			}
 			GetTree().SetInputAsHandled();
-		} else if (inputEvent.IsActionPressed("debug")) {
-			String breakpoint = "this block is used as a breakpoint";  
+		} else if (inputEvent.IsActionPressed("debug")) {	
+			if (true) {}; //Debug breakpoint
 		}
 	}
 
