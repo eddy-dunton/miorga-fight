@@ -222,6 +222,10 @@ public class Lobby : Control {
     }
 
     void RemovePlayer(Player p) {
+        //End the game for both players
+        this.p1.End();
+        this.p2.End();
+
         this.game.RemoveChild(p);
         (this.game.GetNode("camera_track") as CameraTrack).StopTrack(p);
         p.Dispose();

@@ -103,7 +103,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			if (this.controls == ControlMethod.PLAYER1) {this.inputPrefix = "p1_";}
 			else {this.inputPrefix = "p2_";}
 		} else {//Is multiplayer
-			GD.Print("is mp");
 			if (this.controls == ControlMethod.PLAYER1) { //Master
 				this.inputPrefix = "p1_";
 				RsetConfig("position", MultiplayerAPI.RPCMode.Puppetsync);
@@ -126,10 +125,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		if (this.DIRECTION == Direction.LEFT) this.Flip();
 	}
 
-	//public void SetPosition(Vector2 pos) {
-	//	this.Position = pos;
-	//}
-
 	//Called once both players exist, points players towards their HP bar and the enemy
 	//Must be called externally
 	public void Start(Player enemy, HPBar hpbar) {
@@ -140,6 +135,13 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 
 		this.nodeEnemy = enemy;
 		this.started = true;
+	}
+
+	//Called when the game ends either if one player wins or one disconnects
+	public void End() {
+		this.hpBar.Visible = false;
+		this.nodeEnemy = null;
+		this.started = false;
 	}
 
 	public override void _Input(InputEvent inputEvent) {
