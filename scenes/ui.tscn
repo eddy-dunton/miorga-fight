@@ -17,6 +17,7 @@ __meta__ = {
 }
 
 [node name="health_p1" type="ProgressBar" parent="."]
+visible = false
 margin_left = 25.0
 margin_top = 25.0
 margin_right = 325.0
@@ -31,6 +32,7 @@ __meta__ = {
 }
 
 [node name="health_p2" type="ProgressBar" parent="."]
+visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -24.9999
@@ -42,6 +44,7 @@ rect_scale = Vector2( -1, 1 )
 max_value = 150.0
 value = 100.0
 percent_visible = false
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Miorga Fight"
-run/main_scene="res://scenes/level.tscn"
+run/main_scene="res://scenes/lobby.tscn"
 config/icon="res://icon.png"
 
 [display]

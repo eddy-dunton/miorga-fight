@@ -4,13 +4,10 @@ using System.Collections.Generic;
 
 public class CameraTrack : Node2D
 {
-	//Array of names of all nodes to be tracked
-	[Export] List<NodePath> trackNames;
-
 	//Stops the camera from moving, usefull for testing animations
 	[Export] bool moving;
 
-	List<Node2D> tracking;
+	private List<Node2D> tracking;
 
 	public CameraTrack() {
 		this.tracking = new List<Node2D>();
@@ -18,7 +15,6 @@ public class CameraTrack : Node2D
 
 	public override void _Ready()
 	{
-		this.PopulateTrackList();
 		if (! moving) this.CalculatePosition();
 	}
 
@@ -40,22 +36,39 @@ public class CameraTrack : Node2D
 		this.Position = newpos;
 	}
 
-	private void PopulateTrackList() {
-		Trackable parent;
-		Node2D node;
+	public void Track(NodePath path) {
+		Trackable parent = GetNode(path) as Trackable;
+		//Check that parent actually exists
+		if (parent == null) {
+			GD.PrintErr("CameraTrack.Track(NodePath): NodePath passed did not point to Trackable");	
+			return;
+		}
 
-		//Iterates through each 
-		foreach (NodePath track in this.trackNames) {
-			parent = GetNode(track) as Trackable;
-			//Check that parent actually exists
-			if (parent == null) continue;
+		this.Track(parent);
+	}
 
-			//Ensure node exists
-			node = parent.GetTrackingNode();
-			if (node == null) continue;
+	public void Track(Trackable trackable) {
+		//Ensure node exists
+		Node2D node = trackable.GetTrackingNode();
+		if (node == null) {
+			GD.PrintErr("CameraTrack.Track(Trackable): Trackable.GetTrackingNode() did not return a valid Node2D");
+			return;
+		}
 
-			//Add node to track
-			tracking.Add(node);
+		//Add node to track
+		this.tracking.Add(node);
+	}
+
+	public void StopTracking(Trackable trackable) {
+		//Ensure node exists
+		Node2D node = trackable.GetTrackingNode();
+		if (node == null) {
+			GD.PrintErr("CameraTrack.StopTracking(Trackable): Trackable.GetTrackingNode() did not return a valid Node2D");
+			return;
+		}
+
+		if (! this.tracking.Remove(node)) {
+			GD.PrintErr("CameraTrack.StopTracking(Trackable): Unable to find Trackable.GetTrackingNode() in this.tracking");
 		}
 	}
 

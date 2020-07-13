@@ -1,6 +1,6 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=24 format=2]
 
-[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Level.cs" type="Script" id=1]
 [ext_resource path="res://assets/bg/level_base.png" type="Texture" id=2]
 [ext_resource path="res://assets/bg/level_back2.png" type="Texture" id=3]
 [ext_resource path="res://assets/level/holytree/level_fore.png" type="Texture" id=4]
@@ -8,7 +8,6 @@
 [ext_resource path="res://scenes/ui.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/MiorgaCamera.cs" type="Script" id=7]
 [ext_resource path="res://src/CameraTrack.cs" type="Script" id=8]
-[ext_resource path="res://src/HPBar.cs" type="Script" id=9]
 [ext_resource path="res://assets/level/holytree/particles/type 2/7.png" type="Texture" id=10]
 [ext_resource path="res://assets/level/holytree/particles/type 2/2.png" type="Texture" id=11]
 [ext_resource path="res://assets/level/holytree/particles/type 2/9.png" type="Texture" id=12]
@@ -20,15 +19,6 @@
 [ext_resource path="res://assets/level/holytree/particles/type 2/5.png" type="Texture" id=18]
 [ext_resource path="res://assets/level/holytree/particles/type 2/8.png" type="Texture" id=19]
 [ext_resource path="res://assets/level/holytree/particles/type 2/4.png" type="Texture" id=20]
-[ext_resource path="res://resources/animations/walk.tres" type="Resource" id=21]
-[ext_resource path="res://resources/animations/trans_high_main-low.tres" type="Resource" id=22]
-[ext_resource path="res://resources/animations/high_attack_alt.tres" type="Resource" id=23]
-[ext_resource path="res://resources/animations/low_attack_main.tres" type="Resource" id=24]
-[ext_resource path="res://resources/animations/trans_high_alt-low.tres" type="Resource" id=25]
-[ext_resource path="res://resources/animations/high_attack_main.tres" type="Resource" id=26]
-[ext_resource path="res://resources/animations/trans_low_main-high.tres" type="Resource" id=27]
-[ext_resource path="res://resources/animations/lax.tres" type="Resource" id=28]
-[ext_resource path="res://resources/animations/low.tres" type="Resource" id=29]
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
@@ -77,7 +67,10 @@ normal = Vector2( 1, 0 )
 [sub_resource type="LineShape2D" id=4]
 normal = Vector2( -1, 0 )
 
-[node name="scene" type="Node"]
+[node name="scene" type="Node2D"]
+script = ExtResource( 1 )
+POSITION_LEFT = Vector2( -250, 150 )
+POSITION_RIGHT = Vector2( 250, 150 )
 
 [node name="particles" type="Particles2D" parent="."]
 position = Vector2( 0, -200 )
@@ -112,70 +105,6 @@ texture = ExtResource( 2 )
 
 [node name="ui" parent="." instance=ExtResource( 6 )]
 
-[node name="health_p2" parent="ui" index="2"]
-script = ExtResource( 9 )
-
-[node name="en_player1" parent="." instance=ExtResource( 1 )]
-position = Vector2( -250, 150 )
-rotation = 0.0
-collision_layer = 2147483649
-collision/safe_margin = 0.001
-HP_BAR = NodePath("../ui/health_p1")
-
-[node name="animate_sprite" parent="en_player1" index="1"]
-data = {
-"high_attack_alt": ExtResource( 23 ),
-"high_attack_main": ExtResource( 26 ),
-"lax": ExtResource( 28 ),
-"low": ExtResource( 29 ),
-"low_attack_main": ExtResource( 24 ),
-"trans_high_alt->low": ExtResource( 25 ),
-"trans_high_main->low": ExtResource( 22 ),
-"trans_low_main->high": ExtResource( 27 ),
-"walk": ExtResource( 21 )
-}
-
-[node name="overlay_track" parent="en_player1/animate_sprite" index="2"]
-offsets = {
-"blood_mid": Vector2( 40, 38 )
-}
-
-[node name="overlay_notrack" parent="en_player1" index="2"]
-offsets = {
-"high_main_attack_feint": Vector2( 89, -6 )
-}
-
-[node name="en_player2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 250, 150 )
-rotation = 0.0
-collision_layer = 2147483649
-collision/safe_margin = 0.001
-DIRECTION = 1
-HP_BAR = NodePath("../ui/health_p2")
-
-[node name="animate_sprite" parent="en_player2" index="1"]
-data = {
-"high_attack_alt": ExtResource( 23 ),
-"high_attack_main": ExtResource( 26 ),
-"lax": ExtResource( 28 ),
-"low": ExtResource( 29 ),
-"low_attack_main": ExtResource( 24 ),
-"trans_high_alt->low": ExtResource( 25 ),
-"trans_high_main->low": ExtResource( 22 ),
-"trans_low_main->high": ExtResource( 27 ),
-"walk": ExtResource( 21 )
-}
-
-[node name="overlay_track" parent="en_player2/animate_sprite" index="2"]
-offsets = {
-"blood_mid": Vector2( 40, 38 )
-}
-
-[node name="overlay_notrack" parent="en_player2" index="2"]
-offsets = {
-"high_main_attack_feint": Vector2( 89, -6 )
-}
-
 [node name="arena" type="StaticBody2D" parent="."]
 
 [node name="ar_wall_left" type="CollisionShape2D" parent="arena"]
@@ -192,7 +121,6 @@ texture = ExtResource( 4 )
 [node name="camera_track" type="Node2D" parent="."]
 position = Vector2( 0, 131 )
 script = ExtResource( 8 )
-trackNames = [ NodePath("../en_player1"), NodePath("../en_player2") ]
 moving = true
 
 [node name="camera" type="Camera2D" parent="camera_track"]
@@ -203,7 +131,3 @@ smoothing_enabled = true
 script = ExtResource( 7 )
 
 [editable path="ui"]
-
-[editable path="en_player1"]
-
-[editable path="en_player2"]
