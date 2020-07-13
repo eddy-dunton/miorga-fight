@@ -106,14 +106,15 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			if (this.controls == ControlMethod.PLAYER1) { //Master
 				this.inputPrefix = "p1_";
 				RsetConfig("position", MultiplayerAPI.RPCMode.Puppetsync);
-				RpcConfig(nameof(this.ChangeState), MultiplayerAPI.RPCMode.Puppet);
 				RpcConfig(nameof(this.ActionStart), MultiplayerAPI.RPCMode.Puppetsync);
 			} else { // Puppet
 				this.inputPrefix = "remote_";
 				RsetConfig("position", MultiplayerAPI.RPCMode.Puppet);
-				RpcConfig(nameof(this.ChangeState), MultiplayerAPI.RPCMode.Puppet);
 				RpcConfig(nameof(this.ActionStart), MultiplayerAPI.RPCMode.Puppet);
 			}
+			
+			RsetConfig(nameof(this.velocity), MultiplayerAPI.RPCMode.Puppet);
+			RpcConfig(nameof(this.ChangeState), MultiplayerAPI.RPCMode.Puppet);
 		}
 
 		this.ACTION_UP = this.inputPrefix + "up";
@@ -196,6 +197,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 					//If player is actually moving
 					MoveAndCollide(this.velocity * delta);
 				
+					if (this.mp) RsetUnreliable(nameof(this.velocity), this.velocity);
+
 					//Player has just started moving
 					if (this.state == State.LAX) this.ChangeState(State.WALK);
 					//Player has changed direction        
@@ -216,6 +219,12 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			}
 		
 			if (this.mp) RsetUnreliable("position", this.Position);
+		} else {
+			//Check for direction swapping when remote
+			if (this.velocity.x != 0 && this.lastVelocity.x != 0 && 
+					Math.Sign(this.lastVelocity.x) != Math.Sign(this.velocity.x)) {
+				this.WalkStart();
+			}
 		}
 
 		this.lastVelocity = this.velocity;
