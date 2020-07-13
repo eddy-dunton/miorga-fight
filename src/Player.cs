@@ -329,7 +329,9 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	}
 
 	//Flips the player to face the opposite direction
-	private void Flip() {}
+	private void Flip() {
+		this.Scale = this.SCALEFACTOR;
+	}
 
 	private void CalcMovement() {
 		this.velocity = new Vector2();

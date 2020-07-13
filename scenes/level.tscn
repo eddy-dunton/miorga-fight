@@ -148,7 +148,6 @@ offsets = {
 [node name="en_player2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 250, 150 )
 rotation = 0.0
-scale = Vector2( -1, 1 )
 collision_layer = 2147483649
 collision/safe_margin = 0.001
 DIRECTION = 1
