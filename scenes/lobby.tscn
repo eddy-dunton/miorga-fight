@@ -1,16 +1,17 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/Lobby.cs" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
 
 [node name="Lobby" type="Control"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -320.0
-margin_top = -200.0
-margin_right = 320.0
-margin_bottom = 200.0
+margin_left = -390.0
+margin_top = -220.0
+margin_right = 390.0
+margin_bottom = 220.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
@@ -18,25 +19,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="."]
-margin_left = 210.0
-margin_top = 40.0
-margin_right = 430.0
-margin_bottom = 80.0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-text = "Miorga Fight"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="icon" type="Sprite" parent="."]
+position = Vector2( 396.093, 243.302 )
+texture = ExtResource( 2 )
 
 [node name="LobbyPanel" type="Panel" parent="."]
-margin_left = 210.0
-margin_top = 160.0
-margin_right = 430.0
-margin_bottom = 270.0
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 535.68
+margin_top = 98.3232
+margin_right = 755.68
+margin_bottom = 183.323
 size_flags_horizontal = 2
 size_flags_vertical = 2
 __meta__ = {
@@ -50,12 +42,16 @@ margin_right = 62.0
 margin_bottom = 24.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Address"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Address" type="LineEdit" parent="LobbyPanel"]
-margin_left = 10.0
+margin_left = 5.0
 margin_top = 30.0
-margin_right = 210.0
+margin_right = 215.0
 margin_bottom = 54.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -119,3 +115,6 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
