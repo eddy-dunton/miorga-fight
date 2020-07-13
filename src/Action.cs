@@ -67,7 +67,7 @@ public abstract class Action : Resource {
 
         //Colossal if statement
         //Sorry
-        if (input.IsActionPressed(player.prefix + this.triggerInput) && //Correct action has been pressed 
+        if (input.IsActionPressed(player.inputPrefix + this.triggerInput) && //Correct action has been pressed 
             player.nodeAnimateSprite.Animation == this.triggerAnimation && //Correct animation is playing
             ((this.triggerMinFrame == -1) || //Checks if min frame is set to -1
                 (player.nodeAnimateSprite.Frame >= this.triggerMinFrame && //OR players current frame >= min frame 

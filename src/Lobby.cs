@@ -17,6 +17,8 @@ public class Lobby : Control {
     //List of all players in the order they joined
     private List<int> playerQueue;
 
+    private Player p1, p2;
+
     public Lobby() {
         this.deferred = false;
         this.playerQueue = new List<int>();
@@ -75,26 +77,26 @@ public class Lobby : Control {
 
             //No p1, create p1
             if (! this.game.HasNode("p1")) {
-                Rpc(nameof(AddPlayer), new object[] {"p1", id});
+                Rpc(nameof(AddPlayer), new object[] {"p1", id, true});
                 GD.Print(id.ToString() + " is P1!");
                 
                 //if there is a node 2, add that
                 if (this.game.HasNode("p2")) {
-                    RpcId(id, nameof(AddPlayer), new object[] {"p2", this.game.GetNode("p2").GetNetworkMaster()});
+                    RpcId(id, nameof(AddPlayer), new object[] {"p2", this.game.GetNode("p2").GetNetworkMaster(), true});
                 }
 
                 return;
             } else {
                 //if there is a p1, add it to that players game
-                RpcId(id, nameof(AddPlayer), new object[] {"p1", this.game.GetNode("p1").GetNetworkMaster()});
+                RpcId(id, nameof(AddPlayer), new object[] {"p1", this.game.GetNode("p1").GetNetworkMaster(), true});
             }
     
             if (! this.game.HasNode("p2")) {
-                Rpc(nameof(AddPlayer), new object[] {"p2", id});
+                Rpc(nameof(AddPlayer), new object[] {"p2", id, true});
                 GD.Print(id.ToString() + " is P2!");
                 return;
             } else {
-                RpcId(id, nameof(AddPlayer), new object[] {"p2", this.game.GetNode("p2").GetNetworkMaster()});
+                RpcId(id, nameof(AddPlayer), new object[] {"p2", this.game.GetNode("p2").GetNetworkMaster(), true});
             }
 
             GD.Print(id.ToString() + " is spectator!");
@@ -187,24 +189,40 @@ public class Lobby : Control {
     //Host a regular, local game
     void _OnLocalPressed() {
         this.CreateGame();
-        Player p1 = this.AddPlayer("p1", 0, Player.Direction.RIGHT, Player.ControlMethod.PLAYER1);
-        Player p2 = this.AddPlayer("p2", 0, Player.Direction.LEFT, Player.ControlMethod.PLAYER2);
+        this.AddPlayer("p1", 0);
+        this.AddPlayer("p2", 0);
 
         //Start game
-        p1.Start(p2, this.game.GetNode("ui/health_p1") as HPBar);
-        p2.Start(p1, this.game.GetNode("ui/health_p2") as HPBar);
+        this.StartGame();
     }
     
-    Player AddPlayer(String name, int id, Player.Direction dir, Player.ControlMethod ctrl) {
+    private void StartGame() {
+        this.p1.Start(this.p2, this.game.GetNode("ui/health_p1") as HPBar);
+        this.p2.Start(this.p1, this.game.GetNode("ui/health_p2") as HPBar);
+    }
+
+    void AddPlayer(String name, int id, bool mp = false) {
         Player _new = ((ResourceLoader.Load("res://scenes/player.tscn") as PackedScene).Instance()) as Player;
+        _new.mp = mp;
         _new.Name = name;
         _new.SetNetworkMaster(id);
-        _new.controls = ctrl;
-        _new.DIRECTION = dir;
-        _new.Position = this.game.GetPlayerPosition(dir);
+        if (!mp) {
+            _new.controls = (name == "p1") ? Player.ControlMethod.PLAYER1 : Player.ControlMethod.PLAYER2; 
+        } else {
+            _new.controls = (id == GetTree().GetNetworkUniqueId()) ? 
+                    Player.ControlMethod.PLAYER1 : Player.ControlMethod.REMOTE;
+        }
+        _new.DIRECTION = (name == "p1" ? Player.Direction.RIGHT : Player.Direction.LEFT);
+        _new.Position = this.game.GetPlayerPosition(_new.DIRECTION);
         this.game.AddChild(_new);
         (this.game.GetNode("camera_track") as CameraTrack).Track(_new);
-        return _new;
+        
+        if (name == "p1") this.p1 = _new;
+        if (name == "p2") this.p2 = _new;
+
+        if (this.p1 != null && this.p2 != null) {
+            this.StartGame();
+        }
     }
 
     void RemovePlayer(Node player) {
@@ -220,9 +238,10 @@ public class Lobby : Control {
         //if (deferred) {
             //GetParent().CallDeferred(nameof(AddChild), game);
         //}// else {
-            GetParent().AddChild(game);
+        GetParent().AddChild(game);
         //}
         this.Visible = false;
+        GD.Print("Game world created!");
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

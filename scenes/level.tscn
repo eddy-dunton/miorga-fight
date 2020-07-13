@@ -121,13 +121,13 @@ texture = ExtResource( 4 )
 [node name="camera_track" type="Node2D" parent="."]
 position = Vector2( 0, 131 )
 script = ExtResource( 8 )
-moving = true
 
 [node name="camera" type="Camera2D" parent="camera_track"]
 current = true
 limit_left = -500
 limit_right = 500
 smoothing_enabled = true
+smoothing_speed = 25.0
 script = ExtResource( 7 )
 
 [editable path="ui"]

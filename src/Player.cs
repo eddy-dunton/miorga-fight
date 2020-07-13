@@ -48,6 +48,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 
 	private bool started;
 
+	public bool mp;
+
 	//Nodes
 	public PlayerAnimation nodeAnimateSprite;
 	public CollisionShape2D nodeCollision;
@@ -56,7 +58,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public PlayerOverlay nodeOverlayTrack;
 	public PlayerOverlay nodeOverlayNoTrack;
 
-	public String prefix;
+	public String inputPrefix;
 
 	private HPBar hpBar;
 	private Vector2 velocity;
@@ -69,14 +71,17 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Seems redundant but I couldn't get the enums to play nicely with the editor
 	public Vector2 SCALEFACTOR;
 
+
 	public Player() {
 		this.attack = null;
 		this.parry = null;
 		this.started = false;
 		this.lastVelocity = new Vector2();
+		this.mp = false;
 	}
 
 	public override void _Ready() {
+		GD.Print("Player ready");
 		this.nodeAnimateSprite = GetNode<AnimatedSprite>("animate_sprite") as PlayerAnimation;
 		this.nodeCollision = GetNode<CollisionShape2D>("collision");
 		this.nodeSparks = GetNode<Particles2D>("animate_sprite/sparks");
@@ -94,20 +99,34 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		this.SCALEFACTOR = new Vector2((this.DIRECTION == Direction.RIGHT) ? 1 : -1, 1);
 
 		//Set up actions
-		if (this.controls == ControlMethod.PLAYER1) {this.prefix = "p1_";}
-		else if (this.controls == ControlMethod.PLAYER2) {this.prefix = "p2_";}
-		else {
-			//Player is remote
-			this.prefix = ""; //nullify controls
+		if (! this.mp) {
+			if (this.controls == ControlMethod.PLAYER1) {this.inputPrefix = "p1_";}
+			else {this.inputPrefix = "p2_";}
+		} else {//Is multiplayer
+			GD.Print("is mp");
+			if (this.controls == ControlMethod.PLAYER1) { //Master
+				this.inputPrefix = "p1_";
+				RsetConfig("position", MultiplayerAPI.RPCMode.Puppetsync);
+				RpcConfig(nameof(this.ChangeState), MultiplayerAPI.RPCMode.Puppet);
+			} else { // Puppet
+				this.inputPrefix = "remote_";
+				RsetConfig("position", MultiplayerAPI.RPCMode.Puppet);
+				RpcConfig(nameof(this.ChangeState), MultiplayerAPI.RPCMode.Puppet);
+			}
 		}
-		this.ACTION_UP = this.prefix + "up";
-		this.ACTION_DOWN = this.prefix + "down";
-		this.ACTION_LEFT = this.prefix + "left";
-		this.ACTION_RIGHT = this.prefix + "right";
+
+		this.ACTION_UP = this.inputPrefix + "up";
+		this.ACTION_DOWN = this.inputPrefix + "down";
+		this.ACTION_LEFT = this.inputPrefix + "left";
+		this.ACTION_RIGHT = this.inputPrefix + "right";
 
 		//Flip if necessary
 		if (this.DIRECTION == Direction.LEFT) this.Flip();
 	}
+
+	//public void SetPosition(Vector2 pos) {
+	//	this.Position = pos;
+	//}
 
 	//Called once both players exist, points players towards their HP bar and the enemy
 	//Must be called externally
@@ -122,6 +141,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	}
 
 	public override void _Input(InputEvent inputEvent) {
+		if (this.controls == ControlMethod.REMOTE) return; //Do not check for inputs for remote objects
+
 		if (inputEvent.IsActionPressed("debug")) {	
 			if (true) {}; //Debug breakpoint
 		}
@@ -160,7 +181,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	}
 
 	public override void _PhysicsProcess(float delta) {
-		if (this.state == State.LAX || this.state == State.WALK) {
+	if (this.controls != ControlMethod.REMOTE) {
+		if ((this.state == State.LAX || this.state == State.WALK)) {
 			this.CalcMovement();
 			if (this.velocity.x != 0) {
 				//If player is actually moving
@@ -184,6 +206,9 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			//If neither player should be still
 			this.velocity = new Vector2();
 		}
+	
+		RsetUnreliable("position", this.Position);
+	}
 
 		this.lastVelocity = this.velocity;
 	}
@@ -221,6 +246,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 				this.ChangeStance(STANCE_HIGH, transition);
 				break;
 		}
+
+		if (this.mp && this.controls != ControlMethod.REMOTE) Rpc(nameof(this.ChangeState), new object[] {newState});
 	}
 
 	public void ChangeHP(int newhp) {
