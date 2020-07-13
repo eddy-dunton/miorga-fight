@@ -254,7 +254,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		}
 
 		if (this.mp && this.controls != ControlMethod.REMOTE && this.state != State.ATTACK && this.state != State.PARRY) 
-			RpcUnreliable(nameof(this.ChangeState), new object[] {this.state});
+			RpcUnreliable(nameof(this.ChangeState), new object[] {newState});
 	}
 
 	public void ChangeHP(int newhp) {

@@ -64,7 +64,7 @@ public class CameraTrack : Node2D
 		this.tracking.Add(node);
 	}
 
-	public void StopTracking(Trackable trackable) {
+	public void StopTrack(Trackable trackable) {
 		//Ensure node exists
 		Node2D node = trackable.GetTrackingNode();
 		if (node == null) {

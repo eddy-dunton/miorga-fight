@@ -104,18 +104,14 @@ public class Lobby : Control {
     }
 
     void _PlayerDisconnected(int id) {
-        Node node = this.game.GetNode("p1");
-        if (node.GetNetworkMaster() == id) {
+        if (this.p1.GetNetworkMaster() == id) {
             //P1 has disconnected
-            this.RemovePlayer(node);
+            this.RemovePlayer(this.p1);
             GD.Print("P1 disconnected");
             return;
-        } 
-
-        node = this.game.GetNode("p2");
-        if (node.GetNetworkMaster() == id) {
+        } else if (this.p2.GetNetworkMaster() == id) {
             //P1 has disconnected
-            this.RemovePlayer(node);
+            this.RemovePlayer(this.p2);
             GD.Print("P2 disconnected");
             return;
         } 
@@ -225,10 +221,11 @@ public class Lobby : Control {
         }
     }
 
-    void RemovePlayer(Node player) {
-        this.game.RemoveChild(player);
-        player.Dispose();
-        player = null;
+    void RemovePlayer(Player p) {
+        this.game.RemoveChild(p);
+        (this.game.GetNode("camera_track") as CameraTrack).StopTrack(p);
+        p.Dispose();
+        p = null;
     }
 
     void CreateGame() {
@@ -243,10 +240,4 @@ public class Lobby : Control {
         this.Visible = false;
         GD.Print("Game world created!");
     }
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 }
