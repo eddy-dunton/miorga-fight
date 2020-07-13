@@ -7,7 +7,6 @@ public class Lobby : Control {
 
     LineEdit nodeAddr;
     Button nodeHostButton, nodeJoinButton, nodeLocalButton;
-    Label nodeStatusOk, nodeStatusFail;
     Level game;
 
     //Is the creation of the game object deferred
@@ -28,16 +27,14 @@ public class Lobby : Control {
     {
         GD.Print("Starting Lobby");
 
-        nodeAddr = GetNode<LineEdit>("LobbyPanel/Address");    
-        nodeHostButton = GetNode<Button>("LobbyPanel/HostButton");
-        nodeJoinButton = GetNode<Button>("LobbyPanel/JoinButton");
-        nodeLocalButton = GetNode<Button>("LobbyPanel/LocalButton");
-        nodeStatusOk = GetNode<Label>("LobbyPanel/StatusOk");
-        nodeStatusFail = GetNode<Label>("LobbyPanel/StatusFail");
+        this.nodeAddr = GetNode<LineEdit>("LobbyPanel/Address");    
+        this.nodeHostButton = GetNode<Button>("LobbyPanel/HostButton");
+        this.nodeJoinButton = GetNode<Button>("LobbyPanel/JoinButton");
+        this.nodeLocalButton = GetNode<Button>("LobbyPanel/LocalButton");
 
-        nodeHostButton.Connect("pressed", this, nameof(_OnHostPressed));
-        nodeJoinButton.Connect("pressed", this, nameof(_OnJoinPressed));
-        nodeLocalButton.Connect("pressed", this, nameof(_OnLocalPressed));
+        this.nodeHostButton.Connect("pressed", this, nameof(_OnHostPressed));
+        this.nodeJoinButton.Connect("pressed", this, nameof(_OnJoinPressed));
+        this.nodeLocalButton.Connect("pressed", this, nameof(_OnLocalPressed));
 
         GetTree().Connect("network_peer_connected", this, nameof(_PlayerConnected));
         GetTree().Connect("network_peer_disconnected", this, nameof(_PlayerDisconnected));

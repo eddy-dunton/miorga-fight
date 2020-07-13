@@ -20,15 +20,16 @@ __meta__ = {
 }
 
 [node name="icon" type="Sprite" parent="."]
-position = Vector2( 396.093, 243.302 )
+position = Vector2( 391.421, 242.635 )
+scale = Vector2( 0.99, 0.99 )
 texture = ExtResource( 2 )
 
 [node name="LobbyPanel" type="Panel" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_left = 535.68
-margin_top = 98.3232
-margin_right = 755.68
-margin_bottom = 183.323
+margin_left = 542.931
+margin_top = 71.3316
+margin_right = 762.931
+margin_bottom = 185.332
 size_flags_horizontal = 2
 size_flags_vertical = 2
 __meta__ = {
@@ -38,12 +39,13 @@ __meta__ = {
 [node name="AddressLabel" type="Label" parent="LobbyPanel"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 62.0
+margin_right = 215.0
 margin_bottom = 24.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Address"
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -55,7 +57,7 @@ margin_right = 215.0
 margin_bottom = 54.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-text = "127.0.0.1"
+text = "0.0.0.0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -63,7 +65,7 @@ __meta__ = {
 [node name="HostButton" type="Button" parent="LobbyPanel"]
 margin_left = 5.0
 margin_top = 60.0
-margin_right = 70.0
+margin_right = 105.0
 margin_bottom = 80.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -73,9 +75,9 @@ __meta__ = {
 }
 
 [node name="JoinButton" type="Button" parent="LobbyPanel"]
-margin_left = 78.0
+margin_left = 115.0
 margin_top = 60.0
-margin_right = 143.0
+margin_right = 215.0
 margin_bottom = 80.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -85,36 +87,13 @@ __meta__ = {
 }
 
 [node name="LocalButton" type="Button" parent="LobbyPanel"]
-margin_left = 150.0
-margin_top = 60.0
+margin_left = 5.80872
+margin_top = 90.0
 margin_right = 215.0
-margin_bottom = 80.0
+margin_bottom = 103.784
 size_flags_horizontal = 2
 size_flags_vertical = 2
-text = "Local"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="StatusOk" type="Label" parent="LobbyPanel"]
-margin_left = 10.0
-margin_top = 90.0
-margin_right = 210.0
-margin_bottom = 104.0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-custom_colors/font_color = Color( 0, 1, 0.015625, 1 )
-align = 1
-
-[node name="StatusFail" type="Label" parent="LobbyPanel"]
-margin_left = 10.0
-margin_top = 90.0
-margin_right = 210.0
-margin_bottom = 104.0
-size_flags_horizontal = 2
-size_flags_vertical = 0
-custom_colors/font_color = Color( 1, 0, 0, 1 )
-align = 1
+text = "Play Locally"
 __meta__ = {
 "_edit_use_anchors_": false
 }
