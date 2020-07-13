@@ -108,10 +108,12 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 				this.inputPrefix = "p1_";
 				RsetConfig("position", MultiplayerAPI.RPCMode.Puppetsync);
 				RpcConfig(nameof(this.ChangeState), MultiplayerAPI.RPCMode.Puppet);
+				RpcConfig(nameof(this.ActionStart), MultiplayerAPI.RPCMode.Puppetsync);
 			} else { // Puppet
 				this.inputPrefix = "remote_";
 				RsetConfig("position", MultiplayerAPI.RPCMode.Puppet);
 				RpcConfig(nameof(this.ChangeState), MultiplayerAPI.RPCMode.Puppet);
+				RpcConfig(nameof(this.ActionStart), MultiplayerAPI.RPCMode.Puppet);
 			}
 		}
 
@@ -153,7 +155,11 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		//Check for actions
 		foreach (Action action in this.actions) {
 			if (action.IsPossible(this, inputEvent)) {
-				action.Start(this);
+				if (! this.mp) {
+					action.Start(this);
+				} else {
+					RpcUnreliable(nameof(this.ActionStart), new object[] {this.actions.IndexOf(action)});
+				}
 				//Mark input as dealt with
 				GetTree().SetInputAsHandled();
 				return;
@@ -181,34 +187,34 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	}
 
 	public override void _PhysicsProcess(float delta) {
-	if (this.controls != ControlMethod.REMOTE) {
-		if ((this.state == State.LAX || this.state == State.WALK)) {
-			this.CalcMovement();
-			if (this.velocity.x != 0) {
-				//If player is actually moving
-				MoveAndCollide(this.velocity * delta);
-			
-				//Player has just started moving
-				if (this.state == State.LAX) this.ChangeState(State.WALK);
-				//Player has changed direction        
-				else if (Math.Sign(this.lastVelocity.x) != Math.Sign(this.velocity.x)){
-					//restarts the walk
-					this.WalkStart();
+		if (this.controls != ControlMethod.REMOTE) {
+			if ((this.state == State.LAX || this.state == State.WALK)) {
+				this.CalcMovement();
+				if (this.velocity.x != 0) {
+					//If player is actually moving
+					MoveAndCollide(this.velocity * delta);
+				
+					//Player has just started moving
+					if (this.state == State.LAX) this.ChangeState(State.WALK);
+					//Player has changed direction        
+					else if (Math.Sign(this.lastVelocity.x) != Math.Sign(this.velocity.x)){
+						//restarts the walk
+						this.WalkStart();
+					}
+
+				} else {
+					//Player is not moving
+
+					//Player has stopped moving
+					if (this.state == State.WALK) this.ChangeState(this.GetStateFromStance(this.stance));
 				}
-
 			} else {
-				//Player is not moving
-
-				//Player has stopped moving
-				if (this.state == State.WALK) this.ChangeState(this.GetStateFromStance(this.stance));
+				//If neither player should be still
+				this.velocity = new Vector2();
 			}
-		} else {
-			//If neither player should be still
-			this.velocity = new Vector2();
+		
+			if (this.mp) RsetUnreliable("position", this.Position);
 		}
-	
-		RsetUnreliable("position", this.Position);
-	}
 
 		this.lastVelocity = this.velocity;
 	}
@@ -247,7 +253,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 				break;
 		}
 
-		if (this.mp && this.controls != ControlMethod.REMOTE) Rpc(nameof(this.ChangeState), new object[] {newState});
+		if (this.mp && this.controls != ControlMethod.REMOTE && this.state != State.ATTACK && this.state != State.PARRY) 
+			RpcUnreliable(nameof(this.ChangeState), new object[] {this.state});
 	}
 
 	public void ChangeHP(int newhp) {
@@ -354,6 +361,11 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			this.stance = newStance;
 			this.nodeAnimateSprite.Reset();
 		}
+	}
+
+	//Used for RPC calls
+	private void ActionStart(int actionIndex) {
+		this.actions[actionIndex].Start(this);
 	}
 
 	//Starts to walk 
