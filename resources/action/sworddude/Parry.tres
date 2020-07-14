@@ -15,4 +15,4 @@ transitionTo = 0
 animateTransition = false
 frameStart = 1
 frameEnd = 4
-knockback = 0
+knockback = 10

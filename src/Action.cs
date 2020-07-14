@@ -65,16 +65,12 @@ public abstract class Action : Resource {
     public bool IsPossible(Player player, InputEvent input) {
         //I don't like the way this works
 
-        //Colossal if statement
+        //Colossal return statement
         //Sorry
-        if (input.IsActionPressed(player.inputPrefix + this.triggerInput) && //Correct action has been pressed 
+        return (input.IsActionPressed(player.inputPrefix + this.triggerInput) && //Correct action has been pressed 
             player.nodeAnimateSprite.Animation == this.triggerAnimation && //Correct animation is playing
             ((this.triggerMinFrame == -1) || //Checks if min frame is set to -1
                 (player.nodeAnimateSprite.Frame >= this.triggerMinFrame && //OR players current frame >= min frame 
-                player.nodeAnimateSprite.Frame <= this.triggerMaxFrame))) //AND players current frame ,= max frame
-
-            return true;
-         else
-            return false;
+                player.nodeAnimateSprite.Frame <= this.triggerMaxFrame))); //AND players current frame ,= max frame
     }
 }

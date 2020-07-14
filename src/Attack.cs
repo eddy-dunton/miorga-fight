@@ -10,6 +10,8 @@ public class Attack : Action {
 
     [Export] public bool halt;
 
+    [Export] public int damage;
+
     public Attack() {
         this.type = Action.Type.ATTACK;
     }
@@ -31,7 +33,7 @@ public class Attack : Action {
 			if (! ((player.nodeEnemy.state == Player.State.PARRY) && 
 					(player.nodeEnemy.nodeAnimateSprite.Frame >= player.nodeEnemy.parry.frameStart) &&
 					(player.nodeEnemy.nodeAnimateSprite.Frame <= player.nodeEnemy.parry.frameEnd))) {
-                player.nodeEnemy.Hurt(10, this.halt);
+                player.nodeEnemy.Hurt(damage, this.halt);
 			} else {
                 //Attack parried
                 player.Parried(this, player.nodeEnemy.parry);
