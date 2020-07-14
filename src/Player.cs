@@ -116,6 +116,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			RsetConfig(nameof(this.velocity), MultiplayerAPI.RPCMode.Puppet);
 			RpcConfig(nameof(this.ChangeState), MultiplayerAPI.RPCMode.Puppet);
 			RpcConfig(nameof(this.Hurt_), MultiplayerAPI.RPCMode.Remotesync);
+			RpcConfig(nameof(this.ChangeHP_), MultiplayerAPI.RPCMode.Remotesync);
 		}
 
 		this.ACTION_UP = this.inputPrefix + "up";
@@ -269,7 +270,20 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			RpcUnreliable(nameof(this.ChangeState), new object[] {newState});
 	}
 
+	//public wrapper function for ChangeHP_(..)
+	//Used to ensure that hurt is only called by the server in multiplayer
+	//Passes straight through to ChangeHP_(..) in singleplayer
 	public void ChangeHP(int newhp) {
+		if (this.mp) {
+			if (GetTree().GetNetworkUniqueId() == 1) { //check for server
+				Rpc(nameof(this.ChangeHP_), new object[] {newhp});
+			}
+		} else {
+			Hurt_(newhp);
+		}
+	}
+
+	private void ChangeHP_(int newhp) {
 		//Ensures hp is not above max
 		this.hp = Math.Min(this.HP_MAX, newhp);
 
@@ -294,7 +308,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			Hurt_(damage, halting);
 		}
 	}
-
 
 	//Called when a player is damaged
 	//Halting is true if the player received halting damage
