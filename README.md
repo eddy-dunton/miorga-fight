@@ -1,2 +1,3 @@
 # miorga-fight
  
+Miorga is the world's first and best side-on action fighting game designed by British geniuses Ed and Finlay. Your character has a number of guards from which they may perform two actions, excluding walking about. Some actions have additional options, such as feinting an attack or performing an additional action after your first. In 2021 Miorga won the Booker prize for fiction and director Stanley Kubrick described it as 'a better film than 2001'
