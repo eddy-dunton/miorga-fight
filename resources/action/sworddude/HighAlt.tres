@@ -18,6 +18,6 @@ transitionTo = 1
 animateTransition = true
 hitbox = SubResource( 1 )
 hitboxoffset = Vector2( 15.155, 70.461 )
-hitframe = 2
+hitframe = 3
 halt = false
 damage = 0
