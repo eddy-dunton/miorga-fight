@@ -135,7 +135,11 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		this.hpBar = hpbar;
 		this.hpBar.MaxValue = this.HP_MAX;
 		this.hpBar.Visible = true;
-		this.ChangeHP(this.HP_MAX);
+		//Only reset locally
+		//stops RPC calls going off to other clients which may not have finished setting up their game
+		this.ChangeHP_(this.HP_MAX);
+
+		this.Position = (GetParent() as Level).GetPlayerPosition(this.DIRECTION);
 
 		this.nodeEnemy = enemy;
 		this.started = true;
@@ -284,7 +288,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public void ChangeHP(int newhp) {
 		if (this.mp) {
 			if (GetTree().GetNetworkUniqueId() == 1) { //check for server
-				Rpc(nameof(this.ChangeHP_), new object[] {newhp});
+				RpcUnreliable(nameof(this.ChangeHP_), new object[] {newhp});
 			}
 		} else {
 			this.ChangeHP_(newhp);
@@ -304,7 +308,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public void Hurt(int damage, bool halting = false) {
 		if (this.mp) {
 			if (GetTree().GetNetworkUniqueId() == 1) { //check for server
-				Rpc(nameof(this.Hurt_), new object[] {damage, halting});
+				RpcUnreliable(nameof(this.Hurt_), new object[] {damage, halting});
 			}
 		} else {
 			this.Hurt_(damage, halting);
@@ -334,7 +338,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public void Parried(Attack attack, Parry by) {
 		if (this.mp) {
 			if (GetTree().GetNetworkUniqueId() == 1) { //check for server
-				Rpc(nameof(this.Parried_ByIndex_), new object[] 
+				RpcUnreliable(nameof(this.Parried_ByIndex_), new object[] 
 						{this.actions.IndexOf(attack), this.nodeEnemy.actions.IndexOf(by)});
 			}
 		} else {
