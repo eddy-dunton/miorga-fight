@@ -25,6 +25,8 @@ Requirements:
  - MSBUild
  - A handfull of braincells
  
+Steps:
+ 
 1) Open project in Godot
 2) Go Project > Export
 3) Use whatever build settings you plan on using
