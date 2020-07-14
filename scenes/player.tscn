@@ -1,6 +1,7 @@
 [gd_scene load_steps=116 format=2]
 
 [ext_resource path="res://src/Player.cs" type="Script" id=1]
+[ext_resource path="res://resources/animations/low_parry_alt_riposte.tres" type="Resource" id=2]
 [ext_resource path="res://assets/player/regia/stances/high idle/key1.png" type="Texture" id=3]
 [ext_resource path="res://assets/player/regia/stances/high idle/key2.png" type="Texture" id=4]
 [ext_resource path="res://assets/player/regia/stances/lax.png" type="Texture" id=5]
@@ -103,7 +104,6 @@
 [ext_resource path="res://assets/player/regia/fight/low/alternate/afterhit/riposte/key1.png" type="Texture" id=102]
 [ext_resource path="res://assets/player/regia/fight/low/alternate/afterhit/riposte/key2.png" type="Texture" id=103]
 [ext_resource path="res://assets/player/regia/fight/low/alternate/afterhit/riposte/key4.png" type="Texture" id=104]
-[ext_resource path="res://assets/player/regia/fight/low/alternate/afterhit/riposte/key5.png" type="Texture" id=105]
 [ext_resource path="res://assets/player/regia/fight/low/alternate/afterhit/riposte/key3.png" type="Texture" id=106]
 [ext_resource path="res://resources/action/sworddude/ParryRiposte.tres" type="Resource" id=107]
 
@@ -117,30 +117,55 @@ animations = [ {
 "name": "",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 40 ), ExtResource( 43 ) ],
-"loop": false,
-"name": "trans_low->high",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 41 ), ExtResource( 43 ) ],
 "loop": false,
 "name": "trans_high->low",
 "speed": 12.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 39 ), ExtResource( 38 ), ExtResource( 33 ), ExtResource( 21 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "low_parry_alt",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 74 ), ExtResource( 75 ), ExtResource( 72 ), ExtResource( 76 ) ],
+"loop": true,
+"name": "trans_low_main->high",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 102 ), ExtResource( 103 ), ExtResource( 106 ), ExtResource( 104 ), ExtResource( 104 ) ],
+"loop": true,
+"name": "low_parry_alt_riposte",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 83 ), ExtResource( 87 ), ExtResource( 86 ), ExtResource( 84 ) ],
+"loop": true,
+"name": "low",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 42 ) ],
+"loop": false,
+"name": "trans_lax->high",
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 85 ), ExtResource( 82 ) ],
 "loop": true,
 "name": "high",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 29 ), ExtResource( 27 ), ExtResource( 36 ), ExtResource( 26 ), ExtResource( 26 ), ExtResource( 32 ), ExtResource( 32 ), ExtResource( 32 ) ],
+"frames": [ ExtResource( 29 ), ExtResource( 29 ), ExtResource( 27 ), ExtResource( 36 ), ExtResource( 26 ), ExtResource( 26 ), ExtResource( 32 ), ExtResource( 32 ), ExtResource( 32 ) ],
 "loop": false,
 "name": "high_attack_alt",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 102 ), ExtResource( 103 ), ExtResource( 106 ), ExtResource( 104 ), ExtResource( 105 ) ],
-"loop": true,
-"name": "low_parry_alt_riposte",
-"speed": 12.0
+"frames": [ ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 51 ) ],
+"loop": false,
+"name": "trans_high_alt->low",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 51 ) ],
+"loop": false,
+"name": "trans_high_main->low",
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 5 ), ExtResource( 81 ) ],
 "loop": true,
@@ -162,44 +187,19 @@ animations = [ {
 "name": "low_attack_main",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 83 ), ExtResource( 87 ), ExtResource( 86 ), ExtResource( 84 ) ],
-"loop": true,
-"name": "low",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 74 ), ExtResource( 75 ), ExtResource( 72 ), ExtResource( 76 ) ],
-"loop": true,
-"name": "trans_low_main->high",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 51 ) ],
-"loop": false,
-"name": "trans_high_main->low",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 13 ), ExtResource( 39 ), ExtResource( 38 ), ExtResource( 33 ), ExtResource( 21 ), ExtResource( 24 ) ],
-"loop": true,
-"name": "low_parry_alt",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 51 ) ],
-"loop": false,
-"name": "trans_high_alt->low",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 42 ) ],
-"loop": false,
-"name": "trans_lax->high",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 30 ), ExtResource( 23 ), ExtResource( 31 ), ExtResource( 35 ), ExtResource( 28 ), ExtResource( 28 ), ExtResource( 25 ), ExtResource( 25 ) ],
 "loop": false,
 "name": "high_attack_main",
 "speed": 12.0
+}, {
+"frames": [ ExtResource( 40 ), ExtResource( 43 ) ],
+"loop": false,
+"name": "trans_low->high",
+"speed": 12.0
 } ]
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 35, 30, -11, 25, -20, -20, 18, -10 )
+points = PoolVector2Array( 27, -50, 18, -35, 35, -10, 37, 13, 0, 13, 10, -82 )
 
 [sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0.25, 0.5, 0.75, 1 )
@@ -270,8 +270,8 @@ shape = SubResource( 1 )
 
 [node name="animate_sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
-animation = "high_attack_main"
-frame = 3
+animation = "trans_high_main->low"
+frame = 2
 script = ExtResource( 17 )
 data = {
 "high_attack_alt": ExtResource( 89 ),
@@ -279,6 +279,7 @@ data = {
 "lax": ExtResource( 95 ),
 "low": ExtResource( 96 ),
 "low_attack_main": ExtResource( 90 ),
+"low_parry_alt_riposte": ExtResource( 2 ),
 "trans_high_alt->low": ExtResource( 92 ),
 "trans_high_main->low": ExtResource( 93 ),
 "trans_low_main->high": ExtResource( 94 ),
@@ -286,7 +287,7 @@ data = {
 }
 
 [node name="TEMP" type="CollisionShape2D" parent="animate_sprite"]
-position = Vector2( -94.4559, 6.30464 )
+position = Vector2( -306.791, 48.2694 )
 shape = SubResource( 3 )
 
 [node name="sparks" type="Particles2D" parent="animate_sprite"]
