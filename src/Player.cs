@@ -115,6 +115,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			
 			RsetConfig(nameof(this.velocity), MultiplayerAPI.RPCMode.Puppet);
 			RpcConfig(nameof(this.ChangeState), MultiplayerAPI.RPCMode.Puppet);
+			RpcConfig(nameof(this.Hurt_), MultiplayerAPI.RPCMode.Remotesync);
 		}
 
 		this.ACTION_UP = this.inputPrefix + "up";
@@ -281,9 +282,23 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			this.Transition("flinch");
 	}
 
+	//public wrapper function for Hurt_(..)
+	//Used to ensure that hurt is only called by the server in multiplayer
+	//Passes straight through to Hurt_(..) in singleplayer
+	public void Hurt(int damage, bool halting = false) {
+		if (this.mp) {
+			if (GetTree().GetNetworkUniqueId() == 1) { //check for server
+				Rpc(nameof(this.Hurt_), new object[] {damage, halting});
+			}
+		} else {
+			Hurt_(damage, halting);
+		}
+	}
+
+
 	//Called when a player is damaged
 	//Halting is true if the player received halting damage
-	public void Hurt(int damage, bool halting = false) {
+	private void Hurt_(int damage, bool halting = false) {
 		if (halting || (this.state != State.ATTACK && this.state != State.PARRY)) {
 			//Minus here as he's moving away from the damage
 			if (halting) {
