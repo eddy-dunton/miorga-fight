@@ -20,8 +20,7 @@ __meta__ = {
 }
 
 [node name="icon" type="Sprite" parent="."]
-position = Vector2( 391.421, 242.635 )
-scale = Vector2( 0.99, 0.99 )
+position = Vector2( 391, 243 )
 texture = ExtResource( 2 )
 
 [node name="LobbyPanel" type="Panel" parent="."]

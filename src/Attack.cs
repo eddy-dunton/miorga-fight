@@ -33,11 +33,8 @@ public class Attack : Action {
 					(player.nodeEnemy.nodeAnimateSprite.Frame <= player.nodeEnemy.parry.frameEnd))) {
                 player.nodeEnemy.Hurt(10, this.halt);
 			} else {
-                //Successful parry
-                this.Cut(player);
-                //Call the enemies parry success
-                player.nodeEnemy.parry.Success(player.nodeEnemy);
-                player.Knockback(player.nodeEnemy.parry.knockback);
+                //Attack parried
+                player.Parried(this, player.nodeEnemy.parry);
             }
 		}
     }

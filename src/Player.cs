@@ -117,6 +117,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			RpcConfig(nameof(this.ChangeState), MultiplayerAPI.RPCMode.Puppet);
 			RpcConfig(nameof(this.Hurt_), MultiplayerAPI.RPCMode.Remotesync);
 			RpcConfig(nameof(this.ChangeHP_), MultiplayerAPI.RPCMode.Remotesync);
+			RpcConfig(nameof(this.Parried_ByIndex_), MultiplayerAPI.RPCMode.Remotesync);
 		}
 
 		this.ACTION_UP = this.inputPrefix + "up";
@@ -270,8 +271,15 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			RpcUnreliable(nameof(this.ChangeState), new object[] {newState});
 	}
 
+	
+	public void Knockback(int amount, bool animate = true) {
+		this.MoveAndCollide(new Vector2(-amount * 2, 0) * this.SCALEFACTOR);	
+		if (animate)
+			this.Transition("flinch");
+	}
+
 	//public wrapper function for ChangeHP_(..)
-	//Used to ensure that hurt is only called by the server in multiplayer
+	//Used to ensure that ChangeHP_(..) is only called by the server in multiplayer
 	//Passes straight through to ChangeHP_(..) in singleplayer
 	public void ChangeHP(int newhp) {
 		if (this.mp) {
@@ -279,7 +287,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 				Rpc(nameof(this.ChangeHP_), new object[] {newhp});
 			}
 		} else {
-			Hurt_(newhp);
+			this.ChangeHP_(newhp);
 		}
 	}
 
@@ -290,14 +298,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		this.hpBar.Value = this.hp;
 	}
 
-	public void Knockback(int amount, bool animate = true) {
-		this.MoveAndCollide(new Vector2(-amount * 2, 0) * this.SCALEFACTOR);	
-		if (animate)
-			this.Transition("flinch");
-	}
-
 	//public wrapper function for Hurt_(..)
-	//Used to ensure that hurt is only called by the server in multiplayer
+	//Used to ensure that Hurt_(..) is only called by the server in multiplayer
 	//Passes straight through to Hurt_(..) in singleplayer
 	public void Hurt(int damage, bool halting = false) {
 		if (this.mp) {
@@ -305,7 +307,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 				Rpc(nameof(this.Hurt_), new object[] {damage, halting});
 			}
 		} else {
-			Hurt_(damage, halting);
+			this.Hurt_(damage, halting);
 		}
 	}
 
@@ -324,6 +326,40 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 
 		this.nodeOverlayTrack.Play("blood_mid");
 		this.ChangeHP(this.hp - damage);
+	}
+
+	//public wrapper function for Parried_(..)
+	//Used to ensure that Parried_(..) is only called by the server in multiplayer
+	//Passes straight through to Parried_(..) in singleplayer
+	public void Parried(Attack attack, Parry by) {
+		if (this.mp) {
+			if (GetTree().GetNetworkUniqueId() == 1) { //check for server
+				Rpc(nameof(this.Parried_ByIndex_), new object[] 
+						{this.actions.IndexOf(attack), this.nodeEnemy.actions.IndexOf(by)});
+			}
+		} else {
+			this.Parried_(attack, by);
+		}
+	}
+
+	//Called when this players attack is parried
+	//attack is this player's attack that was parried
+	//by is the enemy's parry that stoppped this attack 
+	private void Parried_(Attack attack, Parry by) {
+		attack.Cut(this);
+		//Call the enemies parry success
+		by.Success(this.nodeEnemy);
+		this.Knockback(by.knockback);
+	}
+
+	//Same as Parried_(Attack, Parry)
+	//However instead uses the indexes, to allow for less data to be sent by over RPC
+	//attackindex is the index of of the attack that was parried in this.actions
+	//byindex is the index of of the parry in this.nodeEnemy.actions 
+	private void Parried_ByIndex_(int attackindex, int byindex) {
+		Attack attack = this.actions[attackindex] as Attack;
+		Parry by = this.actions[byindex] as Parry;
+		this.Parried_(attack, by);
 	}
 
 	//Returns the state of the given stance
