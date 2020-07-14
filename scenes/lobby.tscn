@@ -1,0 +1,98 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Lobby.cs" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[node name="Lobby" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -390.0
+margin_top = -220.0
+margin_right = 390.0
+margin_bottom = 220.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="icon" type="Sprite" parent="."]
+position = Vector2( 391, 243 )
+texture = ExtResource( 2 )
+
+[node name="LobbyPanel" type="Panel" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 542.931
+margin_top = 71.3316
+margin_right = 762.931
+margin_bottom = 185.332
+size_flags_horizontal = 2
+size_flags_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AddressLabel" type="Label" parent="LobbyPanel"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 215.0
+margin_bottom = 24.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Address"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Address" type="LineEdit" parent="LobbyPanel"]
+margin_left = 5.0
+margin_top = 30.0
+margin_right = 215.0
+margin_bottom = 54.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "127.0.0.1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HostButton" type="Button" parent="LobbyPanel"]
+margin_left = 5.0
+margin_top = 60.0
+margin_right = 105.0
+margin_bottom = 80.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Host"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="JoinButton" type="Button" parent="LobbyPanel"]
+margin_left = 115.0
+margin_top = 60.0
+margin_right = 215.0
+margin_bottom = 80.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Join"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LocalButton" type="Button" parent="LobbyPanel"]
+margin_left = 5.80872
+margin_top = 90.0
+margin_right = 215.0
+margin_bottom = 103.784
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Play Locally"
+__meta__ = {
+"_edit_use_anchors_": false
+}
