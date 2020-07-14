@@ -51,6 +51,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public bool mp;
 
 	//Nodes
+	public Level nodeLevel;
 	public PlayerAnimation nodeAnimateSprite;
 	public CollisionShape2D nodeCollision;
 	public Player nodeEnemy;
@@ -82,6 +83,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 
 	public override void _Ready() {
 		GD.Print("Player ready");
+		this.nodeLevel = GetParent() as Level;
 		this.nodeAnimateSprite = GetNode<AnimatedSprite>("animate_sprite") as PlayerAnimation;
 		this.nodeCollision = GetNode<CollisionShape2D>("collision");
 		this.nodeSparks = GetNode<Particles2D>("animate_sprite/sparks");
@@ -135,14 +137,20 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		this.hpBar = hpbar;
 		this.hpBar.MaxValue = this.HP_MAX;
 		this.hpBar.Visible = true;
-		//Only reset locally
-		//stops RPC calls going off to other clients which may not have finished setting up their game
-		this.ChangeHP_(this.HP_MAX);
-
-		this.Position = (GetParent() as Level).GetPlayerPosition(this.DIRECTION);
 
 		this.nodeEnemy = enemy;
 		this.started = true;
+	
+		this.Restart();
+	}
+
+	//Called when the at the endo of the round, moves players back and resets HP
+	public void Restart() {
+		this.Position = this.nodeLevel.GetPlayerPosition(this.DIRECTION);
+		//Only reset locally
+		//stops RPC calls going off to other clients which may not have finished setting up their game
+		this.ChangeHP_(this.HP_MAX);
+		this.ChangeState(State.LAX);
 	}
 
 	//Called when the game ends either if one player wins or one disconnects
@@ -203,7 +211,12 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 				if (this.velocity.x != 0) {
 					//If player is actually moving
 					MoveAndCollide(this.velocity * delta);
-				
+					//Stops the player from moving up and down
+					//Pretty shite I know, but there's no better way to do it I believe
+					Vector2 vec = this.Position;
+					vec.y = this.nodeLevel.GetPlayerY();
+					this.Position = vec;
+
 					if (this.mp) RsetUnreliable(nameof(this.velocity), this.velocity);
 
 					//Player has just started moving
@@ -237,10 +250,15 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		this.lastVelocity = this.velocity;
 	}
 
+	//Necessary to make RPC happy
+	public void ChangeState(State newState) {
+		this.ChangeState(newState, true);
+	}
+
 	//Moves the player from one state to another, all state changes should be routed through here
 	//A little unnecessary I know
 	//Not completely sold on it myself, might end up being scrapped
-	public void ChangeState(State newState) {
+	public void ChangeState(State newState, bool transition) {
 		//Perform actions for leaving state
 		switch (this.state) {
 			case State.WALK:
@@ -250,7 +268,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		
 		//Check if a transition should be done
 		//Not particularly proud on this 
-		bool transition = ((this.state == State.LAX || this.state == State.LOW || this.state == State.HIGH || 
+		if (transition)
+			 transition = ((this.state == State.LAX || this.state == State.LOW || this.state == State.HIGH || 
 			this.state == State.WALK) && (newState == State.LAX || newState == State.LOW || newState == State.HIGH));
 
 		this.state = newState;
@@ -300,6 +319,11 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		this.hp = Math.Min(this.HP_MAX, newhp);
 
 		this.hpBar.Value = this.hp;
+
+		if (this.hp < 0) {
+			this.Restart();
+			this.nodeEnemy.Restart();
+		}
 	}
 
 	//public wrapper function for Hurt_(..)
