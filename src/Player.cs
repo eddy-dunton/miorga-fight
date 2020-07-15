@@ -228,17 +228,19 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 					}
 
 				} else {
-					//Player is not moving
 
+					//Player is not moving
 					//Player has stopped moving
 					if (this.state == State.WALK) this.ChangeState(this.GetStateFromStance(this.stance));
 				}
+
+				//Only send the position if walking
+				if (this.mp) RsetUnreliable("position", this.Position);
 			} else {
 				//If neither player should be still
 				this.velocity = new Vector2();
 			}
-		
-			if (this.mp) RsetUnreliable("position", this.Position);
+
 		} else {
 			//Check for direction swapping when remote
 			if (this.velocity.x != 0 && this.lastVelocity.x != 0 && 
