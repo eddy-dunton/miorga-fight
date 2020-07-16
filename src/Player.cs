@@ -322,7 +322,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 
 		this.hpBar.Value = this.hp;
 
-		if (this.hp < 0) {
+		if (this.hp <= 0) {
 			this.Restart();
 			this.nodeEnemy.Restart();
 		}
