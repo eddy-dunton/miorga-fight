@@ -10,7 +10,7 @@ public class Lobby : Control {
 	Level game;
 
 	//Is the creation of the game object deferred
-	//Used to work around godots stupid restrictions
+	//Used to work around the fact not enough of the rest of the scene will have loaded before Ready is run
 	private bool deferred;
 
 	//List of all players in the order they joined
@@ -166,10 +166,10 @@ public class Lobby : Control {
 		GD.Print("Joining...");
 		this.CreateGame();
 
-		String ip = nodeAddr.Text;
+		String ip = IP.ResolveHostname(nodeAddr.Text);
 		
-		if (!ip.IsValidIPAddress()) {
-			GD.PrintErr("Invalid Address");
+		if (ip == "") {
+			GD.Print("Error resolving host!");
 			return;
 		}
 
@@ -195,7 +195,7 @@ public class Lobby : Control {
 	}
 
 	void AddPlayer(String name, int id, bool mp = false) {
-		string path = (name == "p1") ? "res://scenes/player/regia.tscn" : "res://scenes/player/tailor.tscn";
+		string path = (name == "p1") ? "res://scenes/player/regia.tscn" : "res://scenes/player/regia.tscn";
 		Player _new = ((ResourceLoader.Load(path) as PackedScene).Instance()) as Player;
 		_new.mp = mp;
 		_new.Name = name;
