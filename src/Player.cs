@@ -143,7 +143,9 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 
 		this.nodeEnemy = enemy;
 		this.started = true;
-	
+
+		Input.SetMouseMode(Input.MouseMode.Hidden);
+
 		this.Restart();
 	}
 
@@ -161,6 +163,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		this.hpBar.Visible = false;
 		this.nodeEnemy = null;
 		this.started = false;
+
+		Input.SetMouseMode(Input.MouseMode.Visible);
 	}
 
 	public override void _Input(InputEvent inputEvent) {
