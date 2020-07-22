@@ -10,6 +10,7 @@ public class PlayerAnimation : AnimatedSprite {
 
     //Data for the current animation, will never be null
     private AnimationData current;
+    public AnimationData Current() {return this.current;}
 
     public override void _Ready() {
         this.Connect("animation_finished", this, nameof(_AnimationFinished));
@@ -64,10 +65,12 @@ public class PlayerAnimation : AnimatedSprite {
     
     private void UpdateHitbox() {
         if (this.Frame < this.current.hitbox.Length) {
-            this.parent.nodeCollision.Position = 
-                    (this.current.offset + this.current.hitbox_offset[this.Frame]);
+            //this.parent.nodeCollision.Position = 
+            //        (this.current.offset + this.current.hitbox_offset[this.Frame]);
 
-            this.parent.nodeCollision.Shape = this.current.hitbox[this.Frame];
+            //this.parent.nodeCollision.Shape = this.current.hitbox[this.Frame];
+
+            this.parent.hitbox = this.current.hitbox[this.Frame];
         }
     }
 

@@ -37,6 +37,9 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Players current parry, only valid if the player is parrying
 	public Parry parry;
 
+	//The players current hitbox (for attacks)
+	public Shape2D hitbox;
+
 	public bool mp;
 	
 	private int hp;
