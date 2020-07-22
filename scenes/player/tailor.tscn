@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/player/tailor/stances/hang/hang.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/tailor/stances/lax/lax.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/tailor/stances/sept/sept.png" type="Texture" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ) ],
+"loop": false,
+"name": "low",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": false,
+"name": "trans_high->low",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": false,
+"name": "lax",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": false,
+"name": "trans_lax->high",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "trans_low->high",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "high",
+"speed": 5.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "trans_lax->low",
+"speed": 5.0
+} ]
+
+[node name="en_player" instance=ExtResource( 1 )]
+actions = [  ]
+SPEED = 100
+HP_MAX = 100
+
+[node name="animate_sprite" parent="." index="1"]
+frames = SubResource( 1 )
+data = {
+
+}
+
+[node name="overlay_track" parent="animate_sprite" index="1"]
+offsets = {
+
+}
+
+[node name="overlay_notrack" parent="." index="2"]
+offsets = {
+
+}
