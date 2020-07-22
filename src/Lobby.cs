@@ -195,7 +195,7 @@ public class Lobby : Control {
 	}
 
 	void AddPlayer(String name, int id, bool mp = false) {
-		Player _new = ((ResourceLoader.Load("res://scenes/player.tscn") as PackedScene).Instance()) as Player;
+		Player _new = ((ResourceLoader.Load("res://scenes/player/regia.tscn") as PackedScene).Instance()) as Player;
 		_new.mp = mp;
 		_new.Name = name;
 		_new.SetNetworkMaster(id);
