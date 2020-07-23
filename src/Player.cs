@@ -218,11 +218,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 				if (this.velocity.x != 0) {
 					//If player is actually moving
 					MoveAndCollide(this.velocity * delta);
-					//Stops the player from moving up and down
-					//Pretty shite I know, but there's no better way to do it I believe
-					Vector2 vec = this.Position;
-					vec.y = this.nodeLevel.GetPlayerY();
-					this.Position = vec;
 
 					if (this.mp) RsetUnreliable(nameof(this.velocity), this.velocity);
 
@@ -235,7 +230,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 					}
 
 				} else {
-
 					//Player is not moving
 					//Player has stopped moving
 					if (this.state == State.WALK) this.ChangeState(this.GetStateFromStance(this.stance));
