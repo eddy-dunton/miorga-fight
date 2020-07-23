@@ -1,7 +1,7 @@
 [gd_scene load_steps=110 format=2]
 
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://resources/animations/low_parry_alt_riposte.tres" type="Resource" id=2]
+[ext_resource path="res://resources/animations/regia/low_parry_alt_riposte.tres" type="Resource" id=2]
 [ext_resource path="res://assets/player/regia/stances/high idle/key1.png" type="Texture" id=3]
 [ext_resource path="res://assets/player/regia/stances/high idle/key2.png" type="Texture" id=4]
 [ext_resource path="res://assets/player/regia/stances/lax.png" type="Texture" id=5]
@@ -82,15 +82,15 @@
 [ext_resource path="res://assets/player/regia/stances/high idle/key3.png" type="Texture" id=85]
 [ext_resource path="res://assets/player/regia/stances/low idle/key3.png" type="Texture" id=86]
 [ext_resource path="res://assets/player/regia/stances/low idle/key2.png" type="Texture" id=87]
-[ext_resource path="res://resources/animations/walk.tres" type="Resource" id=88]
-[ext_resource path="res://resources/animations/high_attack_alt.tres" type="Resource" id=89]
-[ext_resource path="res://resources/animations/low_attack_main.tres" type="Resource" id=90]
-[ext_resource path="res://resources/animations/high_attack_main.tres" type="Resource" id=91]
-[ext_resource path="res://resources/animations/trans_high_alt-low.tres" type="Resource" id=92]
-[ext_resource path="res://resources/animations/trans_high_main-low.tres" type="Resource" id=93]
-[ext_resource path="res://resources/animations/trans_low_main-high.tres" type="Resource" id=94]
-[ext_resource path="res://resources/animations/lax.tres" type="Resource" id=95]
-[ext_resource path="res://resources/animations/low.tres" type="Resource" id=96]
+[ext_resource path="res://resources/animations/regia/walk.tres" type="Resource" id=88]
+[ext_resource path="res://resources/animations/regia/high_attack_alt.tres" type="Resource" id=89]
+[ext_resource path="res://resources/animations/regia/low_attack_main.tres" type="Resource" id=90]
+[ext_resource path="res://resources/animations/regia/high_attack_main.tres" type="Resource" id=91]
+[ext_resource path="res://resources/animations/regia/trans_high_alt-low.tres" type="Resource" id=92]
+[ext_resource path="res://resources/animations/regia/trans_high_main-low.tres" type="Resource" id=93]
+[ext_resource path="res://resources/animations/regia/trans_low_main-high.tres" type="Resource" id=94]
+[ext_resource path="res://resources/animations/regia/lax.tres" type="Resource" id=95]
+[ext_resource path="res://resources/animations/regia/low.tres" type="Resource" id=96]
 [ext_resource path="res://assets/player/regia/fight/high/standard/feint/key1.png" type="Texture" id=97]
 [ext_resource path="res://assets/player/regia/fight/high/standard/feint/key3.png" type="Texture" id=98]
 [ext_resource path="res://assets/player/regia/fight/high/standard/feint/key4.png" type="Texture" id=99]
@@ -99,11 +99,11 @@
 [ext_resource path="res://assets/player/regia/fight/low/alternate/afterhit/riposte/key1.png" type="Texture" id=102]
 [ext_resource path="res://assets/player/regia/fight/low/alternate/afterhit/riposte/key2.png" type="Texture" id=103]
 [ext_resource path="res://assets/player/regia/fight/low/alternate/afterhit/riposte/key4.png" type="Texture" id=104]
-[ext_resource path="res://resources/animations/high.tres" type="Resource" id=105]
+[ext_resource path="res://resources/animations/regia/high.tres" type="Resource" id=105]
 [ext_resource path="res://assets/player/regia/fight/low/alternate/afterhit/riposte/key3.png" type="Texture" id=106]
 [ext_resource path="res://resources/action/regia/ParryRiposte.tres" type="Resource" id=107]
-[ext_resource path="res://resources/animations/low_parry_alt_.tres" type="Resource" id=108]
-[ext_resource path="res://resources/animations/flinch.tres" type="Resource" id=109]
+[ext_resource path="res://resources/animations/regia/low_parry_alt_.tres" type="Resource" id=108]
+[ext_resource path="res://resources/animations/regia/flinch.tres" type="Resource" id=109]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 23, 46 )
@@ -191,10 +191,10 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 11.148, 29.3844 )
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=4]
 animations = [ {
 "frames": [ ExtResource( 64 ), ExtResource( 60 ), ExtResource( 66 ), ExtResource( 61 ), ExtResource( 63 ), ExtResource( 68 ), ExtResource( 70 ), ExtResource( 65 ), ExtResource( 62 ), ExtResource( 62 ), ExtResource( 80 ), ExtResource( 77 ), ExtResource( 78 ), ExtResource( 79 ) ],
 "loop": false,
@@ -202,7 +202,7 @@ animations = [ {
 "speed": 30.0
 } ]
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=5]
 animations = [ {
 "frames": [ ExtResource( 97 ), ExtResource( 100 ), ExtResource( 98 ), ExtResource( 99 ) ],
 "loop": false,
@@ -240,18 +240,19 @@ data = {
 }
 
 [node name="temp" type="CollisionShape2D" parent="animate_sprite" index="0"]
+visible = false
 position = Vector2( 54.0326, -14.3027 )
-shape = SubResource( 5 )
+shape = SubResource( 3 )
 
 [node name="overlay_track" parent="animate_sprite" index="2"]
-frames = SubResource( 3 )
+frames = SubResource( 4 )
 animation = "blood_mid"
 offsets = {
 "blood_mid": Vector2( 40, 38 )
 }
 
 [node name="overlay_notrack" parent="." index="2"]
-frames = SubResource( 4 )
+frames = SubResource( 5 )
 animation = "high_main_attack_feint"
 offsets = {
 "high_main_attack_feint": Vector2( 89, -6 )

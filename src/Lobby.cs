@@ -195,7 +195,7 @@ public class Lobby : Control {
 	}
 
 	void AddPlayer(String name, int id, bool mp = false) {
-		string path = (name == "p1") ? "res://scenes/player/regia.tscn" : "res://scenes/player/regia.tscn";
+		string path = (name == "p1") ? "res://scenes/player/regia.tscn" : "res://scenes/player/tailor.tscn";
 		Player _new = ((ResourceLoader.Load(path) as PackedScene).Instance()) as Player;
 		_new.mp = mp;
 		_new.Name = name;

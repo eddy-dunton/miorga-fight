@@ -1,13 +1,17 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/Player.cs" type="Script" id=1]
+[ext_resource path="res://assets/player/tailor/fight/hang/alternate/feint/key1.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/tailor/fight/hang/alternate/feint/key2.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/tailor/fight/hang/alternate/feint/key3.png" type="Texture" id=4]
+[ext_resource path="res://assets/player/tailor/fight/hang/alternate/feint/key4.png" type="Texture" id=5]
 [ext_resource path="res://src/PlayerAnimation.cs" type="Script" id=17]
 [ext_resource path="res://assets/player/particles/sparks/spark3_white.png" type="Texture" id=67]
 [ext_resource path="res://assets/player/particles/sparks/spark4_white.png" type="Texture" id=69]
 [ext_resource path="res://src/PlayerOverlay.cs" type="Script" id=71]
 [ext_resource path="res://assets/player/particles/sparks/spark1_white.png" type="Texture" id=73]
 
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [  ],
 "loop": true,
@@ -64,9 +68,9 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [  ],
-"loop": true,
-"name": "default",
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": false,
+"name": "high_alt_feint",
 "speed": 5.0
 } ]
 
@@ -76,7 +80,7 @@ script = ExtResource( 1 )
 [node name="collision" type="CollisionShape2D" parent="."]
 
 [node name="animate_sprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 8 )
+frames = SubResource( 1 )
 script = ExtResource( 17 )
 
 [node name="sparks" type="Particles2D" parent="animate_sprite"]

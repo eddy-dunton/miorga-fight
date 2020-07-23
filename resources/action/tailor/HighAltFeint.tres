@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/Overlay.cs" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+triggerInput = "action_alt"
+triggerAnimation = "high_alt"
+triggerMinFrame = 0
+triggerMaxFrame = 3
+animation = "high_alt_feint"
+movement = Vector2( 0, 0 )
+transition = null
+transitionTo = 2
+animateTransition = false
+overlay = 1
+cancel = true
