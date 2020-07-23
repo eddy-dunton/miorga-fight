@@ -94,10 +94,10 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		this.nodeOverlayNoTrack = GetNode<AnimatedSprite>("overlay_notrack") as PlayerOverlay;
 
 		//Load stances
-		STANCE_LAX = new Stance(LAX_SPRITE);
+		STANCE_LAX = new Stance("lax", LAX_SPRITE);
 		//Creates attacks if they exist
-		STANCE_LOW = new Stance(LOW_SPRITE);
-		STANCE_HIGH = new Stance(HIGH_SPRITE);
+		STANCE_LOW = new Stance("low", LOW_SPRITE);
+		STANCE_HIGH = new Stance("high", HIGH_SPRITE);
 
 		this.ChangeState(State.LAX);
 
@@ -270,7 +270,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		}
 		
 		//Check if a transition should be done
-		//Not particularly proud on this 
+		//Not particularly proud of this 
 		if (transition)
 			 transition = ((this.state == State.LAX || this.state == State.LOW || this.state == State.HIGH || 
 			this.state == State.WALK) && (newState == State.LAX || newState == State.LOW || newState == State.HIGH));
@@ -433,9 +433,31 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Only use this publiclly if you know what you're doing,
 	//Normally stick to change state
 	public void ChangeStance(Stance newStance, bool fromStance = false) {
+		//ChangeStance is only required to provide transitions if moving from stance to stance
+		//If moving from Action to Stance then the action is responsible for providing the transition
 		if (fromStance) {
-			//Only perform transitions if moving from stance 
-			if (this.stance == STANCE_LAX) {
+			
+			//String concatenation and comparisons aren't phenomally fast I know, but it beats a mess of nested ifs
+			//And this code will not be called very often (at max about twice a second I imagine)
+
+			string transition = "trans_" + this.stance.Name() + "->" + newStance.Name();
+
+			//Check for transition
+			if (this.nodeAnimateSprite.Frames.HasAnimation(transition)) {
+				this.Transition(transition);
+			} else {
+				//Check for oppsite transition
+				transition = "trans_" + newStance.Name() + "->" + this.stance.Name();
+				if (this.nodeAnimateSprite.Frames.HasAnimation(transition)) {
+					this.Transition(transition, true); //Plays opposite backwards
+				} else {
+					this.nodeAnimateSprite.Play(newStance.sprite);
+				}
+			}
+			
+			this.stance = newStance;
+
+			/*if (this.stance == STANCE_LAX) {
 				//Moving from lax to stance
 				if (newStance == STANCE_HIGH) {
 					//Lax -> high
@@ -460,10 +482,9 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 				} else if (this.stance == STANCE_HIGH) {
 					this.Transition("trans_high->low");
 				}
-			}
-			this.stance = newStance;
+			}*/
 		} else {
-			//Not coming from stance
+			//Not coming from stance, therefore transition will be handled by the current action
 			this.stance = newStance;
 			this.nodeAnimateSprite.Reset();
 		}
@@ -511,10 +532,14 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	}
 
 	public class Stance {
-		public String sprite;
+		public string sprite;
+		private string name {get;}
 
-		public Stance(String sprite) {
+		public Stance(string name, string sprite) {
+			this.name = name;
 			this.sprite = sprite;
 		}
+
+		public string Name() {return name;}
 	}
 }

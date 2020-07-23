@@ -7,39 +7,19 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 4 ) ],
-"loop": false,
-"name": "low",
-"speed": 5.0
-}, {
-"frames": [  ],
-"loop": false,
-"name": "trans_high->low",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ) ],
 "loop": false,
 "name": "lax",
 "speed": 5.0
 }, {
-"frames": [  ],
+"frames": [ ExtResource( 4 ) ],
 "loop": false,
-"name": "trans_lax->high",
-"speed": 5.0
-}, {
-"frames": [  ],
-"loop": true,
-"name": "trans_low->high",
+"name": "low",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 2 ) ],
 "loop": false,
 "name": "high",
-"speed": 5.0
-}, {
-"frames": [  ],
-"loop": true,
-"name": "trans_lax->low",
 "speed": 5.0
 } ]
 
