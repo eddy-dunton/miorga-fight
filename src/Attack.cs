@@ -41,13 +41,16 @@ public class Attack : Action {
         //Check for collision with other player
 		if (this.hitbox.Collide(thisXform, player.nodeEnemy.hitbox, enemyXform)) {
 			//Check for parry
-			if (player.nodeEnemy.state == Player.State.PARRY && player.nodeEnemy.parry.Check(player, player.nodeEnemy))
+			if (player.nodeEnemy.state == Player.State.PARRY && 
+                    player.nodeEnemy.parry.Check(player, player.nodeEnemy, this)) {
                 //Attack parried
                 player.Parried(this, player.nodeEnemy.parry);
-			else 
+            }
+			else { 
                 //Attack not parried
                 player.nodeEnemy.Hurt(damage, this.halt);
-		}
+            }
+        }
     }
 
     public new void Cut(Player player) {
