@@ -41,14 +41,12 @@ public class Attack : Action {
         //Check for collision with other player
 		if (this.hitbox.Collide(thisXform, player.nodeEnemy.hitbox, enemyXform)) {
 			//Check for parry
-			if (! ((player.nodeEnemy.state == Player.State.PARRY) && 
-					(player.nodeEnemy.nodeAnimateSprite.Frame >= player.nodeEnemy.parry.frameStart) &&
-					(player.nodeEnemy.nodeAnimateSprite.Frame <= player.nodeEnemy.parry.frameEnd))) {
-                player.nodeEnemy.Hurt(damage, this.halt);
-			} else {
+			if (player.nodeEnemy.state == Player.State.PARRY && player.nodeEnemy.parry.Check(player, player.nodeEnemy))
                 //Attack parried
                 player.Parried(this, player.nodeEnemy.parry);
-            }
+			else 
+                //Attack not parried
+                player.nodeEnemy.Hurt(damage, this.halt);
 		}
     }
 

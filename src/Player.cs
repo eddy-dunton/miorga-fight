@@ -436,7 +436,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		//ChangeStance is only required to provide transitions if moving from stance to stance
 		//If moving from Action to Stance then the action is responsible for providing the transition
 		if (fromStance) {
-			
 			//String concatenation and comparisons aren't phenomally fast I know, but it beats a mess of nested ifs
 			//And this code will not be called very often (at max about twice a second I imagine)
 
@@ -456,33 +455,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			}
 			
 			this.stance = newStance;
-
-			/*if (this.stance == STANCE_LAX) {
-				//Moving from lax to stance
-				if (newStance == STANCE_HIGH) {
-					//Lax -> high
-					this.Transition("trans_lax->high");
-				} else {
-					//Lax -> low (no trans)
-					this.nodeAnimateSprite.Play(newStance.sprite);
-				}
-			} else if (newStance == STANCE_LAX) {
-				//Moving from stance to lax
-				if (this.stance == STANCE_HIGH) {
-					//High -> Lax
-					this.Transition("trans_lax->high", true);
-				} else {
-					//Low -> Lax (no trans)
-					this.nodeAnimateSprite.Play(newStance.sprite);
-				}
-			} else {
-				if (this.stance == STANCE_LOW) {
-					//Going between stances, plays forwards if going LOW -> HIGH, or backwards going HIGH -> LOW
-					this.Transition("trans_low->high");
-				} else if (this.stance == STANCE_HIGH) {
-					this.Transition("trans_high->low");
-				}
-			}*/
 		} else {
 			//Not coming from stance, therefore transition will be handled by the current action
 			this.stance = newStance;

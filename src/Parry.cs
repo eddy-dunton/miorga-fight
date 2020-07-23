@@ -33,6 +33,12 @@ public class Parry : Action
 		player.parry = null;
     }
 
+    //Checks if an a players attack would have been parried by this
+    public bool Check(Player attacker, Player parrier) {
+        return ((parrier.nodeAnimateSprite.Frame >= parrier.parry.frameStart) &&
+                (parrier.nodeAnimateSprite.Frame <= parrier.parry.frameEnd));
+    }
+
     public void Success(Player player) {
         player.nodeSparks.Emitting = true;
     }
