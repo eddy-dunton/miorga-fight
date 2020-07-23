@@ -12,11 +12,18 @@ public class Attack : Action {
 
     [Export] public int damage;
 
+    //True if the attack requires a successful parry in order to be pulled off
+    //For this to work correctly triggerAnimation must be a parry, else this will not work
+    [Export] private bool requiresSuccessfulParry;
+
     public Attack() {
         this.type = Action.Type.ATTACK;
     }
 
     public override void Start(Player player) {
+        //Cancels if this attack requires parry but the player has not parried
+        if (this.requiresSuccessfulParry && !player.parrySuccessful) return;
+
         player.attack = this;
         player.nodeAnimateSprite.Play(this.animation);
         player.ChangeState(Player.State.ATTACK);

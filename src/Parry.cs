@@ -23,6 +23,7 @@ public class Parry : Action
 
     public override void Start(Player player) {
         player.parry = this;
+        player.parrySuccessful = false;
         player.nodeAnimateSprite.Play(this.animation);
         player.ChangeState(Player.State.PARRY);
     }
@@ -37,6 +38,7 @@ public class Parry : Action
         base.End(player);
 
 		player.parry = null;
+        player.parrySuccessful = false;
     }
 
     //Checks if an a players attack would have been parried by this
@@ -57,5 +59,6 @@ public class Parry : Action
 
     public void Success(Player player) {
         player.nodeSparks.Emitting = true;
+        player.parrySuccessful = true;
     }
 }

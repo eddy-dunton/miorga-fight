@@ -36,6 +36,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public Attack attack;
 	//Players current parry, only valid if the player is parrying
 	public Parry parry;
+	//Set to false at the start of a parry, then true if the parry is successful
+	public bool parrySuccessful;
 
 	//The players current hitbox (for attacks)
 	public Shape2D hitbox;
@@ -140,6 +142,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		this.hpBar = hpbar;
 		this.hpBar.MaxValue = this.HP_MAX;
 		this.hpBar.Visible = true;
+		this.parrySuccessful = false;
 
 		this.nodeEnemy = enemy;
 		this.started = true;
