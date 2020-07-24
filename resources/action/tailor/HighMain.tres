@@ -1,6 +1,8 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://src/Attack.cs" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
 
 [resource]
 script = ExtResource( 1 )
@@ -13,8 +15,9 @@ movement = Vector2( 0, 0 )
 transition = "trans_high_main->low"
 transitionTo = 1
 animateTransition = true
+hitbox = SubResource( 1 )
 hitboxoffset = Vector2( 0, 0 )
-hitframe = 0
+hitframe = 2
 halt = false
 damage = 0
 requiresSuccessfulParry = false

@@ -5,13 +5,13 @@
 [resource]
 script = ExtResource( 1 )
 triggerInput = "action_alt"
-triggerAnimation = "high_alt"
+triggerAnimation = "high_alt_stage1"
 triggerMinFrame = 0
 triggerMaxFrame = 3
 animation = "high_alt_feint"
 movement = Vector2( 0, 0 )
 transition = null
-transitionTo = 2
+transitionTo = 0
 animateTransition = false
 overlay = 1
 cancel = true

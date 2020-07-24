@@ -1,18 +1,21 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://src/Attack.cs" type="Script" id=1]
 
+[sub_resource type="RectangleShape2D" id=1]
+
 [resource]
 script = ExtResource( 1 )
-triggerInput = "action_alt"
-triggerAnimation = "high"
-triggerMinFrame = -1
-triggerMaxFrame = -1
-animation = "high_alt"
+triggerInput = null
+triggerAnimation = null
+triggerMinFrame = 0
+triggerMaxFrame = 0
+animation = "high_alt_stage2"
 movement = Vector2( 0, 0 )
 transition = null
-transitionTo = 0
+transitionTo = 2
 animateTransition = false
+hitbox = SubResource( 1 )
 hitboxoffset = Vector2( 0, 0 )
 hitframe = 0
 halt = false

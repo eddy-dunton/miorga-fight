@@ -13,23 +13,23 @@
 [ext_resource path="res://assets/player/tailor/fight/hang/alternate/key5.png" type="Texture" id=11]
 [ext_resource path="res://assets/player/tailor/fight/hang/standard/afterhit/transition/key7.png" type="Texture" id=12]
 [ext_resource path="res://assets/player/tailor/fight/hang/alternate/key1.png" type="Texture" id=13]
-[ext_resource path="res://assets/player/tailor/fight/hang/alternate/key9.png" type="Texture" id=14]
+[ext_resource path="res://assets/player/tailor/fight/hang/alternate/key8.png" type="Texture" id=14]
 [ext_resource path="res://assets/player/tailor/fight/hang/alternate/key7.png" type="Texture" id=15]
 [ext_resource path="res://assets/player/tailor/fight/hang/standard/afterhit/transition/key8.png" type="Texture" id=16]
 [ext_resource path="res://assets/player/tailor/fight/hang/alternate/key3.png" type="Texture" id=17]
 [ext_resource path="res://assets/player/tailor/fight/hang/alternate/key4.png" type="Texture" id=18]
 [ext_resource path="res://assets/player/tailor/fight/hang/alternate/key2.png" type="Texture" id=19]
-[ext_resource path="res://assets/player/tailor/fight/hang/alternate/key8.png" type="Texture" id=20]
+[ext_resource path="res://assets/player/tailor/fight/hang/alternate/key9.png" type="Texture" id=20]
 [ext_resource path="res://assets/player/tailor/fight/hang/alternate/key6.png" type="Texture" id=21]
 [ext_resource path="res://resources/action/tailor/HighMain.tres" type="Resource" id=22]
-[ext_resource path="res://resources/action/tailor/HighAlt.tres" type="Resource" id=23]
+[ext_resource path="res://resources/action/tailor/HighAlt_Stage1.tres" type="Resource" id=23]
 [ext_resource path="res://resources/action/tailor/HighAltFeint.tres" type="Resource" id=28]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "lax",
+"frames": [ ExtResource( 11 ), ExtResource( 21 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 20 ) ],
+"loop": false,
+"name": "high_alt_stage2",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 12 ), ExtResource( 16 ) ],
@@ -37,25 +37,30 @@ animations = [ {
 "name": "trans_high_main->low",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "low",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "high",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 13 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 11 ), ExtResource( 21 ), ExtResource( 15 ), ExtResource( 20 ), ExtResource( 14 ) ],
-"loop": false,
-"name": "high_alt",
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "lax",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 9 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 10 ) ],
 "loop": false,
 "name": "high_main",
 "speed": 12.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 18 ) ],
+"loop": false,
+"name": "high_alt_stage1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "low",
+"speed": 5.0
 } ]
 
 [node name="en_player" instance=ExtResource( 1 )]
@@ -65,7 +70,7 @@ HP_MAX = 100
 
 [node name="animate_sprite" parent="." index="1"]
 frames = SubResource( 1 )
-animation = "lax"
+animation = "high_alt_stage2"
 data = {
 
 }
