@@ -173,10 +173,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public override void _Input(InputEvent inputEvent) {
 		if (this.controls == ControlMethod.REMOTE) return; //Do not check for inputs for remote objects
 
-		if (inputEvent.IsActionPressed("debug")) {	
-			if (true) {}; //Debug breakpoint
-		}
-
 		//No actions if the game hasn't started yet
 		if (! this.started) return;
 

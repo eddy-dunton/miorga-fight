@@ -3,6 +3,9 @@ using Godot;
 //Used to control things regardless of scene
 //all input events for command should start "com_"
 public class Command : Node {
+    //Used for debug
+    public static Player p1, p2;
+
     public static InputEvent CreateInputEventAction(string action, bool pressed) {
         InputEventAction newEvent = new InputEventAction();
         newEvent.Action = action;
@@ -44,8 +47,13 @@ public class Command : Node {
         }
     }
     
+
     public override void _Input(InputEvent inputEvent) {
-        if (inputEvent.IsActionPressed("com_fs")) { //Swaps to and from fullscreen
+		if (inputEvent.IsActionPressed("com_debug")) {	
+			if (true) {}; //Debug breakpoint
+		}
+
+        else if (inputEvent.IsActionPressed("com_fs")) { //Swaps to and from fullscreen
             OS.WindowFullscreen = !OS.WindowFullscreen;
             GetTree().SetInputAsHandled();
         }
