@@ -94,12 +94,16 @@ public class Command : Node {
     private void PauseStart() {
         //Pause if game is local
         if (! Command.mp) GetTree().Paused = true;
+
+        Input.SetMouseMode(Input.MouseMode.Visible);
     
         GetTree().Root.AddChild(Command.pauseMenu);
     }
 
-    private void PauseEnd() {
+    public void PauseEnd() {
         GetTree().Paused = false;
+
+        Input.SetMouseMode(Input.MouseMode.Hidden);
 
         GetTree().Root.RemoveChild(Command.pauseMenu);
     }
