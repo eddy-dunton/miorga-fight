@@ -37,6 +37,9 @@ public class Attack : Action {
         //Just to shorten things
         PlayerAnimation enemySprite = player.nodeEnemy.nodeAnimateSprite;
 
+        //No hitbox, no point trying
+        if (enemySprite.Current().hitbox_offset.Length == 0) return;
+
         //I'm sorry about this, I swear there isn't a better way to write things
         //Calculate transform for enemy hitbox: translates the sprites transformation by the current hitbox offset
         Transform2D enemyXform = (enemySprite.Frame < enemySprite.Current().hitbox_offset.Length) ?
