@@ -10,7 +10,7 @@ public class Lobby : Control {
 	Level game;
 
 	//Is the creation of the game object deferred
-	//Used to work around godots stupid restrictions
+	//Used to work around the fact not enough of the rest of the scene will have loaded before Ready is run
 	private bool deferred;
 
 	//List of all players in the order they joined
@@ -166,10 +166,10 @@ public class Lobby : Control {
 		GD.Print("Joining...");
 		this.CreateGame();
 
-		String ip = nodeAddr.Text;
+		String ip = IP.ResolveHostname(nodeAddr.Text);
 		
-		if (!ip.IsValidIPAddress()) {
-			GD.PrintErr("Invalid Address");
+		if (ip == "") {
+			GD.Print("Error resolving host!");
 			return;
 		}
 
@@ -195,7 +195,8 @@ public class Lobby : Control {
 	}
 
 	void AddPlayer(String name, int id, bool mp = false) {
-		Player _new = ((ResourceLoader.Load("res://scenes/player.tscn") as PackedScene).Instance()) as Player;
+		string path = (name == "p1") ? "res://scenes/player/regia.tscn" : "res://scenes/player/tailor.tscn";
+		Player _new = ((ResourceLoader.Load(path) as PackedScene).Instance()) as Player;
 		_new.mp = mp;
 		_new.Name = name;
 		_new.SetNetworkMaster(id);
@@ -205,13 +206,23 @@ public class Lobby : Control {
 			_new.controls = (id == GetTree().GetNetworkUniqueId()) ? 
 					Player.ControlMethod.PLAYER1 : Player.ControlMethod.REMOTE;
 		}
-		_new.DIRECTION = (name == "p1" ? Player.Direction.RIGHT : Player.Direction.LEFT);
+
+		//Position specific stuff
+		if (name == "p1") { 
+			this.p1 = _new;
+			Command.p1 = _new; 
+			_new.DIRECTION = Player.Direction.RIGHT;
+		} else if (name == "p2") {
+			this.p2 = _new;
+			Command.p2 = _new;
+			_new.DIRECTION = Player.Direction.LEFT;
+		}
+		
 		_new.Position = this.game.GetPlayerPosition(_new.DIRECTION);
+		
 		this.game.AddChild(_new);
 		(this.game.GetNode("camera_track") as CameraTrack).Track(_new);
 		
-		if (name == "p1") this.p1 = _new;
-		if (name == "p2") this.p2 = _new;
 
 		if (this.p1 != null && this.p2 != null) {
 			this.StartGame();
@@ -232,12 +243,7 @@ public class Lobby : Control {
 	void CreateGame() {
 		//Load game
 		this.game = ((ResourceLoader.Load("res://scenes/level.tscn") as PackedScene).Instance()) as Level;
-		//game.Connect("game_finished", this, nameof(_GameOver));
-		//if (deferred) {
-			//GetParent().CallDeferred(nameof(AddChild), game);
-		//}// else {
-		GetParent().AddChild(game);
-		//}
+		GetTree().Root.AddChild(game);
 		this.Visible = false;
 		GD.Print("Game world created!");
 	}

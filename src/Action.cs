@@ -26,18 +26,23 @@ public abstract class Action : Resource {
     //Movement performed once the parry has concluded
     [Export] public Vector2 movement;
 
-    //Trans animation
+    //Transition animation
     [Export] public String transition;
 
+    //State to move to when transtition is finished
     [Export] public Player.State transitionTo;
 
+    //Whether the transition should be animated (if this is true transition will be ignored)
     [Export] public bool animateTransition;
+    
+    //Alternate option, enters another action when this action has finished (having this set will ignore transition, 
+    //transitionTo and AnimateTransition)
+    [Export] public Action transitionAction;
 
     public Type type;
 
     public abstract void Start(Player player);
 
-    
     //Cuts an attack short, stopping it where it is
     //Does not play the transition animation
     public void Cut(Player player) {
@@ -47,7 +52,10 @@ public abstract class Action : Resource {
     public void End(Player player) {
         player.MoveAndCollide(this.movement * player.SCALEFACTOR);
     
-        if (this.transitionTo != Player.State.NONE) {
+        //Check for ending action
+        if (this.transitionAction != null) {
+            this.transitionAction.Start(player);
+        } else if (this.transitionTo != Player.State.NONE) {
             //player.ChangeStance(player.GetStanceFromState(this.transitionTo), this.animateTransition);
             if (this.animateTransition) {
                 player.stance = player.GetStanceFromState(this.transitionTo);
