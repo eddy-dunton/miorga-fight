@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/bg/level_back2.png" type="Texture" id=3]
 [ext_resource path="res://assets/level/holytree/level_fore.png" type="Texture" id=4]
 [ext_resource path="res://assets/bg/level_back1.png" type="Texture" id=5]
-[ext_resource path="res://scenes/ui.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/ui/ui.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/MiorgaCamera.cs" type="Script" id=7]
 [ext_resource path="res://src/CameraTrack.cs" type="Script" id=8]
 [ext_resource path="res://assets/level/holytree/particles/type 2/7.png" type="Texture" id=10]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/level/holytree/particles/type 2/5.png" type="Texture" id=18]
 [ext_resource path="res://assets/level/holytree/particles/type 2/8.png" type="Texture" id=19]
 [ext_resource path="res://assets/level/holytree/particles/type 2/4.png" type="Texture" id=20]
+
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2

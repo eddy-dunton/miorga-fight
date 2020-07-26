@@ -242,7 +242,7 @@ public class Lobby : Control {
 
 	void CreateGame() {
 		//Load game
-		this.game = ((ResourceLoader.Load("res://scenes/level.tscn") as PackedScene).Instance()) as Level;
+		this.game = ((ResourceLoader.Load("res://scenes/level/holytree.tscn") as PackedScene).Instance()) as Level;
 		GetTree().Root.AddChild(game);
 		this.Visible = false;
 		GD.Print("Game world created!");
