@@ -2,8 +2,13 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+//Manages moving players in and out of the game
+//And the lobby UI scene which the game starts on
 public class Lobby : Control {
 	public const int PORT = 6785;
+
+    public static bool mp = false;
+    public static bool started = false;
 
 	LineEdit nodeAddr;
 	Button nodeHostButton, nodeJoinButton, nodeLocalButton;
@@ -150,7 +155,7 @@ public class Lobby : Control {
 		host.CompressionMode = NetworkedMultiplayerENet.CompressionModeEnum.RangeCoder;    
 		Error error = host.CreateServer(PORT, 8);
 
-		Command.mp = true;
+		Lobby.mp = true;
 
 		if (error != Error.Ok) {
 			GD.PrintErr("Error hosting server");
@@ -169,7 +174,7 @@ public class Lobby : Control {
 
 	void _OnJoinPressed() {
 		GD.Print("Joining...");
-		Command.mp = true;
+		Lobby.mp = true;
 		this.CreateGame();
 
 		String ip = IP.ResolveHostname(nodeAddr.Text);
@@ -192,12 +197,24 @@ public class Lobby : Control {
 		this.AddPlayer("p2", 0);
 
 		//Start game
-		this.StartGame();
+		this.GameStart();
 	}
 	
-	private void StartGame() {
+	private void GameStart() {
+		Input.SetMouseMode(Input.MouseMode.Hidden);
+		Lobby.started = true;
+
 		this.p1.Start(this.p2, this.game.GetNode("ui/health_p1") as HPBar);
 		this.p2.Start(this.p1, this.game.GetNode("ui/health_p2") as HPBar);
+	}
+
+	private void GameEnd() {
+		this.p1.End();
+		this.p2.End();
+
+		Lobby.started = false;
+
+		Input.SetMouseMode(Input.MouseMode.Visible);
 	}
 
 	void AddPlayer(String name, int id) {
@@ -205,7 +222,7 @@ public class Lobby : Control {
 		Player _new = ((ResourceLoader.Load(path) as PackedScene).Instance()) as Player;
 		_new.Name = name;
 		_new.SetNetworkMaster(id);
-		if (! Command.mp) {
+		if (! Lobby.mp) {
 			_new.controls = (name == "p1") ? Player.ControlMethod.PLAYER1 : Player.ControlMethod.PLAYER2; 
 		} else {
 			_new.controls = (id == GetTree().GetNetworkUniqueId()) ? 
@@ -230,14 +247,13 @@ public class Lobby : Control {
 		
 
 		if (this.p1 != null && this.p2 != null) {
-			this.StartGame();
+			this.GameStart();
 		}
 	}
 
 	void RemovePlayer(Player p) {
 		//End the game for both players
-		this.p1.End();
-		this.p2.End();
+		this.GameEnd();
 
 		this.game.RemoveChild(p);
 		(this.game.GetNode("camera_track") as CameraTrack).StopTrack(p);

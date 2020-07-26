@@ -51,8 +51,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	
 	private Stance STANCE_LAX, STANCE_LOW, STANCE_HIGH;
 
-	private bool started;
-
 	//Nodes
 	public Level nodeLevel;
 	public PlayerAnimation nodeAnimateSprite;
@@ -79,7 +77,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public Player() {
 		this.attack = null;
 		this.parry = null;
-		this.started = false;
 		this.lastVelocity = new Vector2();
 	}
 
@@ -103,7 +100,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		this.SCALEFACTOR = new Vector2((this.DIRECTION == Direction.RIGHT) ? 1 : -1, 1);
 
 		//Set up actions
-		if (! Command.mp) {
+		if (! Lobby.mp) {
 			if (this.controls == ControlMethod.PLAYER1) {this.inputPrefix = "p1_";}
 			else {this.inputPrefix = "p2_";}
 		} else {//Is multiplayer
@@ -142,9 +139,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		this.parrySuccessful = false;
 
 		this.nodeEnemy = enemy;
-		this.started = true;
-
-		Input.SetMouseMode(Input.MouseMode.Hidden);
 
 		this.Restart();
 	}
@@ -162,21 +156,18 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public void End() {
 		this.hpBar.Visible = false;
 		this.nodeEnemy = null;
-		this.started = false;
-
-		Input.SetMouseMode(Input.MouseMode.Visible);
 	}
 
 	public override void _Input(InputEvent inputEvent) {
 		if (this.controls == ControlMethod.REMOTE) return; //Do not check for inputs for remote objects
 
 		//No actions if the game hasn't started yet
-		if (! this.started) return;
+		if (! Lobby.started) return;
 
 		//Check for actions
 		foreach (Action action in this.actions) {
 			if (action.IsPossible(this, inputEvent)) {
-				if (! Command.mp) {
+				if (! Lobby.mp) {
 					action.Start(this);
 				} else {
 					RpcUnreliable(nameof(this.ActionStart), new object[] {this.actions.IndexOf(action)});
@@ -215,7 +206,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 					//If player is actually moving
 					MoveAndCollide(this.velocity * delta);
 
-					if (Command.mp) RsetUnreliable(nameof(this.velocity), this.velocity);
+					if (Lobby.mp) RsetUnreliable(nameof(this.velocity), this.velocity);
 
 					//Player has just started moving
 					if (this.state == State.LAX) this.ChangeState(State.WALK);
@@ -232,7 +223,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 				}
 
 				//Only send the position if walking
-				if (Command.mp) RsetUnreliable("position", this.Position);
+				if (Lobby.mp) RsetUnreliable("position", this.Position);
 			} else {
 				//If neither player should be still
 				this.velocity = new Vector2();
@@ -289,7 +280,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 				break;
 		}
 
-		if (Command.mp && this.controls != ControlMethod.REMOTE && this.state != State.ATTACK && this.state != State.PARRY) 
+		if (Lobby.mp && this.controls != ControlMethod.REMOTE && this.state != State.ATTACK && this.state != State.PARRY) 
 			RpcUnreliable(nameof(this.ChangeState), new object[] {newState});
 	}
 
@@ -304,7 +295,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Used to ensure that ChangeHP_(..) is only called by the server in multiplayer
 	//Passes straight through to ChangeHP_(..) in singleplayer
 	public void ChangeHP(int newhp) {
-		if (Command.mp) {
+		if (Lobby.mp) {
 			if (GetTree().GetNetworkUniqueId() == 1) { //check for server
 				RpcUnreliable(nameof(this.ChangeHP_), new object[] {newhp});
 			}
@@ -329,7 +320,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Used to ensure that Hurt_(..) is only called by the server in multiplayer
 	//Passes straight through to Hurt_(..) in singleplayer
 	public void Hurt(int damage, bool halting = false) {
-		if (Command.mp) {
+		if (Lobby.mp) {
 			if (GetTree().GetNetworkUniqueId() == 1) { //check for server
 				RpcUnreliable(nameof(this.Hurt_), new object[] {damage, halting});
 			}
@@ -359,7 +350,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Used to ensure that Parried_(..) is only called by the server in multiplayer
 	//Passes straight through to Parried_(..) in singleplayer
 	public void Parried(Attack attack, Parry by) {
-		if (Command.mp) {
+		if (Lobby.mp) {
 			if (GetTree().GetNetworkUniqueId() == 1) { //check for server
 				RpcUnreliable(nameof(this.Parried_ByIndex_), new object[] 
 						{this.actions.IndexOf(attack), this.nodeEnemy.actions.IndexOf(by)});

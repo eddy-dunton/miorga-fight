@@ -6,9 +6,6 @@ public class Command : Node {
     //Used for debug
     public static Player p1, p2;
 
-    //Is the game multiplayer?
-    public static bool mp = false;
-
     public static InputEvent CreateInputEventAction(string action, bool pressed) {
         InputEventAction newEvent = new InputEventAction();
         newEvent.Action = action;
@@ -93,7 +90,7 @@ public class Command : Node {
     //Starts pausing the game
     private void PauseStart() {
         //Pause if game is local
-        if (! Command.mp) GetTree().Paused = true;
+        if (! Lobby.mp) GetTree().Paused = true;
 
         Input.SetMouseMode(Input.MouseMode.Visible);
     
