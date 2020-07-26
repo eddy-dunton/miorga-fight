@@ -20,7 +20,6 @@
 [ext_resource path="res://assets/level/holytree/particles/type 2/8.png" type="Texture" id=19]
 [ext_resource path="res://assets/level/holytree/particles/type 2/4.png" type="Texture" id=20]
 
-
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
 emission_box_extents = Vector3( 400, 100, 1 )
@@ -68,7 +67,7 @@ normal = Vector2( 1, 0 )
 [sub_resource type="LineShape2D" id=4]
 normal = Vector2( -1, 0 )
 
-[node name="scene" type="Node2D"]
+[node name="level" type="Node2D"]
 script = ExtResource( 1 )
 POSITION_LEFT = Vector2( -250, 150 )
 POSITION_RIGHT = Vector2( 250, 150 )

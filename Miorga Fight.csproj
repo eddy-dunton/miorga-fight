@@ -61,6 +61,7 @@
     <Compile Include="src\Level.cs" />
     <Compile Include="src\AnimationData.cs" />
     <Compile Include="src\Overlay.cs" />
+    <Compile Include="src\PauseMenu.cs" />
     <Compile Include="src\PlayerOverlay.cs" />
     <Compile Include="src\Action.cs" />
     <Compile Include="src\Attack.cs" />

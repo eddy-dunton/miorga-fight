@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/PauseMenu.cs" type="Script" id=1]
+
+[node name="pause" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="bg" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0.501961 )
+margin_right = 780.0
+margin_bottom = 440.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
