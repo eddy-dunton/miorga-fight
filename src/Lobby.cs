@@ -26,6 +26,9 @@ public class Lobby : Control {
 	public override void _Ready()
 	{
 		GD.Print("Starting Lobby");
+		
+        //Continue through pauses
+        this.PauseMode = Node.PauseModeEnum.Process;
 
 		this.nodeAddr = GetNode<LineEdit>("LobbyPanel/Address");    
 		this.nodeHostButton = GetNode<Button>("LobbyPanel/HostButton");
@@ -74,26 +77,26 @@ public class Lobby : Control {
 
 			//No p1, create p1
 			if (! this.game.HasNode("p1")) {
-				Rpc(nameof(AddPlayer), new object[] {"p1", id, true});
+				Rpc(nameof(AddPlayer), new object[] {"p1", id});
 				GD.Print(id.ToString() + " is P1!");
 				
 				//if there is a node 2, add that
 				if (this.game.HasNode("p2")) {
-					RpcId(id, nameof(AddPlayer), new object[] {"p2", this.game.GetNode("p2").GetNetworkMaster(), true});
+					RpcId(id, nameof(AddPlayer), new object[] {"p2", this.game.GetNode("p2").GetNetworkMaster()});
 				}
 
 				return;
 			} else {
 				//if there is a p1, add it to that players game
-				RpcId(id, nameof(AddPlayer), new object[] {"p1", this.game.GetNode("p1").GetNetworkMaster(), true});
+				RpcId(id, nameof(AddPlayer), new object[] {"p1", this.game.GetNode("p1").GetNetworkMaster()});
 			}
 	
 			if (! this.game.HasNode("p2")) {
-				Rpc(nameof(AddPlayer), new object[] {"p2", id, true});
+				Rpc(nameof(AddPlayer), new object[] {"p2", id});
 				GD.Print(id.ToString() + " is P2!");
 				return;
 			} else {
-				RpcId(id, nameof(AddPlayer), new object[] {"p2", this.game.GetNode("p2").GetNetworkMaster(), true});
+				RpcId(id, nameof(AddPlayer), new object[] {"p2", this.game.GetNode("p2").GetNetworkMaster()});
 			}
 
 			GD.Print(id.ToString() + " is spectator!");
@@ -147,6 +150,8 @@ public class Lobby : Control {
 		host.CompressionMode = NetworkedMultiplayerENet.CompressionModeEnum.RangeCoder;    
 		Error error = host.CreateServer(PORT, 8);
 
+		Command.mp = true;
+
 		if (error != Error.Ok) {
 			GD.PrintErr("Error hosting server");
 			return;
@@ -164,6 +169,7 @@ public class Lobby : Control {
 
 	void _OnJoinPressed() {
 		GD.Print("Joining...");
+		Command.mp = true;
 		this.CreateGame();
 
 		String ip = IP.ResolveHostname(nodeAddr.Text);
@@ -194,13 +200,12 @@ public class Lobby : Control {
 		this.p2.Start(this.p1, this.game.GetNode("ui/health_p2") as HPBar);
 	}
 
-	void AddPlayer(String name, int id, bool mp = false) {
+	void AddPlayer(String name, int id) {
 		string path = (name == "p1") ? "res://scenes/player/regia.tscn" : "res://scenes/player/tailor.tscn";
 		Player _new = ((ResourceLoader.Load(path) as PackedScene).Instance()) as Player;
-		_new.mp = mp;
 		_new.Name = name;
 		_new.SetNetworkMaster(id);
-		if (!mp) {
+		if (! Command.mp) {
 			_new.controls = (name == "p1") ? Player.ControlMethod.PLAYER1 : Player.ControlMethod.PLAYER2; 
 		} else {
 			_new.controls = (id == GetTree().GetNetworkUniqueId()) ? 
@@ -242,7 +247,7 @@ public class Lobby : Control {
 
 	void CreateGame() {
 		//Load game
-		this.game = ((ResourceLoader.Load("res://scenes/level.tscn") as PackedScene).Instance()) as Level;
+		this.game = ((ResourceLoader.Load("res://scenes/level/holytree.tscn") as PackedScene).Instance()) as Level;
 		GetTree().Root.AddChild(game);
 		this.Visible = false;
 		GD.Print("Game world created!");

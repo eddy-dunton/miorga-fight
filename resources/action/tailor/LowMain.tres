@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/Parry.cs" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+triggerInput = "action_main"
+triggerAnimation = "low"
+triggerMinFrame = -1
+triggerMaxFrame = -1
+animation = "low_main"
+movement = Vector2( 0, 0 )
+transition = null
+transitionTo = 0
+animateTransition = false
+frameStart = 0
+frameEnd = 0
+knockback = 0
+hitboxoffset = Vector2( 0, 0 )

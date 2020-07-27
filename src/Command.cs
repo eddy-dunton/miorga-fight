@@ -6,6 +6,9 @@ public class Command : Node {
     //Used for debug
     public static Player p1, p2;
 
+    //Is the game multiplayer?
+    public static bool mp = false;
+
     public static InputEvent CreateInputEventAction(string action, bool pressed) {
         InputEventAction newEvent = new InputEventAction();
         newEvent.Action = action;
@@ -26,19 +29,23 @@ public class Command : Node {
         }
     }
 
-    //List of all joystick mappings
-    private JoystickMapping[] joystickMappings;
+    //Pause menu scene
+    private static PauseMenu pauseMenu = (ResourceLoader.Load("res://scenes/ui/pause.tscn") as PackedScene).Instance() as PauseMenu;
 
-    public Command() {
-        this.joystickMappings = new JoystickMapping[] {
-            new JoystickMapping("ctrlr_down", "p1_down"),
-            new JoystickMapping("ctrlr_up", "p1_up"),
-            new JoystickMapping("ctrlr_left", "p1_left"),
-            new JoystickMapping("ctrlr_right", "p1_right")
-        };
-    }
+    //List of all joystick mappings
+    private static JoystickMapping[] joystickMappings = {
+        new JoystickMapping("ctrlr_down", "p1_down"),
+        new JoystickMapping("ctrlr_up", "p1_up"),
+        new JoystickMapping("ctrlr_left", "p1_left"),
+        new JoystickMapping("ctrlr_right", "p1_right")
+    };
+
+    public Command() {}
 
     public override void _Ready() {
+        //Continue through pauses
+        this.PauseMode = Node.PauseModeEnum.Process;
+
         //Cycle through commands
         foreach (string arg in OS.GetCmdlineArgs()) {
             if (arg == "--fullscreen") {
@@ -46,12 +53,22 @@ public class Command : Node {
             }
         }
     }
-    
 
     public override void _Input(InputEvent inputEvent) {
 		if (inputEvent.IsActionPressed("com_debug")) {	
 			if (true) {}; //Debug breakpoint
 		}
+
+        //Removed from this branch, will be readded in v4.0
+        /*else if (inputEvent.IsActionPressed("com_pause")) { //Opens pause menu (and pauses in local play)
+            //Check if already paused (GetTree().Pause is not checked, 
+            //as this is not changed when the pause menu is opened in mp
+            if (GetTree().Root.HasNode("pause")) {
+                this.PauseEnd();
+            } else if (GetTree().Root.HasNode("level")) { //Check that game is in a level 
+                this.PauseStart();
+            }
+        }*/
 
         else if (inputEvent.IsActionPressed("com_fs")) { //Swaps to and from fullscreen
             OS.WindowFullscreen = !OS.WindowFullscreen;
@@ -61,7 +78,7 @@ public class Command : Node {
 
     public override void _Process(float delta) {
         //Iterates through joystick mappings
-        foreach (JoystickMapping jsm in this.joystickMappings) {
+        foreach (JoystickMapping jsm in joystickMappings) {
             //Checks for mappings which should trigger a pressed event
             if (Input.IsActionPressed(jsm.inputAction) && !jsm.pressed) {
                 jsm.pressed = true;
@@ -72,5 +89,19 @@ public class Command : Node {
                 Input.ParseInputEvent(CreateInputEventAction(jsm.outputAction, false));
             } 
         }
+    }
+
+    //Starts pausing the game
+    private void PauseStart() {
+        //Pause if game is local
+        if (! Command.mp) GetTree().Paused = true;
+    
+        GetTree().Root.AddChild(Command.pauseMenu);
+    }
+
+    private void PauseEnd() {
+        GetTree().Paused = false;
+
+        GetTree().Root.RemoveChild(Command.pauseMenu);
     }
 }
