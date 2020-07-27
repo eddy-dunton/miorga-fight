@@ -26,14 +26,12 @@ public class Lobby : Control {
 	public Lobby() {
 		this.deferred = false;
 		this.playerQueue = new List<int>();
+		Command.lobby = this;
 	}
 
 	public override void _Ready()
 	{
 		GD.Print("Starting Lobby");
-		
-        //Continue through pauses
-        this.PauseMode = Node.PauseModeEnum.Process;
 
 		this.nodeAddr = GetNode<LineEdit>("LobbyPanel/Address");    
 		this.nodeHostButton = GetNode<Button>("LobbyPanel/HostButton");
@@ -68,7 +66,7 @@ public class Lobby : Control {
 		GD.Print(id.ToString() + " connected!");
 
 		if (this.deferred) {
-			this.CreateGame();
+			this.GameCreate();
 			this.deferred = false;
 		}
 
@@ -109,14 +107,18 @@ public class Lobby : Control {
 	}
 
 	void _PlayerDisconnected(int id) {
-		if (this.p1.GetNetworkMaster() == id) {
+		if (this.p1 != null && this.p1.GetNetworkMaster() == id) {
 			//P1 has disconnected
+			this.GameEnd();
 			this.RemovePlayer(this.p1);
+			this.p1 = null;
 			GD.Print("P1 disconnected");
 			return;
-		} else if (this.p2.GetNetworkMaster() == id) {
+		} else if (this.p2 != null && this.p2.GetNetworkMaster() == id) {
 			//P1 has disconnected
+			this.GameEnd();
 			this.RemovePlayer(this.p2);
+			this.p2 = null;
 			GD.Print("P2 disconnected");
 			return;
 		} 
@@ -136,7 +138,7 @@ public class Lobby : Control {
 	}
 
 	void _ServerDisconnected() {
-		_GameOver("Server Disconnected");
+		this.GameQuit();
 	}
 
 	void _GameOver(String error = "") {
@@ -167,7 +169,7 @@ public class Lobby : Control {
 		this.Visible = false;
 
 		if (! this.deferred)
-			this.CreateGame();
+			this.GameCreate();
 
 		GD.Print("Hosting...");
 	}
@@ -175,7 +177,7 @@ public class Lobby : Control {
 	void _OnJoinPressed() {
 		GD.Print("Joining...");
 		Lobby.mp = true;
-		this.CreateGame();
+		this.GameCreate();
 
 		String ip = IP.ResolveHostname(nodeAddr.Text);
 		
@@ -192,7 +194,7 @@ public class Lobby : Control {
 
 	//Host a regular, local game
 	void _OnLocalPressed() {
-		this.CreateGame();
+		this.GameCreate();
 		this.AddPlayer("p1", 0);
 		this.AddPlayer("p2", 0);
 
@@ -200,20 +202,60 @@ public class Lobby : Control {
 		this.GameStart();
 	}
 	
+	//Starts the game
+	//Once both players are already in the game
 	private void GameStart() {
-		Input.SetMouseMode(Input.MouseMode.Hidden);
 		Lobby.started = true;
 
 		this.p1.Start(this.p2, this.game.GetNode("ui/health_p1") as HPBar);
 		this.p2.Start(this.p1, this.game.GetNode("ui/health_p2") as HPBar);
 	}
 
+	//Ends the game, leaving both players in the game
 	private void GameEnd() {
-		this.p1.End();
-		this.p2.End();
+		//If the game has started, end it
+		if (Lobby.started) {
+			this.p1.End();
+			this.p2.End();
+			Lobby.started = false;
+		}
+	}
 
-		Lobby.started = false;
+	//Creates a game
+	private void GameCreate() {
+		//Load game
+		this.game = ((ResourceLoader.Load("res://scenes/level/holytree.tscn") as PackedScene).Instance()) as Level;
+		GetTree().Root.AddChild(game);
+		this.Visible = false;
+		Input.SetMouseMode(Input.MouseMode.Hidden);
+	}
 
+	//Quits the game
+	public void GameQuit() {
+		this.GameEnd();
+		if (this.p1 != null) {
+			this.RemovePlayer(this.p1);
+			this.p1 = null;
+		}
+		if (this.p2 != null) {
+			this.RemovePlayer(this.p2);
+			this.p2 = null;
+		}
+
+		if (Lobby.mp) {
+			Lobby.mp = false;
+			//Close the mulitplayer connection
+			(GetTree().NetworkPeer as NetworkedMultiplayerENet).CloseConnection();
+		}
+
+		//Remove the game
+		GetTree().Root.RemoveChild(this.game);
+		this.game.Dispose();
+		this.game = null;
+
+		this.Visible = true;
+
+		(GetNode("/root/Command") as Command).PauseEnd();
 		Input.SetMouseMode(Input.MouseMode.Visible);
 	}
 
@@ -232,11 +274,9 @@ public class Lobby : Control {
 		//Position specific stuff
 		if (name == "p1") { 
 			this.p1 = _new;
-			Command.p1 = _new; 
 			_new.DIRECTION = Player.Direction.RIGHT;
 		} else if (name == "p2") {
 			this.p2 = _new;
-			Command.p2 = _new;
 			_new.DIRECTION = Player.Direction.LEFT;
 		}
 		
@@ -251,21 +291,11 @@ public class Lobby : Control {
 		}
 	}
 
+	//Removes a player from the game
+	//Player pointer must also then be set to null
 	void RemovePlayer(Player p) {
-		//End the game for both players
-		this.GameEnd();
-
 		this.game.RemoveChild(p);
 		(this.game.GetNode("camera_track") as CameraTrack).StopTrack(p);
 		p.Dispose();
-		p = null;
-	}
-
-	void CreateGame() {
-		//Load game
-		this.game = ((ResourceLoader.Load("res://scenes/level/holytree.tscn") as PackedScene).Instance()) as Level;
-		GetTree().Root.AddChild(game);
-		this.Visible = false;
-		GD.Print("Game world created!");
 	}
 }

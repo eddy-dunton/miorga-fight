@@ -33,7 +33,19 @@ margin_left = 340.0
 margin_top = 220.0
 margin_right = 440.0
 margin_bottom = 240.0
+rect_pivot_offset = Vector2( 154.328, 20 )
 text = "Resume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_quit" type="Button" parent="."]
+margin_left = 340.0
+margin_top = 250.0
+margin_right = 440.0
+margin_bottom = 270.0
+rect_pivot_offset = Vector2( 154.328, 20 )
+text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false
 }

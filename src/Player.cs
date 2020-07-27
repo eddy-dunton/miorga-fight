@@ -143,7 +143,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		this.Restart();
 	}
 
-	//Called when the at the endo of the round, moves players back and resets HP
+	//Called when the at the end of round, moves players back and resets HP
 	public void Restart() {
 		this.Position = this.nodeLevel.GetPlayerPosition(this.DIRECTION);
 		//Only reset locally

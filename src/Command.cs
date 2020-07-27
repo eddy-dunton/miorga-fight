@@ -3,8 +3,8 @@ using Godot;
 //Used to control things regardless of scene
 //all input events for command should start "com_"
 public class Command : Node {
-    //Used for debug
-    public static Player p1, p2;
+    //Reference to Lobby
+    public static Lobby lobby;
 
     public static InputEvent CreateInputEventAction(string action, bool pressed) {
         InputEventAction newEvent = new InputEventAction();
@@ -27,7 +27,8 @@ public class Command : Node {
     }
 
     //Pause menu scene
-    private static PauseMenu pauseMenu = (ResourceLoader.Load("res://scenes/ui/pause.tscn") as PackedScene).Instance() as PauseMenu;
+    private static PauseMenu pauseMenu = 
+            (ResourceLoader.Load("res://scenes/ui/pause.tscn") as PackedScene).Instance() as PauseMenu;
 
     //List of all joystick mappings
     private static JoystickMapping[] joystickMappings = {
@@ -90,7 +91,9 @@ public class Command : Node {
     //Starts pausing the game
     private void PauseStart() {
         //Pause if game is local
-        if (! Lobby.mp) GetTree().Paused = true;
+        if (! Lobby.mp) {
+            GetTree().Paused = true;
+        }
 
         Input.SetMouseMode(Input.MouseMode.Visible);
     
