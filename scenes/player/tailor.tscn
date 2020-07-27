@@ -39,16 +39,6 @@ animations = [ {
 "name": "low",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 13 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 18 ) ],
-"loop": false,
-"name": "high_alt_stage1",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 21 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 20 ) ],
-"loop": false,
-"name": "high_alt_stage2",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "lax",
@@ -64,6 +54,11 @@ animations = [ {
 "name": "trans_high_main->low",
 "speed": 12.0
 }, {
+"frames": [ ExtResource( 13 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 18 ) ],
+"loop": false,
+"name": "high_alt_stage1",
+"speed": 12.0
+}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "high",
@@ -72,7 +67,12 @@ animations = [ {
 "frames": [ ExtResource( 26 ), ExtResource( 29 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ) ],
 "loop": true,
 "name": "low_main",
-"speed": 5.0
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 21 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 20 ) ],
+"loop": false,
+"name": "high_alt_stage2",
+"speed": 12.0
 } ]
 
 [node name="en_player" instance=ExtResource( 1 )]
