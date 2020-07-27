@@ -199,6 +199,7 @@ public class Lobby : Control {
 		this.AddPlayer("p2", 0);
 
 		//Start game
+		//this.CallDeferred(nameof(Lobby.GameStart));
 		this.GameStart();
 	}
 	
@@ -207,8 +208,8 @@ public class Lobby : Control {
 	private void GameStart() {
 		Lobby.started = true;
 
-		this.p1.Start(this.p2, this.game.GetNode("ui/health_p1") as HPBar);
-		this.p2.Start(this.p1, this.game.GetNode("ui/health_p2") as HPBar);
+		this.p1.Start(this.p2, this.game.GetNode("hud/p1") as PlayerHUD);
+		this.p2.Start(this.p1, this.game.GetNode("hud/p2") as PlayerHUD);
 	}
 
 	//Ends the game, leaving both players in the game
@@ -260,7 +261,7 @@ public class Lobby : Control {
 	}
 
 	void AddPlayer(String name, int id) {
-		string path = (name == "p1") ? "res://scenes/player/regia.tscn" : "res://scenes/player/tailor.tscn";
+		string path = (name == "p1") ? "res://scenes/player/regia.tscn" : "res://scenes/player/regia.tscn";
 		Player _new = ((ResourceLoader.Load(path) as PackedScene).Instance()) as Player;
 		_new.Name = name;
 		_new.SetNetworkMaster(id);

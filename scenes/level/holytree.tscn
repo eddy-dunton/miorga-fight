@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/bg/level_back2.png" type="Texture" id=3]
 [ext_resource path="res://assets/level/holytree/level_fore.png" type="Texture" id=4]
 [ext_resource path="res://assets/bg/level_back1.png" type="Texture" id=5]
-[ext_resource path="res://scenes/ui/ui.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/ui/hud.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/MiorgaCamera.cs" type="Script" id=7]
 [ext_resource path="res://src/CameraTrack.cs" type="Script" id=8]
 [ext_resource path="res://assets/level/holytree/particles/type 2/7.png" type="Texture" id=10]
@@ -103,7 +103,14 @@ texture = ExtResource( 5 )
 [node name="sprite" type="Sprite" parent="bg/bg_tree"]
 texture = ExtResource( 2 )
 
-[node name="ui" parent="." instance=ExtResource( 6 )]
+[node name="hud" parent="." instance=ExtResource( 6 )]
+script = null
+
+[node name="p1" parent="hud" index="1"]
+visible = false
+
+[node name="p2" parent="hud" index="2"]
+visible = false
 
 [node name="arena" type="StaticBody2D" parent="."]
 
@@ -131,4 +138,4 @@ smoothing_enabled = true
 smoothing_speed = 25.0
 script = ExtResource( 7 )
 
-[editable path="ui"]
+[editable path="hud"]
