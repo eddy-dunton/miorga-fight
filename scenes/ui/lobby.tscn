@@ -44,6 +44,7 @@ margin_left = 5.0
 margin_top = 30.0
 margin_right = 215.0
 margin_bottom = 54.0
+focus_mode = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "127.0.0.1"
@@ -58,6 +59,7 @@ margin_left = 5.0
 margin_top = 60.0
 margin_right = 105.0
 margin_bottom = 80.0
+focus_mode = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Host"
@@ -70,6 +72,7 @@ margin_left = 115.0
 margin_top = 60.0
 margin_right = 215.0
 margin_bottom = 80.0
+focus_mode = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Join"
@@ -82,6 +85,7 @@ margin_left = 5.80872
 margin_top = 90.0
 margin_right = 215.0
 margin_bottom = 103.784
+focus_mode = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Play Locally"
@@ -90,6 +94,7 @@ __meta__ = {
 }
 
 [node name="pa_error" type="Panel" parent="."]
+visible = false
 margin_left = 255.0
 margin_top = 200.0
 margin_right = 525.0
@@ -114,6 +119,7 @@ margin_left = 85.0
 margin_top = 65.0
 margin_right = 185.0
 margin_bottom = 85.0
+focus_mode = 0
 text = "Cancel"
 __meta__ = {
 "_edit_use_anchors_": false

@@ -1,0 +1,99 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/CharSelection.cs" type="Script" id=1]
+[ext_resource path="res://assets/character_selection/regia.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/regia/stances/lax.png" type="Texture" id=3]
+
+[node name="char_selection" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pa_bottom" type="Panel" parent="."]
+margin_left = 10.0
+margin_top = 395.0
+margin_right = 770.0
+margin_bottom = 430.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_p1" type="Button" parent="pa_bottom"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 285.0
+margin_bottom = 30.0
+focus_mode = 0
+toggle_mode = true
+pressed = true
+text = "Player 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_p2" type="Button" parent="pa_bottom"]
+margin_left = 295.0
+margin_top = 5.0
+margin_right = 575.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 382.757, 26 )
+focus_mode = 0
+toggle_mode = true
+text = "Player 2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_play" type="Button" parent="pa_bottom"]
+margin_left = 585.0
+margin_top = 5.0
+margin_right = 755.0
+margin_bottom = 30.0
+focus_mode = 0
+disabled = true
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pa_char" type="Panel" parent="."]
+margin_left = 160.0
+margin_top = 10.0
+margin_right = 770.0
+margin_bottom = 385.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sp_ability_tree" type="Sprite" parent="pa_char"]
+position = Vector2( 395.32, 185.598 )
+scale = Vector2( 0.597371, 0.79094 )
+texture = ExtResource( 2 )
+
+[node name="sp_player" type="Sprite" parent="pa_char"]
+position = Vector2( 111.371, 186.746 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+
+[node name="pa_selection" type="Panel" parent="."]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 150.0
+margin_bottom = 385.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="il_selection" type="ItemList" parent="pa_selection"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 130.0
+margin_bottom = 365.0
+focus_mode = 0
+items = [ "Regia", null, false, "Tailor", null, false ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
