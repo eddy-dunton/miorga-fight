@@ -11,36 +11,42 @@ public class Lobby : Control {
     public static bool started = false;
 
 	LineEdit nodeAddr;
-	Button nodeHostButton, nodeJoinButton, nodeLocalButton;
+	Button nodeHostButton, nodeJoinButton, nodeLocalButton, nodeErrorButton;
 	Level game;
+	Panel nodeErrorPanel, nodeStartPanel;
+	Label nodeErrorLabel;
 
 	//Is the creation of the game object deferred
 	//Used to work around the fact not enough of the rest of the scene will have loaded before Ready is run
 	private bool deferred;
 
-	//List of all players in the order they joined
-	private List<int> playerQueue;
-
 	private Player p1, p2;
+
+	private NetworkedMultiplayerENet peer;
 
 	public Lobby() {
 		this.deferred = false;
-		this.playerQueue = new List<int>();
 		Command.lobby = this;
 	}
 
 	public override void _Ready()
 	{
-		GD.Print("Starting Lobby");
+		this.nodeAddr = GetNode<LineEdit>("pa_start/tx_address");    
+		
+		this.nodeHostButton = GetNode<Button>("pa_start/bt_host");
+		this.nodeJoinButton = GetNode<Button>("pa_start/bt_join");
+		this.nodeLocalButton = GetNode<Button>("pa_start/bt_local");
+		this.nodeErrorButton = GetNode<Button>("pa_error/bt_error");
 
-		this.nodeAddr = GetNode<LineEdit>("LobbyPanel/Address");    
-		this.nodeHostButton = GetNode<Button>("LobbyPanel/HostButton");
-		this.nodeJoinButton = GetNode<Button>("LobbyPanel/JoinButton");
-		this.nodeLocalButton = GetNode<Button>("LobbyPanel/LocalButton");
+		this.nodeErrorPanel = GetNode<Panel>("pa_error");
+		this.nodeStartPanel = GetNode<Panel>("pa_start");
+
+		this.nodeErrorLabel = GetNode<Label>("pa_error/la_error");
 
 		this.nodeHostButton.Connect("pressed", this, nameof(_OnHostPressed));
 		this.nodeJoinButton.Connect("pressed", this, nameof(_OnJoinPressed));
 		this.nodeLocalButton.Connect("pressed", this, nameof(_OnLocalPressed));
+		this.nodeErrorButton.Connect("pressed", this, nameof(_OnErrorPressed));
 
 		GetTree().Connect("network_peer_connected", this, nameof(_PlayerConnected));
 		GetTree().Connect("network_peer_disconnected", this, nameof(_PlayerDisconnected));
@@ -75,9 +81,6 @@ public class Lobby : Control {
 
 		//If server
 		if (GetTree().IsNetworkServer()) {
-			//Add player to queue
-			this.playerQueue.Add(id);
-
 			//No p1, create p1
 			if (! this.game.HasNode("p1")) {
 				Rpc(nameof(AddPlayer), new object[] {"p1", id});
@@ -125,7 +128,13 @@ public class Lobby : Control {
 	}
 
 	void _ConnectedToServer() {
-		GD.Print("Joined! ID: " + GetTree().GetNetworkUniqueId().ToString());
+		this.GameCreate();
+		Lobby.mp = true;
+
+		this.nodeErrorPanel.Visible = false;
+		this.nodeStartPanel.Visible = true;
+		this.Visible = false;
+
 		foreach (int id in GetTree().GetNetworkConnectedPeers()) {
 			this._PlayerConnected(id);
 		}
@@ -134,7 +143,7 @@ public class Lobby : Control {
 	} 
 
 	void _ConnectionFailed() {
-		GD.PrintErr("Unable to connnect");
+		this.ShowError("Error: Unable to connect\nPerhaps there is no server running?");
 	}
 
 	void _ServerDisconnected() {
@@ -153,43 +162,41 @@ public class Lobby : Control {
 	}
 
 	void _OnHostPressed() {
-		NetworkedMultiplayerENet host = new NetworkedMultiplayerENet();
-		host.CompressionMode = NetworkedMultiplayerENet.CompressionModeEnum.RangeCoder;    
-		Error error = host.CreateServer(PORT, 8);
-
-		Lobby.mp = true;
+		//Create peer
+		this.peer = new NetworkedMultiplayerENet();
+		this.peer.CompressionMode = NetworkedMultiplayerENet.CompressionModeEnum.RangeCoder;    
+		Error error = this.peer.CreateServer(PORT, 8);
 
 		if (error != Error.Ok) {
-			GD.PrintErr("Error hosting server");
+			this.ShowError("Error: Unable to host server\nPerhaps there is alreay a server open?");
 			return;
 		}
 
-		GetTree().NetworkPeer = host;
+		Lobby.mp = true;
+		GetTree().NetworkPeer = this.peer;
 	
 		this.Visible = false;
 
 		if (! this.deferred)
 			this.GameCreate();
-
-		GD.Print("Hosting...");
 	}
 
 	void _OnJoinPressed() {
-		GD.Print("Joining...");
-		Lobby.mp = true;
-		this.GameCreate();
-
 		String ip = IP.ResolveHostname(nodeAddr.Text);
 		
 		if (ip == "") {
-			GD.Print("Error resolving host!");
+			this.ShowError("Error: Invalid host!");
 			return;
 		}
 
-		NetworkedMultiplayerENet host = new NetworkedMultiplayerENet();
-		host.CompressionMode = NetworkedMultiplayerENet.CompressionModeEnum.RangeCoder;
-		host.CreateClient(ip, PORT);
-		GetTree().NetworkPeer = host;
+		//Create host
+		this.peer = new NetworkedMultiplayerENet();
+		this.peer.CompressionMode = NetworkedMultiplayerENet.CompressionModeEnum.RangeCoder;    
+		this.peer.CreateClient(ip, PORT);
+		GetTree().NetworkPeer = this.peer;
+		
+		//Also will allow the connection of 
+		this.ShowError("Connecting...", "Cancel");
 	}
 
 	//Host a regular, local game
@@ -202,14 +209,28 @@ public class Lobby : Control {
 		//this.CallDeferred(nameof(Lobby.GameStart));
 		this.GameStart();
 	}
-	
+
+	//Called when the error panel's button is called
+	//Either to cancel a connection or to accept an error
+	void _OnErrorPressed() {
+		if (this.peer != null) {
+			//Cancel the connection
+			this.peer.CloseConnection();
+			this.peer = null;
+			GetTree().NetworkPeer = null;
+		}
+		
+		this.nodeStartPanel.Visible = true;
+		this.nodeErrorPanel.Visible = false;
+	}
+
 	//Starts the game
 	//Once both players are already in the game
 	private void GameStart() {
 		Lobby.started = true;
 
-		this.p1.Start(this.p2, this.game.GetNode("hud/p1") as PlayerHUD);
-		this.p2.Start(this.p1, this.game.GetNode("hud/p2") as PlayerHUD);
+		this.p1.Start(this.p2, this.game.GetNode("hud/gr_p1") as PlayerHUD);
+		this.p2.Start(this.p1, this.game.GetNode("hud/gr_p2") as PlayerHUD);
 	}
 
 	//Ends the game, leaving both players in the game
@@ -246,7 +267,9 @@ public class Lobby : Control {
 		if (Lobby.mp) {
 			Lobby.mp = false;
 			//Close the mulitplayer connection
-			(GetTree().NetworkPeer as NetworkedMultiplayerENet).CloseConnection();
+			this.peer.CloseConnection();
+			this.peer = null;
+			GetTree().NetworkPeer = null;
 		}
 
 		//Remove the game
@@ -298,5 +321,13 @@ public class Lobby : Control {
 		this.game.RemoveChild(p);
 		(this.game.GetNode("camera_track") as CameraTrack).StopTrack(p);
 		p.Dispose();
+	}
+
+	//Enable the error panel and have it display the given message
+	private void ShowError(string msg, string buttonmsg = "Ok") {
+		this.nodeStartPanel.Visible = false;
+		this.nodeErrorPanel.Visible = true;
+		this.nodeErrorLabel.Text = msg;
+		this.nodeErrorButton.Text = buttonmsg;
 	}
 }

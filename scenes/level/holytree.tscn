@@ -104,13 +104,6 @@ texture = ExtResource( 5 )
 texture = ExtResource( 2 )
 
 [node name="hud" parent="." instance=ExtResource( 6 )]
-script = null
-
-[node name="p1" parent="hud" index="1"]
-visible = false
-
-[node name="p2" parent="hud" index="2"]
-visible = false
 
 [node name="arena" type="StaticBody2D" parent="."]
 

@@ -14,7 +14,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="label" type="Label" parent="."]
+[node name="la_paused" type="Label" parent="."]
 margin_left = 350.0
 margin_top = 175.0
 margin_right = 430.0

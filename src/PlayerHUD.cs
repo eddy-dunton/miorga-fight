@@ -8,7 +8,9 @@ public class PlayerHUD : Control
 
     public override void _Ready() {
         //Get nodes
-        this.nodeHP = GetNode<ProgressBar>("health");
-        this.nodeScore = GetNode<Label>("score");
+        this.nodeHP = GetNode<ProgressBar>("pb_health");
+        this.nodeScore = GetNode<Label>("la_score");
+        //Be invisible on creation
+        this.Visible = false;
     }
 }
