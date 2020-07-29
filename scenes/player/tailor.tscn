@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/player/tailor/stances/hang/hang.png" type="Texture" id=2]
@@ -45,6 +45,18 @@
 [ext_resource path="res://assets/player/tailor/walk/key5.png" type="Texture" id=43]
 [ext_resource path="res://assets/player/tailor/walk/key3.png" type="Texture" id=44]
 [ext_resource path="res://assets/player/tailor/walk/key1.png" type="Texture" id=45]
+[ext_resource path="res://assets/player/tailor/flinch/key8.png" type="Texture" id=46]
+[ext_resource path="res://assets/player/tailor/flinch/key6.png" type="Texture" id=47]
+[ext_resource path="res://assets/player/tailor/flinch/key9.png" type="Texture" id=48]
+[ext_resource path="res://assets/player/tailor/flinch/key10.png" type="Texture" id=49]
+[ext_resource path="res://assets/player/tailor/flinch/key5.png" type="Texture" id=50]
+[ext_resource path="res://assets/player/tailor/flinch/key7.png" type="Texture" id=51]
+[ext_resource path="res://assets/player/tailor/flinch/key11.png" type="Texture" id=52]
+[ext_resource path="res://assets/player/tailor/flinch/key12.png" type="Texture" id=53]
+[ext_resource path="res://assets/player/tailor/flinch/key4.png" type="Texture" id=54]
+[ext_resource path="res://assets/player/tailor/flinch/key1.png" type="Texture" id=55]
+[ext_resource path="res://assets/player/tailor/flinch/key2.png" type="Texture" id=56]
+[ext_resource path="res://assets/player/tailor/flinch/key3.png" type="Texture" id=57]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -93,6 +105,11 @@ animations = [ {
 "name": "high_alt_stage2",
 "speed": 12.0
 }, {
+"frames": [ ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 54 ), ExtResource( 50 ), ExtResource( 47 ), ExtResource( 51 ), ExtResource( 46 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 52 ), ExtResource( 53 ) ],
+"loop": true,
+"name": "flinch",
+"speed": 20.0
+}, {
 "frames": [ ExtResource( 45 ), ExtResource( 38 ), ExtResource( 44 ), ExtResource( 39 ), ExtResource( 43 ), ExtResource( 41 ), ExtResource( 40 ), ExtResource( 42 ) ],
 "loop": true,
 "name": "walk",
@@ -106,7 +123,7 @@ HP_MAX = 100
 
 [node name="animate_sprite" parent="." index="1"]
 frames = SubResource( 1 )
-animation = "walk"
+animation = "flinch"
 data = {
 
 }
