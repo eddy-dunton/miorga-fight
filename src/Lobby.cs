@@ -27,8 +27,8 @@ public class Lobby : Control {
 	{
 		GD.Print("Starting Lobby");
 		
-        //Continue through pauses
-        this.PauseMode = Node.PauseModeEnum.Process;
+		//Continue through pauses
+		this.PauseMode = Node.PauseModeEnum.Process;
 
 		this.nodeAddr = GetNode<LineEdit>("LobbyPanel/Address");    
 		this.nodeHostButton = GetNode<Button>("LobbyPanel/HostButton");
