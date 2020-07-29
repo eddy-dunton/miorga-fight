@@ -87,7 +87,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	}
 
 	public override void _Ready() {
-		GD.Print("Player ready");
 		this.nodeLevel = GetParent() as Level;
 		this.nodeAnimateSprite = GetNode<AnimatedSprite>("animate_sprite") as PlayerAnimation;
 		this.nodeCollision = GetNode<CollisionShape2D>("collision");

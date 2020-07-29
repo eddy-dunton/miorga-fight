@@ -202,12 +202,17 @@ public class Lobby : Control {
 	//Host a regular, local game
 	void _OnLocalPressed() {
 		this.GameCreate();
-		this.AddPlayer("p1", 0);
-		this.AddPlayer("p2", 0);
+		//this.AddPlayer("p1", 0);
+		//this.AddPlayer("p2", 0);
 
 		//Start game
-		//this.CallDeferred(nameof(Lobby.GameStart));
-		this.GameStart();
+		//this.GameStart();
+		this.Visible = false;
+		CharSelection cs = 
+				(ResourceLoader.Load("res://scenes/ui/char_selection.tscn") as PackedScene).Instance() as CharSelection;
+		cs.SetCallback(this);
+
+		GetTree().Root.AddChild(cs);
 	}
 
 	//Called when the error panel's button is called
@@ -226,7 +231,7 @@ public class Lobby : Control {
 
 	//Starts the game
 	//Once both players are already in the game
-	private void GameStart() {
+	public void GameStart() {
 		Lobby.started = true;
 
 		this.p1.Start(this.p2, this.game.GetNode("hud/gr_p1") as PlayerHUD);
@@ -247,10 +252,15 @@ public class Lobby : Control {
 	private void GameCreate() {
 		//Load game
 		this.game = ((ResourceLoader.Load("res://scenes/level/holytree.tscn") as PackedScene).Instance()) as Level;
-		GetTree().Root.AddChild(game);
+	}
+
+	//Goes to the game, from the lobby
+	public void GameGoto() {
+		GetTree().Root.AddChild(this.game);
 		this.Visible = false;
 		Input.SetMouseMode(Input.MouseMode.Hidden);
 	}
+
 
 	//Quits the game
 	public void GameQuit() {
@@ -284,8 +294,11 @@ public class Lobby : Control {
 	}
 
 	void AddPlayer(String name, int id) {
-		string path = (name == "p1") ? "res://scenes/player/regia.tscn" : "res://scenes/player/regia.tscn";
-		Player _new = ((ResourceLoader.Load(path) as PackedScene).Instance()) as Player;
+		this.AddPlayer(name, id, ResourceLoader.Load("res://scenes/player/regia.tscn") as PackedScene);
+	}
+
+	public void AddPlayer(String name, int id, PackedScene player) {
+		Player _new = player.Instance() as Player;
 		_new.Name = name;
 		_new.SetNetworkMaster(id);
 		if (! Lobby.mp) {
