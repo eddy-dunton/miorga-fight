@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/Attack.cs" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+triggerInput = "action_main"
+triggerAnimation = "low_main"
+triggerMinFrame = 4
+triggerMaxFrame = 5
+animation = "low_riposte"
+movement = Vector2( 0, 0 )
+transition = null
+transitionTo = 2
+animateTransition = false
+hitboxoffset = Vector2( 0, 0 )
+hitframe = 0
+halt = false
+damage = 0
+requiresSuccessfulParry = false
