@@ -87,16 +87,6 @@ animations = [ {
 "name": "low_main",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 34 ), ExtResource( 33 ), ExtResource( 37 ), ExtResource( 36 ), ExtResource( 35 ), ExtResource( 35 ) ],
-"loop": true,
-"name": "low_alt",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "lax",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 72 ), ExtResource( 74 ), ExtResource( 67 ), ExtResource( 73 ) ],
 "loop": true,
 "name": "low",
@@ -111,6 +101,16 @@ animations = [ {
 "loop": true,
 "name": "flinch",
 "speed": 20.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "lax",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 34 ), ExtResource( 33 ), ExtResource( 37 ), ExtResource( 36 ), ExtResource( 35 ), ExtResource( 35 ) ],
+"loop": true,
+"name": "low_alt",
+"speed": 12.0
 }, {
 "frames": [ ExtResource( 9 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 10 ) ],
 "loop": false,
@@ -127,6 +127,16 @@ animations = [ {
 "name": "trans_high_main->low",
 "speed": 12.0
 }, {
+"frames": [ ExtResource( 68 ) ],
+"loop": false,
+"name": "trans_lax->high",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "trans_lax->low",
+"speed": 10.0
+}, {
 "frames": [ ExtResource( 62 ), ExtResource( 65 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 64 ), ExtResource( 63 ) ],
 "loop": true,
 "name": "low_riposte",
@@ -137,20 +147,10 @@ animations = [ {
 "name": "walk",
 "speed": 8.0
 }, {
-"frames": [ ExtResource( 2 ) ],
-"loop": false,
-"name": "trans_lax->low",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 68 ) ],
-"loop": false,
-"name": "trans_lax->high",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "trans_low->high",
-"speed": 5.0
+"speed": 10.0
 } ]
 
 [node name="en_player" instance=ExtResource( 1 )]
