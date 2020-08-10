@@ -88,7 +88,8 @@ texture = SubResource( 2 )
 [node name="bg" type="ParallaxBackground" parent="."]
 
 [node name="bg_sky" type="ParallaxLayer" parent="bg"]
-motion_scale = Vector2( 0.08, 0.08 )
+position = Vector2( 0, 125 )
+motion_scale = Vector2( 0.08, 1 )
 
 [node name="sprite" type="Sprite" parent="bg/bg_sky"]
 texture = ExtResource( 3 )
@@ -108,8 +109,8 @@ motion_scale = Vector2( 0.25, 1 )
 texture = ExtResource( 9 )
 
 [node name="bg_islands" type="ParallaxLayer" parent="bg"]
-position = Vector2( 0, 100 )
-motion_scale = Vector2( 0.78, 0.78 )
+position = Vector2( 0, 130 )
+motion_scale = Vector2( 0.78, 1 )
 
 [node name="sprite" type="Sprite" parent="bg/bg_islands"]
 texture = ExtResource( 5 )
