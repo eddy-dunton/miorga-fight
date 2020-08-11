@@ -1,7 +1,9 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=4 format=2]
 
 [ext_resource path="res://src/Parry.cs" type="Script" id=1]
 [ext_resource path="res://resources/action/tailor/HighAlt_Stage2.tres" type="Resource" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
 
 [resource]
 script = ExtResource( 1 )
@@ -18,4 +20,5 @@ transitionAction = ExtResource( 2 )
 frameStart = 0
 frameEnd = 0
 knockback = 0
+hitbox = SubResource( 1 )
 hitboxoffset = Vector2( 0, 0 )
