@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/holytreemoc.png-745a645fc4db0aa861620976c3ff62c6.stex"
+path="res://.import/marketharbourmocleft.png-62efac17677013dccc2e8c9c1181b4c7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/level/mocup/holytreemoc.png"
-dest_files=[ "res://.import/holytreemoc.png-745a645fc4db0aa861620976c3ff62c6.stex" ]
+source_file="res://assets/level/mocup/marketharbourmocleft.png"
+dest_files=[ "res://.import/marketharbourmocleft.png-62efac17677013dccc2e8c9c1181b4c7.stex" ]
 
 [params]
 

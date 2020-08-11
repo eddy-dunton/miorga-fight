@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/holytreemoc.png-745a645fc4db0aa861620976c3ff62c6.stex"
+path="res://.import/iconhover.png-f29a6e87ab45898e05eb1e64c489b93e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/level/mocup/holytreemoc.png"
-dest_files=[ "res://.import/holytreemoc.png-745a645fc4db0aa861620976c3ff62c6.stex" ]
+source_file="res://assets/ui/menus/character selection/icons/iconhover.png"
+dest_files=[ "res://.import/iconhover.png-f29a6e87ab45898e05eb1e64c489b93e.stex" ]
 
 [params]
 

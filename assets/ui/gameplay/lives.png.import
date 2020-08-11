@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/holytreemoc.png-745a645fc4db0aa861620976c3ff62c6.stex"
+path="res://.import/lives.png-268c6ccf7797abbb48544209dfe0d865.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/level/mocup/holytreemoc.png"
-dest_files=[ "res://.import/holytreemoc.png-745a645fc4db0aa861620976c3ff62c6.stex" ]
+source_file="res://assets/ui/gameplay/lives.png"
+dest_files=[ "res://.import/lives.png-268c6ccf7797abbb48544209dfe0d865.stex" ]
 
 [params]
 
