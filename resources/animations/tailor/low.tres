@@ -8,5 +8,5 @@ points = PoolVector2Array( -21, 0, 0, 40, -35, 40, -50, -56, -35, -55, -23, -15 
 [resource]
 script = ExtResource( 1 )
 offset = Vector2( 0, 0 )
-hitbox_offset = PoolVector2Array( -16.087, 70.317 )
+hitboxOffset = PoolVector2Array( -16.087, 70.317 )
 hitbox = [ SubResource( 1 ) ]

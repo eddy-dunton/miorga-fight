@@ -38,18 +38,12 @@ public class Attack : Action {
         PlayerAnimation enemySprite = player.nodeEnemy.nodeAnimateSprite;
 
         //No hitbox, no point trying
-        if (enemySprite.Current().hitbox_offset.Length == 0) return;
+        if (enemySprite.Current().hitboxOffset.Length == 0) return;
 
-        //I'm sorry about this, I swear there isn't a better way to write things
-        //Calculate transform for enemy hitbox: translates the sprites transformation by the current hitbox offset
-        Transform2D enemyXform = (enemySprite.Frame < enemySprite.Current().hitbox_offset.Length) ?
-                enemySprite.GlobalTransform.Translated(enemySprite.Current().hitbox_offset[enemySprite.Frame]) : 
-                //If there is not a hitbox for the current frame, use the last one
-                enemySprite.GlobalTransform.Translated(
-                        enemySprite.Current().hitbox_offset[enemySprite.Current().hitbox_offset.Length - 1]);
+        (Shape2D enHitbox, Transform2D enXform) = player.nodeEnemy.nodeAnimateSprite.GetHitbox(); 
 
         //Check for collision with other player
-		if (this.hitbox.Collide(thisXform, player.nodeEnemy.hitbox, enemyXform)) {
+		if (this.hitbox.Collide(thisXform, enHitbox, enXform)) {
 			//Check for parry
 			if (player.nodeEnemy.state == Player.State.PARRY && 
                     player.nodeEnemy.parry.Check(player, player.nodeEnemy, this)) {

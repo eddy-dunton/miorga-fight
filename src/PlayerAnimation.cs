@@ -25,17 +25,12 @@ public class PlayerAnimation : AnimatedSprite {
         base.Play(anim, backwards);
         this.Frame = 0;
 
-        AnimationData data;
-        //Has animation data
-        if (this.data.TryGetValue(anim, out data)) {
-            this.current = data;
-        
-            this.UpdateHitbox();
-        } else {
-            //Does not have data, sets to defaults
+        //Tries to get animation data
+        //Resets this.current to a blank value if none is found 
+        if (!this.data.TryGetValue(anim, out this.current)) {
             this.current = new AnimationData();
         }
-        
+                    
         //Set this position
         this.Position = this.current.offset;
     }
@@ -59,18 +54,27 @@ public class PlayerAnimation : AnimatedSprite {
         if (this.parent.state == Player.State.ATTACK && this.Frame == this.parent.attack.hitframe) {
             this.parent.attack.Hit(this.parent);
         }
-
-        this.UpdateHitbox();
     }
     
-    private void UpdateHitbox() {
-        if (this.Frame < this.current.hitbox.Length) {
-            //this.parent.nodeCollision.Position = 
-            //        (this.current.offset + this.current.hitbox_offset[this.Frame]);
-
-            //this.parent.nodeCollision.Shape = this.current.hitbox[this.Frame];
-
-            this.parent.hitbox = this.current.hitbox[this.Frame];
+	//Returns this players hitbox as a shape and a transform
+	//Will return a 0 long line with a transform of 0 the player does not have one
+	//Returns value of this.nodeAnimateSprite.GetHitbox(..)
+    //The length of the hitbox and hitbox_offset 
+    public (Shape2D, Transform2D) GetHitbox() {
+        //Lists are not the same length, or are both of length 0, cry
+        if (this.current.hitboxOffset.Length != this.current.hitbox.Length || this.current.hitbox.Length == 0) 
+            return (new LineShape2D(), new Transform2D());
+        
+        //Case: current frame is higher than number of hitboxes
+        else if (this.Frame >= this.current.hitbox.Length) {
+            //If there is not a hitbox for the current frame, use the last one
+            return (this.current.hitbox[this.current.hitbox.Length - 1],
+                    this.GlobalTransform.Translated(this.current.hitboxOffset[this.current.hitboxOffset.Length - 1]));   
+            
+        } else {
+            //There is a hitbox offset for this frame
+            return (this.current.hitbox[this.Frame], 
+                    this.GlobalTransform.Translated(this.current.hitboxOffset[this.Frame]));
         }
     }
 
