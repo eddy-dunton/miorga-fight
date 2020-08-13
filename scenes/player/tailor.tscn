@@ -90,6 +90,11 @@ extents = Vector2( 20, 53 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
+"frames": [ ExtResource( 34 ), ExtResource( 33 ), ExtResource( 37 ), ExtResource( 36 ), ExtResource( 35 ), ExtResource( 35 ) ],
+"loop": true,
+"name": "low_alt",
+"speed": 12.0
+}, {
 "frames": [ ExtResource( 13 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": false,
 "name": "high_alt_stage1",
@@ -115,11 +120,6 @@ animations = [ {
 "name": "high",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 34 ), ExtResource( 33 ), ExtResource( 37 ), ExtResource( 36 ), ExtResource( 35 ), ExtResource( 35 ) ],
-"loop": true,
-"name": "low_alt",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": false,
 "name": "trans_lax->low",
@@ -140,25 +140,25 @@ animations = [ {
 "name": "high_main",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 45 ), ExtResource( 38 ), ExtResource( 44 ), ExtResource( 39 ), ExtResource( 43 ), ExtResource( 41 ), ExtResource( 40 ), ExtResource( 42 ) ],
-"loop": true,
-"name": "walk",
-"speed": 8.0
-}, {
-"frames": [ ExtResource( 62 ), ExtResource( 65 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 64 ), ExtResource( 63 ) ],
-"loop": true,
-"name": "low_riposte",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "trans_low->high",
 "speed": 10.0
 }, {
+"frames": [ ExtResource( 45 ), ExtResource( 38 ), ExtResource( 44 ), ExtResource( 39 ), ExtResource( 43 ), ExtResource( 41 ), ExtResource( 40 ), ExtResource( 42 ) ],
+"loop": true,
+"name": "walk",
+"speed": 8.0
+}, {
 "frames": [ ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 54 ), ExtResource( 50 ), ExtResource( 47 ), ExtResource( 51 ), ExtResource( 46 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 52 ), ExtResource( 53 ) ],
 "loop": true,
 "name": "flinch",
 "speed": 20.0
+}, {
+"frames": [ ExtResource( 62 ), ExtResource( 65 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 64 ), ExtResource( 63 ) ],
+"loop": true,
+"name": "low_riposte",
+"speed": 12.0
 }, {
 "frames": [ ExtResource( 12 ), ExtResource( 16 ) ],
 "loop": false,
@@ -166,8 +166,8 @@ animations = [ {
 "speed": 12.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 23.795, 11.0926 )
+[sub_resource type="ConvexPolygonShape2D" id=3]
+points = PoolVector2Array( 35, 33, 60, 25, 68, -28, 55, -62, 25, -10 )
 
 [node name="en_player" instance=ExtResource( 1 )]
 position = Vector2( 1, 0 )
@@ -182,8 +182,8 @@ shape = SubResource( 1 )
 [node name="animate_sprite" parent="." index="1"]
 position = Vector2( 13.6759, 2.52706 )
 frames = SubResource( 2 )
-animation = "high_main"
-frame = 2
+animation = "trans_high_main->low"
+frame = 1
 data = {
 "high": ExtResource( 75 ),
 "high_alt_stage1": ExtResource( 78 ),
@@ -203,7 +203,7 @@ offsets = {
 }
 
 [node name="temp" type="CollisionShape2D" parent="animate_sprite" index="2"]
-position = Vector2( 63.8213, 10.8606 )
+position = Vector2( -158.058, 31.2566 )
 shape = SubResource( 3 )
 
 [node name="overlay_notrack" parent="." index="2"]
