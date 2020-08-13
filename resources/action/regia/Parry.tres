@@ -3,7 +3,7 @@
 [ext_resource path="res://src/Parry.cs" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 11.148, 29.3844 )
+extents = Vector2( 22.592, 34.733 )
 
 [resource]
 script = ExtResource( 1 )
@@ -20,4 +20,4 @@ frameStart = 1
 frameEnd = 4
 knockback = 10
 hitbox = SubResource( 1 )
-hitboxoffset = Vector2( 54.033, -14.303 )
+hitboxoffset = Vector2( 46.292, -7.889 )

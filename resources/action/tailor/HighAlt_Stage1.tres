@@ -4,6 +4,7 @@
 [ext_resource path="res://resources/action/tailor/HighAlt_Stage2.tres" type="Resource" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32.468, 10 )
 
 [resource]
 script = ExtResource( 1 )
@@ -12,7 +13,7 @@ triggerAnimation = "high"
 triggerMinFrame = -1
 triggerMaxFrame = -1
 animation = "high_alt_stage1"
-movement = Vector2( 0, 0 )
+movement = Vector2( 75, 0 )
 transition = null
 transitionTo = 0
 animateTransition = false
@@ -21,4 +22,4 @@ frameStart = 0
 frameEnd = 0
 knockback = 0
 hitbox = SubResource( 1 )
-hitboxoffset = Vector2( 0, 0 )
+hitboxoffset = Vector2( -92.43, 16.756 )
