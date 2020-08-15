@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://src/Parry.cs" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 14.68, 10 )
+
+[resource]
+script = ExtResource( 1 )
+triggerInput = "action_alt"
+triggerAnimation = "low"
+triggerMinFrame = -1
+triggerMaxFrame = -1
+animation = "low_alt"
+movement = Vector2( 0, 0 )
+transition = "trans_low_alt->high"
+transitionTo = 2
+animateTransition = true
+frameStart = 1
+frameEnd = 2
+knockback = 0
+hitbox = SubResource( 1 )
+hitboxoffset = Vector2( 0.285, -9.29 )

@@ -1,6 +1,9 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://src/Parry.cs" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 14.68, 10 )
 
 [resource]
 script = ExtResource( 1 )
@@ -10,10 +13,11 @@ triggerMinFrame = -1
 triggerMaxFrame = -1
 animation = "low_main"
 movement = Vector2( 0, 0 )
-transition = null
-transitionTo = 0
-animateTransition = false
-frameStart = 0
-frameEnd = 0
+transition = "trans_low_main->low"
+transitionTo = 1
+animateTransition = true
+frameStart = 1
+frameEnd = 3
 knockback = 0
-hitboxoffset = Vector2( 0, 0 )
+hitbox = SubResource( 1 )
+hitboxoffset = Vector2( 27.336, 70.826 )

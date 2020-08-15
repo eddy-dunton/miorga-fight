@@ -3,6 +3,7 @@
 [ext_resource path="res://src/Attack.cs" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 23.795, 11.093 )
 
 [resource]
 script = ExtResource( 1 )
@@ -11,13 +12,13 @@ triggerAnimation = "high"
 triggerMinFrame = -1
 triggerMaxFrame = -1
 animation = "high_main"
-movement = Vector2( 0, 0 )
+movement = Vector2( 100, 0 )
 transition = "trans_high_main->low"
 transitionTo = 1
 animateTransition = true
 hitbox = SubResource( 1 )
-hitboxoffset = Vector2( 0, 0 )
-hitframe = 2
+hitboxoffset = Vector2( 63.821, 10.861 )
+hitframe = 3
 halt = false
-damage = 0
+damage = 25
 requiresSuccessfulParry = false

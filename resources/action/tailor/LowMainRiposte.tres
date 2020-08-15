@@ -1,0 +1,24 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://src/Attack.cs" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 39.234, 3.247 )
+
+[resource]
+script = ExtResource( 1 )
+triggerInput = "action_main"
+triggerAnimation = "low_main"
+triggerMinFrame = 4
+triggerMaxFrame = 5
+animation = "low_riposte"
+movement = Vector2( 0, 0 )
+transition = null
+transitionTo = 2
+animateTransition = false
+hitbox = SubResource( 1 )
+hitboxoffset = Vector2( 58.518, 17.932 )
+hitframe = 1
+halt = false
+damage = 30
+requiresSuccessfulParry = true

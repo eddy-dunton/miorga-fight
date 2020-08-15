@@ -7,7 +7,7 @@ public class AnimationData : Resource
     [Export] public Vector2 offset;
 
     //Position relative to the animation's position (after offset is applied) of offset
-    [Export] public Vector2[] hitbox_offset;
+    [Export] public Vector2[] hitboxOffset;
 
     //Shape of the hitbox
     [Export] public Shape2D[] hitbox;
@@ -18,7 +18,7 @@ public class AnimationData : Resource
     public AnimationData() {
         this.offset = new Vector2();
 
-        this.hitbox_offset = new Vector2[0];
+        this.hitboxOffset = new Vector2[0];
 
         this.hitbox = new Shape2D[0];
     }

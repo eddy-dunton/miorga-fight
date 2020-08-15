@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/holytreemoc.png-659a0ef7c6460ead9377c2c5b037b2bb.stex"
+path="res://.import/key2.png-eff149aca398ff013fcd0e13ec441bc9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/mocup/holytreemoc.png"
-dest_files=[ "res://.import/holytreemoc.png-659a0ef7c6460ead9377c2c5b037b2bb.stex" ]
+source_file="res://assets/ui/titlecards/win/key2.png"
+dest_files=[ "res://.import/key2.png-eff149aca398ff013fcd0e13ec441bc9.stex" ]
 
 [params]
 

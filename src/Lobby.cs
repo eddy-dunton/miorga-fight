@@ -41,6 +41,9 @@ public class Lobby : Control {
 		this.nodeErrorPanel = GetNode<Panel>("pa_error");
 		this.nodeStartPanel = GetNode<Panel>("pa_start");
 
+		//Continue through pauses
+		this.PauseMode = Node.PauseModeEnum.Process;
+
 		this.nodeErrorLabel = GetNode<Label>("pa_error/la_error");
 
 		this.nodeHostButton.Connect("pressed", this, nameof(_OnHostPressed));

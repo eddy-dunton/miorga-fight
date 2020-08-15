@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://src/Level.cs" type="Script" id=1]
 [ext_resource path="res://assets/bg/level_base.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/ui/hud.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/MiorgaCamera.cs" type="Script" id=7]
 [ext_resource path="res://src/CameraTrack.cs" type="Script" id=8]
+[ext_resource path="res://assets/level/holytree/level_back2.png" type="Texture" id=9]
 [ext_resource path="res://assets/level/holytree/particles/type 2/7.png" type="Texture" id=10]
 [ext_resource path="res://assets/level/holytree/particles/type 2/2.png" type="Texture" id=11]
 [ext_resource path="res://assets/level/holytree/particles/type 2/9.png" type="Texture" id=12]
@@ -19,6 +20,7 @@
 [ext_resource path="res://assets/level/holytree/particles/type 2/5.png" type="Texture" id=18]
 [ext_resource path="res://assets/level/holytree/particles/type 2/8.png" type="Texture" id=19]
 [ext_resource path="res://assets/level/holytree/particles/type 2/4.png" type="Texture" id=20]
+[ext_resource path="res://assets/level/holytree/level_back3.png" type="Texture" id=21]
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
@@ -86,16 +88,31 @@ texture = SubResource( 2 )
 [node name="bg" type="ParallaxBackground" parent="."]
 
 [node name="bg_sky" type="ParallaxLayer" parent="bg"]
-motion_scale = Vector2( 0.08, 0.08 )
+position = Vector2( 0, 125 )
+motion_scale = Vector2( 0.08, 1 )
 
 [node name="sprite" type="Sprite" parent="bg/bg_sky"]
 texture = ExtResource( 3 )
 
+[node name="bg_grass" type="ParallaxLayer" parent="bg"]
+position = Vector2( 0, 270 )
+motion_scale = Vector2( 0.15, 1 )
+
+[node name="sprite" type="Sprite" parent="bg/bg_grass"]
+texture = ExtResource( 21 )
+
+[node name="bg_dirt" type="ParallaxLayer" parent="bg"]
+position = Vector2( 0, 225 )
+motion_scale = Vector2( 0.25, 1 )
+
+[node name="sprite" type="Sprite" parent="bg/bg_dirt"]
+texture = ExtResource( 9 )
+
 [node name="bg_islands" type="ParallaxLayer" parent="bg"]
-motion_scale = Vector2( 0.78, 0.78 )
+position = Vector2( 0, 130 )
+motion_scale = Vector2( 0.78, 1 )
 
 [node name="sprite" type="Sprite" parent="bg/bg_islands"]
-position = Vector2( 0, 100 )
 texture = ExtResource( 5 )
 
 [node name="bg_tree" type="ParallaxLayer" parent="bg"]

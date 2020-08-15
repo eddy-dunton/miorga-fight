@@ -57,7 +57,8 @@ public class Command : Node {
 			if (true) {}; //Debug breakpoint
 		}
 
-        else if (inputEvent.IsActionPressed("com_pause")) { //Opens pause menu (and pauses in local play)
+        //Removed from this branch, will be readded in v4.0
+        /*else if (inputEvent.IsActionPressed("com_pause")) { //Opens pause menu (and pauses in local play)
             //Check if already paused (GetTree().Pause is not checked, 
             //as this is not changed when the pause menu is opened in mp
             if (GetTree().Root.HasNode("pause")) {
@@ -65,7 +66,7 @@ public class Command : Node {
             } else if (GetTree().Root.HasNode("level")) { //Check that game is in a level 
                 this.PauseStart();
             }
-        }
+        }*/
 
         else if (inputEvent.IsActionPressed("com_fs")) { //Swaps to and from fullscreen
             OS.WindowFullscreen = !OS.WindowFullscreen;

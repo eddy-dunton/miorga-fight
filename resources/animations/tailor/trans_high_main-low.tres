@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://src/AnimationData.cs" type="Script" id=1]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 35, 33, 52, 18, 65, -10, 68, -35, 60, -55, 10, -10 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 35, 33, 60, 25, 68, -28, 55, -62, 25, -10 )
+
+[resource]
+script = ExtResource( 1 )
+offset = Vector2( -13, 0 )
+hitboxOffset = PoolVector2Array( -59.28, 50.612, -59.28, 50.612 )
+hitbox = [ SubResource( 1 ), SubResource( 2 ) ]
