@@ -1,21 +1,10 @@
 using Godot;
 using System;
 
-public class PauseMenu : CanvasLayer
-{
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-        
+public class PauseMenu : CanvasLayer {
+    public override void _Ready() {
+        //Connect the resume button to end pause
+        GetNode("bt_resume").Connect("pressed", GetNode("/root/Command"), nameof(Command.PauseEnd));
+        GetNode("bt_quit").Connect("pressed", Command.lobby, nameof(Lobby.GameQuit));
     }
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 }

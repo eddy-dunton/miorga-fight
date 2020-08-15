@@ -3,27 +3,17 @@
 [ext_resource path="res://src/Lobby.cs" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 
-[node name="Lobby" type="Control"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -390.0
-margin_top = -220.0
-margin_right = 390.0
-margin_bottom = 220.0
-size_flags_horizontal = 2
-size_flags_vertical = 2
+[node name="lobby" type="Control"]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="icon" type="Sprite" parent="."]
+[node name="bg" type="Sprite" parent="."]
 position = Vector2( 391, 243 )
 texture = ExtResource( 2 )
 
-[node name="LobbyPanel" type="Panel" parent="."]
+[node name="pa_start" type="Panel" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
 margin_left = 542.931
 margin_top = 71.3316
@@ -35,7 +25,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AddressLabel" type="Label" parent="LobbyPanel"]
+[node name="la_address" type="Label" parent="pa_start"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 215.0
@@ -49,23 +39,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Address" type="LineEdit" parent="LobbyPanel"]
+[node name="tx_address" type="LineEdit" parent="pa_start"]
 margin_left = 5.0
 margin_top = 30.0
 margin_right = 215.0
 margin_bottom = 54.0
+focus_mode = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "127.0.0.1"
+caret_blink = true
+caret_blink_speed = 0.5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HostButton" type="Button" parent="LobbyPanel"]
+[node name="bt_host" type="Button" parent="pa_start"]
 margin_left = 5.0
 margin_top = 60.0
 margin_right = 105.0
 margin_bottom = 80.0
+focus_mode = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Host"
@@ -73,11 +67,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="JoinButton" type="Button" parent="LobbyPanel"]
+[node name="bt_join" type="Button" parent="pa_start"]
 margin_left = 115.0
 margin_top = 60.0
 margin_right = 215.0
 margin_bottom = 80.0
+focus_mode = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Join"
@@ -85,14 +80,47 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LocalButton" type="Button" parent="LobbyPanel"]
+[node name="bt_local" type="Button" parent="pa_start"]
 margin_left = 5.80872
 margin_top = 90.0
 margin_right = 215.0
 margin_bottom = 103.784
+focus_mode = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Play Locally"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pa_error" type="Panel" parent="."]
+visible = false
+margin_left = 255.0
+margin_top = 200.0
+margin_right = 525.0
+margin_bottom = 300.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="la_error" type="Label" parent="pa_error"]
+margin_top = 20.0
+margin_right = 270.0
+margin_bottom = 60.0
+text = "Connecting..."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_error" type="Button" parent="pa_error"]
+margin_left = 85.0
+margin_top = 65.0
+margin_right = 185.0
+margin_bottom = 85.0
+focus_mode = 0
+text = "Cancel"
 __meta__ = {
 "_edit_use_anchors_": false
 }

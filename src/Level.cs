@@ -9,9 +9,7 @@ public class Level : Node2D
 
     [Export] private float POSITION_Y;
 
-    public Level() {
-        GD.Print("Game created");
-    }
+    public Level() {}
 
     public override void _Ready() {
         if (POSITION_LEFT.y != POSITION_RIGHT.y) GD.Print("Error: Left and Right players do not have the same y value");
