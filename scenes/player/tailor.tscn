@@ -100,15 +100,50 @@ extents = Vector2( 20, 53 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 69 ), ExtResource( 70 ), ExtResource( 71 ), ExtResource( 66 ) ],
+"frames": [ ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 54 ), ExtResource( 50 ), ExtResource( 47 ), ExtResource( 51 ), ExtResource( 46 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 52 ), ExtResource( 53 ) ],
 "loop": true,
-"name": "high",
+"name": "flinch",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 62 ), ExtResource( 65 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 64 ), ExtResource( 63 ) ],
+"loop": true,
+"name": "low_riposte",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "trans_low->high",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 10 ) ],
+"loop": false,
+"name": "high_main",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 34 ), ExtResource( 33 ), ExtResource( 37 ), ExtResource( 36 ), ExtResource( 35 ), ExtResource( 35 ) ],
+"loop": true,
+"name": "low_alt",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 72 ), ExtResource( 74 ), ExtResource( 67 ), ExtResource( 73 ) ],
+"loop": true,
+"name": "low",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 26 ), ExtResource( 29 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ) ],
+"loop": true,
+"name": "low_main",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 16 ) ],
 "loop": false,
-"name": "trans_lax->low",
-"speed": 10.0
+"name": "trans_high_main->low",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 91 ) ],
+"loop": true,
+"name": "trans_low_main->low",
+"speed": 12.0
 }, {
 "frames": [ ExtResource( 92 ), ExtResource( 90 ) ],
 "loop": true,
@@ -120,70 +155,35 @@ animations = [ {
 "name": "trans_lax->high",
 "speed": 10.0
 }, {
+"frames": [ ExtResource( 11 ), ExtResource( 21 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 20 ) ],
+"loop": false,
+"name": "high_alt_stage2",
+"speed": 12.0
+}, {
 "frames": [ ExtResource( 45 ), ExtResource( 38 ), ExtResource( 44 ), ExtResource( 39 ), ExtResource( 43 ), ExtResource( 41 ), ExtResource( 40 ), ExtResource( 42 ) ],
 "loop": true,
 "name": "walk",
 "speed": 8.0
-}, {
-"frames": [ ExtResource( 91 ) ],
-"loop": true,
-"name": "trans_low_main->low",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 54 ), ExtResource( 50 ), ExtResource( 47 ), ExtResource( 51 ), ExtResource( 46 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 52 ), ExtResource( 53 ) ],
-"loop": true,
-"name": "flinch",
-"speed": 20.0
 }, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "lax",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 10 ) ],
-"loop": false,
-"name": "high_main",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 26 ), ExtResource( 29 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ) ],
-"loop": true,
-"name": "low_main",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "trans_low->high",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 62 ), ExtResource( 65 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 64 ), ExtResource( 63 ) ],
-"loop": true,
-"name": "low_riposte",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 12 ), ExtResource( 16 ) ],
-"loop": false,
-"name": "trans_high_main->low",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 72 ), ExtResource( 74 ), ExtResource( 67 ), ExtResource( 73 ) ],
-"loop": true,
-"name": "low",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 34 ), ExtResource( 33 ), ExtResource( 37 ), ExtResource( 36 ), ExtResource( 35 ), ExtResource( 35 ) ],
-"loop": true,
-"name": "low_alt",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 21 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 20 ) ],
-"loop": false,
-"name": "high_alt_stage2",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 13 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": false,
 "name": "high_alt_stage1",
 "speed": 12.0
+}, {
+"frames": [ ExtResource( 69 ), ExtResource( 70 ), ExtResource( 71 ), ExtResource( 66 ) ],
+"loop": true,
+"name": "high",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "trans_lax->low",
+"speed": 10.0
 } ]
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
@@ -192,8 +192,8 @@ points = PoolVector2Array( -18, -70, 40, 0, 0, 0, -45, 30, -60, 10, -12, -35 )
 [node name="en_player" instance=ExtResource( 1 )]
 position = Vector2( 1, 0 )
 actions = [ ExtResource( 22 ), ExtResource( 23 ), ExtResource( 28 ), ExtResource( 24 ), ExtResource( 32 ), ExtResource( 58 ), ExtResource( 59 ) ]
-SPEED = 100
-HP_MAX = 100
+SPEED = 110
+HP_MAX = 75
 
 [node name="collision" parent="." index="0"]
 position = Vector2( -8, 30 )
