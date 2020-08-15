@@ -20,5 +20,5 @@ hitbox = SubResource( 1 )
 hitboxoffset = Vector2( 63.821, 10.861 )
 hitframe = 2
 halt = false
-damage = 30
+damage = 25
 requiresSuccessfulParry = false

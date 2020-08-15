@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=2]
+[gd_scene load_steps=98 format=2]
 
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/player/tailor/stances/transitions/laxtolow/inout.png" type="Texture" id=2]
@@ -88,6 +88,12 @@
 [ext_resource path="res://resources/animations/tailor/walk.tres" type="Resource" id=86]
 [ext_resource path="res://resources/animations/tailor/trans_low-high.tres" type="Resource" id=87]
 [ext_resource path="res://resources/animations/tailor/trans_lax-high.tres" type="Resource" id=88]
+[ext_resource path="res://resources/animations/tailor/flinch.tres" type="Resource" id=89]
+[ext_resource path="res://assets/player/tailor/fight/sept/alternate/afterhit/return/key2.png" type="Texture" id=90]
+[ext_resource path="res://assets/player/tailor/fight/sept/standard/afterhit/return/key1.png" type="Texture" id=91]
+[ext_resource path="res://assets/player/tailor/fight/sept/alternate/afterhit/return/key1.png" type="Texture" id=92]
+[ext_resource path="res://resources/animations/tailor/trans_low_alt-high.tres" type="Resource" id=93]
+[ext_resource path="res://resources/animations/tailor/trans_low_main-low.tres" type="Resource" id=94]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 53 )
@@ -99,19 +105,14 @@ animations = [ {
 "name": "low_alt",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 72 ), ExtResource( 74 ), ExtResource( 67 ), ExtResource( 73 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": true,
-"name": "low",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ) ],
-"loop": false,
-"name": "trans_lax->low",
+"name": "trans_low->high",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 10 ) ],
+"frames": [ ExtResource( 12 ), ExtResource( 16 ) ],
 "loop": false,
-"name": "high_main",
+"name": "trans_high_main->low",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 62 ), ExtResource( 65 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 64 ), ExtResource( 63 ) ],
@@ -119,59 +120,74 @@ animations = [ {
 "name": "low_riposte",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 13 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 18 ) ],
-"loop": false,
-"name": "high_alt_stage1",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 68 ) ],
-"loop": false,
-"name": "trans_lax->high",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 54 ), ExtResource( 50 ), ExtResource( 47 ), ExtResource( 51 ), ExtResource( 46 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 52 ), ExtResource( 53 ) ],
-"loop": true,
-"name": "flinch",
-"speed": 20.0
-}, {
-"frames": [ ExtResource( 69 ), ExtResource( 70 ), ExtResource( 71 ), ExtResource( 66 ) ],
-"loop": true,
-"name": "high",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 45 ), ExtResource( 38 ), ExtResource( 44 ), ExtResource( 39 ), ExtResource( 43 ), ExtResource( 41 ), ExtResource( 40 ), ExtResource( 42 ) ],
 "loop": true,
 "name": "walk",
 "speed": 8.0
 }, {
-"frames": [ ExtResource( 12 ), ExtResource( 16 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": false,
-"name": "trans_high_main->low",
-"speed": 12.0
+"name": "trans_lax->low",
+"speed": 10.0
 }, {
-"frames": [ ExtResource( 11 ), ExtResource( 21 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 20 ) ],
+"frames": [ ExtResource( 13 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": false,
-"name": "high_alt_stage2",
+"name": "high_alt_stage1",
 "speed": 12.0
-}, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "lax",
-"speed": 5.0
 }, {
 "frames": [ ExtResource( 26 ), ExtResource( 29 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ) ],
 "loop": true,
 "name": "low_main",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 4 ) ],
+"frames": [ ExtResource( 69 ), ExtResource( 70 ), ExtResource( 71 ), ExtResource( 66 ) ],
 "loop": true,
-"name": "trans_low->high",
+"name": "high",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 68 ) ],
+"loop": false,
+"name": "trans_lax->high",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 21 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 20 ) ],
+"loop": false,
+"name": "high_alt_stage2",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 54 ), ExtResource( 50 ), ExtResource( 47 ), ExtResource( 51 ), ExtResource( 46 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 52 ), ExtResource( 53 ) ],
+"loop": true,
+"name": "flinch",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "lax",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 72 ), ExtResource( 74 ), ExtResource( 67 ), ExtResource( 73 ) ],
+"loop": true,
+"name": "low",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 10 ) ],
+"loop": false,
+"name": "high_main",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 91 ) ],
+"loop": true,
+"name": "trans_low_main->low",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 92 ), ExtResource( 90 ) ],
+"loop": true,
+"name": "trans_low_alt->high",
+"speed": 12.0
 } ]
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
-points = PoolVector2Array( 42, 32, 36, -20, 42, -37, 30, -65, 0, 0 )
+points = PoolVector2Array( 42, 32, 36, 0, 30, -18, 40, -53, 20, -65, 0, 0 )
 
 [node name="en_player" instance=ExtResource( 1 )]
 position = Vector2( 1, 0 )
@@ -186,8 +202,10 @@ shape = SubResource( 1 )
 [node name="animate_sprite" parent="." index="1"]
 position = Vector2( 13.6759, 2.52706 )
 frames = SubResource( 2 )
-animation = "trans_lax->high"
+animation = "trans_low_alt->high"
+frame = 1
 data = {
+"flinch": ExtResource( 89 ),
 "high": ExtResource( 75 ),
 "high_alt_stage1": ExtResource( 78 ),
 "high_alt_stage2": ExtResource( 79 ),
@@ -201,6 +219,8 @@ data = {
 "trans_lax->high": ExtResource( 88 ),
 "trans_lax->low": ExtResource( 85 ),
 "trans_low->high": ExtResource( 87 ),
+"trans_low_alt->high": ExtResource( 93 ),
+"trans_low_main->low": ExtResource( 94 ),
 "walk": ExtResource( 86 )
 }
 
@@ -210,7 +230,7 @@ offsets = {
 }
 
 [node name="temp" type="CollisionShape2D" parent="animate_sprite" index="2"]
-position = Vector2( -114.173, 41.0301 )
+position = Vector2( -118.942, 41.7067 )
 shape = SubResource( 3 )
 
 [node name="overlay_notrack" parent="." index="2"]
