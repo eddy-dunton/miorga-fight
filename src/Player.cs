@@ -388,7 +388,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//byindex is the index of of the parry in this.nodeEnemy.actions 
 	private void Parried_ByIndex_(int attackindex, int byindex) {
 		Attack attack = this.actions[attackindex] as Attack;
-		Parry by = this.actions[byindex] as Parry;
+		Parry by = this.nodeEnemy.actions[byindex] as Parry;
 		this.Parried_(attack, by);
 	}
 
@@ -506,7 +506,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	Node2D CameraTrack.Trackable.GetTrackingNode() {
 		//Gets camera to play nice
 		return this.nodeCollision;
-		//return this;
 	}
 
 	public class Stance {
