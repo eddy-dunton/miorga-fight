@@ -3,7 +3,7 @@
 [ext_resource path="res://src/Attack.cs" type="Script" id=1]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
-points = PoolVector2Array( 0, 7, 60, 0, 0, -8, 0, -2.5, -50, -2.5, -50, 2.5, 0, 2.5 )
+points = PoolVector2Array( 0, 7, 45, 0, 0, -8, 0, -2.5, -50, -2.5, -50, 2.5, 0, 2.5 )
 
 [resource]
 script = ExtResource( 1 )
@@ -20,5 +20,5 @@ hitbox = SubResource( 1 )
 hitboxoffset = Vector2( 37.354, 25.232 )
 hitframe = 1
 halt = true
-damage = 40
+damage = 30
 requiresSuccessfulParry = false
