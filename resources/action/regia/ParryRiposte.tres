@@ -2,8 +2,8 @@
 
 [ext_resource path="res://src/Attack.cs" type="Script" id=1]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
-points = PoolVector2Array( 75, -40, 60, -20, 45, -25, 60, -50, 50, -67, 55, -70, 75, -50 )
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 108.407, 14.88 )
 
 [resource]
 script = ExtResource( 1 )
@@ -17,7 +17,7 @@ transition = "trans_low->high"
 transitionTo = 2
 animateTransition = true
 hitbox = SubResource( 1 )
-hitboxoffset = Vector2( 30.848, 71.147 )
+hitboxoffset = Vector2( -8.647, 26.572 )
 hitframe = 1
 halt = false
 damage = 35
