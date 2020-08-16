@@ -1,4 +1,4 @@
-[gd_scene load_steps=98 format=2]
+[gd_scene load_steps=103 format=2]
 
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/player/tailor/stances/transitions/laxtolow/inout.png" type="Texture" id=2]
@@ -94,30 +94,39 @@
 [ext_resource path="res://assets/player/tailor/fight/sept/alternate/afterhit/return/key1.png" type="Texture" id=92]
 [ext_resource path="res://resources/animations/tailor/trans_low_alt-high.tres" type="Resource" id=93]
 [ext_resource path="res://resources/animations/tailor/trans_low_main-low.tres" type="Resource" id=94]
+[ext_resource path="res://assets/player/tailor/fight/hang/alternate/feint/key1.png" type="Texture" id=95]
+[ext_resource path="res://assets/player/tailor/fight/hang/alternate/feint/key2.png" type="Texture" id=96]
+[ext_resource path="res://assets/player/tailor/fight/hang/alternate/feint/key3.png" type="Texture" id=97]
+[ext_resource path="res://assets/player/tailor/fight/hang/alternate/feint/key4.png" type="Texture" id=98]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 53 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "lax",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 18 ) ],
+"loop": false,
+"name": "high_alt_stage1",
+"speed": 12.0
+}, {
 "frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "trans_low->high",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 69 ), ExtResource( 70 ), ExtResource( 71 ), ExtResource( 66 ) ],
+"frames": [ ExtResource( 62 ), ExtResource( 65 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 64 ), ExtResource( 63 ) ],
 "loop": true,
-"name": "high",
-"speed": 5.0
+"name": "low_riposte",
+"speed": 12.0
 }, {
-"frames": [ ExtResource( 68 ) ],
-"loop": false,
-"name": "trans_lax->high",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 21 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 20 ) ],
-"loop": false,
-"name": "high_alt_stage2",
+"frames": [ ExtResource( 92 ), ExtResource( 90 ) ],
+"loop": true,
+"name": "trans_low_alt->high",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 45 ), ExtResource( 38 ), ExtResource( 44 ), ExtResource( 39 ), ExtResource( 43 ), ExtResource( 41 ), ExtResource( 40 ), ExtResource( 42 ) ],
@@ -130,9 +139,34 @@ animations = [ {
 "name": "trans_high_main->low",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 34 ), ExtResource( 33 ), ExtResource( 37 ), ExtResource( 36 ), ExtResource( 35 ), ExtResource( 35 ) ],
+"frames": [ ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 54 ), ExtResource( 50 ), ExtResource( 47 ), ExtResource( 51 ), ExtResource( 46 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 52 ), ExtResource( 53 ) ],
 "loop": true,
-"name": "low_alt",
+"name": "flinch",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 69 ), ExtResource( 70 ), ExtResource( 71 ), ExtResource( 66 ) ],
+"loop": true,
+"name": "high",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "trans_lax->low",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 91 ) ],
+"loop": true,
+"name": "trans_low_main->low",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 72 ), ExtResource( 74 ), ExtResource( 67 ), ExtResource( 73 ) ],
+"loop": true,
+"name": "low",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 21 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 20 ) ],
+"loop": false,
+"name": "high_alt_stage2",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 9 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 10 ) ],
@@ -140,54 +174,32 @@ animations = [ {
 "name": "high_main",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 72 ), ExtResource( 74 ), ExtResource( 67 ), ExtResource( 73 ) ],
-"loop": true,
-"name": "low",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 92 ), ExtResource( 90 ) ],
-"loop": true,
-"name": "trans_low_alt->high",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 91 ) ],
-"loop": true,
-"name": "trans_low_main->low",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "lax",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 55 ), ExtResource( 56 ), ExtResource( 57 ), ExtResource( 54 ), ExtResource( 50 ), ExtResource( 47 ), ExtResource( 51 ), ExtResource( 46 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 52 ), ExtResource( 53 ) ],
-"loop": true,
-"name": "flinch",
-"speed": 20.0
-}, {
 "frames": [ ExtResource( 26 ), ExtResource( 29 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ) ],
 "loop": true,
 "name": "low_main",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 13 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 18 ) ],
+"frames": [ ExtResource( 68 ) ],
 "loop": false,
-"name": "high_alt_stage1",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 62 ), ExtResource( 65 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 64 ), ExtResource( 63 ) ],
-"loop": true,
-"name": "low_riposte",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 2 ) ],
-"loop": false,
-"name": "trans_lax->low",
+"name": "trans_lax->high",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 34 ), ExtResource( 33 ), ExtResource( 37 ), ExtResource( 36 ), ExtResource( 35 ), ExtResource( 35 ) ],
+"loop": true,
+"name": "low_alt",
+"speed": 12.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 42.9922, 20.6177 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 95 ), ExtResource( 96 ), ExtResource( 97 ), ExtResource( 98 ) ],
+"loop": false,
+"name": "high_alt_feint",
+"speed": 12.0
+} ]
 
 [node name="en_player" instance=ExtResource( 1 )]
 position = Vector2( 1, 0 )
@@ -234,6 +246,7 @@ position = Vector2( -202.792, -18.4752 )
 shape = SubResource( 3 )
 
 [node name="overlay_notrack" parent="." index="2"]
+frames = SubResource( 4 )
 animation = "high_alt_feint"
 offsets = {
 "high_alt_feint": Vector2( 87, 0 )

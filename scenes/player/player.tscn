@@ -1,10 +1,6 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/Player.cs" type="Script" id=1]
-[ext_resource path="res://assets/player/tailor/fight/hang/alternate/feint/key1.png" type="Texture" id=2]
-[ext_resource path="res://assets/player/tailor/fight/hang/alternate/feint/key2.png" type="Texture" id=3]
-[ext_resource path="res://assets/player/tailor/fight/hang/alternate/feint/key3.png" type="Texture" id=4]
-[ext_resource path="res://assets/player/tailor/fight/hang/alternate/feint/key4.png" type="Texture" id=5]
 [ext_resource path="res://src/HitboxDrawer.cs" type="Script" id=6]
 [ext_resource path="res://src/PlayerAnimation.cs" type="Script" id=17]
 [ext_resource path="res://assets/player/particles/sparks/spark3_white.png" type="Texture" id=67]
@@ -67,11 +63,11 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
-"loop": false,
-"name": "high_alt_feint",
+"frames": [  ],
+"loop": true,
+"name": "default",
 "speed": 5.0
 } ]
 
@@ -111,5 +107,5 @@ enabled = true
 
 [node name="overlay_notrack" type="AnimatedSprite" parent="."]
 visible = false
-frames = SubResource( 8 )
+frames = SubResource( 7 )
 script = ExtResource( 71 )
