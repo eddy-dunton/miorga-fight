@@ -1,0 +1,15 @@
+1 - the basic screen when nothing has been selected or hovered over
+2 - hovering over a character icon displays the character on the panel with quick description underneath (next to "confirm" button)
+3 - clicking on a character icon selects the character for your player. The panel display now remains when not hovering over the icon.
+4/5 - clicking on the P2 tab wipes the screen (all P1 info is still stored when returning to P1 tab)
+6 - clicking on icon as described in image 3
+7/8 - clicking on the "info" tab of the display panel smoothly slides the panel to the left, revealing the character's moveset
+(NOTE: i am aware the dimensions given to display the moveset don't match but the diagram will be adapted to fit)
+9/10 - clicking on the "info" tab again returns the panel to its origin
+11 - hovering over a character icon whilst another is selected displays that character but doesn't alter your selected character
+12 - clicking on a character icon as in image 3
+13 - pressing "confirm" produces a "ready" status graphic over your player tab
+14/15 - returning to a player tab returns the screen information to the same as it was left. the ready status is still present over P2
+16 - P1 readies up as in image 13
+17 - Both players are ready so a final screen appears before playing. Selecting "yes" begins the game. Selecting "No" returns both
+players to a non readied state but with the same characters selected. This final screen is temporary and made for this mocup.
