@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/MiorgaFight/UI/CharSelection.cs" type="Script" id=1]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/key.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://assets/player/tailor/stances/lax/lax.png" type="Texture" id=14]
 [ext_resource path="res://assets/logo.png" type="Texture" id=15]
 [ext_resource path="res://assets/ui/menus/character selection/icons/iconclick.png" type="Texture" id=16]
+[ext_resource path="res://assets/ui/menus/character selection/button_confirm.png" type="Texture" id=17]
 
 [sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 16 )
@@ -66,14 +67,15 @@ position = Vector2( 400, 215 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
-[node name="bt_play" type="Button" parent="."]
-margin_left = 583.61
-margin_top = 403.0
-margin_right = 753.61
-margin_bottom = 428.0
+[node name="bt_play" type="TextureButton" parent="."]
+margin_left = 680.0
+margin_top = 400.0
+margin_right = 759.0
+margin_bottom = 420.0
 focus_mode = 0
 disabled = true
-text = "Play"
+texture_normal = ExtResource( 17 )
+stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -101,6 +103,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="sp_p1" type="Sprite" parent="pa_player_buttons"]
+position = Vector2( 29, 83 )
+
 [node name="bt_p2" type="TextureButton" parent="pa_player_buttons"]
 margin_top = 167.0
 margin_right = 35.0
@@ -114,3 +119,6 @@ stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="sp_p2" type="Sprite" parent="pa_player_buttons"]
+position = Vector2( 29, 251 )

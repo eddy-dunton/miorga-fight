@@ -14,13 +14,16 @@ public class CharSelection : Control
         public TextureButton button;
         //The other players data holder
         public PlayerData other;
+        //This players button icon
+        public Sprite icon;
 
         public string name;
 
-        public PlayerData(string name, TextureButton button) {
+        public PlayerData(string name, TextureButton button, Sprite icon) {
             this.selection = -1;
             this.name = name;
             this.button = button;
+            this.icon = icon;
         }
     }
 
@@ -36,19 +39,22 @@ public class CharSelection : Control
     //Lobby which will be called back to once the players have decided which classes they will play as
     private Lobby callback;
 
-    private TextureButton nodeP1Button, nodeP2Button;
-    private Button nodePlayButton;
+    private TextureButton nodeP1Button, nodeP2Button, nodePlayButton;
+    private Sprite nodeP1Icon, nodeP2Icon;
     private ItemList nodeCharList;
     private Sprite nodeAbilityTreeSprite, nodePlayerSprite;
 
     public override void _Ready() {
         //Get nodes
         this.nodeP1Button = GetNode<TextureButton>("pa_player_buttons/bt_p1");
+        this.nodeP1Icon = GetNode<Sprite>("pa_player_buttons/sp_p1");
         this.nodeP2Button = GetNode<TextureButton>("pa_player_buttons/bt_p2");
-        this.nodePlayButton = GetNode<Button>("bt_play");
+        this.nodeP2Icon = GetNode<Sprite>("pa_player_buttons/sp_p2");
+        
+        this.nodePlayButton = GetNode<TextureButton>("bt_play");
 
-        this.p1 = new PlayerData("Player 1", this.nodeP1Button);
-        this.p2 = new PlayerData("Player 2", this.nodeP2Button);
+        this.p1 = new PlayerData("Player 1", this.nodeP1Button, this.nodeP1Icon);
+        this.p2 = new PlayerData("Player 2", this.nodeP2Button, this.nodeP2Icon);
         this.p1.other = this.p2;
         this.p2.other = this.p1;
         
@@ -105,7 +111,7 @@ public class CharSelection : Control
         PlayerData d = this.nodeP1Button.Pressed ? this.p1 : this.p2;
 
         d.selection = index;
-        //d.button.Text = d.name + ": " + this.nodeCharList.GetItemText(index);
+        d.icon.Texture = this.nodeCharList.GetItemIcon(index);
 
         if (this.p1.selection != -1 && this.p2.selection != -1) this.nodePlayButton.Disabled = false;
         this.ShowChar(index);
