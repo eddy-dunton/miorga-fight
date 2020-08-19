@@ -105,7 +105,6 @@ __meta__ = {
 
 [node name="sp_p1" type="Sprite" parent="pa_player_buttons"]
 position = Vector2( 29, 83 )
-scale = Vector2( 1.5, 1.5 )
 
 [node name="bt_p2" type="TextureButton" parent="pa_player_buttons"]
 margin_top = 167.0
@@ -123,4 +122,3 @@ __meta__ = {
 
 [node name="sp_p2" type="Sprite" parent="pa_player_buttons"]
 position = Vector2( 29, 251 )
-scale = Vector2( 1.5, 1.5 )
