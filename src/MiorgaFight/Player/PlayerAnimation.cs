@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+namespace MiorgaFight {
+
 public class PlayerAnimation : AnimatedSprite {
 
     [Export] Dictionary<String, AnimationData> data;
@@ -83,4 +85,4 @@ public class PlayerAnimation : AnimatedSprite {
         this.Play(this.parent.stance.sprite);
         //this.Stop();
     }
-}
+}}

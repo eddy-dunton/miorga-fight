@@ -1,6 +1,7 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
-[ext_resource path="res://src/Parry.cs" type="Script" id=1]
+[ext_resource path="res://src/MiorgaFight/Action/Parry.cs" type="Script" id=1]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.68, 10 )

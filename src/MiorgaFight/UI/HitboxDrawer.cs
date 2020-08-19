@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace MiorgaFight {
+
 public class HitboxDrawer : CollisionShape2D
 {
     [Export] private NodePath parentPath;
@@ -20,4 +22,4 @@ public class HitboxDrawer : CollisionShape2D
         
         this.Shape = hitbox;
     }
-}
+}}

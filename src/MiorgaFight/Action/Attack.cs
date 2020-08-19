@@ -1,6 +1,9 @@
 using Godot;
 using System;
 
+
+namespace MiorgaFight {
+
 public class Attack : Action {
     [Export] public Shape2D hitbox;
 
@@ -69,4 +72,4 @@ public class Attack : Action {
 
         player.attack = null;
     }
-}
+}}

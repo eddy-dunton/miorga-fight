@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+namespace MiorgaFight {
+
 public class PlayerOverlay : AnimatedSprite {
     [Export] public Dictionary<String, Vector2> offsets;
 
@@ -49,4 +51,4 @@ public class PlayerOverlay : AnimatedSprite {
     public void _AnimationFinished() {
         this.End();
     } 
-}
+}}

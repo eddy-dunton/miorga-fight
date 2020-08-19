@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace MiorgaFight {
+
 public class Level : Node2D
 {
     [Export] private Vector2 POSITION_LEFT;
@@ -22,4 +24,4 @@ public class Level : Node2D
     }
 
     public float GetPlayerY() {return this.POSITION_Y;}
-}
+}}

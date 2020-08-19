@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace MiorgaFight {
+
 public class Parry : Action
 {
     //First frame that this parry blocks attacks on
@@ -61,4 +63,4 @@ public class Parry : Action
         player.nodeSparks.Emitting = true;
         player.parrySuccessful = true;
     }
-}
+}}

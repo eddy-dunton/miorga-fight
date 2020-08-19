@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Collections;
 
+namespace MiorgaFight {
+
 public class CharSelection : Control
 {
     //Stores all the data for a specific player
@@ -124,4 +126,4 @@ public class CharSelection : Control
     public void SetCallback(Lobby l) {
         this.callback = l;
     }
-}
+}}

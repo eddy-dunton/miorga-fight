@@ -1,12 +1,13 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://src/CharSelection.cs" type="Script" id=1]
+[ext_resource path="res://src/MiorgaFight/UI/CharSelection.cs" type="Script" id=1]
 [ext_resource path="res://assets/character_selection/regia.png" type="Texture" id=2]
 [ext_resource path="res://assets/player/regia/stances/lax.png" type="Texture" id=3]
 [ext_resource path="res://assets/player/tailor/stances/lax/lax.png" type="Texture" id=4]
 [ext_resource path="res://assets/logo.png" type="Texture" id=5]
 [ext_resource path="res://scenes/player/regia.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/player/tailor.tscn" type="PackedScene" id=7]
+
 
 [node name="char_selection" type="Control"]
 anchor_right = 1.0

@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+namespace MiorgaFight {
+
 //Manages moving players in and out of the game
 //And the lobby UI scene which the game starts on
 public class Lobby : Control {
@@ -346,4 +348,4 @@ public class Lobby : Control {
 		this.nodeErrorLabel.Text = msg;
 		this.nodeErrorButton.Text = buttonmsg;
 	}
-}
+}}

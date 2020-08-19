@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace MiorgaFight {
+
 public abstract class Action : Resource {
     public enum Type {
         ATTACK,
@@ -81,4 +83,4 @@ public abstract class Action : Resource {
                 (player.nodeAnimateSprite.Frame >= this.triggerMinFrame && //OR players current frame >= min frame 
                 player.nodeAnimateSprite.Frame <= this.triggerMaxFrame))); //AND players current frame ,= max frame
     }
-}
+}}

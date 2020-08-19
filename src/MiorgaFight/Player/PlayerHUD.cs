@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace MiorgaFight {
+
 public class PlayerHUD : Control
 {
     public ProgressBar nodeHP;
@@ -13,4 +15,4 @@ public class PlayerHUD : Control
         //Be invisible on creation
         this.Visible = false;
     }
-}
+}}

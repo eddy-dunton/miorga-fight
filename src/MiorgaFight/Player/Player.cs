@@ -2,6 +2,8 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+namespace MiorgaFight {
+
 public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Players direction, also deciedes whether they are p1 or p2
 	//Right is always p1 and left is always p2
@@ -519,4 +521,4 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 
 		public string Name() {return name;}
 	}
-}
+}}

@@ -1,5 +1,7 @@
 using Godot;
 
+namespace MiorgaFight {
+
 //Used to control things regardless of scene
 //all input events for command should start "com_"
 public class Command : Node {
@@ -108,4 +110,4 @@ public class Command : Node {
 
         GetTree().Root.RemoveChild(Command.pauseMenu);
     }
-}
+}}

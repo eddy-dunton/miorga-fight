@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace MiorgaFight {
+
 public class AnimationData : Resource
 {
     //Position the animation should be moved to when this animation is 
@@ -22,4 +24,4 @@ public class AnimationData : Resource
 
         this.hitbox = new Shape2D[0];
     }
-}
+}}

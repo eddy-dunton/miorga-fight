@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace MiorgaFight {
+
 public class Overlay : Action {
     public enum OverlayOption {
         OVERLAY_TRACK,
@@ -30,4 +32,4 @@ public class Overlay : Action {
 
     //Should be immpossible
     public new void Cut(Player player) {}
-}
+}}
