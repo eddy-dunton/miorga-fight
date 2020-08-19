@@ -2,7 +2,6 @@
 
 [ext_resource path="res://src/MiorgaFight/Player/AnimationData.cs" type="Script" id=1]
 
-
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 35, 33, 43, 16, 45, -10, 70, -22, 57, -40, 0, 0 )
 

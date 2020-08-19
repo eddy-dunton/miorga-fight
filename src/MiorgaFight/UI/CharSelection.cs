@@ -11,13 +11,13 @@ public class CharSelection : Control
         //This data holders current selection
         public int selection;
         //The button to select this data holder
-        public Button button;
+        public TextureButton button;
         //The other players data holder
         public PlayerData other;
 
         public string name;
 
-        public PlayerData(string name, Button button) {
+        public PlayerData(string name, TextureButton button) {
             this.selection = -1;
             this.name = name;
             this.button = button;
@@ -36,25 +36,26 @@ public class CharSelection : Control
     //Lobby which will be called back to once the players have decided which classes they will play as
     private Lobby callback;
 
-    private Button nodeP1Button, nodeP2Button, nodePlayButton;
+    private TextureButton nodeP1Button, nodeP2Button;
+    private Button nodePlayButton;
     private ItemList nodeCharList;
     private Sprite nodeAbilityTreeSprite, nodePlayerSprite;
 
     public override void _Ready() {
         //Get nodes
-        this.nodeP1Button = GetNode<Button>("pa_bottom/bt_p1");
-        this.nodeP2Button = GetNode<Button>("pa_bottom/bt_p2");
-        this.nodePlayButton = GetNode<Button>("pa_bottom/bt_play");
+        this.nodeP1Button = GetNode<TextureButton>("pa_player_buttons/bt_p1");
+        this.nodeP2Button = GetNode<TextureButton>("pa_player_buttons/bt_p2");
+        this.nodePlayButton = GetNode<Button>("bt_play");
 
         this.p1 = new PlayerData("Player 1", this.nodeP1Button);
         this.p2 = new PlayerData("Player 2", this.nodeP2Button);
         this.p1.other = this.p2;
         this.p2.other = this.p1;
         
-        this.nodeCharList = GetNode<ItemList>("pa_selection/il_selection");
+        this.nodeCharList = GetNode<ItemList>("il_selection");
 
-        this.nodeAbilityTreeSprite = GetNode<Sprite>("pa_char/sp_ability_tree");
-        this.nodePlayerSprite = GetNode<Sprite>("pa_char/sp_player");
+        this.nodeAbilityTreeSprite = GetNode<Sprite>("sp_ability_tree");
+        this.nodePlayerSprite = GetNode<Sprite>("sp_player");
 
         //Connect player buttons
         this.nodeP1Button.Connect("pressed", this, nameof(this._OnPlayerPressed), 
@@ -104,7 +105,7 @@ public class CharSelection : Control
         PlayerData d = this.nodeP1Button.Pressed ? this.p1 : this.p2;
 
         d.selection = index;
-        d.button.Text = d.name + ": " + this.nodeCharList.GetItemText(index);
+        //d.button.Text = d.name + ": " + this.nodeCharList.GetItemText(index);
 
         if (this.p1.selection != -1 && this.p2.selection != -1) this.nodePlayButton.Disabled = false;
         this.ShowChar(index);

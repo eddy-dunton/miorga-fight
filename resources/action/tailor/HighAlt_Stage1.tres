@@ -3,7 +3,6 @@
 [ext_resource path="res://src/MiorgaFight/Action/Parry.cs" type="Script" id=1]
 [ext_resource path="res://resources/action/tailor/HighAlt_Stage2.tres" type="Resource" id=2]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32.468, 10 )
 

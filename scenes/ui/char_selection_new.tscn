@@ -1,0 +1,116 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://src/MiorgaFight/UI/CharSelection.cs" type="Script" id=1]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/key.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/regia/stances/lax.png" type="Texture" id=3]
+[ext_resource path="res://assets/ui/menus/character selection/icons/regia.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/menus/character selection/icons/tailor.png" type="Texture" id=5]
+[ext_resource path="res://scenes/player/regia.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/player/tailor.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/ui/menus/character selection/player buttons/p2_unselected.png" type="Texture" id=8]
+[ext_resource path="res://assets/ui/menus/character selection/player buttons/p1_selected.png" type="Texture" id=9]
+[ext_resource path="res://assets/ui/menus/character selection/player buttons/p2_selected.png" type="Texture" id=10]
+[ext_resource path="res://assets/ui/menus/character selection/character selection.png" type="Texture" id=11]
+[ext_resource path="res://assets/ui/menus/character selection/player buttons/p1_unselected.png" type="Texture" id=12]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/regia.png" type="Texture" id=13]
+[ext_resource path="res://assets/player/tailor/stances/lax/lax.png" type="Texture" id=14]
+[ext_resource path="res://assets/logo.png" type="Texture" id=15]
+[ext_resource path="res://assets/ui/menus/character selection/icons/iconclick.png" type="Texture" id=16]
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 16 )
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="char_selection" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+chars = [ ExtResource( 6 ), ExtResource( 7 ) ]
+charSprites = [ ExtResource( 3 ), ExtResource( 14 ) ]
+charTrees = [ ExtResource( 13 ), ExtResource( 15 ) ]
+
+[node name="bg" type="Sprite" parent="."]
+position = Vector2( 283.832, 220 )
+texture = ExtResource( 11 )
+
+[node name="il_selection" type="ItemList" parent="."]
+margin_left = 110.0
+margin_top = 48.0
+margin_right = 144.0
+margin_bottom = 403.0
+focus_mode = 0
+custom_styles/selected = SubResource( 3 )
+custom_styles/bg = SubResource( 2 )
+items = [ "", ExtResource( 4 ), false, "", ExtResource( 5 ), false ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sp_ability_tree" type="Sprite" parent="."]
+position = Vector2( 675, 188 )
+texture = ExtResource( 13 )
+
+[node name="sp_key" type="Sprite" parent="."]
+position = Vector2( 651.48, 339.693 )
+texture = ExtResource( 2 )
+
+[node name="sp_player" type="Sprite" parent="."]
+position = Vector2( 400, 215 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+
+[node name="bt_play" type="Button" parent="."]
+margin_left = 583.61
+margin_top = 403.0
+margin_right = 753.61
+margin_bottom = 428.0
+focus_mode = 0
+disabled = true
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pa_player_buttons" type="Panel" parent="."]
+margin_left = 2.0
+margin_top = 48.0
+margin_right = 37.0
+margin_bottom = 383.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_p1" type="TextureButton" parent="pa_player_buttons"]
+margin_right = 35.0
+margin_bottom = 168.0
+focus_mode = 0
+toggle_mode = true
+pressed = true
+texture_normal = ExtResource( 12 )
+texture_pressed = ExtResource( 9 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_p2" type="TextureButton" parent="pa_player_buttons"]
+margin_top = 167.0
+margin_right = 35.0
+margin_bottom = 335.0
+rect_pivot_offset = Vector2( 382.757, 26 )
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 10 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

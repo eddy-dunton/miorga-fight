@@ -2,7 +2,6 @@
 
 [ext_resource path="res://src/MiorgaFight/Action/Parry.cs" type="Script" id=1]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 22.592, 34.733 )
 
