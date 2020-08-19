@@ -1,3 +1,5 @@
+NOTE: The character selection screen would be overlayed on to the level, so would appear after choosing a level
+
 1 - the basic screen when nothing has been selected or hovered over
 2 - hovering over a character icon displays the character on the panel with quick description underneath (next to "confirm" button)
 3 - clicking on a character icon selects the character for your player. The panel display now remains when not hovering over the icon.
