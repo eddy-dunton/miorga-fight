@@ -1,106 +1,126 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://src/MiorgaFight/UI/CharSelection.cs" type="Script" id=1]
-[ext_resource path="res://assets/character_selection/regia.png" type="Texture" id=2]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/key.png" type="Texture" id=2]
 [ext_resource path="res://assets/player/regia/stances/lax.png" type="Texture" id=3]
 [ext_resource path="res://assets/player/tailor/stances/lax/lax.png" type="Texture" id=4]
 [ext_resource path="res://assets/logo.png" type="Texture" id=5]
 [ext_resource path="res://scenes/player/regia.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/player/tailor.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/ui/menus/character selection/icons/regia.png" type="Texture" id=8]
+[ext_resource path="res://assets/ui/menus/character selection/icons/tailor.png" type="Texture" id=9]
+[ext_resource path="res://assets/ui/menus/character selection/icons/iconclick.png" type="Texture" id=10]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/regia.png" type="Texture" id=11]
+[ext_resource path="res://assets/ui/menus/character selection/button_confirm.png" type="Texture" id=12]
+[ext_resource path="res://assets/ui/menus/character selection/player buttons/p2_unselected.png" type="Texture" id=13]
+[ext_resource path="res://assets/ui/menus/character selection/player buttons/p1_selected.png" type="Texture" id=14]
+[ext_resource path="res://assets/ui/menus/character selection/player buttons/p2_selected.png" type="Texture" id=15]
+[ext_resource path="res://assets/ui/menus/character selection/character selection.png" type="Texture" id=16]
+[ext_resource path="res://assets/ui/menus/character selection/player buttons/p1_unselected.png" type="Texture" id=17]
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 10 )
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=1]
 
 [node name="char_selection" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_right = 40.0
+margin_bottom = 40.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 chars = [ ExtResource( 6 ), ExtResource( 7 ) ]
 charSprites = [ ExtResource( 3 ), ExtResource( 4 ) ]
-charTrees = [ ExtResource( 2 ), ExtResource( 5 ) ]
+charTrees = [ ExtResource( 11 ), ExtResource( 5 ) ]
 
-[node name="pa_bottom" type="Panel" parent="."]
-margin_left = 10.0
-margin_top = 395.0
-margin_right = 770.0
-margin_bottom = 430.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="bg" type="Sprite" parent="."]
+position = Vector2( 283.832, 220 )
+texture = ExtResource( 16 )
 
-[node name="bt_p1" type="Button" parent="pa_bottom"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 285.0
-margin_bottom = 30.0
+[node name="il_selection" type="ItemList" parent="."]
+margin_left = 110.0
+margin_top = 48.0
+margin_right = 144.0
+margin_bottom = 403.0
 focus_mode = 0
-toggle_mode = true
-pressed = true
-text = "Player 1"
+custom_styles/selected = SubResource( 3 )
+custom_styles/bg = SubResource( 2 )
+items = [ "", ExtResource( 8 ), false, "", ExtResource( 9 ), false ]
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="bt_p2" type="Button" parent="pa_bottom"]
-margin_left = 295.0
-margin_top = 5.0
-margin_right = 575.0
-margin_bottom = 30.0
-rect_pivot_offset = Vector2( 382.757, 26 )
-focus_mode = 0
-toggle_mode = true
-text = "Player 2"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="sp_ability_tree" type="Sprite" parent="."]
+position = Vector2( 675, 188 )
+texture = ExtResource( 11 )
 
-[node name="bt_play" type="Button" parent="pa_bottom"]
-margin_left = 585.0
-margin_top = 5.0
-margin_right = 755.0
-margin_bottom = 30.0
-focus_mode = 0
-disabled = true
-text = "Play"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="pa_char" type="Panel" parent="."]
-margin_left = 160.0
-margin_top = 10.0
-margin_right = 770.0
-margin_bottom = 385.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="sp_ability_tree" type="Sprite" parent="pa_char"]
-position = Vector2( 395.32, 185.598 )
-scale = Vector2( 0.597371, 0.79094 )
+[node name="sp_key" type="Sprite" parent="."]
+position = Vector2( 651.48, 339.693 )
 texture = ExtResource( 2 )
 
-[node name="sp_player" type="Sprite" parent="pa_char"]
-position = Vector2( 111.371, 186.746 )
+[node name="sp_player" type="Sprite" parent="."]
+position = Vector2( 400, 215 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
-[node name="pa_selection" type="Panel" parent="."]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 150.0
-margin_bottom = 385.0
+[node name="bt_play" type="TextureButton" parent="."]
+margin_left = 680.0
+margin_top = 400.0
+margin_right = 759.0
+margin_bottom = 420.0
+focus_mode = 0
+disabled = true
+texture_normal = ExtResource( 12 )
+stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="il_selection" type="ItemList" parent="pa_selection"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 130.0
-margin_bottom = 365.0
-focus_mode = 0
-items = [ "Regia", null, false, "Tailor", null, false ]
+[node name="pa_player_buttons" type="Panel" parent="."]
+margin_left = 2.0
+margin_top = 48.0
+margin_right = 37.0
+margin_bottom = 383.0
+custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="bt_p1" type="TextureButton" parent="pa_player_buttons"]
+margin_right = 35.0
+margin_bottom = 168.0
+focus_mode = 0
+toggle_mode = true
+pressed = true
+texture_normal = ExtResource( 17 )
+texture_pressed = ExtResource( 14 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sp_p1" type="Sprite" parent="pa_player_buttons"]
+position = Vector2( 29, 83 )
+scale = Vector2( 1.5, 1.5 )
+
+[node name="bt_p2" type="TextureButton" parent="pa_player_buttons"]
+margin_top = 167.0
+margin_right = 35.0
+margin_bottom = 335.0
+rect_pivot_offset = Vector2( 382.757, 26 )
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource( 13 )
+texture_pressed = ExtResource( 15 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sp_p2" type="Sprite" parent="pa_player_buttons"]
+position = Vector2( 29, 251 )
+scale = Vector2( 1.5, 1.5 )
