@@ -18,13 +18,13 @@
 [ext_resource path="res://assets/ui/menus/character selection/character selection.png" type="Texture" id=16]
 [ext_resource path="res://assets/ui/menus/character selection/player buttons/p1_unselected.png" type="Texture" id=17]
 
-[sub_resource type="StyleBoxTexture" id=3]
+[sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 10 )
 region_rect = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
-[sub_resource type="StyleBoxEmpty" id=1]
+[sub_resource type="StyleBoxEmpty" id=3]
 
 [node name="char_selection" type="Control"]
 margin_right = 40.0
@@ -38,7 +38,7 @@ charSprites = [ ExtResource( 3 ), ExtResource( 4 ) ]
 charTrees = [ ExtResource( 11 ), ExtResource( 5 ) ]
 
 [node name="bg" type="Sprite" parent="."]
-position = Vector2( 283.832, 220 )
+position = Vector2( 390, 220 )
 texture = ExtResource( 16 )
 
 [node name="il_selection" type="ItemList" parent="."]
@@ -47,7 +47,7 @@ margin_top = 48.0
 margin_right = 144.0
 margin_bottom = 403.0
 focus_mode = 0
-custom_styles/selected = SubResource( 3 )
+custom_styles/selected = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 items = [ "", ExtResource( 8 ), false, "", ExtResource( 9 ), false ]
 __meta__ = {
@@ -55,23 +55,23 @@ __meta__ = {
 }
 
 [node name="sp_ability_tree" type="Sprite" parent="."]
-position = Vector2( 675, 188 )
+position = Vector2( 349, 163 )
 texture = ExtResource( 11 )
 
 [node name="sp_key" type="Sprite" parent="."]
-position = Vector2( 651.48, 339.693 )
+position = Vector2( 328, 351 )
 texture = ExtResource( 2 )
 
 [node name="sp_player" type="Sprite" parent="."]
-position = Vector2( 400, 215 )
+position = Vector2( 628.923, 231.649 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
 [node name="bt_play" type="TextureButton" parent="."]
-margin_left = 680.0
-margin_top = 400.0
-margin_right = 759.0
-margin_bottom = 420.0
+margin_left = 682.0
+margin_top = 406.0
+margin_right = 761.0
+margin_bottom = 426.0
 focus_mode = 0
 disabled = true
 texture_normal = ExtResource( 12 )
@@ -81,11 +81,11 @@ __meta__ = {
 }
 
 [node name="pa_player_buttons" type="Panel" parent="."]
-margin_left = 2.0
-margin_top = 48.0
-margin_right = 37.0
-margin_bottom = 383.0
-custom_styles/panel = SubResource( 1 )
+margin_left = 3.0
+margin_top = 53.0
+margin_right = 38.0
+margin_bottom = 388.0
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
