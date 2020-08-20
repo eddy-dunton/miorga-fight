@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/MiorgaFight/UI/CharSelectionDataPanel.cs" type="Script" id=1]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/key.png" type="Texture" id=2]
+[ext_resource path="res://resources/font.tres" type="DynamicFont" id=4]
+
+[node name="pa_char_data" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sp_player" type="Sprite" parent="."]
+position = Vector2( 349, 202 )
+
+[node name="sp_key" type="Sprite" parent="."]
+position = Vector2( 612.996, 348.881 )
+texture = ExtResource( 2 )
+
+[node name="sp_action_tree" type="Sprite" parent="."]
+position = Vector2( 647, 174 )
+
+[node name="tx_description" type="RichTextLabel" parent="."]
+margin_left = 270.0
+margin_top = 309.0
+margin_right = 428.0
+margin_bottom = 393.0
+custom_fonts/normal_font = ExtResource( 4 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

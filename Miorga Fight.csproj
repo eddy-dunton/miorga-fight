@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\MiorgaFight\UI\CharSelection.cs" />
+    <Compile Include="src\MiorgaFight\UI\CharSelectionDataPanel.cs" />
     <Compile Include="src\MiorgaFight\UI\HitboxDrawer.cs" />
     <Compile Include="src\Level.cs" />
     <Compile Include="src\MiorgaFight\Player\AnimationData.cs" />

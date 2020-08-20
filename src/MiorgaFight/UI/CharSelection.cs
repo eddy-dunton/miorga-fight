@@ -1,6 +1,7 @@
 using Godot;
 using System;
-using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MiorgaFight {
 
@@ -29,13 +30,12 @@ public class CharSelection : Control
 
     private PlayerData p1, p2;
 
-    [Export] private System.Collections.Generic.List<PackedScene> chars; 
-    //List of all Player sprites
-    //The indexes of these must line up with the player indexes in il_selection
-    [Export] private System.Collections.Generic.List<Texture> charSprites;
-    //List of all player ability trees
-    [Export] private System.Collections.Generic.List<Texture> charTrees;
- 
+    //Character scenes in packed format
+    //These are then instanced into the charScenes array 
+    [Export] private List<PackedScene> charScenes; 
+    
+    private CharSelectionDataPanel[] chars;
+
     //Lobby which will be called back to once the players have decided which classes they will play as
     private Lobby callback;
 
@@ -43,6 +43,7 @@ public class CharSelection : Control
     private Sprite nodeP1Icon, nodeP2Icon;
     private ItemList nodeCharList;
     private Sprite nodeAbilityTreeSprite, nodePlayerSprite;
+    private CharSelectionDataPanel nodeDataPanel;
 
     public override void _Ready() {
         //Get nodes
@@ -52,6 +53,8 @@ public class CharSelection : Control
         this.nodeP2Icon = GetNode<Sprite>("pa_player_buttons/sp_p2");
         
         this.nodePlayButton = GetNode<TextureButton>("bt_play");
+
+        this.nodeDataPanel = GetNode<CharSelectionDataPanel>("pa_char_data");
 
         this.p1 = new PlayerData("Player 1", this.nodeP1Button, this.nodeP1Icon);
         this.p2 = new PlayerData("Player 2", this.nodeP2Button, this.nodeP2Icon);
@@ -70,8 +73,10 @@ public class CharSelection : Control
                 new Godot.Collections.Array(new byte[] {2}));
         this.nodePlayButton.Connect("pressed", this, nameof(this._OnPlayPressed));
 
-
         this.nodeCharList.Connect("item_selected", this, nameof(this._OnCharSelected));
+
+        //Map PackedScenes in charScenes into Control nodes in chars
+        this.chars = charScenes.Select(character => character.Instance() as CharSelectionDataPanel).ToArray();
 
         this.ShowChar(-1);
     }
@@ -101,8 +106,8 @@ public class CharSelection : Control
 
         this.callback.GameGoto();
 
-        this.callback.AddPlayer("p1", 0, this.chars[this.p1.selection]);
-        this.callback.AddPlayer("p2", 0, this.chars[this.p2.selection]);
+        this.callback.AddPlayer("p1", 0, this.chars[this.p1.selection].character);
+        this.callback.AddPlayer("p2", 0, this.chars[this.p2.selection].character);
         GetTree().Root.RemoveChild(this);
         this.callback.GameStart();
     }
@@ -121,11 +126,14 @@ public class CharSelection : Control
     //Index must be an index found in the itemlist, CharSprites and CharTrees or -1 for non
     private void ShowChar(int index) {
         if (index == -1) {
-            this.nodePlayerSprite.Texture = null;
-            this.nodeAbilityTreeSprite.Texture = null;
+            //Remove the data panel
+            this.RemoveChild(this.nodeDataPanel);
         } else {
-            this.nodePlayerSprite.Texture = this.charSprites[index];
-            this.nodeAbilityTreeSprite.Texture = this.charTrees[index];
+            this.RemoveChild(this.nodeDataPanel);
+            //Set the pointer to the new data panel
+            this.nodeDataPanel = this.chars[index];
+            //Add the new data panel
+            this.AddChild(this.nodeDataPanel);
         }
     }
 

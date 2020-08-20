@@ -213,8 +213,8 @@ public class Lobby : Control {
 		//Start game
 		//this.GameStart();
 		this.Visible = false;
-		CharSelection cs = 
-				(ResourceLoader.Load("res://scenes/ui/char_selection.tscn") as PackedScene).Instance() as CharSelection;
+		CharSelection cs = (ResourceLoader.Load("res://scenes/ui/char_selection/char_selection.tscn") as PackedScene)
+				.Instance() as CharSelection;
 		cs.SetCallback(this);
 
 		GetTree().Root.AddChild(cs);
