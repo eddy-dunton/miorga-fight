@@ -1,13 +1,10 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://src/MiorgaFight/Level.cs" type="Script" id=1]
 [ext_resource path="res://assets/bg/level_base.png" type="Texture" id=2]
 [ext_resource path="res://assets/bg/level_back2.png" type="Texture" id=3]
 [ext_resource path="res://assets/level/holytree/level_fore.png" type="Texture" id=4]
 [ext_resource path="res://assets/bg/level_back1.png" type="Texture" id=5]
-[ext_resource path="res://scenes/ui/hud.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/MiorgaFight/MiorgaCamera.cs" type="Script" id=7]
-[ext_resource path="res://src/MiorgaFight/CameraTrack.cs" type="Script" id=8]
+[ext_resource path="res://scenes/level/level.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/level/holytree/level_back2.png" type="Texture" id=9]
 [ext_resource path="res://assets/level/holytree/particles/type 2/7.png" type="Texture" id=10]
 [ext_resource path="res://assets/level/holytree/particles/type 2/2.png" type="Texture" id=11]
@@ -69,12 +66,9 @@ normal = Vector2( 1, 0 )
 [sub_resource type="LineShape2D" id=4]
 normal = Vector2( -1, 0 )
 
-[node name="level" type="Node2D"]
-script = ExtResource( 1 )
-POSITION_LEFT = Vector2( -250, 150 )
-POSITION_RIGHT = Vector2( 250, 150 )
+[node name="level" instance=ExtResource( 6 )]
 
-[node name="particles" type="Particles2D" parent="."]
+[node name="particles" type="Particles2D" parent="." index="0"]
 position = Vector2( 0, -200 )
 amount = 100
 lifetime = 2.75
@@ -85,67 +79,54 @@ local_coords = false
 process_material = SubResource( 1 )
 texture = SubResource( 2 )
 
-[node name="bg" type="ParallaxBackground" parent="."]
+[node name="bg" type="ParallaxBackground" parent="." index="1"]
 
-[node name="bg_sky" type="ParallaxLayer" parent="bg"]
+[node name="bg_sky" type="ParallaxLayer" parent="bg" index="0"]
 position = Vector2( 0, 125 )
 motion_scale = Vector2( 0.08, 1 )
 
-[node name="sprite" type="Sprite" parent="bg/bg_sky"]
+[node name="sprite" type="Sprite" parent="bg/bg_sky" index="0"]
 texture = ExtResource( 3 )
 
-[node name="bg_grass" type="ParallaxLayer" parent="bg"]
+[node name="bg_grass" type="ParallaxLayer" parent="bg" index="1"]
 position = Vector2( 0, 270 )
 motion_scale = Vector2( 0.15, 1 )
 
-[node name="sprite" type="Sprite" parent="bg/bg_grass"]
+[node name="sprite" type="Sprite" parent="bg/bg_grass" index="0"]
 texture = ExtResource( 21 )
 
-[node name="bg_dirt" type="ParallaxLayer" parent="bg"]
+[node name="bg_dirt" type="ParallaxLayer" parent="bg" index="2"]
 position = Vector2( 0, 225 )
 motion_scale = Vector2( 0.25, 1 )
 
-[node name="sprite" type="Sprite" parent="bg/bg_dirt"]
+[node name="sprite" type="Sprite" parent="bg/bg_dirt" index="0"]
 texture = ExtResource( 9 )
 
-[node name="bg_islands" type="ParallaxLayer" parent="bg"]
+[node name="bg_islands" type="ParallaxLayer" parent="bg" index="3"]
 position = Vector2( 0, 130 )
 motion_scale = Vector2( 0.78, 1 )
 
-[node name="sprite" type="Sprite" parent="bg/bg_islands"]
+[node name="sprite" type="Sprite" parent="bg/bg_islands" index="0"]
 texture = ExtResource( 5 )
 
-[node name="bg_tree" type="ParallaxLayer" parent="bg"]
+[node name="bg_tree" type="ParallaxLayer" parent="bg" index="4"]
 
-[node name="sprite" type="Sprite" parent="bg/bg_tree"]
+[node name="sprite" type="Sprite" parent="bg/bg_tree" index="0"]
 texture = ExtResource( 2 )
 
-[node name="hud" parent="." instance=ExtResource( 6 )]
+[node name="arena" type="StaticBody2D" parent="." index="2"]
 
-[node name="arena" type="StaticBody2D" parent="."]
-
-[node name="ar_wall_left" type="CollisionShape2D" parent="arena"]
+[node name="ar_wall_left" type="CollisionShape2D" parent="arena" index="0"]
 position = Vector2( -520, 180 )
 shape = SubResource( 3 )
 
-[node name="ar_wall_right" type="CollisionShape2D" parent="arena"]
+[node name="ar_wall_right" type="CollisionShape2D" parent="arena" index="1"]
 position = Vector2( 520, 180 )
 shape = SubResource( 4 )
 
-[node name="fg" type="Sprite" parent="."]
+[node name="fg" type="Sprite" parent="." index="3"]
 z_index = 1
 texture = ExtResource( 4 )
 
-[node name="camera_track" type="Node2D" parent="."]
+[node name="camera_track" parent="." index="5"]
 position = Vector2( 0, 131 )
-script = ExtResource( 8 )
-
-[node name="camera" type="Camera2D" parent="camera_track"]
-current = true
-limit_left = -500
-limit_right = 500
-smoothing_enabled = true
-smoothing_speed = 25.0
-script = ExtResource( 7 )
-
-[editable path="hud"]

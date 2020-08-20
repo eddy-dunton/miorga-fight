@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/MiorgaFight/Level.cs" type="Script" id=1]
+[ext_resource path="res://scenes/ui/hud.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/MiorgaFight/MiorgaCamera.cs" type="Script" id=7]
+[ext_resource path="res://src/MiorgaFight/CameraTrack.cs" type="Script" id=8]
+
+[node name="level" type="Node2D"]
+script = ExtResource( 1 )
+POSITION_LEFT = Vector2( -250, 150 )
+POSITION_RIGHT = Vector2( 250, 150 )
+
+[node name="hud" parent="." instance=ExtResource( 6 )]
+
+[node name="camera_track" type="Node2D" parent="."]
+script = ExtResource( 8 )
+
+[node name="camera" type="Camera2D" parent="camera_track"]
+current = true
+limit_left = -500
+limit_right = 500
+smoothing_enabled = true
+smoothing_speed = 25.0
+script = ExtResource( 7 )
