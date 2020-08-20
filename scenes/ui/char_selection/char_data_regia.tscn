@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/ui/char_selection/char_data_panel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/player/regia/stances/lax.png" type="Texture" id=2]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/regia.png" type="Texture" id=3]
 [ext_resource path="res://scenes/player/regia.tscn" type="PackedScene" id=4]
-[ext_resource path="res://resources/font_bold.tres" type="DynamicFont" id=5]
 
 [node name="pa_char_data" instance=ExtResource( 1 )]
 character = ExtResource( 4 )
@@ -16,7 +15,6 @@ texture = ExtResource( 2 )
 texture = ExtResource( 3 )
 
 [node name="tx_description" parent="." index="3"]
-custom_fonts/bold_font = ExtResource( 5 )
 bbcode_text = "[b]Regia[/b]
 Health: 100
 Speed: 100"
