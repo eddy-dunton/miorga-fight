@@ -54,6 +54,9 @@ public class CharSelection : Control
         
         this.nodePlayButton = GetNode<TextureButton>("bt_play");
 
+        //This is removed the moment the scene is opened
+        //However I left it in the scene as it works as a good visual guide as to where the everything is in engine
+        //And also means that this.nodeDataPanel will not be left null
         this.nodeDataPanel = GetNode<CharSelectionDataPanel>("pa_char_data");
 
         this.p1 = new PlayerData("Player 1", this.nodeP1Button, this.nodeP1Icon);
@@ -125,11 +128,13 @@ public class CharSelection : Control
     //Shows a character up on the panel on the right hand side
     //Index must be an index found in the itemlist, CharSprites and CharTrees or -1 for non
     private void ShowChar(int index) {
-        if (index == -1) {
-            //Remove the data panel
+        //Remove the data panel if it exists
+        if (this.HasNode("pa_char_data")) {
             this.RemoveChild(this.nodeDataPanel);
-        } else {
-            this.RemoveChild(this.nodeDataPanel);
+        }
+
+        //if index is -1 then the data panel is supposed to just be removed
+        if (index != -1) { 
             //Set the pointer to the new data panel
             this.nodeDataPanel = this.chars[index];
             //Add the new data panel
