@@ -26,7 +26,6 @@ public class HUD : CanvasLayer
         if (round == 1) { //case first round, play the fight graphic
             this.nodeCardsSprite.Play("go");
             this.nodeCardsPlayer.Play("cards_fade_long");
-            this.Win(Player.Direction.LEFT);
         } else if (round == 11) { //Final round, play the final round graphic
             this.nodeCardsSprite.Play("final");
             this.nodeCardsPlayer.Play("cards_fade");
