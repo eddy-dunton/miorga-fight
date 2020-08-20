@@ -40,7 +40,7 @@ public class PlayerOverlay : AnimatedSprite {
 
         this.Visible = true;
         this.Frame = 0;
-        base.Play();
+        base.Play(anim);
     }
 
     public void End() {
