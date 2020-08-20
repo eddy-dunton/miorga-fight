@@ -21,7 +21,6 @@ public class CameraTrack : Node2D
 	//Find a better way to do this
 	public override void _PhysicsProcess(float delta) {
 		if (moving) this.CalculatePosition();
-		//GD.Print(this.Position);
 	}
 
 	//Recalculates this nodes position, based on the average position of the elements of tracking and its offset
@@ -57,8 +56,6 @@ public class CameraTrack : Node2D
 			GD.Print("CameraTrack.Track(Trackable): Trackable.GetTrackingNode() did not return a valid Node2D");
 			return;
 		}
-
-		GD.Print("Adding tracking node");
 
 		//Add node to track
 		this.tracking.Add(node);

@@ -2,9 +2,9 @@
 
 [ext_resource path="res://src/MiorgaFight/UI/PauseMenu.cs" type="Script" id=1]
 
-
 [node name="pause" type="CanvasLayer"]
 pause_mode = 2
+layer = 3
 script = ExtResource( 1 )
 
 [node name="bg" type="Panel" parent="."]

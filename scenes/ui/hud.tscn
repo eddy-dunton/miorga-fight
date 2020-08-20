@@ -148,6 +148,7 @@ p1Card = ExtResource( 17 )
 p2Card = ExtResource( 18 )
 
 [node name="la_fps" type="Label" parent="."]
+visible = false
 anchor_top = 0.97
 anchor_bottom = 1.0
 custom_colors/font_color = Color( 0.85098, 0, 1, 1 )
