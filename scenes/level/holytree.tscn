@@ -1,13 +1,13 @@
 [gd_scene load_steps=26 format=2]
 
-[ext_resource path="res://src/Level.cs" type="Script" id=1]
+[ext_resource path="res://src/MiorgaFight/Level.cs" type="Script" id=1]
 [ext_resource path="res://assets/bg/level_base.png" type="Texture" id=2]
 [ext_resource path="res://assets/bg/level_back2.png" type="Texture" id=3]
 [ext_resource path="res://assets/level/holytree/level_fore.png" type="Texture" id=4]
 [ext_resource path="res://assets/bg/level_back1.png" type="Texture" id=5]
 [ext_resource path="res://scenes/ui/hud.tscn" type="PackedScene" id=6]
-[ext_resource path="res://src/MiorgaCamera.cs" type="Script" id=7]
-[ext_resource path="res://src/CameraTrack.cs" type="Script" id=8]
+[ext_resource path="res://src/MiorgaFight/MiorgaCamera.cs" type="Script" id=7]
+[ext_resource path="res://src/MiorgaFight/CameraTrack.cs" type="Script" id=8]
 [ext_resource path="res://assets/level/holytree/level_back2.png" type="Texture" id=9]
 [ext_resource path="res://assets/level/holytree/particles/type 2/7.png" type="Texture" id=10]
 [ext_resource path="res://assets/level/holytree/particles/type 2/2.png" type="Texture" id=11]
@@ -21,6 +21,7 @@
 [ext_resource path="res://assets/level/holytree/particles/type 2/8.png" type="Texture" id=19]
 [ext_resource path="res://assets/level/holytree/particles/type 2/4.png" type="Texture" id=20]
 [ext_resource path="res://assets/level/holytree/level_back3.png" type="Texture" id=21]
+
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
