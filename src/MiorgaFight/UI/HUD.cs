@@ -38,7 +38,7 @@ public class HUD : CanvasLayer
     public void Win(Player.Direction winnerDir) {
         //Set the player win card to the correct texture
         this.nodeCardsPlayerWin.Visible = false;
-        this.nodeCardsPlayerWin.Texture = winnerDir == Player.Direction.LEFT ? p1Card : p2Card;
+        this.nodeCardsPlayerWin.Texture = winnerDir == Player.Direction.RIGHT ? p1Card : p2Card;
 
         //Gets node cards sprite set up correctly
         this.nodeCardsSprite.Modulate = new Color(255,255,255,255);
