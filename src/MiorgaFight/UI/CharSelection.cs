@@ -60,8 +60,8 @@ public class CharSelection : Control
         
         this.nodeCharList = GetNode<ItemList>("il_selection");
 
-        this.nodeAbilityTreeSprite = GetNode<Sprite>("sp_ability_tree");
-        this.nodePlayerSprite = GetNode<Sprite>("sp_player");
+        this.nodeAbilityTreeSprite = GetNode<Sprite>("pa_char_data/sp_action_tree");
+        this.nodePlayerSprite = GetNode<Sprite>("pa_char_data/sp_player");
 
         //Connect player buttons
         this.nodeP1Button.Connect("pressed", this, nameof(this._OnPlayerPressed), 

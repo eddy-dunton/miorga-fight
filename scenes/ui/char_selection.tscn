@@ -17,14 +17,13 @@
 [ext_resource path="res://assets/ui/menus/character selection/player buttons/p2_selected.png" type="Texture" id=15]
 [ext_resource path="res://assets/ui/menus/character selection/character selection.png" type="Texture" id=16]
 [ext_resource path="res://assets/ui/menus/character selection/player buttons/p1_unselected.png" type="Texture" id=17]
+[ext_resource path="res://resources/font.tres" type="DynamicFont" id=18]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 10 )
 region_rect = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="StyleBoxEmpty" id=2]
-
-[sub_resource type="StyleBoxEmpty" id=3]
 
 [node name="char_selection" type="Control"]
 margin_right = 40.0
@@ -54,19 +53,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="sp_ability_tree" type="Sprite" parent="."]
-position = Vector2( 349, 163 )
-texture = ExtResource( 11 )
-
-[node name="sp_key" type="Sprite" parent="."]
-position = Vector2( 328, 351 )
-texture = ExtResource( 2 )
-
-[node name="sp_player" type="Sprite" parent="."]
-position = Vector2( 628.923, 231.649 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 3 )
-
 [node name="bt_play" type="TextureButton" parent="."]
 margin_left = 682.0
 margin_top = 406.0
@@ -80,15 +66,43 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="pa_player_buttons" type="Panel" parent="."]
+[node name="pa_char_data" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sp_player" type="Sprite" parent="pa_char_data"]
+position = Vector2( 349, 202 )
+texture = ExtResource( 3 )
+
+[node name="sp_key" type="Sprite" parent="pa_char_data"]
+position = Vector2( 612.996, 348.881 )
+texture = ExtResource( 2 )
+
+[node name="sp_action_tree" type="Sprite" parent="pa_char_data"]
+position = Vector2( 647, 174 )
+texture = ExtResource( 11 )
+
+[node name="tx_description" type="RichTextLabel" parent="pa_char_data"]
+margin_left = 270.0
+margin_top = 309.0
+margin_right = 428.0
+margin_bottom = 393.0
+custom_fonts/normal_font = ExtResource( 18 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Regia
+Bit of a bellend
+This is sample text, designed to fill up space, so I can figure out what the fuck is going on 
+I 
+N"
+
+[node name="pa_player_buttons" type="Control" parent="."]
 margin_left = 3.0
 margin_top = 53.0
 margin_right = 38.0
 margin_bottom = 388.0
-custom_styles/panel = SubResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="bt_p1" type="TextureButton" parent="pa_player_buttons"]
 margin_right = 35.0
