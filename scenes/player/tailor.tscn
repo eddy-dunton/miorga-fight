@@ -104,20 +104,10 @@ extents = Vector2( 20, 53 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 3 ) ],
+"frames": [ ExtResource( 72 ), ExtResource( 74 ), ExtResource( 67 ), ExtResource( 73 ) ],
 "loop": true,
-"name": "lax",
+"name": "low",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 13 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 18 ) ],
-"loop": false,
-"name": "high_alt_stage1",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 4 ) ],
-"loop": true,
-"name": "trans_low->high",
-"speed": 10.0
 }, {
 "frames": [ ExtResource( 62 ), ExtResource( 65 ), ExtResource( 60 ), ExtResource( 61 ), ExtResource( 64 ), ExtResource( 63 ) ],
 "loop": true,
@@ -128,6 +118,11 @@ animations = [ {
 "loop": true,
 "name": "trans_low_alt->high",
 "speed": 12.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "lax",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 45 ), ExtResource( 38 ), ExtResource( 44 ), ExtResource( 39 ), ExtResource( 43 ), ExtResource( 41 ), ExtResource( 40 ), ExtResource( 42 ) ],
 "loop": true,
@@ -159,19 +154,14 @@ animations = [ {
 "name": "trans_low_main->low",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 72 ), ExtResource( 74 ), ExtResource( 67 ), ExtResource( 73 ) ],
-"loop": true,
-"name": "low",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 21 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 20 ) ],
+"frames": [ ExtResource( 13 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": false,
-"name": "high_alt_stage2",
+"name": "high_alt_stage1",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 10 ) ],
-"loop": false,
-"name": "high_main",
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "trans_low->high",
 "speed": 10.0
 }, {
 "frames": [ ExtResource( 26 ), ExtResource( 29 ), ExtResource( 25 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 31 ) ],
@@ -188,6 +178,16 @@ animations = [ {
 "loop": true,
 "name": "low_alt",
 "speed": 12.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 10 ) ],
+"loop": false,
+"name": "high_main",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 21 ), ExtResource( 15 ), ExtResource( 14 ), ExtResource( 20 ) ],
+"loop": false,
+"name": "high_alt_stage2",
+"speed": 10.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
