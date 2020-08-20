@@ -15,7 +15,7 @@
 [ext_resource path="res://assets/ui/menus/character selection/character selection.png" type="Texture" id=18]
 [ext_resource path="res://assets/ui/menus/character selection/player buttons/p2_selected.png" type="Texture" id=19]
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=1]
 draw_center = false
 border_width_left = 2
 border_width_top = 2
@@ -51,7 +51,7 @@ margin_right = 144.0
 margin_bottom = 405.0
 rect_clip_content = false
 focus_mode = 0
-custom_styles/selected = SubResource( 3 )
+custom_styles/selected = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 items = [ "", ExtResource( 2 ), false, "", ExtResource( 7 ), false ]
 max_columns = 2
