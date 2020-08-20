@@ -13,7 +13,7 @@ public class Lobby : Control {
     public static bool started = false;
 
 	LineEdit nodeAddr;
-	Button nodeHostButton, nodeJoinButton, nodeLocalButton, nodeErrorButton;
+	Button nodeHostButton, nodeJoinButton, nodeLocalButton, nodeErrorButton, nodeQuitButton;
 	Level game;
 	Panel nodeErrorPanel, nodeStartPanel;
 	Label nodeErrorLabel;
@@ -39,6 +39,7 @@ public class Lobby : Control {
 		this.nodeJoinButton = GetNode<Button>("pa_start/bt_join");
 		this.nodeLocalButton = GetNode<Button>("pa_start/bt_local");
 		this.nodeErrorButton = GetNode<Button>("pa_error/bt_error");
+		this.nodeQuitButton = GetNode<Button>("bt_quit");
 
 		this.nodeErrorPanel = GetNode<Panel>("pa_error");
 		this.nodeStartPanel = GetNode<Panel>("pa_start");
@@ -52,6 +53,7 @@ public class Lobby : Control {
 		this.nodeJoinButton.Connect("pressed", this, nameof(_OnJoinPressed));
 		this.nodeLocalButton.Connect("pressed", this, nameof(_OnLocalPressed));
 		this.nodeErrorButton.Connect("pressed", this, nameof(_OnErrorPressed));
+		this.nodeQuitButton.Connect("pressed", this, nameof(_OnQuitPressed));
 
 		GetTree().Connect("network_peer_connected", this, nameof(_PlayerConnected));
 		GetTree().Connect("network_peer_disconnected", this, nameof(_PlayerDisconnected));
@@ -232,6 +234,13 @@ public class Lobby : Control {
 		
 		this.nodeStartPanel.Visible = true;
 		this.nodeErrorPanel.Visible = false;
+	}
+
+	//Called when the quit button is pressed
+	//Closes the game
+	void _OnQuitPressed() {
+		//I wanted to wire this directly, but it wouldn't let me
+		GetTree().Quit();
 	}
 
 	//Starts the game

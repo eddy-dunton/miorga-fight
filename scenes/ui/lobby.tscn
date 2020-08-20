@@ -15,12 +15,24 @@ __meta__ = {
 position = Vector2( 391, 243 )
 texture = ExtResource( 2 )
 
+[node name="bt_quit" type="Button" parent="."]
+margin_left = 22.0
+margin_top = 22.0
+margin_right = 122.0
+margin_bottom = 42.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="pa_start" type="Panel" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_left = 542.931
-margin_top = 71.3316
-margin_right = 762.931
-margin_bottom = 185.332
+margin_left = 543.0
+margin_top = 71.0
+margin_right = 763.0
+margin_bottom = 185.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 theme = ExtResource( 3 )
