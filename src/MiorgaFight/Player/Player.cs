@@ -247,6 +247,14 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			}
 		}
 
+		if (Lobby.started) {
+			//Catches strange edge cases, most likely caused by multi-threaded physics
+			if (this.DIRECTION == Direction.LEFT && this.Position.x < this.nodeEnemy.Position.x) {
+				this.Restart();
+				this.nodeEnemy.Restart();
+			}
+		}
+
 		this.lastVelocity = this.velocity;
 	}
 
@@ -257,7 +265,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 
 	//Moves the player from one state to another, all state changes should be routed through here
 	//A little unnecessary I know
-	//Not completely sold on it myself, might end up being scrapped
 	public void ChangeState(State newState, bool transition) {
 		//Perform actions for leaving state
 		switch (this.state) {
@@ -269,8 +276,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		//Check if a transition should be done
 		//Not particularly proud of this 
 		if (transition)
-			 transition = ((this.state == State.LAX || this.state == State.LOW || this.state == State.HIGH || 
-			this.state == State.WALK) && (newState == State.LAX || newState == State.LOW || newState == State.HIGH));
+			transition = ((this.state == State.LAX || this.state == State.LOW || this.state == State.HIGH || 
+				this.state == State.WALK) && (newState == State.LAX || newState == State.LOW || newState == State.HIGH));
 
 		this.state = newState;
 

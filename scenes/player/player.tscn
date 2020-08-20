@@ -8,8 +8,6 @@
 [ext_resource path="res://src/MiorgaFight/Player/PlayerOverlay.cs" type="Script" id=71]
 [ext_resource path="res://assets/player/particles/sparks/spark1_white.png" type="Texture" id=73]
 
-
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [  ],
