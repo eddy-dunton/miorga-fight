@@ -1,9 +1,8 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/ui/char_selection/char_data_regia.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/menus/character selection/icons/regia.png" type="Texture" id=2]
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm.png" type="Texture" id=3]
-[ext_resource path="res://assets/ui/menus/character selection/icons/iconclick.png" type="Texture" id=4]
 [ext_resource path="res://scenes/ui/char_selection/char_data_tailor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/ui/menus/character selection/player buttons/p2_unselected.png" type="Texture" id=6]
 [ext_resource path="res://assets/ui/menus/character selection/icons/tailor.png" type="Texture" id=7]
@@ -16,9 +15,19 @@
 [ext_resource path="res://assets/ui/menus/character selection/character selection.png" type="Texture" id=18]
 [ext_resource path="res://assets/ui/menus/character selection/player buttons/p2_selected.png" type="Texture" id=19]
 
-[sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 4 )
-region_rect = Rect2( 0, 0, 32, 32 )
+[sub_resource type="StyleBoxFlat" id=3]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.890196, 0.0862745, 0.0862745, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 1
+anti_aliasing = false
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -37,13 +46,16 @@ texture = ExtResource( 18 )
 
 [node name="il_selection" type="ItemList" parent="."]
 margin_left = 110.0
-margin_top = 48.0
+margin_top = 50.0
 margin_right = 144.0
-margin_bottom = 403.0
+margin_bottom = 405.0
+rect_clip_content = false
 focus_mode = 0
-custom_styles/selected = SubResource( 1 )
+custom_styles/selected = SubResource( 3 )
 custom_styles/bg = SubResource( 2 )
 items = [ "", ExtResource( 2 ), false, "", ExtResource( 7 ), false ]
+max_columns = 2
+icon_mode = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
