@@ -12,8 +12,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="sp_player" type="Sprite" parent="."]
+[node name="sp_player" type="AnimatedSprite" parent="."]
 position = Vector2( 349, 202 )
+playing = true
 
 [node name="sp_key" type="Sprite" parent="."]
 position = Vector2( 612.996, 348.881 )

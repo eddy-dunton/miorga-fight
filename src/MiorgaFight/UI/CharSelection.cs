@@ -42,7 +42,6 @@ public class CharSelection : Control
     private TextureButton nodeP1Button, nodeP2Button, nodePlayButton;
     private Sprite nodeP1Icon, nodeP2Icon;
     private ItemList nodeCharList;
-    private Sprite nodeAbilityTreeSprite, nodePlayerSprite;
     private CharSelectionDataPanel nodeDataPanel;
 
     public override void _Ready() {
@@ -65,9 +64,6 @@ public class CharSelection : Control
         this.p2.other = this.p1;
         
         this.nodeCharList = GetNode<ItemList>("il_selection");
-
-        this.nodeAbilityTreeSprite = GetNode<Sprite>("pa_char_data/sp_action_tree");
-        this.nodePlayerSprite = GetNode<Sprite>("pa_char_data/sp_player");
 
         //Connect player buttons
         this.nodeP1Button.Connect("pressed", this, nameof(this._OnPlayerPressed), 
@@ -139,6 +135,7 @@ public class CharSelection : Control
             this.nodeDataPanel = this.chars[index];
             //Add the new data panel
             this.AddChild(this.nodeDataPanel);
+            this.nodeDataPanel.Reset();
         }
     }
 
