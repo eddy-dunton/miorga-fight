@@ -1,0 +1,120 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://scenes/ui/char_selection/char_data_regia.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/ui/menus/character selection/icons/regia.png" type="Texture" id=2]
+[ext_resource path="res://assets/ui/menus/character selection/button_confirm.png" type="Texture" id=3]
+[ext_resource path="res://scenes/ui/char_selection/char_data_tailor.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/ui/menus/character selection/player buttons/p2_unselected.png" type="Texture" id=6]
+[ext_resource path="res://assets/ui/menus/character selection/icons/tailor.png" type="Texture" id=7]
+[ext_resource path="res://assets/ui/menus/character selection/player buttons/p1_selected.png" type="Texture" id=8]
+[ext_resource path="res://scenes/ui/char_selection/char_data_panel.tscn" type="PackedScene" id=9]
+[ext_resource path="res://src/MiorgaFight/UI/CharSelection.cs" type="Script" id=14]
+[ext_resource path="res://assets/ui/menus/character selection/button_confirm_disabled.png" type="Texture" id=15]
+[ext_resource path="res://assets/ui/menus/character selection/player buttons/p1_unselected.png" type="Texture" id=16]
+[ext_resource path="res://assets/ui/menus/character selection/button_confirm_hover.png" type="Texture" id=17]
+[ext_resource path="res://assets/ui/menus/character selection/character selection.png" type="Texture" id=18]
+[ext_resource path="res://assets/ui/menus/character selection/player buttons/p2_selected.png" type="Texture" id=19]
+
+[sub_resource type="StyleBoxFlat" id=3]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.890196, 0.0862745, 0.0862745, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="char_selection" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+charScenes = [ ExtResource( 1 ), ExtResource( 5 ) ]
+
+[node name="bg" type="Sprite" parent="."]
+position = Vector2( 390, 220 )
+texture = ExtResource( 18 )
+
+[node name="il_selection" type="ItemList" parent="."]
+margin_left = 110.0
+margin_top = 50.0
+margin_right = 144.0
+margin_bottom = 405.0
+rect_clip_content = false
+focus_mode = 0
+custom_styles/selected = SubResource( 3 )
+custom_styles/bg = SubResource( 2 )
+items = [ "", ExtResource( 2 ), false, "", ExtResource( 7 ), false ]
+max_columns = 2
+icon_mode = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_play" type="TextureButton" parent="."]
+margin_left = 682.0
+margin_top = 406.0
+margin_right = 761.0
+margin_bottom = 426.0
+focus_mode = 0
+disabled = true
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 17 )
+texture_disabled = ExtResource( 15 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pa_char_data" parent="." instance=ExtResource( 9 )]
+
+[node name="pa_player_buttons" type="Control" parent="."]
+margin_left = 3.0
+margin_top = 53.0
+margin_right = 38.0
+margin_bottom = 388.0
+
+[node name="bt_p1" type="TextureButton" parent="pa_player_buttons"]
+margin_right = 35.0
+margin_bottom = 168.0
+focus_mode = 0
+toggle_mode = true
+pressed = true
+texture_normal = ExtResource( 16 )
+texture_pressed = ExtResource( 8 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sp_p1" type="Sprite" parent="pa_player_buttons"]
+position = Vector2( 29, 83 )
+
+[node name="bt_p2" type="TextureButton" parent="pa_player_buttons"]
+margin_top = 167.0
+margin_right = 35.0
+margin_bottom = 335.0
+rect_pivot_offset = Vector2( 382.757, 26 )
+focus_mode = 0
+toggle_mode = true
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 19 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sp_p2" type="Sprite" parent="pa_player_buttons"]
+position = Vector2( 29, 251 )
+
+[editable path="pa_char_data"]

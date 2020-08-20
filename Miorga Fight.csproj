@@ -59,8 +59,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\MiorgaFight\UI\CharSelection.cs" />
+    <Compile Include="src\MiorgaFight\UI\CharSelectionDataPanel.cs" />
     <Compile Include="src\MiorgaFight\UI\HitboxDrawer.cs" />
-    <Compile Include="src\Level.cs" />
+    <Compile Include="src\MiorgaFight\Level.cs" />
     <Compile Include="src\MiorgaFight\Player\AnimationData.cs" />
     <Compile Include="src\MiorgaFight\Action\Overlay.cs" />
     <Compile Include="src\MiorgaFight\UI\PauseMenu.cs" />
@@ -68,14 +69,14 @@
     <Compile Include="src\MiorgaFight\Player\PlayerOverlay.cs" />
     <Compile Include="src\MiorgaFight\Action\Action.cs" />
     <Compile Include="src\MiorgaFight\Action\Attack.cs" />
-    <Compile Include="src\CameraTrack.cs" />
-    <Compile Include="src\MiorgaCamera.cs" />
+    <Compile Include="src\MiorgaFight\CameraTrack.cs" />
+    <Compile Include="src\MiorgaFight\MiorgaCamera.cs" />
     <Compile Include="src\MiorgaFight\Player\PlayerAnimation.cs" />
     <Compile Include="src\MiorgaFight\UI\FpsCounter.cs" />
     <Compile Include="src\MiorgaFight\Player\Player.cs" />
     <Compile Include="src\MiorgaFight\Action\Parry.cs" />
     <Compile Include="src\MiorgaFight\UI\Lobby.cs" />
-    <Compile Include="src\Command.cs" />
+    <Compile Include="src\MiorgaFight\Command.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
