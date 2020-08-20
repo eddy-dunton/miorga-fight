@@ -1,17 +1,153 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/MiorgaFight/UI/FpsCounter.cs" type="Script" id=1]
 [ext_resource path="res://src/MiorgaFight/Player/PlayerHUD.cs" type="Script" id=2]
-[ext_resource path="res://resources/font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://src/MiorgaFight/UI/HUD.cs" type="Script" id=3]
 [ext_resource path="res://assets/ui/gameplay/healthbar.png" type="Texture" id=4]
 [ext_resource path="res://assets/ui/gameplay/healthbar_progress.png" type="Texture" id=5]
 [ext_resource path="res://assets/ui/gameplay/life1.png" type="Texture" id=6]
 [ext_resource path="res://assets/ui/gameplay/life5.png" type="Texture" id=7]
+[ext_resource path="res://assets/ui/titlecards/round1.png" type="Texture" id=8]
+[ext_resource path="res://assets/ui/titlecards/round2.png" type="Texture" id=9]
+[ext_resource path="res://assets/ui/titlecards/round3.png" type="Texture" id=10]
+[ext_resource path="res://assets/ui/titlecards/round4.png" type="Texture" id=11]
+[ext_resource path="res://assets/ui/titlecards/round5.png" type="Texture" id=12]
+[ext_resource path="res://assets/ui/titlecards/go.png" type="Texture" id=13]
+[ext_resource path="res://assets/ui/titlecards/final.png" type="Texture" id=14]
+[ext_resource path="res://assets/ui/titlecards/win/key2.png" type="Texture" id=15]
+[ext_resource path="res://assets/ui/titlecards/win/key1.png" type="Texture" id=16]
+[ext_resource path="res://assets/ui/titlecards/general/player1.png" type="Texture" id=17]
+[ext_resource path="res://assets/ui/titlecards/general/player2.png" type="Texture" id=18]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [  ],
+"loop": false,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "wins",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": false,
+"name": "round3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": false,
+"name": "round2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "go",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "final",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": false,
+"name": "round1",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": false,
+"name": "round4",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": false,
+"name": "round5",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=2]
+resource_name = "cards_fade"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("sp_cards:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "cards_fade_long"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("sp_cards:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "win"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("sp_win_player:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("sp_cards:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.9 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "wins" ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("sp_cards")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ "wins", false ],
+"method": "play"
+} ]
+}
 
 [node name="hud" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 3 )
+p1Card = ExtResource( 17 )
+p2Card = ExtResource( 18 )
 
 [node name="la_fps" type="Label" parent="."]
-visible = false
 anchor_top = 0.97
 anchor_bottom = 1.0
 custom_colors/font_color = Color( 0.85098, 0, 1, 1 )
@@ -31,12 +167,12 @@ __meta__ = {
 }
 
 [node name="pb_health" type="TextureProgress" parent="gr_p1"]
-margin_left = 25.0
-margin_top = 25.0
-margin_right = 325.0
-margin_bottom = 39.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 328.0
+margin_bottom = 42.0
 rect_min_size = Vector2( 100, 0 )
-max_value = 150.0
+max_value = 100.0
 value = 100.0
 texture_over = ExtResource( 4 )
 texture_progress = ExtResource( 5 )
@@ -44,38 +180,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="la_score" type="Label" parent="gr_p1"]
-visible = false
-margin_left = 15.6495
-margin_top = 203.279
-margin_right = 55.6495
-margin_bottom = 217.279
-custom_fonts/font = ExtResource( 3 )
-text = "0"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="sp_lives_1" type="Sprite" parent="gr_p1"]
-position = Vector2( 344, 37 )
+position = Vector2( 32, 60 )
 texture = ExtResource( 6 )
 
 [node name="sp_lives_2" type="Sprite" parent="gr_p1"]
-position = Vector2( 353, 33 )
+position = Vector2( 41, 60 )
 texture = ExtResource( 6 )
 
 [node name="sp_lives_3" type="Sprite" parent="gr_p1"]
-position = Vector2( 362, 32 )
+position = Vector2( 50, 60 )
 texture = ExtResource( 6 )
 
 [node name="sp_lives_4" type="Sprite" parent="gr_p1"]
-position = Vector2( 370, 31 )
+position = Vector2( 59, 60 )
 texture = ExtResource( 6 )
 
 [node name="sp_lives_5" type="Sprite" parent="gr_p1"]
-position = Vector2( 357, 33 )
+position = Vector2( 46, 60 )
 texture = ExtResource( 7 )
 
 [node name="gr_p2" type="Control" parent="."]
@@ -89,52 +211,48 @@ __meta__ = {
 [node name="pb_health" type="TextureProgress" parent="gr_p2"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = 715.0
-margin_top = 25.0
-margin_right = 1015.0
-margin_bottom = 39.0
+margin_left = 412.0
+margin_top = 24.0
+margin_right = 716.0
+margin_bottom = 42.0
 rect_min_size = Vector2( 100, 0 )
-rect_scale = Vector2( -1, 1 )
-max_value = 150.0
+max_value = 100.0
 value = 100.0
 texture_over = ExtResource( 4 )
 texture_progress = ExtResource( 5 )
-
-[node name="la_score" type="Label" parent="gr_p2"]
-visible = false
-margin_left = 410.0
-margin_top = 25.0
-margin_right = 450.0
-margin_bottom = 39.0
-custom_fonts/font = ExtResource( 3 )
-text = "0"
-align = 1
-valign = 1
+fill_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="sp_lives_1" type="Sprite" parent="gr_p2"]
-position = Vector2( 436, 37 )
-scale = Vector2( -1, 1 )
+position = Vector2( 720, 61 )
 texture = ExtResource( 6 )
 
 [node name="sp_lives_2" type="Sprite" parent="gr_p2"]
-position = Vector2( 427, 33 )
-scale = Vector2( -1, 1 )
+position = Vector2( 729, 61 )
 texture = ExtResource( 6 )
 
 [node name="sp_lives_3" type="Sprite" parent="gr_p2"]
-position = Vector2( 418, 32 )
-scale = Vector2( -1, 1 )
+position = Vector2( 738, 61 )
 texture = ExtResource( 6 )
 
 [node name="sp_lives_4" type="Sprite" parent="gr_p2"]
-position = Vector2( 410, 31 )
-scale = Vector2( -1, 1 )
+position = Vector2( 747, 61 )
 texture = ExtResource( 6 )
 
 [node name="sp_lives_5" type="Sprite" parent="gr_p2"]
-position = Vector2( 423, 33 )
-scale = Vector2( -1, 1 )
+position = Vector2( 734, 61 )
 texture = ExtResource( 7 )
+
+[node name="sp_win_player" type="Sprite" parent="."]
+position = Vector2( 390, 150 )
+
+[node name="sp_cards" type="AnimatedSprite" parent="."]
+position = Vector2( 390, 220 )
+frames = SubResource( 1 )
+
+[node name="an_cards" type="AnimationPlayer" parent="."]
+anims/cards_fade = SubResource( 2 )
+anims/cards_fade_long = SubResource( 3 )
+anims/win = SubResource( 4 )

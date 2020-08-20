@@ -5,6 +5,7 @@ namespace MiorgaFight {
 
 public class PlayerHUD : Control
 {
+    public HUD parent;
     public TextureProgress nodeHP;
     public Sprite[] lives; 
 
@@ -17,6 +18,8 @@ public class PlayerHUD : Control
         for (int i = 1; i <= 5; i ++) {
             this.lives[i - 1] = this.GetNode<Sprite>("sp_lives_" + i.ToString());
         }
+
+        this.parent = this.GetParent() as HUD;
 
         //Be invisible on creation
         this.Visible = false;

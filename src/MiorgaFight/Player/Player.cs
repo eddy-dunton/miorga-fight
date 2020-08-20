@@ -156,6 +156,10 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		//stops RPC calls going off to other clients which may not have finished setting up their game
 		this.ChangeHP_(this.HP_MAX);
 		this.ChangeState(State.LAX);
+		
+		//direction == left ensures that this is only called once
+		if (this.DIRECTION == Direction.LEFT)
+			this.hud.parent.ChangeRound(11 - this.lives - this.nodeEnemy.lives);
 	}
 
 	//Called when the game ends either if one player wins or one disconnects
@@ -316,11 +320,26 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 
 		this.hud.nodeHP.Value = this.hp;
 
-		if (this.hp <= 0) {
-			this.ChangeLives(this.lives - 1);
-			this.Restart();
-			this.nodeEnemy.Restart();
+		if (this.hp <= 0) 
+			this.LoseLife();
+	}
+
+	private void LoseLife() {
+		//Lost
+		if (this.lives == 0) {
+			this.nodeEnemy.Wins();
+			return;
 		}
+
+		this.ChangeLives(this.lives - 1);
+		this.Restart();
+		this.nodeEnemy.Restart();
+	}
+
+	//Called when this player wins
+	public void Wins() {
+		GetTree().Paused = true;
+		this.hud.parent.Win(this.DIRECTION);
 	}
 
 	//Changes this player score to the 
