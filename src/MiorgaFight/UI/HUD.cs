@@ -18,8 +18,12 @@ public class HUD : CanvasLayer
     public override void _Ready()
     {
         this.nodeCardsSprite = this.GetNode<AnimatedSprite>("sp_cards");
+        //Ensure nodeCards sprite is off when starting
+        this.nodeCardsSprite.Play("default");
         this.nodeCardsPlayer = this.GetNode<AnimationPlayer>("an_cards");    
         this.nodeCardsPlayerWin = this.GetNode<Sprite>("sp_win_player");
+        //Ensure that this is hidden
+        this.nodeCardsPlayerWin.Visible = false;
     }
 
     public void ChangeRound(int round) {
@@ -28,7 +32,7 @@ public class HUD : CanvasLayer
             this.nodeCardsPlayer.Play("cards_fade_long");
         } else if (round == 11) { //Final round, play the final round graphic
             this.nodeCardsSprite.Play("final");
-            this.nodeCardsPlayer.Play("cards_fade");
+            this.nodeCardsPlayer.Play("cards_fade_long");
         } else {
             this.nodeCardsSprite.Play("round" + round.ToString());
             this.nodeCardsPlayer.Play("cards_fade");

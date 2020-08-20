@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://src/MiorgaFight/UI/FpsCounter.cs" type="Script" id=1]
 [ext_resource path="res://src/MiorgaFight/Player/PlayerHUD.cs" type="Script" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/ui/gameplay/healthbar_progress.png" type="Texture" id=5]
 [ext_resource path="res://assets/ui/gameplay/life1.png" type="Texture" id=6]
 [ext_resource path="res://assets/ui/gameplay/life5.png" type="Texture" id=7]
-[ext_resource path="res://assets/ui/titlecards/round1.png" type="Texture" id=8]
+[ext_resource path="res://assets/ui/titlecards/round10.png" type="Texture" id=8]
 [ext_resource path="res://assets/ui/titlecards/round2.png" type="Texture" id=9]
 [ext_resource path="res://assets/ui/titlecards/round3.png" type="Texture" id=10]
 [ext_resource path="res://assets/ui/titlecards/round4.png" type="Texture" id=11]
@@ -18,12 +18,21 @@
 [ext_resource path="res://assets/ui/titlecards/win/key1.png" type="Texture" id=16]
 [ext_resource path="res://assets/ui/titlecards/general/player1.png" type="Texture" id=17]
 [ext_resource path="res://assets/ui/titlecards/general/player2.png" type="Texture" id=18]
+[ext_resource path="res://assets/ui/titlecards/round7.png" type="Texture" id=19]
+[ext_resource path="res://assets/ui/titlecards/round8.png" type="Texture" id=20]
+[ext_resource path="res://assets/ui/titlecards/round6.png" type="Texture" id=21]
+[ext_resource path="res://assets/ui/titlecards/round9.png" type="Texture" id=22]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [  ],
 "loop": false,
 "name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "round10",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 16 ), ExtResource( 15 ) ],
@@ -36,9 +45,29 @@ animations = [ {
 "name": "round3",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 19 ) ],
+"loop": true,
+"name": "round7",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 22 ) ],
+"loop": true,
+"name": "round9",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 9 ) ],
 "loop": false,
 "name": "round2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 20 ) ],
+"loop": true,
+"name": "round8",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 21 ) ],
+"loop": true,
+"name": "round6",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 13 ) ],
@@ -49,11 +78,6 @@ animations = [ {
 "frames": [ ExtResource( 14 ) ],
 "loop": true,
 "name": "final",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 8 ) ],
-"loop": false,
-"name": "round1",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 11 ) ],
