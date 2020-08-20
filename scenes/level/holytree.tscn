@@ -22,7 +22,6 @@
 [ext_resource path="res://assets/level/holytree/particles/type 2/4.png" type="Texture" id=20]
 [ext_resource path="res://assets/level/holytree/level_back3.png" type="Texture" id=21]
 
-
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
 emission_box_extents = Vector3( 400, 100, 1 )

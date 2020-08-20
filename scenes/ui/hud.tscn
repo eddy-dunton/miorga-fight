@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/MiorgaFight/UI/FpsCounter.cs" type="Script" id=1]
 [ext_resource path="res://src/MiorgaFight/Player/PlayerHUD.cs" type="Script" id=2]
-
-
+[ext_resource path="res://resources/font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/ui/gameplay/healthbar.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/gameplay/healthbar_progress.png" type="Texture" id=5]
 
 [node name="hud" type="CanvasLayer"]
 
@@ -27,7 +28,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="pb_health" type="ProgressBar" parent="gr_p1"]
+[node name="pb_health" type="TextureProgress" parent="gr_p1"]
 margin_left = 25.0
 margin_top = 25.0
 margin_right = 325.0
@@ -35,7 +36,8 @@ margin_bottom = 39.0
 rect_min_size = Vector2( 100, 0 )
 max_value = 150.0
 value = 100.0
-percent_visible = false
+texture_over = ExtResource( 4 )
+texture_progress = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -45,6 +47,7 @@ margin_left = 330.0
 margin_top = 25.0
 margin_right = 370.0
 margin_bottom = 39.0
+custom_fonts/font = ExtResource( 3 )
 text = "0"
 align = 1
 valign = 1
@@ -60,7 +63,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="pb_health" type="ProgressBar" parent="gr_p2"]
+[node name="pb_health" type="TextureProgress" parent="gr_p2"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = 715.0
@@ -71,16 +74,15 @@ rect_min_size = Vector2( 100, 0 )
 rect_scale = Vector2( -1, 1 )
 max_value = 150.0
 value = 100.0
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture_over = ExtResource( 4 )
+texture_progress = ExtResource( 5 )
 
 [node name="la_score" type="Label" parent="gr_p2"]
 margin_left = 410.0
 margin_top = 25.0
 margin_right = 450.0
 margin_bottom = 39.0
+custom_fonts/font = ExtResource( 3 )
 text = "0"
 align = 1
 valign = 1
