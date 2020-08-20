@@ -256,7 +256,7 @@ public class Lobby : Control {
 	//Creates a game
 	private void GameCreate() {
 		//Load game
-		this.game = ((ResourceLoader.Load("res://scenes/level/holytree.tscn") as PackedScene).Instance()) as Level;
+		this.game = ((ResourceLoader.Load("res://scenes/level/marketharbour.tscn") as PackedScene).Instance()) as Level;
 	}
 
 	//Goes to the game, from the lobby

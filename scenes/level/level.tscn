@@ -7,8 +7,6 @@
 
 [node name="level" type="Node2D"]
 script = ExtResource( 1 )
-POSITION_LEFT = Vector2( -250, 150 )
-POSITION_RIGHT = Vector2( 250, 150 )
 
 [node name="hud" parent="." instance=ExtResource( 6 )]
 

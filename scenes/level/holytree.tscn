@@ -67,6 +67,9 @@ normal = Vector2( 1, 0 )
 normal = Vector2( -1, 0 )
 
 [node name="level" instance=ExtResource( 6 )]
+POSITION_LEFT = -250.0
+POSITION_RIGHT = 250.0
+POSITION_Y = 150.0
 
 [node name="particles" type="Particles2D" parent="." index="0"]
 position = Vector2( 0, -200 )
