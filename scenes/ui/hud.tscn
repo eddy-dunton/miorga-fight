@@ -35,19 +35,9 @@ animations = [ {
 "name": "round10",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 16 ), ExtResource( 15 ) ],
+"frames": [ ExtResource( 14 ) ],
 "loop": true,
-"name": "wins",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 10 ) ],
-"loop": false,
-"name": "round3",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 19 ) ],
-"loop": true,
-"name": "round7",
+"name": "final",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 22 ) ],
@@ -55,14 +45,9 @@ animations = [ {
 "name": "round9",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ) ],
-"loop": false,
-"name": "round2",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 20 ) ],
+"frames": [ ExtResource( 13 ) ],
 "loop": true,
-"name": "round8",
+"name": "go",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 21 ) ],
@@ -70,24 +55,39 @@ animations = [ {
 "name": "round6",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 13 ) ],
+"frames": [ ExtResource( 19 ) ],
 "loop": true,
-"name": "go",
+"name": "round7",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 14 ) ],
+"frames": [ ExtResource( 20 ) ],
 "loop": true,
-"name": "final",
+"name": "round8",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "wins",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 12 ) ],
+"loop": false,
+"name": "round5",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": false,
+"name": "round3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": false,
+"name": "round2",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 11 ) ],
 "loop": false,
 "name": "round4",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 12 ) ],
-"loop": false,
-"name": "round5",
 "speed": 5.0
 } ]
 
@@ -192,12 +192,12 @@ __meta__ = {
 }
 
 [node name="pb_health" type="TextureProgress" parent="gr_p1"]
+light_mask = -2147483647
 margin_left = 24.0
 margin_top = 24.0
 margin_right = 328.0
 margin_bottom = 42.0
 rect_min_size = Vector2( 100, 0 )
-max_value = 100.0
 value = 100.0
 texture_over = ExtResource( 4 )
 texture_progress = ExtResource( 5 )
@@ -241,7 +241,6 @@ margin_top = 24.0
 margin_right = 716.0
 margin_bottom = 42.0
 rect_min_size = Vector2( 100, 0 )
-max_value = 100.0
 value = 100.0
 texture_over = ExtResource( 4 )
 texture_progress = ExtResource( 5 )

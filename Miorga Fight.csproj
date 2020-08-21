@@ -66,6 +66,7 @@
     <Compile Include="src\MiorgaFight\Player\AnimationData.cs" />
     <Compile Include="src\MiorgaFight\Action\Overlay.cs" />
     <Compile Include="src\MiorgaFight\UI\HUD.cs" />
+    <Compile Include="src\MiorgaFight\UI\MapSelection.cs" />
     <Compile Include="src\MiorgaFight\UI\PauseMenu.cs" />
     <Compile Include="src\MiorgaFight\Player\PlayerHUD.cs" />
     <Compile Include="src\MiorgaFight\Player\PlayerOverlay.cs" />

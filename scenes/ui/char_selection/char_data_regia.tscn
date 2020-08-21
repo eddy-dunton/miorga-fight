@@ -108,7 +108,7 @@ character = ExtResource( 4 )
 [node name="sp_player" parent="." index="0"]
 frames = SubResource( 1 )
 animation = "low_parry_alt_riposte"
-frame = 3
+frame = 4
 
 [node name="pa_action_tree" type="Control" parent="." index="2"]
 margin_right = 40.0
