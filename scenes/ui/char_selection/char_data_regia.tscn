@@ -95,9 +95,12 @@ animations = [ {
 
 [node name="pa_char_data" instance=ExtResource( 1 )]
 offsets = {
-"high_attack_alt": Vector2( 50, 0 ),
-"high_attack_main": Vector2( 15, -5 ),
-"low_attack_main": Vector2( 31, 0 ),
+"high": Vector2( -12, 0 ),
+"high_attack_alt": Vector2( 62, 0 ),
+"high_attack_main": Vector2( 20, -5 ),
+"low": Vector2( 8, 0 ),
+"low_attack_main": Vector2( 38, 0 ),
+"low_parry_alt": Vector2( -18, 0 ),
 "low_parry_alt_riposte": Vector2( -5, 5 )
 }
 character = ExtResource( 4 )
@@ -110,6 +113,9 @@ frame = 3
 [node name="pa_action_tree" type="Control" parent="." index="2"]
 margin_right = 40.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="sp_action_tree" type="Sprite" parent="pa_action_tree" index="0"]
 position = Vector2( 647, 174 )
