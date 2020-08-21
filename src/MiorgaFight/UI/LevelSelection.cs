@@ -24,10 +24,10 @@ public class LevelSelection : Control
 
     private Control nodeButtonPanel;
     private TextureButton nodeButtonPlay;
-    private Sprite nodeMapSprite;
-    private Viewport nodeMapViewport;
-    private Camera2D nodeMapCamera;
-    private HSlider nodeMapSlider;
+    private Sprite nodeLevelSprite;
+    private Viewport nodeLevelViewport;
+    private Camera2D nodeLevelCamera;
+    private HSlider nodeLevelSlider;
 
     //Function to call once map selection is finished
     private Func<LevelSelection, PackedScene, int> callback;
@@ -41,14 +41,14 @@ public class LevelSelection : Control
         this.nodeButtonPanel = this.GetNode<Control>("pa_buttons");
         this.nodeButtonPlay = this.GetNode<TextureButton>("bt_play");
 
-        this.nodeMapSprite = this.GetNode<Sprite>("sp_map");
-        this.nodeMapViewport = this.GetNode<Viewport>("vp_map");
-        this.nodeMapCamera = this.GetNode<Camera2D>("vp_map/camera");
-        this.nodeMapSlider = this.GetNode<HSlider>("sl_map");
+        this.nodeLevelSprite = this.GetNode<Sprite>("sp_map");
+        this.nodeLevelViewport = this.GetNode<Viewport>("vp_map");
+        this.nodeLevelCamera = this.GetNode<Camera2D>("vp_map/camera");
+        this.nodeLevelSlider = this.GetNode<HSlider>("sl_map");
 
         this.nodeButtonPlay.Connect("pressed", this, nameof(_OnPlayPressed));
 
-        this.nodeMapSlider.Connect("value_changed", this, nameof(_OnSliderChanged));
+        this.nodeLevelSlider.Connect("value_changed", this, nameof(_OnSliderChanged));
     
         if (this.packedMaps.Length != this.nodeButtonPanel.GetChildren().Count) {
             GD.Print("ERROR: MAP SELECTION: Unequal number of buttons and maps, aborting");
@@ -103,7 +103,7 @@ public class LevelSelection : Control
     }
 
     void _OnSliderChanged(float value) {
-        this.nodeMapCamera.Position = new Vector2(value, this.nodeMapCamera.Position.y);
+        this.nodeLevelCamera.Position = new Vector2(value, this.nodeLevelCamera.Position.y);
     }
 
     void _OnButtonPressed(int i) {
@@ -136,15 +136,15 @@ public class LevelSelection : Control
 
     private void ShowMap(LevelData newlevel, LevelData? oldlevel) {
         if (oldlevel.HasValue) {
-            this.nodeMapViewport.RemoveChild(oldlevel.Value.level);
+            this.nodeLevelViewport.RemoveChild(oldlevel.Value.level);
         }
         
-        this.nodeMapSlider.Value = 0f;
-        this.nodeMapSlider.MinValue = -newlevel.movement;
-        this.nodeMapSlider.MaxValue = newlevel.movement;
-        this.nodeMapCamera.Position = newlevel.cameraPos;
+        this.nodeLevelSlider.Value = 0f;
+        this.nodeLevelSlider.MinValue = -newlevel.movement;
+        this.nodeLevelSlider.MaxValue = newlevel.movement;
+        this.nodeLevelCamera.Position = newlevel.cameraPos;
         
-        this.nodeMapViewport.AddChild(newlevel.level);
+        this.nodeLevelViewport.AddChild(newlevel.level);
     }
 
     public void SetCallback(Func<LevelSelection, PackedScene, int> c) {

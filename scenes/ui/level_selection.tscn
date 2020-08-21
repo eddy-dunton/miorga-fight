@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm_hover.png" type="Texture" id=1]
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm_disabled.png" type="Texture" id=2]
+[ext_resource path="res://resources/theme/theme.tres" type="Theme" id=3]
 [ext_resource path="res://assets/ui/menus/map selection/iconselect.png" type="Texture" id=4]
 [ext_resource path="res://assets/ui/menus/map selection/iconhover.png" type="Texture" id=5]
 [ext_resource path="res://assets/ui/menus/map selection/icons/holytree.png" type="Texture" id=6]
@@ -44,10 +45,13 @@ texture = SubResource( 1 )
 
 [node name="sl_map" type="HSlider" parent="."]
 margin_left = 346.0
-margin_top = 265.0
+margin_top = 268.0
 margin_right = 736.0
-margin_bottom = 281.0
+margin_bottom = 284.0
+theme = ExtResource( 3 )
 min_value = -100.0
+tick_count = 9
+ticks_on_borders = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
