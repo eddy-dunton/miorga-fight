@@ -212,14 +212,27 @@ public class Lobby : Control {
 		//this.AddPlayer("p1", 0);
 		//this.AddPlayer("p2", 0);
 
+
+
 		//Start game
 		//this.GameStart();
 		this.Visible = false;
 		CharSelection cs = (ResourceLoader.Load("res://scenes/ui/char_selection/char_selection.tscn") as PackedScene)
 				.Instance() as CharSelection;
-		cs.SetCallback(this);
+		cs.SetCallback(this._LocalCSCallback);
 
 		GetTree().Root.AddChild(cs);
+	}
+
+	int _LocalCSCallback(CharSelection cs, PackedScene p1, PackedScene p2) {
+		this.GameGoto();
+
+        this.AddPlayer("p1", 0, p1);
+        this.AddPlayer("p2", 0, p2);
+        GetTree().Root.RemoveChild(cs);
+        this.GameStart();
+
+		return 0;
 	}
 
 	//Called when the error panel's button is called
