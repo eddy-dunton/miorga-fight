@@ -42,29 +42,14 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 6 ), ExtResource( 6 ), ExtResource( 26 ), ExtResource( 15 ), ExtResource( 33 ), ExtResource( 33 ), ExtResource( 9 ), ExtResource( 9 ) ],
-"loop": true,
-"name": "high_attack_alt",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 13 ), ExtResource( 30 ), ExtResource( 46 ), ExtResource( 45 ) ],
-"loop": true,
-"name": "high",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 31 ), ExtResource( 10 ), ExtResource( 18 ), ExtResource( 28 ), ExtResource( 5 ), ExtResource( 34 ) ],
-"loop": true,
-"name": "low_parry_alt",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 7 ), ExtResource( 24 ), ExtResource( 27 ), ExtResource( 32 ), ExtResource( 14 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 11 ) ],
 "loop": true,
 "name": "high_attack_main",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 22 ), ExtResource( 25 ), ExtResource( 39 ), ExtResource( 16 ), ExtResource( 16 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 6 ), ExtResource( 26 ), ExtResource( 15 ), ExtResource( 33 ), ExtResource( 33 ), ExtResource( 9 ), ExtResource( 9 ) ],
 "loop": true,
-"name": "low_attack_main",
+"name": "high_attack_alt",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 41 ), ExtResource( 62 ), ExtResource( 43 ), ExtResource( 56 ) ],
@@ -72,15 +57,30 @@ animations = [ {
 "name": "low",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 2 ), ExtResource( 40 ) ],
+"loop": true,
+"name": "lax",
+"speed": 1.5
+}, {
 "frames": [ ExtResource( 68 ), ExtResource( 67 ), ExtResource( 70 ), ExtResource( 69 ), ExtResource( 69 ) ],
 "loop": true,
 "name": "low_parry_alt_riposte",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 40 ) ],
+"frames": [ ExtResource( 31 ), ExtResource( 10 ), ExtResource( 18 ), ExtResource( 28 ), ExtResource( 5 ), ExtResource( 34 ) ],
 "loop": true,
-"name": "lax",
-"speed": 1.5
+"name": "low_parry_alt",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 22 ), ExtResource( 25 ), ExtResource( 39 ), ExtResource( 16 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "low_attack_main",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 30 ), ExtResource( 46 ), ExtResource( 45 ) ],
+"loop": true,
+"name": "high",
+"speed": 5.0
 } ]
 
 [sub_resource type="StyleBoxEmpty" id=2]
@@ -104,7 +104,8 @@ character = ExtResource( 4 )
 
 [node name="sp_player" parent="." index="0"]
 frames = SubResource( 1 )
-animation = "lax"
+animation = "low_parry_alt_riposte"
+frame = 3
 
 [node name="pa_action_tree" type="Control" parent="." index="2"]
 margin_right = 40.0
@@ -250,7 +251,7 @@ __meta__ = {
 anim = "low_attack_main"
 parentPath = NodePath("../..")
 
-[node name="tx_description" parent="." index="4"]
+[node name="tx_description" parent="." index="5"]
 bbcode_text = "[b]Regia[/b]
 Health: 100
 Speed: 100"

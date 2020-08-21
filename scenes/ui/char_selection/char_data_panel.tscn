@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/MiorgaFight/UI/CharSelectionDataPanel.cs" type="Script" id=1]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/key.png" type="Texture" id=2]
 [ext_resource path="res://resources/theme/font_bold.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/ui/menus/character selection/character mask.png" type="Texture" id=4]
 
 [node name="pa_char_data" type="Control"]
 margin_right = 40.0
@@ -13,8 +14,15 @@ __meta__ = {
 }
 
 [node name="sp_player" type="AnimatedSprite" parent="."]
+light_mask = 2
 position = Vector2( 349, 202 )
 playing = true
+
+[node name="sp_player_mask" type="Light2D" parent="."]
+position = Vector2( 390, 220 )
+texture = ExtResource( 4 )
+mode = 3
+range_item_cull_mask = 2
 
 [node name="sp_key" type="Sprite" parent="."]
 position = Vector2( 612.996, 348.881 )
