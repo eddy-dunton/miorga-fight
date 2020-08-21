@@ -211,14 +211,14 @@ public class Lobby : Control {
 		//this.GameCreate();
 
 		this.Visible = false;
-		MapSelection ms = (ResourceLoader.Load("res://scenes/ui/map_selection.tscn") as PackedScene).Instance() 
-				as MapSelection;
-		ms.SetCallback(this._LocalMSCallback);
+		LevelSelection ms = (ResourceLoader.Load("res://scenes/ui/level_selection.tscn") as PackedScene).Instance() 
+				as LevelSelection;
+		ms.SetCallback(this._LocalLSCallback);
 		GetTree().Root.AddChild(ms);
 	}
 
-	int _LocalMSCallback(MapSelection ms, PackedScene map) {
-		this.GameCreate(map);
+	int _LocalLSCallback(LevelSelection ms, PackedScene level) {
+		this.GameCreate(level);
 		GetTree().Root.RemoveChild(ms);
 		
 		CharSelection cs = (ResourceLoader.Load("res://scenes/ui/char_selection/char_selection.tscn") as PackedScene)
