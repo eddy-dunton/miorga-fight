@@ -5,20 +5,24 @@ namespace MiorgaFight {
 
 public class LevelSelection : Control
 {
+    /*
+        Data for these levels is stored in 2 different structures, the LevelSelectionLevelData resources stores all
+        static data about each level, including names, descriptions and packed scenes etc.
+
+        This structure contains all instance specific data for a level (this is actually unnecessary as there will only
+        ever be a single instance of any of these resources and just a resource could be used, but that would be bad
+        practice)
+    */
     private struct LevelData {
-        public PackedScene packed;
         //Button for this level
         public TextureButton button;
         //This levels map
         public Level level;
-        //the cameras y position
-        public Vector2 cameraPos;
-        //How much sideways movement the level allows
-        public float movement;
+        //Raw data for this level
+        public LevelSelectionLevelData resource;
     }
 
-    [Export] private PackedScene[] packedMaps;
-    [Export] private int[] mapWidth;
+    [Export] LevelSelectionLevelData[] levelData;
 
     private LevelData[] levels;
 
@@ -38,6 +42,7 @@ public class LevelSelection : Control
     public override void _Ready() {
         this.level = null;
 
+        //Gets nodes and sets up connections
         this.nodeButtonPanel = this.GetNode<Control>("pa_buttons");
         this.nodeButtonPlay = this.GetNode<TextureButton>("bt_play");
 
@@ -50,48 +55,45 @@ public class LevelSelection : Control
 
         this.nodeLevelSlider.Connect("value_changed", this, nameof(_OnSliderChanged));
     
-        if (this.packedMaps.Length != this.nodeButtonPanel.GetChildren().Count) {
+        //Checks that number of buttons and levels are the same
+        Godot.Collections.Array buttonPanelChildren = this.nodeButtonPanel.GetChildren();
+
+        if (this.levelData.Length != buttonPanelChildren.Count) {
             GD.Print("ERROR: MAP SELECTION: Unequal number of buttons and maps, aborting");
             return;
         }
 
-        this.levels = new LevelData[this.packedMaps.Length];
+        //Init levels array
+        this.levels = new LevelData[this.levelData.Length];
 
         //Temp looping values
         int i = 0;
-        Node2D cameraTrack;
-        LevelData data;
-        foreach (Node child in this.nodeButtonPanel.GetChildren()) {
-            data = new LevelData();
-            
-            data.packed = this.packedMaps[i];
+        LevelData level;
+        //Iterate through level data provided
+        foreach (LevelSelectionLevelData data in this.levelData) {
+            //Create new resource for level
+            level = new LevelData();
+            level.resource = data;
 
-            //Get level
-            data.level = data.packed.Instance() as Level;
-            if (data.level == null) {
+            //Instance level
+            level.level = level.resource.packed.Instance() as Level;
+            if (level.level == null) {
                 GD.Print("Error: Processing level from pack");
                 continue;
             }
 
-            cameraTrack = data.level.GetNode<Node2D>("camera_track");
-            //Get camera position
-            data.cameraPos = cameraTrack.Position;
-
-            //Set up movement allowances
-            data.movement = (this.mapWidth[i] - 780) / 2;
-
             //Remove hud and camera track
-            data.level.RemoveChild(data.level.GetNode("hud"));
-            data.level.RemoveChild(cameraTrack);
+            level.level.RemoveChild(level.level.GetNode("hud"));
+            level.level.RemoveChild(level.level.GetNode("camera_track"));
         
             //Gets all children of the button panel
-            data.button = child as TextureButton;
+            level.button = buttonPanelChildren[i] as TextureButton;
 
             //Call _OnButtonPress with this buttons index on press
-            data.button.Connect("pressed", this, nameof(this._OnButtonPressed), 
+            level.button.Connect("pressed", this, nameof(this._OnButtonPressed), 
                     new Godot.Collections.Array(new int[] {i}));
 
-            this.levels[i] = data;
+            this.levels[i] = level;
 
             i ++;
             //Something has gone very wrong if there's more than 6 buttons
@@ -130,7 +132,7 @@ public class LevelSelection : Control
         }
     
         if (this.level.HasValue) {
-            this.callback(this, this.level.Value.packed);
+            this.callback(this, this.level.Value.resource.packed);
         }
     }
 
@@ -140,9 +142,9 @@ public class LevelSelection : Control
         }
         
         this.nodeLevelSlider.Value = 0f;
-        this.nodeLevelSlider.MinValue = -newlevel.movement;
-        this.nodeLevelSlider.MaxValue = newlevel.movement;
-        this.nodeLevelCamera.Position = newlevel.cameraPos;
+        this.nodeLevelSlider.MinValue = -newlevel.resource.GetMovement();
+        this.nodeLevelSlider.MaxValue = newlevel.resource.GetMovement();
+        this.nodeLevelCamera.Position = newlevel.resource.GetCameraPos();
         
         this.nodeLevelViewport.AddChild(newlevel.level);
     }

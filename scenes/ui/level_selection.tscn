@@ -7,11 +7,11 @@
 [ext_resource path="res://assets/ui/menus/map selection/iconhover.png" type="Texture" id=5]
 [ext_resource path="res://assets/ui/menus/map selection/icons/holytree.png" type="Texture" id=6]
 [ext_resource path="res://assets/ui/menus/map selection/mapselection.png" type="Texture" id=7]
+[ext_resource path="res://resources/ui/level_selection/marketharbour.tres" type="Resource" id=8]
 [ext_resource path="res://assets/ui/menus/map selection/icons/marketharbour.png" type="Texture" id=9]
 [ext_resource path="res://src/MiorgaFight/UI/LevelSelection.cs" type="Script" id=10]
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm.png" type="Texture" id=11]
-[ext_resource path="res://scenes/level/holytree.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/level/marketharbour.tscn" type="PackedScene" id=13]
+[ext_resource path="res://resources/ui/level_selection/holytree.tres" type="Resource" id=12]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("vp_map")
@@ -23,8 +23,7 @@ script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-packedMaps = [ ExtResource( 12 ), ExtResource( 13 ) ]
-mapWidth = PoolIntArray( 1000, 1040 )
+levelData = [ ExtResource( 12 ), ExtResource( 8 ) ]
 
 [node name="bg" type="Sprite" parent="."]
 position = Vector2( 390, 220 )

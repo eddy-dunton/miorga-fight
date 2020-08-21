@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://src/MiorgaFight/UI/LevelSelectionLevelData.cs" type="Script" id=1]
+[ext_resource path="res://scenes/level/marketharbour.tscn" type="PackedScene" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Market Harbour"
+desc = ""
+packed = ExtResource( 2 )
+width = 1040
