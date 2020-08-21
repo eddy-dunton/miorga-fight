@@ -32,6 +32,8 @@ public class MapSelection : Control
 
         this.nodeButtonPlay.Connect("pressed", this, nameof(_OnPlayPressed));
 
+        this.GetNode<HSlider>("HSlider").Connect("value_changed", this, nameof(_OnSliderChanged));
+
         //Populates button array
         TextureButton button;
         int i = 0;
@@ -53,6 +55,10 @@ public class MapSelection : Control
                 break;
             }
         }
+    }
+
+    void _OnSliderChanged(float value) {
+        this.GetNode<Camera2D>("Viewport/level/camera").Position = new Vector2(value, 0);
     }
 
     void _OnButtonPressed(int index) {
