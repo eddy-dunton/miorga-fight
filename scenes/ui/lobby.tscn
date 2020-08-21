@@ -3,8 +3,8 @@
 [ext_resource path="res://src/MiorgaFight/UI/Lobby.cs" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://resources/theme/theme.tres" type="Theme" id=3]
-[ext_resource path="res://assets/ui/button220x20_hover.png" type="Texture" id=4]
-[ext_resource path="res://assets/ui/button220x20.png" type="Texture" id=5]
+[ext_resource path="res://assets/ui/button214x23_hover.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/button214x23.png" type="Texture" id=5]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 4 )
@@ -28,8 +28,8 @@ texture = ExtResource( 2 )
 [node name="bt_quit" type="Button" parent="."]
 margin_left = 22.0
 margin_top = 22.0
-margin_right = 122.0
-margin_bottom = 42.0
+margin_right = 126.0
+margin_bottom = 45.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "Quit"
@@ -65,7 +65,7 @@ __meta__ = {
 }
 
 [node name="tx_address" type="LineEdit" parent="pa_start"]
-margin_left = 5.0
+margin_left = 1.0
 margin_top = 30.0
 margin_right = 215.0
 margin_bottom = 54.0
@@ -80,10 +80,10 @@ __meta__ = {
 }
 
 [node name="bt_host" type="Button" parent="pa_start"]
-margin_left = 5.0
+margin_left = 1.0
 margin_top = 60.0
 margin_right = 105.0
-margin_bottom = 80.0
+margin_bottom = 83.0
 focus_mode = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -93,10 +93,10 @@ __meta__ = {
 }
 
 [node name="bt_join" type="Button" parent="pa_start"]
-margin_left = 115.0
+margin_left = 111.0
 margin_top = 60.0
 margin_right = 215.0
-margin_bottom = 80.0
+margin_bottom = 83.0
 focus_mode = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
@@ -106,10 +106,10 @@ __meta__ = {
 }
 
 [node name="bt_local" type="Button" parent="pa_start"]
-margin_left = 6.0
-margin_top = 90.0
-margin_right = 216.0
-margin_bottom = 110.0
+margin_left = 0.867554
+margin_top = 86.0
+margin_right = 214.868
+margin_bottom = 106.0
 focus_mode = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2

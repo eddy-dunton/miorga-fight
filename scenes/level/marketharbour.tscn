@@ -37,7 +37,7 @@ motion_scale = Vector2( 0.3, 1 )
 texture = ExtResource( 4 )
 
 [node name="bg_layer2" type="ParallaxLayer" parent="bg" index="2"]
-motion_scale = Vector2( 0.35, 1 )
+motion_scale = Vector2( 0.3, 1 )
 
 [node name="sprite" type="Sprite" parent="bg/bg_layer2" index="0"]
 texture = ExtResource( 3 )
@@ -46,7 +46,7 @@ texture = ExtResource( 3 )
 texture = ExtResource( 7 )
 
 [node name="bg_layer1" type="ParallaxLayer" parent="bg" index="3"]
-motion_scale = Vector2( 0.95, 1 )
+motion_scale = Vector2( 0.82, 1 )
 
 [node name="sprite" type="Sprite" parent="bg/bg_layer1" index="0"]
 texture = ExtResource( 2 )

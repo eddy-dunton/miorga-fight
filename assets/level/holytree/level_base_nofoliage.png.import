@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/button100x20_hover.png-49624329d4e9e4584d72f9430956f65f.stex"
+path="res://.import/level_base_nofoliage.png-f8108dfb78009b1525203a34e42f4f36.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/button100x20_hover.png"
-dest_files=[ "res://.import/button100x20_hover.png-49624329d4e9e4584d72f9430956f65f.stex" ]
+source_file="res://assets/level/holytree/level_base_nofoliage.png"
+dest_files=[ "res://.import/level_base_nofoliage.png-f8108dfb78009b1525203a34e42f4f36.stex" ]
 
 [params]
 
