@@ -1,20 +1,20 @@
 [gd_resource type="Theme" load_steps=8 format=2]
 
 [ext_resource path="res://resources/theme/font.tres" type="DynamicFont" id=1]
-[ext_resource path="res://assets/ui/button100x20.png" type="Texture" id=2]
-[ext_resource path="res://assets/ui/button100x20_hover.png" type="Texture" id=3]
-[ext_resource path="res://assets/ui/button100x20_disabled.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/button104x23_disabled.png" type="Texture" id=2]
+[ext_resource path="res://assets/ui/button104x23.png" type="Texture" id=3]
+[ext_resource path="res://assets/ui/button104x23_hover.png" type="Texture" id=4]
 
 [sub_resource type="StyleBoxTexture" id=3]
-texture = ExtResource( 4 )
+texture = ExtResource( 2 )
 region_rect = Rect2( 0, 0, 104, 23 )
 
 [sub_resource type="StyleBoxTexture" id=2]
-texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 104, 22 )
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 104, 23 )
 
 [sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 104, 23 )
 
 [resource]
