@@ -208,18 +208,37 @@ public class Lobby : Control {
 
 	//Host a regular, local game
 	void _OnLocalPressed() {
-		this.GameCreate();
-		//this.AddPlayer("p1", 0);
-		//this.AddPlayer("p2", 0);
+		//this.GameCreate();
 
-		//Start game
-		//this.GameStart();
 		this.Visible = false;
+		MapSelection ms = (ResourceLoader.Load("res://scenes/ui/map_selection.tscn") as PackedScene).Instance() 
+				as MapSelection;
+		ms.SetCallback(this._LocalMSCallback);
+		GetTree().Root.AddChild(ms);
+	}
+
+	int _LocalMSCallback(MapSelection ms, PackedScene map) {
+		this.GameCreate(map);
+		GetTree().Root.RemoveChild(ms);
+		
 		CharSelection cs = (ResourceLoader.Load("res://scenes/ui/char_selection/char_selection.tscn") as PackedScene)
 				.Instance() as CharSelection;
-		cs.SetCallback(this);
+		cs.SetCallback(this._LocalCSCallback);
 
 		GetTree().Root.AddChild(cs);
+
+		return 0;
+	}
+
+	int _LocalCSCallback(CharSelection cs, PackedScene p1, PackedScene p2) {
+		this.GameGoto();
+
+        this.AddPlayer("p1", 0, p1);
+        this.AddPlayer("p2", 0, p2);
+        GetTree().Root.RemoveChild(cs);
+        this.GameStart();
+
+		return 0;
 	}
 
 	//Called when the error panel's button is called
@@ -266,6 +285,10 @@ public class Lobby : Control {
 	private void GameCreate() {
 		//Load game
 		this.game = ((ResourceLoader.Load("res://scenes/level/marketharbour.tscn") as PackedScene).Instance()) as Level;
+	}
+
+	private void GameCreate(PackedScene map) {
+		this.game = (map.Instance()) as Level;
 	}
 
 	//Goes to the game, from the lobby

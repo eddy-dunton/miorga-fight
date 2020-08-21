@@ -36,8 +36,8 @@ public class CharSelection : Control
     
     private CharSelectionDataPanel[] chars;
 
-    //Lobby which will be called back to once the players have decided which classes they will play as
-    private Lobby callback;
+    //Function to be called once the characters are selected
+    private Func<CharSelection, PackedScene, PackedScene, int> callback;
 
     private TextureButton nodeP1Button, nodeP2Button, nodePlayButton;
     private Sprite nodeP1Icon, nodeP2Icon;
@@ -103,12 +103,7 @@ public class CharSelection : Control
             return;
         }
 
-        this.callback.GameGoto();
-
-        this.callback.AddPlayer("p1", 0, this.chars[this.p1.selection].character);
-        this.callback.AddPlayer("p2", 0, this.chars[this.p2.selection].character);
-        GetTree().Root.RemoveChild(this);
-        this.callback.GameStart();
+        this.callback(this, this.chars[this.p1.selection].character, this.chars[this.p2.selection].character);
     }
 
     void _OnCharSelected(int index) {
@@ -140,7 +135,7 @@ public class CharSelection : Control
     }
 
     //Sets the call back lobby to the one provided
-    public void SetCallback(Lobby l) {
-        this.callback = l;
+    public void SetCallback(Func<CharSelection, PackedScene, PackedScene, int> c) {
+        this.callback = c;
     }
 }}
