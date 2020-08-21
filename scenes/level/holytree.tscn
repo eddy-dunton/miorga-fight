@@ -38,6 +38,7 @@ angle_random = 1.0
 [sub_resource type="ImageTexture" id=2]
 
 [sub_resource type="AnimatedTexture" id=3]
+flags = 4
 frames = 15
 frame_0/texture = ExtResource( 16 )
 frame_1/texture = ExtResource( 11 )
@@ -140,7 +141,6 @@ POSITION_RIGHT = 250.0
 POSITION_Y = 150.0
 
 [node name="particles1" type="Particles2D" parent="." index="0"]
-visible = false
 position = Vector2( 0, -100 )
 amount = 2
 lifetime = 2.75
@@ -152,7 +152,6 @@ process_material = SubResource( 1 )
 texture = SubResource( 3 )
 
 [node name="particles2" type="Particles2D" parent="." index="1"]
-visible = false
 position = Vector2( 0, -100 )
 amount = 2
 lifetime = 2.75
