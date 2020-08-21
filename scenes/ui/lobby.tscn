@@ -1,8 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/MiorgaFight/UI/Lobby.cs" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://resources/theme/theme.tres" type="Theme" id=3]
+[ext_resource path="res://assets/ui/button220x20_hover.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/button220x20.png" type="Texture" id=5]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 214, 23 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 214, 23 )
 
 [node name="lobby" type="Control"]
 theme = ExtResource( 3 )
@@ -103,6 +113,11 @@ margin_bottom = 110.0
 focus_mode = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
 text = "Play Locally"
 __meta__ = {
 "_edit_use_anchors_": false
