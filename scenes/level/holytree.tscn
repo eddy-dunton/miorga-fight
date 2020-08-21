@@ -104,6 +104,7 @@ frame_13/delay_sec = 0.0
 frame_14/delay_sec = 0.0
 
 [sub_resource type="AnimatedTexture" id=5]
+flags = 7
 frames = 15
 fps = 6.0
 frame_0/texture = ExtResource( 16 )
@@ -133,7 +134,7 @@ frame_12/delay_sec = 0.0
 frame_13/delay_sec = 0.0
 frame_14/delay_sec = 0.0
 
-[sub_resource type="SpriteFrames" id=8]
+[sub_resource type="SpriteFrames" id=6]
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 22 ), ExtResource( 23 ) ],
 "loop": true,
@@ -141,10 +142,10 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="LineShape2D" id=6]
+[sub_resource type="LineShape2D" id=7]
 normal = Vector2( 1, 0 )
 
-[sub_resource type="LineShape2D" id=7]
+[sub_resource type="LineShape2D" id=8]
 normal = Vector2( -1, 0 )
 
 [node name="level" instance=ExtResource( 6 )]
@@ -224,34 +225,34 @@ texture = ExtResource( 1 )
 
 [node name="sp_foliage_lightgrass1_1" type="AnimatedSprite" parent="bg/bg_tree" index="1"]
 position = Vector2( 99.6298, 165.704 )
-frames = SubResource( 8 )
-frame = 2
+frames = SubResource( 6 )
+frame = 1
+speed_scale = 1.1
 playing = true
 
 [node name="sp_foliage_lightgrass1_2" type="AnimatedSprite" parent="bg/bg_tree" index="2"]
 position = Vector2( -48.4265, 197.813 )
-frames = SubResource( 8 )
-frame = 3
+frames = SubResource( 6 )
 playing = true
 
 [node name="sp_foliage_lightgrass1_3" type="AnimatedSprite" parent="bg/bg_tree" index="3"]
 position = Vector2( -98.3732, 270.355 )
-frames = SubResource( 8 )
-frame = 1
+frames = SubResource( 6 )
+frame = 4
+speed_scale = 1.2
 playing = true
 
 [node name="arena" type="StaticBody2D" parent="." index="4"]
 
 [node name="ar_wall_left" type="CollisionShape2D" parent="arena" index="0"]
 position = Vector2( -520, 180 )
-shape = SubResource( 6 )
+shape = SubResource( 7 )
 
 [node name="ar_wall_right" type="CollisionShape2D" parent="arena" index="1"]
 position = Vector2( 520, 180 )
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="fg" type="Sprite" parent="." index="5"]
-visible = false
 z_index = 1
 texture = ExtResource( 4 )
 
