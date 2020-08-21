@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm_hover.png" type="Texture" id=1]
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm_disabled.png" type="Texture" id=2]
@@ -12,13 +12,15 @@
 [ext_resource path="res://src/MiorgaFight/UI/LevelSelection.cs" type="Script" id=10]
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm.png" type="Texture" id=11]
 [ext_resource path="res://resources/ui/level_selection/holytree.tres" type="Resource" id=12]
+[ext_resource path="res://resources/theme/font_large_bold.tres" type="DynamicFont" id=13]
 
 [sub_resource type="ViewportTexture" id=1]
-viewport_path = NodePath("vp_map")
+viewport_path = NodePath("vp_level")
 
 [node name="level_selection" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 3 )
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -29,20 +31,20 @@ levelData = [ ExtResource( 12 ), ExtResource( 8 ) ]
 position = Vector2( 390, 220 )
 texture = ExtResource( 7 )
 
-[node name="vp_map" type="Viewport" parent="."]
+[node name="vp_level" type="Viewport" parent="."]
 size = Vector2( 780, 440 )
 disable_3d = true
 usage = 0
 
-[node name="camera" type="Camera2D" parent="vp_map"]
+[node name="camera" type="Camera2D" parent="vp_level"]
 current = true
 
-[node name="sp_map" type="Sprite" parent="."]
+[node name="sp_level" type="Sprite" parent="."]
 position = Vector2( 541, 154 )
 scale = Vector2( 0.5, -0.5 )
 texture = SubResource( 1 )
 
-[node name="sl_map" type="HSlider" parent="."]
+[node name="sl_level" type="HSlider" parent="."]
 margin_left = 346.0
 margin_top = 268.0
 margin_right = 736.0
@@ -51,6 +53,17 @@ theme = ExtResource( 3 )
 min_value = -100.0
 tick_count = 9
 ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="la_level_name" type="Label" parent="."]
+margin_left = 346.0
+margin_top = 288.0
+margin_right = 440.0
+margin_bottom = 310.0
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -72,8 +85,6 @@ __meta__ = {
 }
 
 [node name="pa_icons" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -87,8 +98,6 @@ position = Vector2( 196, 128 )
 texture = ExtResource( 9 )
 
 [node name="pa_buttons" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

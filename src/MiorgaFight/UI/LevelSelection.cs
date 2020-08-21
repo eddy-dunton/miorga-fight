@@ -32,6 +32,7 @@ public class LevelSelection : Control
     private Viewport nodeLevelViewport;
     private Camera2D nodeLevelCamera;
     private HSlider nodeLevelSlider;
+    private Label nodeLevelName;
 
     //Function to call once map selection is finished
     private Func<LevelSelection, PackedScene, int> callback;
@@ -46,10 +47,11 @@ public class LevelSelection : Control
         this.nodeButtonPanel = this.GetNode<Control>("pa_buttons");
         this.nodeButtonPlay = this.GetNode<TextureButton>("bt_play");
 
-        this.nodeLevelSprite = this.GetNode<Sprite>("sp_map");
-        this.nodeLevelViewport = this.GetNode<Viewport>("vp_map");
-        this.nodeLevelCamera = this.GetNode<Camera2D>("vp_map/camera");
-        this.nodeLevelSlider = this.GetNode<HSlider>("sl_map");
+        this.nodeLevelSprite = this.GetNode<Sprite>("sp_level");
+        this.nodeLevelViewport = this.GetNode<Viewport>("vp_level");
+        this.nodeLevelCamera = this.GetNode<Camera2D>("vp_level/camera");
+        this.nodeLevelSlider = this.GetNode<HSlider>("sl_level");
+        this.nodeLevelName = this.GetNode<Label>("la_level_name");
 
         this.nodeButtonPlay.Connect("pressed", this, nameof(_OnPlayPressed));
 
@@ -59,7 +61,7 @@ public class LevelSelection : Control
         Godot.Collections.Array buttonPanelChildren = this.nodeButtonPanel.GetChildren();
 
         if (this.levelData.Length != buttonPanelChildren.Count) {
-            GD.Print("ERROR: MAP SELECTION: Unequal number of buttons and maps, aborting");
+            GD.Print("ERROR: LEVEL SELECTION: Unequal number of buttons and maps, aborting");
             return;
         }
 
@@ -98,7 +100,7 @@ public class LevelSelection : Control
             i ++;
             //Something has gone very wrong if there's more than 6 buttons
             if (i == 6) {
-                GD.Print("ERROR: MAP SELECTION: More than 6 maps");
+                GD.Print("ERROR: LEVEL SELECTION: More than 6 maps");
                 break;
             }
         }
@@ -145,7 +147,8 @@ public class LevelSelection : Control
         this.nodeLevelSlider.MinValue = -newlevel.resource.GetMovement();
         this.nodeLevelSlider.MaxValue = newlevel.resource.GetMovement();
         this.nodeLevelCamera.Position = newlevel.resource.GetCameraPos();
-        
+        this.nodeLevelName.Text = newlevel.resource.name;
+
         this.nodeLevelViewport.AddChild(newlevel.level);
     }
 
