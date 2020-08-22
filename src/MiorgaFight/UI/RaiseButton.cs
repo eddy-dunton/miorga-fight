@@ -1,6 +1,8 @@
 using Godot;
 using System;
 
+namespace MiorgaFight {
+
 public class RaiseButton : Button
 {
     private Label nodeLabel;
@@ -28,4 +30,4 @@ public class RaiseButton : Button
     void _TextDown() {
         this.nodeLabel.RectPosition = this.downPosition;
     }
-}
+}}

@@ -156,10 +156,11 @@ region_rect = Rect2( 0, 0, 20, 24 )
 
 [node name="pa_char_data" instance=ExtResource( 1 )]
 offsets = {
-"high": Vector2( -12, 0 ),
+"high": Vector2( -16, 0 ),
 "high_attack_alt": Vector2( 0, -29 ),
 "high_attack_main": Vector2( 0, -29 ),
-"low": Vector2( 8, 0 ),
+"low": Vector2( -16, 0 ),
+"low_attack_main": Vector2( 0, -29 ),
 "low_parry_alt": Vector2( 0, -29 ),
 "low_parry_alt_riposte": Vector2( 0, -29 )
 }
@@ -403,7 +404,7 @@ __meta__ = {
 }
 anim = "low_parry_alt_riposte"
 parentPath = NodePath("../..")
-end = "low"
+end = "high"
 
 [node name="label" type="Label" parent="pa_action_tree/bt_low_e_e" index="0"]
 margin_left = 2.46002
@@ -436,7 +437,7 @@ script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-anim = "high_attack_main"
+anim = "low_attack_main"
 parentPath = NodePath("../..")
 end = "low"
 

@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 namespace MiorgaFight {
 
@@ -7,6 +8,12 @@ namespace MiorgaFight {
 public class Command : Node {
     //Reference to Lobby
     public static Lobby lobby;
+
+    private static Random random = new Random();
+
+    public static double Random(double min, double max) {
+        return min + (random.NextDouble() / (1 / (max - min)));
+    }
 
     public static InputEvent CreateInputEventAction(string action, bool pressed) {
         InputEventAction newEvent = new InputEventAction();
