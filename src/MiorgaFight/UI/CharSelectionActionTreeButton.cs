@@ -3,7 +3,7 @@ using System;
 
 namespace MiorgaFight {
 
-public class CharSelectionActionTreeButton : Button
+public class CharSelectionActionTreeButton : RaiseButton
 {
     [Export] private String anim;
 
@@ -14,6 +14,7 @@ public class CharSelectionActionTreeButton : Button
 
     public override void _Ready()
     {
+        base._Ready();
         this.parent = GetNode<CharSelectionDataPanel>(parentPath);
         this.Connect("pressed", this, nameof(this._OnPressed));
     }

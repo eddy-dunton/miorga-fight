@@ -1,32 +1,43 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://scenes/ui/char_selection/char_data_panel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/player/regia/stances/lax.png" type="Texture" id=2]
-[ext_resource path="res://assets/ui/menus/character selection/movesets/regia.png" type="Texture" id=3]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/regia_skeleton.png" type="Texture" id=3]
 [ext_resource path="res://scenes/player/regia.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/player/regia/fight/low/alternate/key5.png" type="Texture" id=5]
 [ext_resource path="res://assets/player/regia/fight/high/alternate/key2.png" type="Texture" id=6]
 [ext_resource path="res://assets/player/regia/fight/high/standard/key2.png" type="Texture" id=7]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_lax.png" type="Texture" id=8]
 [ext_resource path="res://assets/player/regia/fight/high/alternate/key6.png" type="Texture" id=9]
 [ext_resource path="res://assets/player/regia/fight/low/alternate/key2.png" type="Texture" id=10]
 [ext_resource path="res://assets/player/regia/fight/high/standard/key6.png" type="Texture" id=11]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_attack.png" type="Texture" id=12]
 [ext_resource path="res://assets/player/regia/stances/high idle/key1.png" type="Texture" id=13]
 [ext_resource path="res://assets/player/regia/fight/high/standard/key5_b.png" type="Texture" id=14]
 [ext_resource path="res://assets/player/regia/fight/high/alternate/key4.png" type="Texture" id=15]
 [ext_resource path="res://assets/player/regia/fight/low/standard/key5.png" type="Texture" id=16]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_parry.png" type="Texture" id=17]
 [ext_resource path="res://assets/player/regia/fight/low/alternate/key3.png" type="Texture" id=18]
+[ext_resource path="res://resources/theme/font_large.tres" type="DynamicFont" id=19]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/icon_feint.png" type="Texture" id=20]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_parry_hover.png" type="Texture" id=21]
 [ext_resource path="res://assets/player/regia/fight/low/standard/key3.png" type="Texture" id=22]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/icon_halt.png" type="Texture" id=23]
 [ext_resource path="res://assets/player/regia/fight/high/standard/key3.png" type="Texture" id=24]
 [ext_resource path="res://assets/player/regia/fight/low/standard/key4.png" type="Texture" id=25]
 [ext_resource path="res://assets/player/regia/fight/high/alternate/key3.png" type="Texture" id=26]
 [ext_resource path="res://assets/player/regia/fight/high/standard/key4.png" type="Texture" id=27]
 [ext_resource path="res://assets/player/regia/fight/low/alternate/key4.png" type="Texture" id=28]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_attack_hover.png" type="Texture" id=29]
 [ext_resource path="res://assets/player/regia/stances/high idle/key2.png" type="Texture" id=30]
 [ext_resource path="res://assets/player/regia/fight/low/alternate/key1.png" type="Texture" id=31]
 [ext_resource path="res://assets/player/regia/fight/high/standard/key5.png" type="Texture" id=32]
 [ext_resource path="res://assets/player/regia/fight/high/alternate/key5.png" type="Texture" id=33]
 [ext_resource path="res://assets/player/regia/fight/low/alternate/key6.png" type="Texture" id=34]
 [ext_resource path="res://src/MiorgaFight/UI/CharSelectionActionTreeButton.cs" type="Script" id=35]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_highlow_hover.png" type="Texture" id=36]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_highlow.png" type="Texture" id=37]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_lax_hover.png" type="Texture" id=38]
 [ext_resource path="res://assets/player/regia/fight/low/standard/key4_b.png" type="Texture" id=39]
 [ext_resource path="res://assets/player/regia/stances/lax idle/key2.png" type="Texture" id=40]
 [ext_resource path="res://assets/player/regia/stances/low idle/key1.png" type="Texture" id=41]
@@ -42,10 +53,10 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 22 ), ExtResource( 25 ), ExtResource( 39 ), ExtResource( 16 ), ExtResource( 16 ) ],
+"frames": [ ExtResource( 13 ), ExtResource( 30 ), ExtResource( 46 ), ExtResource( 45 ) ],
 "loop": true,
-"name": "low_attack_main",
-"speed": 12.0
+"name": "high",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 2 ), ExtResource( 40 ) ],
 "loop": true,
@@ -67,6 +78,11 @@ animations = [ {
 "name": "low_parry_alt_riposte",
 "speed": 12.0
 }, {
+"frames": [ ExtResource( 22 ), ExtResource( 25 ), ExtResource( 39 ), ExtResource( 16 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "low_attack_main",
+"speed": 12.0
+}, {
 "frames": [ ExtResource( 31 ), ExtResource( 10 ), ExtResource( 18 ), ExtResource( 28 ), ExtResource( 5 ), ExtResource( 34 ) ],
 "loop": true,
 "name": "low_parry_alt",
@@ -76,22 +92,39 @@ animations = [ {
 "loop": true,
 "name": "high_attack_alt",
 "speed": 12.0
-}, {
-"frames": [ ExtResource( 13 ), ExtResource( 30 ), ExtResource( 46 ), ExtResource( 45 ) ],
-"loop": true,
-"name": "high",
-"speed": 5.0
 } ]
 
-[sub_resource type="StyleBoxEmpty" id=2]
+[sub_resource type="StyleBoxTexture" id=13]
+texture = ExtResource( 38 )
+region_rect = Rect2( 0, 0, 34, 24 )
 
-[sub_resource type="StyleBoxEmpty" id=3]
+[sub_resource type="StyleBoxTexture" id=14]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 34, 24 )
 
-[sub_resource type="StyleBoxEmpty" id=4]
+[sub_resource type="StyleBoxTexture" id=11]
+texture = ExtResource( 36 )
+region_rect = Rect2( 0, 0, 46, 28 )
 
-[sub_resource type="StyleBoxEmpty" id=5]
+[sub_resource type="StyleBoxTexture" id=12]
+texture = ExtResource( 37 )
+region_rect = Rect2( 0, 0, 46, 28 )
 
-[sub_resource type="StyleBoxEmpty" id=6]
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 29 )
+region_rect = Rect2( 0, 0, 20, 24 )
+
+[sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 12 )
+region_rect = Rect2( 0, 0, 20, 24 )
+
+[sub_resource type="StyleBoxTexture" id=10]
+texture = ExtResource( 21 )
+region_rect = Rect2( 0, 0, 20, 24 )
+
+[sub_resource type="StyleBoxTexture" id=9]
+texture = ExtResource( 17 )
+region_rect = Rect2( 0, 0, 20, 24 )
 
 [node name="pa_char_data" instance=ExtResource( 1 )]
 offsets = {
@@ -108,14 +141,11 @@ character = ExtResource( 4 )
 [node name="sp_player" parent="." index="0"]
 frames = SubResource( 1 )
 animation = "low_parry_alt_riposte"
-frame = 1
+frame = 4
 
-[node name="pa_action_tree" type="Control" parent="." index="2"]
+[node name="pa_action_tree" parent="." index="2"]
 margin_right = 40.0
 margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="sp_action_tree" type="Sprite" parent="pa_action_tree" index="0"]
 position = Vector2( 647, 174 )
@@ -123,31 +153,16 @@ texture = ExtResource( 3 )
 
 [node name="bt_lax" type="Button" parent="pa_action_tree" index="1"]
 margin_left = 634.0
-margin_top = 62.0
+margin_top = 61.0
 margin_right = 668.0
-margin_bottom = 86.0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
-script = ExtResource( 35 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-anim = "lax"
-parentPath = NodePath("../..")
-
-[node name="bt_high" type="Button" parent="pa_action_tree" index="2"]
-margin_left = 582.0
-margin_top = 87.0
-margin_right = 629.0
-margin_bottom = 115.0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
+margin_bottom = 85.0
+focus_mode = 0
+custom_styles/hover = SubResource( 13 )
+custom_styles/pressed = SubResource( 14 )
+custom_styles/focus = SubResource( 14 )
+custom_styles/disabled = SubResource( 14 )
+custom_styles/normal = SubResource( 14 )
+enabled_focus_mode = 0
 script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -155,33 +170,65 @@ __meta__ = {
 anim = "high"
 parentPath = NodePath("../..")
 
-[node name="bt_low" type="Button" parent="pa_action_tree" index="3"]
-margin_left = 675.0
-margin_top = 90.0
-margin_right = 717.0
-margin_bottom = 114.0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
+[node name="label" type="Label" parent="pa_action_tree/bt_lax" index="0"]
+margin_left = -1.9386
+margin_top = 2.21422
+margin_right = 38.0614
+margin_bottom = 24.2143
+custom_fonts/font = ExtResource( 19 )
+custom_colors/font_color = Color( 0.988235, 0.74902, 0, 1 )
+text = "lax"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_high" type="Button" parent="pa_action_tree" index="2"]
+margin_left = 583.0
+margin_top = 88.0
+margin_right = 629.0
+margin_bottom = 116.0
+focus_mode = 0
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/focus = SubResource( 12 )
+custom_styles/disabled = SubResource( 12 )
+custom_styles/normal = SubResource( 12 )
+enabled_focus_mode = 0
 script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-anim = "low"
+anim = "high"
 parentPath = NodePath("../..")
 
-[node name="bt_high_e" type="Button" parent="pa_action_tree" index="4"]
+[node name="label" type="Label" parent="pa_action_tree/bt_high" index="0"]
+margin_left = 4.46002
+margin_top = 2.77545
+margin_right = 44.46
+margin_bottom = 24.7755
+custom_fonts/font = ExtResource( 19 )
+custom_colors/font_color = Color( 0.988235, 0.74902, 0, 1 )
+text = "high"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_high_e" type="Button" parent="pa_action_tree" index="3"]
 margin_left = 582.0
 margin_top = 144.0
 margin_right = 602.0
 margin_bottom = 166.0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
+focus_mode = 0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 8 )
+enabled_focus_mode = 0
 script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -189,16 +236,33 @@ __meta__ = {
 anim = "high_attack_alt"
 parentPath = NodePath("../..")
 
-[node name="bt_high_q" type="Button" parent="pa_action_tree" index="5"]
+[node name="label" type="Label" parent="pa_action_tree/bt_high_e" index="0"]
+margin_left = 2.46002
+margin_top = 1.77545
+margin_right = 22.46
+margin_bottom = 23.7755
+custom_fonts/font = ExtResource( 19 )
+custom_colors/font_color = Color( 0.988235, 0.74902, 0, 1 )
+text = "E"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_high_q" type="Button" parent="pa_action_tree" index="4"]
 margin_left = 612.0
 margin_top = 144.0
 margin_right = 632.0
 margin_bottom = 166.0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
+rect_pivot_offset = Vector2( -73.2455, 23.243 )
+focus_mode = 0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 8 )
+enabled_focus_mode = 0
 script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -206,16 +270,69 @@ __meta__ = {
 anim = "high_attack_main"
 parentPath = NodePath("../..")
 
+[node name="label" type="Label" parent="pa_action_tree/bt_high_q" index="0"]
+margin_left = 1.0
+margin_top = 2.0
+margin_right = 21.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 19 )
+custom_colors/font_color = Color( 0.988235, 0.74902, 0, 1 )
+text = "Q"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="icon_feint" type="Sprite" parent="pa_action_tree/bt_high_q" index="1"]
+position = Vector2( 18.9386, -0.10257 )
+texture = ExtResource( 20 )
+
+[node name="bt_low" type="Button" parent="pa_action_tree" index="5"]
+margin_left = 673.0
+margin_top = 87.0
+margin_right = 719.0
+margin_bottom = 115.0
+focus_mode = 0
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/focus = SubResource( 12 )
+custom_styles/disabled = SubResource( 12 )
+custom_styles/normal = SubResource( 12 )
+enabled_focus_mode = 0
+script = ExtResource( 35 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+anim = "low"
+parentPath = NodePath("../..")
+
+[node name="label" type="Label" parent="pa_action_tree/bt_low" index="0"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 44.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 19 )
+custom_colors/font_color = Color( 0.988235, 0.74902, 0, 1 )
+text = "low"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="bt_low_e" type="Button" parent="pa_action_tree" index="6"]
 margin_left = 676.0
 margin_top = 189.0
 margin_right = 696.0
 margin_bottom = 211.0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
+focus_mode = 0
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 9 )
+enabled_focus_mode = 0
 script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -223,16 +340,33 @@ __meta__ = {
 anim = "low_parry_alt"
 parentPath = NodePath("../..")
 
+[node name="label" type="Label" parent="pa_action_tree/bt_low_e" index="0"]
+margin_left = 2.46002
+margin_top = 1.77545
+margin_right = 22.46
+margin_bottom = 23.7755
+custom_fonts/font = ExtResource( 19 )
+custom_colors/font_color = Color( 0.988235, 0.74902, 0, 1 )
+text = "E"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="bt_low_e_e" type="Button" parent="pa_action_tree" index="7"]
 margin_left = 676.0
 margin_top = 242.0
 margin_right = 696.0
 margin_bottom = 264.0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
+rect_pivot_offset = Vector2( 80.611, 61.5076 )
+focus_mode = 0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 8 )
+enabled_focus_mode = 0
 script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -240,23 +374,58 @@ __meta__ = {
 anim = "low_parry_alt_riposte"
 parentPath = NodePath("../..")
 
+[node name="label" type="Label" parent="pa_action_tree/bt_low_e_e" index="0"]
+margin_left = 2.46002
+margin_top = 1.77545
+margin_right = 22.46
+margin_bottom = 23.7755
+custom_fonts/font = ExtResource( 19 )
+custom_colors/font_color = Color( 0.988235, 0.74902, 0, 1 )
+text = "E"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="bt_low_q" type="Button" parent="pa_action_tree" index="8"]
 margin_left = 702.0
 margin_top = 189.0
 margin_right = 722.0
 margin_bottom = 211.0
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 6 )
+rect_pivot_offset = Vector2( -73.2455, 23.243 )
+focus_mode = 0
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 8 )
+enabled_focus_mode = 0
 script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-anim = "low_attack_main"
+anim = "high_attack_main"
 parentPath = NodePath("../..")
 
-[node name="tx_description" parent="." index="5"]
+[node name="label" type="Label" parent="pa_action_tree/bt_low_q" index="0"]
+margin_left = 1.0
+margin_top = 2.0
+margin_right = 21.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 19 )
+custom_colors/font_color = Color( 0.988235, 0.74902, 0, 1 )
+text = "Q"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="icon_feint" type="Sprite" parent="pa_action_tree/bt_low_q" index="1"]
+position = Vector2( 18.9386, -0.10257 )
+texture = ExtResource( 23 )
+
+[node name="tx_description" parent="." index="4"]
 bbcode_text = "[b]Regia[/b] - Lord Regia Heloine - is a monster hunter of austere nature and uncontested pride. The second son of the high lord of Orvia, he devoted himself not to aristocracy but to that of the monster hunting nomad. His discipline has caused him to develop keen precision in his blows. This may cost him some speed but he nevertheless deals a lot of damage."
 text = "Regia - Lord Regia Heloine - is a monster hunter of austere nature and uncontested pride. The second son of the high lord of Orvia, he devoted himself not to aristocracy but to that of the monster hunting nomad. His discipline has caused him to develop keen precision in his blows. This may cost him some speed but he nevertheless deals a lot of damage."
