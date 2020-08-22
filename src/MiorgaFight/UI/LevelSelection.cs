@@ -143,6 +143,7 @@ public class LevelSelection : Control
             this.nodeLevelViewport.RemoveChild(oldlevel.Value.level);
         }
         
+        this.nodeLevelSlider.Editable = true;
         this.nodeLevelSlider.Value = 0f;
         this.nodeLevelSlider.MinValue = -newlevel.resource.GetMovement();
         this.nodeLevelSlider.MaxValue = newlevel.resource.GetMovement();
