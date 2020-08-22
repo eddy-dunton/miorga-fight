@@ -12,7 +12,7 @@
 [ext_resource path="res://src/MiorgaFight/UI/LevelSelection.cs" type="Script" id=10]
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm.png" type="Texture" id=11]
 [ext_resource path="res://resources/ui/level_selection/holytree.tres" type="Resource" id=12]
-[ext_resource path="res://resources/theme/font_large_bold.tres" type="DynamicFont" id=13]
+[ext_resource path="res://resources/theme/font_bold.tres" type="DynamicFont" id=13]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("vp_level")
@@ -46,9 +46,9 @@ texture = SubResource( 1 )
 
 [node name="sl_level" type="HSlider" parent="."]
 margin_left = 346.0
-margin_top = 268.0
+margin_top = 264.0
 margin_right = 736.0
-margin_bottom = 284.0
+margin_bottom = 280.0
 theme = ExtResource( 3 )
 min_value = -100.0
 tick_count = 9
@@ -57,13 +57,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="la_level_name" type="Label" parent="."]
-margin_left = 346.0
-margin_top = 288.0
-margin_right = 440.0
-margin_bottom = 310.0
-custom_fonts/font = ExtResource( 13 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+[node name="tx_level" type="RichTextLabel" parent="."]
+margin_left = 348.0
+margin_top = 282.0
+margin_right = 734.0
+margin_bottom = 391.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/bold_font = ExtResource( 13 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

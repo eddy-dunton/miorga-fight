@@ -43,7 +43,6 @@ angle_random = 1.0
 [sub_resource type="ImageTexture" id=2]
 
 [sub_resource type="AnimatedTexture" id=3]
-flags = 4
 frames = 15
 frame_0/texture = ExtResource( 16 )
 frame_1/texture = ExtResource( 11 )
@@ -104,7 +103,6 @@ frame_13/delay_sec = 0.0
 frame_14/delay_sec = 0.0
 
 [sub_resource type="AnimatedTexture" id=5]
-flags = 7
 frames = 15
 fps = 6.0
 frame_0/texture = ExtResource( 16 )

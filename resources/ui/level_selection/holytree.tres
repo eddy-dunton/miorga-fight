@@ -5,7 +5,6 @@
 
 [resource]
 script = ExtResource( 1 )
-name = "Holy Tree"
-desc = ""
+text = "The [b]Holy Tree[/b] marks an epicentre of the magical aura permiating about the world which Miorga sits upon. The land it stands on lies far from the isles and is home to a people so distant physically that they may be a new race entirely. The tree marks the site of many religious festivals, although only those at the top of the clerical hierarchy are permitted to step foot under its vast canopy - and, perhaps, two individuals looking for a duel."
 packed = ExtResource( 2 )
 width = 1000

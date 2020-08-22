@@ -5,11 +5,8 @@ namespace MiorgaFight {
 
 public class LevelSelectionLevelData : Resource
 {
-    // Name of this level
-    [Export] public string name;
-
     // Description of this level
-    [Export] public string desc;
+    [Export] public string text;
 
     // Packed Scene version of this
     [Export] public PackedScene packed;
@@ -22,8 +19,7 @@ public class LevelSelectionLevelData : Resource
 
     //Set to defaults
     public LevelSelectionLevelData() {
-        this.name = "";
-        this.desc = "";
+        this.text = "";
         this.packed = null;
         this.width = 0;
 

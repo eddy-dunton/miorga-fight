@@ -33,8 +33,6 @@ anti_aliasing = false
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [node name="char_selection" type="Control"]
-margin_right = 40.0
-margin_bottom = 40.0
 theme = ExtResource( 4 )
 script = ExtResource( 14 )
 __meta__ = {

@@ -32,7 +32,7 @@ public class LevelSelection : Control
     private Viewport nodeLevelViewport;
     private Camera2D nodeLevelCamera;
     private HSlider nodeLevelSlider;
-    private Label nodeLevelName;
+    private RichTextLabel nodeLevelText;
 
     //Function to call once map selection is finished
     private Func<LevelSelection, PackedScene, int> callback;
@@ -51,7 +51,7 @@ public class LevelSelection : Control
         this.nodeLevelViewport = this.GetNode<Viewport>("vp_level");
         this.nodeLevelCamera = this.GetNode<Camera2D>("vp_level/camera");
         this.nodeLevelSlider = this.GetNode<HSlider>("sl_level");
-        this.nodeLevelName = this.GetNode<Label>("la_level_name");
+        this.nodeLevelText = this.GetNode<RichTextLabel>("tx_level");
 
         this.nodeButtonPlay.Connect("pressed", this, nameof(_OnPlayPressed));
 
@@ -147,7 +147,7 @@ public class LevelSelection : Control
         this.nodeLevelSlider.MinValue = -newlevel.resource.GetMovement();
         this.nodeLevelSlider.MaxValue = newlevel.resource.GetMovement();
         this.nodeLevelCamera.Position = newlevel.resource.GetCameraPos();
-        this.nodeLevelName.Text = newlevel.resource.name;
+        this.nodeLevelText.BbcodeText = newlevel.resource.text;
 
         this.nodeLevelViewport.AddChild(newlevel.level);
     }

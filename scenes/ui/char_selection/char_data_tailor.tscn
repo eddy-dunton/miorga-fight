@@ -55,14 +55,24 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 14 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 17 ) ],
-"loop": false,
-"name": "high_alt_stage1",
+"frames": [ ExtResource( 19 ), ExtResource( 25 ), ExtResource( 24 ), ExtResource( 23 ), ExtResource( 26 ), ExtResource( 27 ) ],
+"loop": true,
+"name": "low_main",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 12 ), ExtResource( 10 ), ExtResource( 22 ), ExtResource( 18 ), ExtResource( 9 ) ],
 "loop": false,
 "name": "high_alt_stage2",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 31 ), ExtResource( 29 ), ExtResource( 43 ), ExtResource( 43 ) ],
+"loop": true,
+"name": "low_alt",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 17 ) ],
+"loop": false,
+"name": "high_alt_stage1",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 32 ), ExtResource( 42 ), ExtResource( 33 ), ExtResource( 49 ), ExtResource( 48 ), ExtResource( 39 ) ],
@@ -75,30 +85,20 @@ animations = [ {
 "name": "high_main",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 31 ), ExtResource( 29 ), ExtResource( 43 ), ExtResource( 43 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "low_alt",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 19 ), ExtResource( 25 ), ExtResource( 24 ), ExtResource( 23 ), ExtResource( 26 ), ExtResource( 27 ) ],
-"loop": true,
-"name": "low_main",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 37 ), ExtResource( 38 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 52 ), ExtResource( 47 ), ExtResource( 50 ), ExtResource( 36 ) ],
-"loop": true,
-"name": "walk",
-"speed": 8.0
+"name": "lax",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 46 ), ExtResource( 28 ), ExtResource( 45 ), ExtResource( 35 ) ],
 "loop": true,
 "name": "low",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 37 ), ExtResource( 38 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 52 ), ExtResource( 47 ), ExtResource( 50 ), ExtResource( 36 ) ],
 "loop": true,
-"name": "lax",
-"speed": 5.0
+"name": "walk",
+"speed": 8.0
 }, {
 "frames": [ ExtResource( 44 ), ExtResource( 30 ), ExtResource( 34 ), ExtResource( 51 ) ],
 "loop": true,
@@ -120,9 +120,5 @@ animation = "lax"
 texture = ExtResource( 3 )
 
 [node name="tx_description" parent="." index="4"]
-bbcode_text = "[b]The Tailor[/b]
-Health: 75		
-Speed: 110"
-text = "The Tailor
-Health: 75		
-Speed: 110"
+bbcode_text = "[b]The Tailor[/b] is a man of mystery. A mask conceals expression, displaying only a deceptively stolid visage. Through combat he presents a ballad in dance-like whips and twirls of his blade. He attacks quickly and with a long reach, but is fragile and deals low damage."
+text = "The Tailor is a man of mystery. A mask conceals expression, displaying only a deceptively stolid visage. Through combat he presents a ballad in dance-like whips and twirls of his blade. He attacks quickly and with a long reach, but is fragile and deals low damage."

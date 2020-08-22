@@ -15,7 +15,7 @@ __meta__ = {
 
 [node name="sp_player" type="AnimatedSprite" parent="."]
 light_mask = 2
-position = Vector2( 349, 202 )
+position = Vector2( 349, 181 )
 playing = true
 
 [node name="sp_player_mask" type="Light2D" parent="."]
@@ -32,10 +32,10 @@ texture = ExtResource( 2 )
 position = Vector2( 647, 174 )
 
 [node name="tx_description" type="RichTextLabel" parent="."]
-margin_left = 270.0
-margin_top = 309.0
-margin_right = 428.0
-margin_bottom = 393.0
+margin_left = 261.0
+margin_top = 289.0
+margin_right = 437.0
+margin_bottom = 398.0
 custom_fonts/bold_font = ExtResource( 3 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
