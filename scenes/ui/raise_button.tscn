@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/theme/theme.tres" type="Theme" id=1]
+[ext_resource path="res://src/MiorgaFight/UI/RaiseButton.cs" type="Script" id=2]
+
+[node name="raise_button" type="Button"]
+margin_right = 104.0
+margin_bottom = 23.0
+focus_mode = 0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="."]
+margin_left = 3.0
+margin_top = 6.0
+margin_right = 101.0
+margin_bottom = 17.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+align = 1
+valign = 1

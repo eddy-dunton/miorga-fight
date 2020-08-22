@@ -81,6 +81,7 @@
     <Compile Include="src\MiorgaFight\Action\Parry.cs" />
     <Compile Include="src\MiorgaFight\UI\Lobby.cs" />
     <Compile Include="src\MiorgaFight\Command.cs" />
+    <Compile Include="src\MiorgaFight\UI\RaiseButton.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
