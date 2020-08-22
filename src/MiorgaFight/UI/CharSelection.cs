@@ -71,7 +71,7 @@ public class CharSelection : Control
         this.nodeP2Button.Connect("pressed", this, nameof(this._OnPlayerPressed), 
                 new Godot.Collections.Array(new byte[] {2}));
         this.nodePlayButton.Connect("pressed", this, nameof(this._OnPlayPressed));
-
+    
         this.nodeCharList.Connect("item_selected", this, nameof(this._OnCharSelected));
 
         //Map PackedScenes in charScenes into Control nodes in chars

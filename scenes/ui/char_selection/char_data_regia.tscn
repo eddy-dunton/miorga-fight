@@ -1,55 +1,83 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=88 format=2]
 
 [ext_resource path="res://scenes/ui/char_selection/char_data_panel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/player/regia/stances/lax.png" type="Texture" id=2]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/regia_skeleton.png" type="Texture" id=3]
 [ext_resource path="res://scenes/player/regia.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/player/regia/fight/low/alternate/key5.png" type="Texture" id=5]
-[ext_resource path="res://assets/player/regia/fight/high/alternate/key2.png" type="Texture" id=6]
-[ext_resource path="res://assets/player/regia/fight/high/standard/key2.png" type="Texture" id=7]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parry only/4.png" type="Texture" id=5]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high main/5.png" type="Texture" id=6]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parryriposte/7.png" type="Texture" id=7]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_lax.png" type="Texture" id=8]
-[ext_resource path="res://assets/player/regia/fight/high/alternate/key6.png" type="Texture" id=9]
-[ext_resource path="res://assets/player/regia/fight/low/alternate/key2.png" type="Texture" id=10]
-[ext_resource path="res://assets/player/regia/fight/high/standard/key6.png" type="Texture" id=11]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parryriposte/8.png" type="Texture" id=9]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high main/4.png" type="Texture" id=10]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high alt/1.png" type="Texture" id=11]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_attack.png" type="Texture" id=12]
 [ext_resource path="res://assets/player/regia/stances/high idle/key1.png" type="Texture" id=13]
-[ext_resource path="res://assets/player/regia/fight/high/standard/key5_b.png" type="Texture" id=14]
-[ext_resource path="res://assets/player/regia/fight/high/alternate/key4.png" type="Texture" id=15]
-[ext_resource path="res://assets/player/regia/fight/low/standard/key5.png" type="Texture" id=16]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parry only/5.png" type="Texture" id=14]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high main/1.png" type="Texture" id=15]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high main/6.png" type="Texture" id=16]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_parry.png" type="Texture" id=17]
-[ext_resource path="res://assets/player/regia/fight/low/alternate/key3.png" type="Texture" id=18]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low main/1.png" type="Texture" id=18]
 [ext_resource path="res://resources/theme/font_large.tres" type="DynamicFont" id=19]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/icon_feint.png" type="Texture" id=20]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_parry_hover.png" type="Texture" id=21]
-[ext_resource path="res://assets/player/regia/fight/low/standard/key3.png" type="Texture" id=22]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parryriposte/11.png" type="Texture" id=22]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/icon_halt.png" type="Texture" id=23]
-[ext_resource path="res://assets/player/regia/fight/high/standard/key3.png" type="Texture" id=24]
-[ext_resource path="res://assets/player/regia/fight/low/standard/key4.png" type="Texture" id=25]
-[ext_resource path="res://assets/player/regia/fight/high/alternate/key3.png" type="Texture" id=26]
-[ext_resource path="res://assets/player/regia/fight/high/standard/key4.png" type="Texture" id=27]
-[ext_resource path="res://assets/player/regia/fight/low/alternate/key4.png" type="Texture" id=28]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low main/6.png" type="Texture" id=24]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high alt/5.png" type="Texture" id=25]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high alt/11.png" type="Texture" id=26]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high main/12.png" type="Texture" id=27]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high main/9.png" type="Texture" id=28]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_attack_hover.png" type="Texture" id=29]
 [ext_resource path="res://assets/player/regia/stances/high idle/key2.png" type="Texture" id=30]
-[ext_resource path="res://assets/player/regia/fight/low/alternate/key1.png" type="Texture" id=31]
-[ext_resource path="res://assets/player/regia/fight/high/standard/key5.png" type="Texture" id=32]
-[ext_resource path="res://assets/player/regia/fight/high/alternate/key5.png" type="Texture" id=33]
-[ext_resource path="res://assets/player/regia/fight/low/alternate/key6.png" type="Texture" id=34]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parryriposte/4.png" type="Texture" id=31]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high alt/2.png" type="Texture" id=32]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parry only/8.png" type="Texture" id=33]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high main/10.png" type="Texture" id=34]
 [ext_resource path="res://src/MiorgaFight/UI/CharSelectionActionTreeButton.cs" type="Script" id=35]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_highlow_hover.png" type="Texture" id=36]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_highlow.png" type="Texture" id=37]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_lax_hover.png" type="Texture" id=38]
-[ext_resource path="res://assets/player/regia/fight/low/standard/key4_b.png" type="Texture" id=39]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parryriposte/6.png" type="Texture" id=39]
 [ext_resource path="res://assets/player/regia/stances/lax idle/key2.png" type="Texture" id=40]
 [ext_resource path="res://assets/player/regia/stances/low idle/key1.png" type="Texture" id=41]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parryriposte/1.png" type="Texture" id=42]
 [ext_resource path="res://assets/player/regia/stances/low idle/key3.png" type="Texture" id=43]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parry only/1.png" type="Texture" id=44]
 [ext_resource path="res://assets/player/regia/stances/high idle/key4.png" type="Texture" id=45]
 [ext_resource path="res://assets/player/regia/stances/high idle/key3.png" type="Texture" id=46]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high alt/8.png" type="Texture" id=47]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high alt/9.png" type="Texture" id=48]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high main/2.png" type="Texture" id=49]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parry only/6.png" type="Texture" id=50]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parryriposte/5.png" type="Texture" id=51]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low main/5.png" type="Texture" id=52]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low main/7.png" type="Texture" id=53]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low main/8.png" type="Texture" id=54]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low main/2.png" type="Texture" id=55]
 [ext_resource path="res://assets/player/regia/stances/low idle/key4.png" type="Texture" id=56]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parryriposte/3.png" type="Texture" id=57]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high alt/6.png" type="Texture" id=58]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low main/3.png" type="Texture" id=59]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parryriposte/2.png" type="Texture" id=60]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low main/4.png" type="Texture" id=61]
 [ext_resource path="res://assets/player/regia/stances/low idle/key2.png" type="Texture" id=62]
-[ext_resource path="res://assets/player/regia/fight/low/alternate/afterhit/riposte/key2.png" type="Texture" id=67]
-[ext_resource path="res://assets/player/regia/fight/low/alternate/afterhit/riposte/key1.png" type="Texture" id=68]
-[ext_resource path="res://assets/player/regia/fight/low/alternate/afterhit/riposte/key4.png" type="Texture" id=69]
-[ext_resource path="res://assets/player/regia/fight/low/alternate/afterhit/riposte/key3.png" type="Texture" id=70]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high alt/7.png" type="Texture" id=63]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high main/7.png" type="Texture" id=64]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parry only/2.png" type="Texture" id=65]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high main/3.png" type="Texture" id=66]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parry only/3.png" type="Texture" id=67]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parryriposte/9.png" type="Texture" id=68]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parryriposte/10.png" type="Texture" id=69]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high alt/10.png" type="Texture" id=70]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parry only/9.png" type="Texture" id=71]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parry only/7.png" type="Texture" id=72]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low main/9.png" type="Texture" id=73]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high alt/4.png" type="Texture" id=74]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/low main/10.png" type="Texture" id=75]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high alt/3.png" type="Texture" id=76]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high main/8.png" type="Texture" id=77]
+[ext_resource path="res://assets/ui/menus/character selection/animations/regia/high main/11.png" type="Texture" id=78]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -58,67 +86,67 @@ animations = [ {
 "name": "high",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 18 ), ExtResource( 18 ), ExtResource( 18 ), ExtResource( 55 ), ExtResource( 59 ), ExtResource( 61 ), ExtResource( 52 ), ExtResource( 24 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 73 ), ExtResource( 75 ) ],
+"loop": false,
+"name": "low_attack_main",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 44 ), ExtResource( 44 ), ExtResource( 44 ), ExtResource( 65 ), ExtResource( 67 ), ExtResource( 5 ), ExtResource( 14 ), ExtResource( 50 ), ExtResource( 72 ), ExtResource( 33 ), ExtResource( 71 ) ],
+"loop": false,
+"name": "low_parry_alt",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 15 ), ExtResource( 15 ), ExtResource( 49 ), ExtResource( 66 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 16 ), ExtResource( 64 ), ExtResource( 77 ), ExtResource( 28 ), ExtResource( 34 ), ExtResource( 78 ), ExtResource( 27 ) ],
+"loop": false,
+"name": "high_attack_main",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 42 ), ExtResource( 42 ), ExtResource( 42 ), ExtResource( 60 ), ExtResource( 57 ), ExtResource( 31 ), ExtResource( 51 ), ExtResource( 39 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 68 ), ExtResource( 69 ), ExtResource( 22 ) ],
+"loop": false,
+"name": "low_parry_alt_riposte",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 32 ), ExtResource( 76 ), ExtResource( 74 ), ExtResource( 25 ), ExtResource( 58 ), ExtResource( 63 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 70 ), ExtResource( 26 ) ],
+"loop": false,
+"name": "high_attack_alt",
+"speed": 12.0
+}, {
 "frames": [ ExtResource( 2 ), ExtResource( 40 ) ],
 "loop": true,
 "name": "lax",
 "speed": 1.5
 }, {
-"frames": [ ExtResource( 7 ), ExtResource( 24 ), ExtResource( 27 ), ExtResource( 32 ), ExtResource( 14 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 11 ) ],
-"loop": true,
-"name": "high_attack_main",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 41 ), ExtResource( 62 ), ExtResource( 43 ), ExtResource( 56 ) ],
 "loop": true,
 "name": "low",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 68 ), ExtResource( 67 ), ExtResource( 70 ), ExtResource( 69 ), ExtResource( 69 ) ],
-"loop": true,
-"name": "low_parry_alt_riposte",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 22 ), ExtResource( 25 ), ExtResource( 39 ), ExtResource( 16 ), ExtResource( 16 ) ],
-"loop": true,
-"name": "low_attack_main",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 31 ), ExtResource( 10 ), ExtResource( 18 ), ExtResource( 28 ), ExtResource( 5 ), ExtResource( 34 ) ],
-"loop": true,
-"name": "low_parry_alt",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 6 ), ExtResource( 26 ), ExtResource( 15 ), ExtResource( 33 ), ExtResource( 33 ), ExtResource( 9 ), ExtResource( 9 ) ],
-"loop": true,
-"name": "high_attack_alt",
-"speed": 12.0
 } ]
 
-[sub_resource type="StyleBoxTexture" id=13]
+[sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 38 )
 region_rect = Rect2( 0, 0, 34, 24 )
 
-[sub_resource type="StyleBoxTexture" id=14]
+[sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 8 )
 region_rect = Rect2( 0, 0, 34, 24 )
 
-[sub_resource type="StyleBoxTexture" id=11]
+[sub_resource type="StyleBoxTexture" id=4]
 texture = ExtResource( 36 )
 region_rect = Rect2( 0, 0, 46, 28 )
 
-[sub_resource type="StyleBoxTexture" id=12]
+[sub_resource type="StyleBoxTexture" id=5]
 texture = ExtResource( 37 )
 region_rect = Rect2( 0, 0, 46, 28 )
 
-[sub_resource type="StyleBoxTexture" id=7]
+[sub_resource type="StyleBoxTexture" id=6]
 texture = ExtResource( 29 )
 region_rect = Rect2( 0, 0, 20, 24 )
 
-[sub_resource type="StyleBoxTexture" id=8]
+[sub_resource type="StyleBoxTexture" id=7]
 texture = ExtResource( 12 )
 region_rect = Rect2( 0, 0, 20, 24 )
 
-[sub_resource type="StyleBoxTexture" id=10]
+[sub_resource type="StyleBoxTexture" id=8]
 texture = ExtResource( 21 )
 region_rect = Rect2( 0, 0, 20, 24 )
 
@@ -129,19 +157,18 @@ region_rect = Rect2( 0, 0, 20, 24 )
 [node name="pa_char_data" instance=ExtResource( 1 )]
 offsets = {
 "high": Vector2( -12, 0 ),
-"high_attack_alt": Vector2( 58, 0 ),
-"high_attack_main": Vector2( 20, -5 ),
+"high_attack_alt": Vector2( 0, -29 ),
+"high_attack_main": Vector2( 0, -29 ),
 "low": Vector2( 8, 0 ),
-"low_attack_main": Vector2( 38, 0 ),
-"low_parry_alt": Vector2( -18, 0 ),
-"low_parry_alt_riposte": Vector2( -10, 5 )
+"low_parry_alt": Vector2( 0, -29 ),
+"low_parry_alt_riposte": Vector2( 0, -29 )
 }
 character = ExtResource( 4 )
 
 [node name="sp_player" parent="." index="0"]
 frames = SubResource( 1 )
-animation = "low_parry_alt_riposte"
-frame = 4
+animation = "lax"
+frame = 1
 
 [node name="pa_action_tree" parent="." index="2"]
 margin_right = 40.0
@@ -157,17 +184,17 @@ margin_top = 61.0
 margin_right = 668.0
 margin_bottom = 85.0
 focus_mode = 0
-custom_styles/hover = SubResource( 13 )
-custom_styles/pressed = SubResource( 14 )
-custom_styles/focus = SubResource( 14 )
-custom_styles/disabled = SubResource( 14 )
-custom_styles/normal = SubResource( 14 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
 enabled_focus_mode = 0
 script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-anim = "high"
+anim = "lax"
 parentPath = NodePath("../..")
 
 [node name="label" type="Label" parent="pa_action_tree/bt_lax" index="0"]
@@ -190,11 +217,11 @@ margin_top = 88.0
 margin_right = 629.0
 margin_bottom = 116.0
 focus_mode = 0
-custom_styles/hover = SubResource( 11 )
-custom_styles/pressed = SubResource( 12 )
-custom_styles/focus = SubResource( 12 )
-custom_styles/disabled = SubResource( 12 )
-custom_styles/normal = SubResource( 12 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
 enabled_focus_mode = 0
 script = ExtResource( 35 )
 __meta__ = {
@@ -223,11 +250,11 @@ margin_top = 144.0
 margin_right = 602.0
 margin_bottom = 166.0
 focus_mode = 0
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 8 )
-custom_styles/focus = SubResource( 8 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 8 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
 enabled_focus_mode = 0
 script = ExtResource( 35 )
 __meta__ = {
@@ -235,6 +262,7 @@ __meta__ = {
 }
 anim = "high_attack_alt"
 parentPath = NodePath("../..")
+end = "high"
 
 [node name="label" type="Label" parent="pa_action_tree/bt_high_e" index="0"]
 margin_left = 2.46002
@@ -257,11 +285,11 @@ margin_right = 632.0
 margin_bottom = 166.0
 rect_pivot_offset = Vector2( -73.2455, 23.243 )
 focus_mode = 0
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 8 )
-custom_styles/focus = SubResource( 8 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 8 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
 enabled_focus_mode = 0
 script = ExtResource( 35 )
 __meta__ = {
@@ -269,6 +297,7 @@ __meta__ = {
 }
 anim = "high_attack_main"
 parentPath = NodePath("../..")
+end = "high"
 
 [node name="label" type="Label" parent="pa_action_tree/bt_high_q" index="0"]
 margin_left = 1.0
@@ -294,11 +323,11 @@ margin_top = 87.0
 margin_right = 719.0
 margin_bottom = 115.0
 focus_mode = 0
-custom_styles/hover = SubResource( 11 )
-custom_styles/pressed = SubResource( 12 )
-custom_styles/focus = SubResource( 12 )
-custom_styles/disabled = SubResource( 12 )
-custom_styles/normal = SubResource( 12 )
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
 enabled_focus_mode = 0
 script = ExtResource( 35 )
 __meta__ = {
@@ -327,7 +356,7 @@ margin_top = 189.0
 margin_right = 696.0
 margin_bottom = 211.0
 focus_mode = 0
-custom_styles/hover = SubResource( 10 )
+custom_styles/hover = SubResource( 8 )
 custom_styles/pressed = SubResource( 9 )
 custom_styles/focus = SubResource( 9 )
 custom_styles/disabled = SubResource( 9 )
@@ -339,6 +368,7 @@ __meta__ = {
 }
 anim = "low_parry_alt"
 parentPath = NodePath("../..")
+end = "low"
 
 [node name="label" type="Label" parent="pa_action_tree/bt_low_e" index="0"]
 margin_left = 2.46002
@@ -361,11 +391,11 @@ margin_right = 696.0
 margin_bottom = 264.0
 rect_pivot_offset = Vector2( 80.611, 61.5076 )
 focus_mode = 0
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 8 )
-custom_styles/focus = SubResource( 8 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 8 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
 enabled_focus_mode = 0
 script = ExtResource( 35 )
 __meta__ = {
@@ -373,6 +403,7 @@ __meta__ = {
 }
 anim = "low_parry_alt_riposte"
 parentPath = NodePath("../..")
+end = "low"
 
 [node name="label" type="Label" parent="pa_action_tree/bt_low_e_e" index="0"]
 margin_left = 2.46002
@@ -395,11 +426,11 @@ margin_right = 722.0
 margin_bottom = 211.0
 rect_pivot_offset = Vector2( -73.2455, 23.243 )
 focus_mode = 0
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 8 )
-custom_styles/focus = SubResource( 8 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 8 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
 enabled_focus_mode = 0
 script = ExtResource( 35 )
 __meta__ = {
@@ -407,6 +438,7 @@ __meta__ = {
 }
 anim = "high_attack_main"
 parentPath = NodePath("../..")
+end = "low"
 
 [node name="label" type="Label" parent="pa_action_tree/bt_low_q" index="0"]
 margin_left = 1.0
