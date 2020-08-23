@@ -36,5 +36,12 @@ public class Level : Node2D
     public float GetPlayerY() {return this.POSITION_Y;}
 
     //Adds foliage to the dictionary
-    public void AddFoliage(Foliage f) {this.foliage.Add(((int) f.GlobalPosition.x) / FOLIAGE_GROUPING_SIZE, f);}
+    public void AddFoliage(Foliage f) {
+        int x = ((int) f.GlobalPosition.x) / FOLIAGE_GROUPING_SIZE;
+        if (this.foliage.ContainsKey(x)) {
+            GD.Print("ERROR: Level.AddFoliage(...): duplicate key used: " + x.ToString());
+            return;
+        }
+        this.foliage.Add(x, f);
+    }
 }}
