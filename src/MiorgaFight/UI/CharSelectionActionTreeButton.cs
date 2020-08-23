@@ -13,6 +13,9 @@ public class CharSelectionActionTreeButton : RaiseButton
     //Animation played on end
     [Export] private string end;
 
+    //Overlay to be placed over tree when selected
+    [Export] private Texture overlay; 
+
     private CharSelectionDataPanel parent;
 
     public override void _Ready()
@@ -25,7 +28,7 @@ public class CharSelectionActionTreeButton : RaiseButton
     private void _OnPressed() {
         //Check for correct setup
         if (this.parent != null) {
-            this.parent.Play(this.anim, this.end);
+            this.parent.Play(this.anim, this.end, this.overlay);
         }
     }
 }}

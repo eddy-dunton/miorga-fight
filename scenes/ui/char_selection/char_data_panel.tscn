@@ -29,6 +29,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="sp_action_tree" type="Sprite" parent="pa_action_tree"]
+position = Vector2( 647, 174 )
+
+[node name="sp_action_overlay" type="Sprite" parent="pa_action_tree"]
+position = Vector2( 647, 174 )
+
 [node name="sp_key" type="Sprite" parent="."]
 position = Vector2( 612.996, 348.881 )
 texture = ExtResource( 2 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=2]
+[gd_scene load_steps=93 format=2]
 
 [ext_resource path="res://scenes/ui/char_selection/char_data_panel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/player/regia/stances/lax.png" type="Texture" id=2]
@@ -78,6 +78,11 @@
 [ext_resource path="res://assets/ui/menus/character selection/animations/regia/high alt/3.png" type="Texture" id=76]
 [ext_resource path="res://assets/ui/menus/character selection/animations/regia/high main/8.png" type="Texture" id=77]
 [ext_resource path="res://assets/ui/menus/character selection/animations/regia/high main/11.png" type="Texture" id=78]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/highlights/regia/highalt.png" type="Texture" id=79]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/highlights/regia/highmain.png" type="Texture" id=80]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/highlights/regia/lowparry.png" type="Texture" id=81]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/highlights/regia/lowparryriposte.png" type="Texture" id=82]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/highlights/regia/lowmain.png" type="Texture" id=83]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -86,19 +91,19 @@ animations = [ {
 "name": "high",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 18 ), ExtResource( 18 ), ExtResource( 18 ), ExtResource( 55 ), ExtResource( 59 ), ExtResource( 61 ), ExtResource( 52 ), ExtResource( 24 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 73 ), ExtResource( 75 ) ],
-"loop": false,
-"name": "low_attack_main",
-"speed": 12.0
+"frames": [ ExtResource( 41 ), ExtResource( 62 ), ExtResource( 43 ), ExtResource( 56 ) ],
+"loop": true,
+"name": "low",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 40 ) ],
+"loop": true,
+"name": "lax",
+"speed": 1.5
 }, {
 "frames": [ ExtResource( 44 ), ExtResource( 44 ), ExtResource( 44 ), ExtResource( 65 ), ExtResource( 67 ), ExtResource( 5 ), ExtResource( 14 ), ExtResource( 50 ), ExtResource( 72 ), ExtResource( 33 ), ExtResource( 71 ) ],
 "loop": false,
 "name": "low_parry_alt",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 15 ), ExtResource( 15 ), ExtResource( 15 ), ExtResource( 49 ), ExtResource( 66 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 16 ), ExtResource( 64 ), ExtResource( 77 ), ExtResource( 28 ), ExtResource( 34 ), ExtResource( 78 ), ExtResource( 27 ) ],
-"loop": false,
-"name": "high_attack_main",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 42 ), ExtResource( 42 ), ExtResource( 42 ), ExtResource( 60 ), ExtResource( 57 ), ExtResource( 31 ), ExtResource( 51 ), ExtResource( 39 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 68 ), ExtResource( 69 ), ExtResource( 22 ) ],
@@ -106,20 +111,20 @@ animations = [ {
 "name": "low_parry_alt_riposte",
 "speed": 12.0
 }, {
+"frames": [ ExtResource( 18 ), ExtResource( 18 ), ExtResource( 18 ), ExtResource( 55 ), ExtResource( 59 ), ExtResource( 61 ), ExtResource( 52 ), ExtResource( 24 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 73 ), ExtResource( 75 ) ],
+"loop": false,
+"name": "low_attack_main",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 15 ), ExtResource( 15 ), ExtResource( 49 ), ExtResource( 66 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 16 ), ExtResource( 64 ), ExtResource( 77 ), ExtResource( 28 ), ExtResource( 34 ), ExtResource( 78 ), ExtResource( 27 ) ],
+"loop": false,
+"name": "high_attack_main",
+"speed": 12.0
+}, {
 "frames": [ ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 32 ), ExtResource( 76 ), ExtResource( 74 ), ExtResource( 25 ), ExtResource( 58 ), ExtResource( 63 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 70 ), ExtResource( 26 ) ],
 "loop": false,
 "name": "high_attack_alt",
 "speed": 12.0
-}, {
-"frames": [ ExtResource( 2 ), ExtResource( 40 ) ],
-"loop": true,
-"name": "lax",
-"speed": 1.5
-}, {
-"frames": [ ExtResource( 41 ), ExtResource( 62 ), ExtResource( 43 ), ExtResource( 56 ) ],
-"loop": true,
-"name": "low",
-"speed": 5.0
 } ]
 
 [sub_resource type="StyleBoxTexture" id=2]
@@ -169,14 +174,12 @@ character = ExtResource( 4 )
 [node name="sp_player" parent="." index="0"]
 frames = SubResource( 1 )
 animation = "lax"
-frame = 1
 
 [node name="pa_action_tree" parent="." index="2"]
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="sp_action_tree" type="Sprite" parent="pa_action_tree" index="0"]
-position = Vector2( 647, 174 )
+[node name="sp_action_tree" parent="pa_action_tree" index="0"]
 texture = ExtResource( 3 )
 
 [node name="bt_lax" type="Button" parent="pa_action_tree" index="1"]
@@ -263,7 +266,8 @@ __meta__ = {
 }
 anim = "high_attack_alt"
 parentPath = NodePath("../..")
-end = "high"
+end = "low"
+overlay = ExtResource( 79 )
 
 [node name="label" type="Label" parent="pa_action_tree/bt_high_e" index="0"]
 margin_left = 2.46002
@@ -298,7 +302,8 @@ __meta__ = {
 }
 anim = "high_attack_main"
 parentPath = NodePath("../..")
-end = "high"
+end = "low"
+overlay = ExtResource( 80 )
 
 [node name="label" type="Label" parent="pa_action_tree/bt_high_q" index="0"]
 margin_left = 1.0
@@ -370,6 +375,7 @@ __meta__ = {
 anim = "low_parry_alt"
 parentPath = NodePath("../..")
 end = "low"
+overlay = ExtResource( 81 )
 
 [node name="label" type="Label" parent="pa_action_tree/bt_low_e" index="0"]
 margin_left = 2.46002
@@ -405,6 +411,7 @@ __meta__ = {
 anim = "low_parry_alt_riposte"
 parentPath = NodePath("../..")
 end = "high"
+overlay = ExtResource( 82 )
 
 [node name="label" type="Label" parent="pa_action_tree/bt_low_e_e" index="0"]
 margin_left = 2.46002
@@ -439,7 +446,8 @@ __meta__ = {
 }
 anim = "low_attack_main"
 parentPath = NodePath("../..")
-end = "low"
+end = "high"
+overlay = ExtResource( 83 )
 
 [node name="label" type="Label" parent="pa_action_tree/bt_low_q" index="0"]
 margin_left = 1.0

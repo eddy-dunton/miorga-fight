@@ -25,6 +25,7 @@ region_rect = Rect2( 0, 0, 390, 10 )
 [node name="level_selection" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_default_cursor_shape = 2
 theme = ExtResource( 3 )
 script = ExtResource( 10 )
 __meta__ = {

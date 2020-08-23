@@ -12,12 +12,15 @@ public class CharSelectionDataPanel : Control
 
     private Vector2 playerSpriteOrigin;
     private AnimatedSprite nodePlayerSprite;
+    private Sprite nodeTreeOverlay;
 
     private string onAnimEnd;
 
     public override void _Ready()
     {
         this.nodePlayerSprite = GetNode<AnimatedSprite>("sp_player");
+        this.nodeTreeOverlay = GetNode<Sprite>("pa_action_tree/sp_action_overlay");
+
         this.nodePlayerSprite.Connect("animation_finished", this, nameof(_OnAnimationFinished));
         this.playerSpriteOrigin = this.nodePlayerSprite.Position;
         this.onAnimEnd = null;
@@ -28,8 +31,9 @@ public class CharSelectionDataPanel : Control
         this.Play("lax");
     }
 
-    public void Play(String anim, string onEnd = null) {
+    public void Play(String anim, string onEnd = null, Texture overlay = null) {
         this.onAnimEnd = onEnd;
+        this.nodeTreeOverlay.Texture = overlay;
 
         //Try and get data for the animation
         Vector2 offset;
