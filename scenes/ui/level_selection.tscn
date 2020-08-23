@@ -55,6 +55,7 @@ margin_left = 346.0
 margin_top = 262.0
 margin_right = 736.0
 margin_bottom = 282.0
+focus_mode = 0
 theme = ExtResource( 3 )
 custom_styles/slider = SubResource( 2 )
 min_value = -100.0
