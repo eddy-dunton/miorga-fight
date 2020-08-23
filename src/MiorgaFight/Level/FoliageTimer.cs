@@ -26,12 +26,22 @@ public class FoliageTimer : Timer
     //Maximmum possible length of gust (in zones)
     [Export] private int gustLegnthMax;
 
+    //Minimum length (in sec between gusts)
+    [Export] private float gustGapMin;
+    //Maximum length (in sec between gusts)
+    [Export] private float gustGapMax;
+
+    //Current head of the gust
     private int position;
     
     private Level parent;
     
     //Length of the current gust in foliage positions
     private int gustLength; 
+
+    //Is there a gust currently happening
+    private bool gusting;
+    private float gustWaitTime;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -53,32 +63,38 @@ public class FoliageTimer : Timer
     }
 
     void _OnTimeout() {
-        this.position --;
-        this.StartGust(this.position);
-        this.EndGust(this.position + this.gustLength);
-        //Once gust has passed through all the positions, reset
-        if (this.position + this.gustLength < -this.parent.foliagePositions) this.ResetCycle();
+        if (this.gusting) {
+            this.position --;
+            this.StartGustAt(this.position);
+            this.EndGustAt(this.position + this.gustLength);
+            //Once gust has passed through all the positions, reset
+            if (this.position + this.gustLength < -this.parent.foliagePositions) {this.ResetCycle();}
+        } else { //Gust gap has ended, start gust
+            this.WaitTime = this.gustWaitTime;
+            this.gusting = true;
+        }
     }
 
-    private void StartGust(int x) {
+    private void StartGustAt(int x) {
         Foliage f;
         if (this.parent.foliage.TryGetValue(x, out f)) {
             f.Play();
         }
     }
 
-    private void EndGust(int x) {
+    private void EndGustAt(int x) {
         Foliage f;
         if (this.parent.foliage.TryGetValue(x, out f)) {
             f.EndGust();
         }
     }
 
+    //Resets the gust, waiting before the next gust happens
     private void ResetCycle() {
         //Reset position
         this.position = this.parent.foliagePositions;
         //Randomly generate new speed
-        this.WaitTime = (float) Command.Random(this.waitTimeMin, this.waitTimeMax);
+        this.gustWaitTime = (float) Command.Random(this.waitTimeMin, this.waitTimeMax);
     
         //Calculate speed scale of foliage based off wait time
         float ss = (float) 
@@ -91,5 +107,9 @@ public class FoliageTimer : Timer
 
         //Randomly generate gust length
         this.gustLength = Command.Random(this.gustLegnthMin, this.gustLegnthMax);
+
+        //Set the gap to next gust
+        this.WaitTime = (float) Command.Random(this.gustGapMin, this.gustGapMax);
+        this.gusting = false;
     }
 }}
