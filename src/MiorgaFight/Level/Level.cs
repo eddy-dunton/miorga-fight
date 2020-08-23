@@ -29,15 +29,6 @@ public class Level : Node2D
         this.foliagePositions = foliageWidth / FOLIAGE_GROUPING_SIZE;
     }
 
-    public void PlayFoliage(int x) {
-        Foliage f;
-        if (this.foliage.TryGetValue(x, out f)) {
-            f.Frame = 0;
-            f.Play("default");
-        }
-
-    }
-
     public Vector2 GetPlayerPosition(Player.Direction dir) {
         return new Vector2((dir == Player.Direction.LEFT ? POSITION_RIGHT : POSITION_LEFT), POSITION_Y); 
     }

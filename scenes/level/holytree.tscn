@@ -145,7 +145,6 @@ frame_13/delay_sec = 0.0
 frame_14/delay_sec = 0.0
 
 [sub_resource type="AnimatedTexture" id=5]
-flags = 4
 frames = 15
 fps = 6.0
 frame_0/texture = ExtResource( 16 )
@@ -263,6 +262,13 @@ POSITION_Y = 150.0
 wait_time = 0.01
 autostart = true
 script = ExtResource( 64 )
+zonesPerSecondMin = 500
+zonesPerSecondMax = 1000
+speedScaleMin = 1.0
+speedScaleMax = 2.0
+speedScaleVar = 0.5
+gustLegnthMin = 150
+gustLegnthMax = 500
 
 [node name="particles1" type="Particles2D" parent="." index="1"]
 position = Vector2( 0, -100 )
@@ -340,6 +346,8 @@ frame = 4
 speed_scale = 1.1
 playing = true
 script = ExtResource( 63 )
+gustStartFrame = 2
+gustEndFrame = 3
 
 [node name="lightgrass1_2" type="AnimatedSprite" parent="foliage" index="1"]
 position = Vector2( -74.8755, 204.552 )
@@ -347,6 +355,8 @@ frames = SubResource( 6 )
 frame = 4
 playing = true
 script = ExtResource( 63 )
+gustStartFrame = 2
+gustEndFrame = 3
 
 [node name="lightgrass3_1" type="AnimatedSprite" parent="foliage" index="2"]
 position = Vector2( -52, 240.5 )
@@ -354,6 +364,8 @@ frames = SubResource( 7 )
 frame = 4
 playing = true
 script = ExtResource( 63 )
+gustStartFrame = 2
+gustEndFrame = 3
 
 [node name="arena" type="StaticBody2D" parent="." index="6"]
 
@@ -375,6 +387,8 @@ frame = 4
 speed_scale = 1.2
 playing = true
 script = ExtResource( 63 )
+gustStartFrame = 2
+gustEndFrame = 3
 
 [node name="lightgrass2_1" type="AnimatedSprite" parent="fg" index="1"]
 position = Vector2( -76.4264, 231.813 )
@@ -382,6 +396,8 @@ frames = SubResource( 10 )
 frame = 4
 playing = true
 script = ExtResource( 63 )
+gustStartFrame = 2
+gustEndFrame = 3
 
 [node name="medgrass1_1" type="AnimatedSprite" parent="fg" index="2"]
 position = Vector2( 301.751, 240.015 )
@@ -389,6 +405,8 @@ frames = SubResource( 11 )
 frame = 4
 playing = true
 script = ExtResource( 63 )
+gustStartFrame = 2
+gustEndFrame = 3
 
 [node name="medgrass2_1" type="AnimatedSprite" parent="fg" index="3"]
 position = Vector2( 150.561, 266.474 )
@@ -396,6 +414,8 @@ frames = SubResource( 12 )
 frame = 4
 playing = true
 script = ExtResource( 63 )
+gustStartFrame = 2
+gustEndFrame = 3
 
 [node name="medgrass3_1" type="AnimatedSprite" parent="fg" index="4"]
 position = Vector2( 51.0268, 267.733 )
@@ -403,6 +423,8 @@ frames = SubResource( 13 )
 frame = 4
 playing = true
 script = ExtResource( 63 )
+gustStartFrame = 2
+gustEndFrame = 3
 
 [node name="darkgrass1_1" type="AnimatedSprite" parent="fg" index="5"]
 position = Vector2( -263.954, 267.103 )
@@ -410,6 +432,8 @@ frames = SubResource( 14 )
 frame = 4
 playing = true
 script = ExtResource( 63 )
+gustStartFrame = 2
+gustEndFrame = 3
 
 [node name="darkgrass2_1" type="AnimatedSprite" parent="fg" index="6"]
 position = Vector2( 76.2253, 246.945 )
@@ -417,6 +441,8 @@ frames = SubResource( 15 )
 frame = 4
 playing = true
 script = ExtResource( 63 )
+gustStartFrame = 2
+gustEndFrame = 3
 
 [node name="darkgrass3_1" type="AnimatedSprite" parent="fg" index="7"]
 position = Vector2( -339.549, 270.253 )
@@ -424,6 +450,8 @@ frames = SubResource( 16 )
 frame = 4
 playing = true
 script = ExtResource( 63 )
+gustStartFrame = 2
+gustEndFrame = 3
 
 [node name="camera_track" parent="." index="9"]
 position = Vector2( 0, 131 )
