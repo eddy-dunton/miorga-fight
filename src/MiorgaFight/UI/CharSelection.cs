@@ -28,28 +28,42 @@ public class CharSelection : Control
         }
     }
 
+    private Lobby.MultiplayerRole mp;
+
     private PlayerData p1, p2;
 
     //Character scenes in packed format
     //These are then instanced into the charScenes array 
     [Export] private List<PackedScene> charScenes; 
     
+    //Texture used for other players in mp
+    [Export] private Texture iconUnknown;
+
     private CharSelectionDataPanel[] chars;
 
     //Function to be called once the characters are selected
     private Func<CharSelection, PackedScene, PackedScene, int> callback;
 
     private TextureButton nodeP1Button, nodeP2Button, nodePlayButton;
-    private Sprite nodeP1Icon, nodeP2Icon;
+    private Sprite nodeP1Icon, nodeP2Icon, nodeP1Confirmed, nodeP2Confirmed, nodeP1Present, nodeP2Present;
     private ItemList nodeCharList;
     private CharSelectionDataPanel nodeDataPanel;
 
     public override void _Ready() {
+        //Default to offline
+        this.mp = Lobby.MultiplayerRole.OFFLINE;
+
         //Get nodes
         this.nodeP1Button = GetNode<TextureButton>("pa_player_buttons/bt_p1");
         this.nodeP1Icon = GetNode<Sprite>("pa_player_buttons/sp_p1");
+        this.nodeP1Confirmed = GetNode<Sprite>("pa_player_buttons/sp_ready_p1");
+        this.nodeP1Present = GetNode<Sprite>("pa_player_buttons/sp_present_p1");
+        
         this.nodeP2Button = GetNode<TextureButton>("pa_player_buttons/bt_p2");
         this.nodeP2Icon = GetNode<Sprite>("pa_player_buttons/sp_p2");
+        this.nodeP2Confirmed = GetNode<Sprite>("pa_player_buttons/sp_ready_p2");
+        this.nodeP2Present = GetNode<Sprite>("pa_player_buttons/sp_present_p2");
+
         
         this.nodePlayButton = GetNode<TextureButton>("bt_play");
 
@@ -77,6 +91,8 @@ public class CharSelection : Control
         //Map PackedScenes in charScenes into Control nodes in chars
         this.chars = charScenes.Select(character => character.Instance() as CharSelectionDataPanel).ToArray();
 
+        this.RpcConfig(nameof(this.Confirm), MultiplayerAPI.RPCMode.Remotesync);
+
         this.ShowChar(-1);
     }
 
@@ -98,6 +114,16 @@ public class CharSelection : Control
 
     //When the play button is pressed
     void _OnPlayPressed() {
+        //If online, RPC confirmed instead
+        if (this.mp != Lobby.MultiplayerRole.OFFLINE) {
+            Rpc(nameof(this.Confirm), new object[] {this.mp, this.GetSelectedPlayer().selection});
+            //this.Confirm(this.mp, this.GetSelectedPlayer().selection);
+            this.nodePlayButton.Disabled = true;
+            //Disable char list
+            for (int i = 0; i < this.nodeCharList.GetItemCount(); i ++) {this.nodeCharList.SetItemSelectable(i, false);}
+            return;
+        }
+
         if (this.callback == null) {
             GD.Print("Fatal Error: No callback set for Character Selection, unable to proceed");
             return;
@@ -107,13 +133,39 @@ public class CharSelection : Control
     }
 
     void _OnCharSelected(int index) {
-        PlayerData d = this.nodeP1Button.Pressed ? this.p1 : this.p2;
+        //This is incorrectly called even if an item should not be selectable
+        //So check here that the item is actually selectable
+        if (!this.nodeCharList.IsItemSelectable(index)) return;
+
+        this.ShowChar(index);
+        //Don't change anything for spectators
+        if (this.mp == Lobby.MultiplayerRole.SPECTATOR) return;
+
+        PlayerData d = this.GetSelectedPlayer();
 
         d.selection = index;
         d.icon.Texture = this.nodeCharList.GetItemIcon(index);
 
-        if (this.p1.selection != -1 && this.p2.selection != -1) this.nodePlayButton.Disabled = false;
-        this.ShowChar(index);
+        //Enable button if both players have selected, or mp (== P1 or P2, specs don't get this far in the function, as long as both players are in the game)
+        if ((this.p1.selection != -1 && this.p2.selection != -1) || 
+                ((this.mp != Lobby.MultiplayerRole.OFFLINE) && (Command.lobby.p1Id != 0 && Command.lobby.p2Id != 0)))
+            this.nodePlayButton.Disabled = false;
+    }
+
+    //Sets a player selection to be confirmed
+    void Confirm(Lobby.MultiplayerRole p, int selection) {
+        if (p == Lobby.MultiplayerRole.P1) {
+            this.nodeP1Confirmed.Visible = true;
+            this.p1.selection = selection; 
+        } else if (p == Lobby.MultiplayerRole.P2) {
+            this.nodeP2Confirmed.Visible = true;
+            this.p2.selection = selection;
+        } else {} //Cry I guess?
+
+        //Both are selected, start the game
+        if (this.nodeP2Confirmed.Visible == true && this.nodeP2Confirmed.Visible == true) {
+            //TODO
+        }
     }
 
     //Shows a character up on the panel on the right hand side
@@ -134,8 +186,46 @@ public class CharSelection : Control
         }
     }
 
+    //Sets the lobby up for different multiplayer scenarios
+    public void SetMp(Lobby.MultiplayerRole role) {
+        this.mp = role;
+        if (this.mp == Lobby.MultiplayerRole.SPECTATOR) {
+            //Disable all buttons
+            this.nodeP1Button.Disabled = true;
+            this.nodeP2Button.Disabled = true;
+            this.nodePlayButton.Disabled = true;
+            this.nodeP1Icon.Texture = this.iconUnknown;
+            this.nodeP2Icon.Texture = this.iconUnknown;
+        } else if (this.mp == Lobby.MultiplayerRole.P1) {
+            this.nodeP1Button.Pressed = true;
+            this.nodeP2Button.Pressed = false;
+            this.nodeP2Button.Disabled = true;
+            this.nodeP2Icon.Texture = this.iconUnknown;
+        } else if (this.mp == Lobby.MultiplayerRole.P2) {
+            this.nodeP1Button.Pressed = false;
+            this.nodeP2Button.Pressed = true;
+            this.nodeP1Button.Disabled = true;
+            this.nodeP1Icon.Texture = this.iconUnknown;
+        }
+
+        //Turn these off (as players updated should be called after set MP)
+        this.nodeP1Present.Visible = false;
+        this.nodeP2Present.Visible = false;
+    }
+
+    //Sets present buttons correctly
+    public void PlayersUpdated(bool p1, bool p2) {
+        this.nodeP1Present.Visible = p1;
+        this.nodeP2Present.Visible = p2;
+    }
+
     //Sets the call back lobby to the one provided
     public void SetCallback(Func<CharSelection, PackedScene, PackedScene, int> c) {
         this.callback = c;
+    }
+
+    //Returns the currently selected player data
+    private PlayerData GetSelectedPlayer() {
+        return this.nodeP1Button.Pressed ? this.p1 : this.p2;
     }
 }}

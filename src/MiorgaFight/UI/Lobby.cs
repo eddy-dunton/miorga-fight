@@ -7,6 +7,17 @@ namespace MiorgaFight {
 //Manages moving players in and out of the game
 //And the lobby UI scene which the game starts on
 public class Lobby : Control {
+	public enum MultiplayerRole {
+		SPECTATOR, P1, P2, OFFLINE
+	}
+
+	public enum GameState {
+		//Waiting for player data from server (upon joining)
+		WAITING, 
+		//Sat in character selection
+		CHAR_SELECTION
+	}
+
 	public const int PORT = 6785;
 
     public static bool mp = false;
@@ -18,11 +29,20 @@ public class Lobby : Control {
 	Panel nodeErrorPanel, nodeStartPanel;
 	Label nodeErrorLabel;
 
+	//The current state of this client
+	private GameState state;
+
 	//Is the creation of the game object deferred
 	//Used to work around the fact not enough of the rest of the scene will have loaded before Ready is run
+	//This should be deprecated soon
 	private bool deferred;
 
+	private PackedScene p1Scene, p2Scene;
+
 	private Player p1, p2;
+
+	//MP ID's of players p1 and p2, or -1 if waiting for server to set, 0 if none
+	public int p1Id, p2Id;
 
 	private NetworkedMultiplayerENet peer;
 
@@ -33,6 +53,8 @@ public class Lobby : Control {
 
 	public override void _Ready()
 	{
+		this.state = GameState.WAITING;
+
 		this.nodeAddr = GetNode<LineEdit>("pa_start/tx_address");    
 		
 		this.nodeHostButton = GetNode<Button>("pa_start/bt_host");
@@ -61,7 +83,8 @@ public class Lobby : Control {
 		GetTree().Connect("connection_failed", this, nameof(_ConnectionFailed));
 		GetTree().Connect("server_disconnected", this, nameof(_ServerDisconnected));
 
-		this.RpcConfig(nameof(AddPlayer), MultiplayerAPI.RPCMode.Puppetsync);
+		this.RpcConfig(nameof(this.AddPlayer), MultiplayerAPI.RPCMode.Puppetsync);
+		this.RpcConfig(nameof(this.SetPlayerId), MultiplayerAPI.RPCMode.Remotesync);
 
 		//Host at start
 		foreach (String arg in OS.GetCmdlineArgs()) {
@@ -73,6 +96,30 @@ public class Lobby : Control {
 		}
 	}
 
+
+	//Called when a player connects (duh)	
+	void _PlayerConnected(int id) {
+		GD.Print(id.ToString() + " connected!");
+
+		//Don't let the server get in here (I don't think it can anyway tbf)
+		if (id == 1) return;
+
+		if (GetTree().GetNetworkUniqueId() == 1) {
+			//If p1 or p2 change, push changes to all clients
+			if (this.p1Id == 0) {
+				this.p1Id = id;
+				Rpc(nameof(this.SetPlayerId), new object[] {GameState.CHAR_SELECTION, this.p1Id, this.p2Id});
+			} else if (this.p2Id == 0) {
+				this.p2Id = id;
+				Rpc(nameof(this.SetPlayerId), new object[] {GameState.CHAR_SELECTION, this.p1Id, this.p2Id});
+			}
+
+			//Otherwise just current ids to new player
+			RpcId(id, nameof(this.SetPlayerId), new object[] {GameState.CHAR_SELECTION, this.p1Id, this.p2Id});
+		}
+	}
+
+	/*
 	//Called when a player connects
 	//Adds that player to the game
 	void _PlayerConnected(int id) {
@@ -114,8 +161,9 @@ public class Lobby : Control {
 
 			GD.Print(id.ToString() + " is spectator!");
 		}
-	}
+	}*/
 
+	/*
 	void _PlayerDisconnected(int id) {
 		if (this.p1 != null && this.p1.GetNetworkMaster() == id) {
 			//P1 has disconnected
@@ -132,21 +180,34 @@ public class Lobby : Control {
 			GD.Print("P2 disconnected");
 			return;
 		} 
+	}*/
+
+	void _PlayerDisconnected(int id) {
+		if (GetTree().GetNetworkUniqueId() == 1) {
+			//Force everyone back to lobby (if you're the server)
+			if (id == this.p1Id) {
+				Rpc(nameof(this.SetPlayerId), new object[] {GameState.CHAR_SELECTION, this.GetFirstSpectator(), this.p2Id});
+			} else if (id == this.p2Id) {
+				Rpc(nameof(this.SetPlayerId), new object[] {GameState.CHAR_SELECTION, this.p1Id, this.GetFirstSpectator()});
+			}
+		}
 	}
 
 	void _ConnectedToServer() {
-		this.GameCreate();
-		Lobby.mp = true;
+		//Lobby.mp = true;
+		//this.p1Id = -1;
+		//this.p2Id = -1;
 
 		this.nodeErrorPanel.Visible = false;
 		this.nodeStartPanel.Visible = true;
 		this.Visible = false;
 
+		/*
 		foreach (int id in GetTree().GetNetworkConnectedPeers()) {
 			this._PlayerConnected(id);
 		}
 
-		this._PlayerConnected(GetTree().GetNetworkUniqueId());
+		this._PlayerConnected(GetTree().GetNetworkUniqueId());*/
 	} 
 
 	void _ConnectionFailed() {
@@ -154,7 +215,7 @@ public class Lobby : Control {
 	}
 
 	void _ServerDisconnected() {
-		this.GameQuit();
+		this.Reset();
 	}
 
 	void _GameOver(String error = "") {
@@ -180,12 +241,19 @@ public class Lobby : Control {
 		}
 
 		Lobby.mp = true;
+		this.p1Id = 0;
+		this.p2Id = 0;
 		GetTree().NetworkPeer = this.peer;
+		this.state = GameState.CHAR_SELECTION;
 	
 		this.Visible = false;
 
-		if (! this.deferred)
-			this.GameCreate();
+		//Goto CS as spectator
+		CharSelection cs = (ResourceLoader.Load("res://scenes/ui/char_selection/char_selection.tscn") as PackedScene)
+				.Instance() as CharSelection;
+		GetTree().Root.AddChild(cs);
+		//Set the character selection up for multiplayer, with this as a spectator
+		cs.SetMp(Lobby.MultiplayerRole.SPECTATOR);
 	}
 
 	void _OnJoinPressed() {
@@ -201,42 +269,52 @@ public class Lobby : Control {
 		this.peer.CompressionMode = NetworkedMultiplayerENet.CompressionModeEnum.RangeCoder;    
 		this.peer.CreateClient(ip, PORT);
 		GetTree().NetworkPeer = this.peer;
-		
-		//Also will allow the connection of 
+		 
 		this.ShowError("Connecting...", "Cancel");
+		this.state = GameState.WAITING;
 	}
 
 	//Host a regular, local game
 	void _OnLocalPressed() {
-		//this.GameCreate();
-
+		//Move to char selection
 		this.Visible = false;
-		LevelSelection ms = (ResourceLoader.Load("res://scenes/ui/level_selection.tscn") as PackedScene).Instance() 
-				as LevelSelection;
-		ms.SetCallback(this._LocalLSCallback);
-		GetTree().Root.AddChild(ms);
-	}
-
-	int _LocalLSCallback(LevelSelection ms, PackedScene level) {
-		this.GameCreate(level);
-		GetTree().Root.RemoveChild(ms);
-		
 		CharSelection cs = (ResourceLoader.Load("res://scenes/ui/char_selection/char_selection.tscn") as PackedScene)
 				.Instance() as CharSelection;
 		cs.SetCallback(this._LocalCSCallback);
-
 		GetTree().Root.AddChild(cs);
+	}
 
+	int _LocalLSCallback(LevelSelection ls, PackedScene level) {
+		//Remove level selection
+		GetTree().Root.RemoveChild(ls);
+		
+		//Create and goto level
+		this.GameCreate(level);
+		this.GameGoto();
+
+		//Add the players
+		this.AddPlayer("p1", 0, this.p1Scene);
+		this.AddPlayer("p2", 0, this.p2Scene);
+
+		//Start the game
+		this.GameStart();
 		return 0;
 	}
 
+	//Local character selection callback, stores the selected characters and moves on to map selection
 	int _LocalCSCallback(CharSelection cs, PackedScene p1, PackedScene p2) {
-		this.GameGoto();
+		//Removes the charselection
+		GetTree().Root.RemoveChild(cs);
 
-        this.AddPlayer("p1", 0, p1);
-        this.AddPlayer("p2", 0, p2);
-        GetTree().Root.RemoveChild(cs);
-        this.GameStart();
+		//Stores player choices
+		this.p1Scene = p1;
+		this.p2Scene = p2;
+
+		//Moves to level selection
+		LevelSelection ls = (ResourceLoader.Load("res://scenes/ui/level_selection.tscn") as PackedScene).Instance() 
+				as LevelSelection;
+		ls.SetCallback(this._LocalLSCallback);
+		GetTree().Root.AddChild(ls);
 
 		return 0;
 	}
@@ -260,6 +338,37 @@ public class Lobby : Control {
 	void _OnQuitPressed() {
 		//I wanted to wire this directly, but it wouldn't let me
 		GetTree().Quit();
+	}
+
+	//Called by the server once a client has connected, telling them how to set up their game
+	private void SetPlayerId(GameState state, int p1Id, int p2Id) {
+		//One of the players has disconnected, move back to lobby
+		if ((this.p1Id != p1Id) || (this.p2Id != p2Id)) {
+			this.state = state;
+			this.p1Id = p1Id;	
+			this.p2Id = p2Id;
+			this.ResetToCharSelection();
+		
+		} else if (this.state == GameState.WAITING) { //This player has just joined
+				
+			//Goto CS as spectator
+			CharSelection cs = (ResourceLoader.Load("res://scenes/ui/char_selection/char_selection.tscn") as PackedScene)
+					.Instance() as CharSelection;
+			GetTree().Root.AddChild(cs);
+			//Set the character selection up for multiplayer, with this as a spectator
+			if (p1Id == GetTree().GetNetworkUniqueId()) cs.SetMp(Lobby.MultiplayerRole.P1);
+			else if (p2Id == GetTree().GetNetworkUniqueId()) cs.SetMp(Lobby.MultiplayerRole.P2);
+			else cs.SetMp(Lobby.MultiplayerRole.SPECTATOR);
+		} 
+
+		if (state == GameState.CHAR_SELECTION) { //if in char selection, pass through
+			GetTree().Root.GetNode<CharSelection>("char_selection")
+					.PlayersUpdated(p1Id != 0 ? true : false, p2Id != 0 ? true : false);
+		}
+
+		this.state = state;
+		this.p1Id = p1Id;	
+		this.p2Id = p2Id;
 	}
 
 	//Starts the game
@@ -308,6 +417,7 @@ public class Lobby : Control {
 		}
 		if (this.p2 != null) {
 			this.RemovePlayer(this.p2);
+
 			this.p2 = null;
 		}
 
@@ -371,6 +481,43 @@ public class Lobby : Control {
 		this.game.RemoveChild(p);
 		(this.game.GetNode("camera_track") as CameraTrack).StopTrack(p);
 		p.Dispose();
+	}
+
+	//Scrap everything currently going on
+	//Keep the lobby 
+	public void ResetToCharSelection() {
+		this.RemoveAll();
+
+		//Reset state and action as if this client has just connected
+		this.state = GameState.WAITING;
+		this.SetPlayerId(GameState.CHAR_SELECTION, this.p1Id, this.p2Id);
+	}
+
+	//Reset all the way back to title screen
+	public void Reset() {
+		this.RemoveAll();
+
+		//Reset everything
+		GetTree().ChangeScene("res://scenes/ui/lobby.tscn");
+	}
+
+	//Returns the id of the first spectator connected to this game, or 0 if there are none
+	private int GetFirstSpectator() {
+		foreach (int id in GetTree().GetNetworkConnectedPeers()) {
+			if (id != 1 && id != this.p1Id && id != this.p2Id) return id;
+		}
+
+		//None, return 0
+		return 0;
+	}
+
+	//Removes everything other than this and Command from the root node
+	private void RemoveAll() {
+		foreach (Node n in GetTree().Root.GetChildren()) {
+			if (n is Command || n == this) continue;
+			GetTree().Root.RemoveChild(n);
+			n.Free();
+		}
 	}
 
 	//Enable the error panel and have it display the given message

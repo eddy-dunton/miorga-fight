@@ -1,0 +1,128 @@
+<mxfile host="98993468-2ff6-43a1-ab7b-1bc1f9273e3a" modified="2020-08-24T12:53:38.921Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.48.1 Chrome/78.0.3904.130 Electron/7.3.2 Safari/537.36" etag="DHTqONQdBMsqtu_jTDlH" version="13.1.3">
+    <diagram id="cb2z88o21yjABV37sfY2" name="Page-1">
+        <mxGraphModel dx="760" dy="915" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="lL624lGxMALZUtuPehRK-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="lL624lGxMALZUtuPehRK-1" target="lL624lGxMALZUtuPehRK-3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-1" value="&lt;div&gt;Start in character selection,&lt;/div&gt;&lt;div&gt;No players&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="40" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-12" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="lL624lGxMALZUtuPehRK-3" target="lL624lGxMALZUtuPehRK-6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-13" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="lL624lGxMALZUtuPehRK-3" target="lL624lGxMALZUtuPehRK-14" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="520" y="240" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-3" value="1 Player in lobby" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="200" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="lL624lGxMALZUtuPehRK-6" target="lL624lGxMALZUtuPehRK-10" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="520" y="400" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-17" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="lL624lGxMALZUtuPehRK-6" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="360" y="520" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-6" value="2 Players in lobby" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="360" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-9" value="&lt;div&gt;Either player&lt;/div&gt;&lt;div&gt; leaves&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+                    <mxGeometry x="400" y="370" width="80" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-11" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" parent="1" source="lL624lGxMALZUtuPehRK-10" target="lL624lGxMALZUtuPehRK-3" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-10" value="Remaining Player Becomes P1" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="360" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-16" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" parent="1" source="lL624lGxMALZUtuPehRK-14" target="lL624lGxMALZUtuPehRK-1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="410" y="120" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-14" value="Reset Lobby" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="200" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-15" value="P1 Leaves" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+                    <mxGeometry x="405" y="220" width="70" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-22" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="lL624lGxMALZUtuPehRK-18" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="480" y="560" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-28" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="lL624lGxMALZUtuPehRK-18" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="360" y="680" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-18" value="&lt;div&gt;Map &lt;br&gt;&lt;/div&gt;&lt;div&gt;Selection&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="520" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-21" value="&lt;div&gt;Characters&lt;/div&gt;&lt;div&gt;selected&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="465" width="80" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-23" value="&lt;div&gt;Either player &lt;br&gt;&lt;/div&gt;&lt;div&gt;leaves&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+                    <mxGeometry x="400" y="530" width="80" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-27" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="lL624lGxMALZUtuPehRK-24" target="lL624lGxMALZUtuPehRK-10" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-24" value="Move back to lobby" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="480" y="520" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-25" value="&lt;div&gt;P1&lt;/div&gt;&lt;div&gt;Joins&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="150" width="50" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-26" value="&lt;div&gt;P2&lt;/div&gt;&lt;div&gt;Joins&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="310" width="50" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-32" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;" parent="1" source="lL624lGxMALZUtuPehRK-29" target="lL624lGxMALZUtuPehRK-24" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-34" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="lL624lGxMALZUtuPehRK-29" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="360" y="840" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-29" value="&lt;div&gt;Game starts&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="680" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-30" value="Move to map" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="630" width="40" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-33" value="&lt;div&gt;Either player leaves&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+                    <mxGeometry x="440" y="640" width="120" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-35" value="&lt;div&gt;Player wins&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="790" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-37" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="lL624lGxMALZUtuPehRK-36" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="240" y="880" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-36" value="Game over" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="320" y="840" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="lL624lGxMALZUtuPehRK-38" target="lL624lGxMALZUtuPehRK-6" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-38" value="&lt;div&gt;Timeout up&lt;/div&gt;&lt;div&gt;Returns to lobby&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+                    <mxGeometry x="160" y="840" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="lL624lGxMALZUtuPehRK-39" value="&lt;div&gt;Wait for &lt;br&gt;&lt;/div&gt;&lt;div&gt;timeout&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;" parent="1" vertex="1">
+                    <mxGeometry x="250" y="850" width="60" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
