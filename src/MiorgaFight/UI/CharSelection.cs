@@ -8,7 +8,7 @@ namespace MiorgaFight {
 public class CharSelection : Control
 {
     //Stores all the data for a specific player
-    protected class PlayerData {
+    public class PlayerData {
         //This data holders current selection
         public int selection;
         //The button to select this data holder
@@ -30,7 +30,10 @@ public class CharSelection : Control
 
     private Lobby.MultiplayerRole mp;
 
-    private PlayerData p1, p2;
+    //MP status variables
+    public bool mpP1Connected, mpP2Connected, mpP1Confirmed, mpP2Confirmed;
+
+    public PlayerData p1, p2;
 
     //Character scenes in packed format
     //These are then instanced into the charScenes array 
@@ -38,6 +41,9 @@ public class CharSelection : Control
     
     //Texture used for other players in mp
     [Export] private Texture iconUnknown;
+
+    [Export] private Texture iconPlayerPresent;
+    [Export] private Texture iconPlayerNotPresent;
 
     private CharSelectionDataPanel[] chars;
 
@@ -50,6 +56,13 @@ public class CharSelection : Control
     private CharSelectionDataPanel nodeDataPanel;
 
     public override void _Ready() {
+        //Set mp values to false
+        this.mpP1Connected = false;
+        this.mpP2Connected = false;
+        
+        this.mpP1Confirmed = false;
+        this.mpP2Confirmed = false;
+
         //Default to offline
         this.mp = Lobby.MultiplayerRole.OFFLINE;
 
@@ -147,23 +160,24 @@ public class CharSelection : Control
         d.icon.Texture = this.nodeCharList.GetItemIcon(index);
 
         //Enable button if both players have selected, or mp (== P1 or P2, specs don't get this far in the function, as long as both players are in the game)
-        if ((this.p1.selection != -1 && this.p2.selection != -1) || 
-                ((this.mp != Lobby.MultiplayerRole.OFFLINE) && (Command.lobby.p1Id != 0 && Command.lobby.p2Id != 0)))
+        if ((this.p1.selection != -1 && this.p2.selection != -1) || (this.mpP1Connected && this.mpP1Connected))
             this.nodePlayButton.Disabled = false;
     }
 
     //Sets a player selection to be confirmed
-    void Confirm(Lobby.MultiplayerRole p, int selection) {
+    public void Confirm(Lobby.MultiplayerRole p, int selection) {
         if (p == Lobby.MultiplayerRole.P1) {
             this.nodeP1Confirmed.Visible = true;
             this.p1.selection = selection; 
+            this.mpP1Confirmed = true;
         } else if (p == Lobby.MultiplayerRole.P2) {
             this.nodeP2Confirmed.Visible = true;
             this.p2.selection = selection;
+            this.mpP2Confirmed = true;
         } else {} //Cry I guess?
 
         //Both are selected, start the game
-        if (this.nodeP2Confirmed.Visible == true && this.nodeP2Confirmed.Visible == true) {
+        if (this.mpP1Confirmed && this.mpP2Confirmed) {
             //TODO
         }
     }
@@ -195,28 +209,45 @@ public class CharSelection : Control
             this.nodeP2Button.Disabled = true;
             this.nodePlayButton.Disabled = true;
             this.nodeP1Icon.Texture = this.iconUnknown;
+            this.nodeP1Icon.Visible = false;
             this.nodeP2Icon.Texture = this.iconUnknown;
+            this.nodeP2Icon.Visible = false;
         } else if (this.mp == Lobby.MultiplayerRole.P1) {
             this.nodeP1Button.Pressed = true;
             this.nodeP2Button.Pressed = false;
             this.nodeP2Button.Disabled = true;
             this.nodeP2Icon.Texture = this.iconUnknown;
+            this.nodeP2Icon.Visible = false;
         } else if (this.mp == Lobby.MultiplayerRole.P2) {
             this.nodeP1Button.Pressed = false;
             this.nodeP2Button.Pressed = true;
             this.nodeP1Button.Disabled = true;
             this.nodeP1Icon.Texture = this.iconUnknown;
+            this.nodeP1Icon.Visible = false;
         }
 
         //Turn these off (as players updated should be called after set MP)
-        this.nodeP1Present.Visible = false;
-        this.nodeP2Present.Visible = false;
+        this.nodeP1Present.Texture = this.iconPlayerNotPresent;
+        this.nodeP2Present.Texture = this.iconPlayerNotPresent;
+        
+        this.mpP1Connected = false;
+        this.mpP2Connected = false;
+        
+        this.mpP1Confirmed = false;
+        this.mpP2Confirmed = false;
     }
 
     //Sets present buttons correctly
+    //p1 & p2 should be whether the player is now connected
     public void PlayersUpdated(bool p1, bool p2) {
-        this.nodeP1Present.Visible = p1;
-        this.nodeP2Present.Visible = p2;
+        this.nodeP1Present.Texture = p1 ? this.iconPlayerPresent : this.iconPlayerNotPresent;
+        this.nodeP2Present.Texture = p2 ? this.iconPlayerPresent : this.iconPlayerNotPresent;
+
+        this.nodeP1Icon.Visible = p1;
+        this.nodeP2Icon.Visible = p2;
+
+        this.mpP1Connected = p1;
+        this.mpP2Connected = p2;
     }
 
     //Sets the call back lobby to the one provided

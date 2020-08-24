@@ -116,6 +116,14 @@ public class Lobby : Control {
 
 			//Otherwise just current ids to new player
 			RpcId(id, nameof(this.SetPlayerId), new object[] {GameState.CHAR_SELECTION, this.p1Id, this.p2Id});
+			//Send the new player any confirmations that may have been made in char selection
+			if (this.state == GameState.CHAR_SELECTION) {
+				CharSelection cs = GetTree().Root.GetNode<CharSelection>("char_selection");
+				if (cs.mpP1Confirmed) 
+					cs.RpcId(id, nameof(cs.Confirm), new object[] {Lobby.MultiplayerRole.P1, cs.p1.selection});
+				if (cs.mpP2Confirmed) 
+					cs.RpcId(id, nameof(cs.Confirm), new object[] {Lobby.MultiplayerRole.P2, cs.p2.selection});
+			}
 		}
 	}
 
