@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/MiorgaFight/UI/Lobby.cs" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -19,6 +19,20 @@ region_rect = Rect2( 0, 0, 214, 23 )
 [sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 7 )
 region_rect = Rect2( 0, 0, 214, 23 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.172549, 0.164706, 0.196078, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.368627, 0.282353, 0.203922, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 1
+anti_aliasing = false
 
 [node name="lobby" type="Control"]
 theme = ExtResource( 3 )
@@ -72,7 +86,7 @@ margin_left = 1.0
 margin_top = 30.0
 margin_right = 215.0
 margin_bottom = 54.0
-focus_mode = 0
+focus_mode = 1
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "127.0.0.1"
@@ -117,11 +131,12 @@ margin_right = 211.0
 text = "Play Locally"
 
 [node name="pa_error" type="Panel" parent="."]
-visible = false
+modulate = Color( 1, 1, 1, 0.862745 )
 margin_left = 255.0
 margin_top = 200.0
 margin_right = 525.0
 margin_bottom = 300.0
+custom_styles/panel = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -137,16 +152,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="bt_error" type="Button" parent="pa_error"]
-margin_left = 85.0
-margin_top = 65.0
-margin_right = 185.0
-margin_bottom = 85.0
-focus_mode = 0
+[node name="bt_error" parent="pa_error" instance=ExtResource( 6 )]
+margin_left = 83.0
+margin_top = 64.0
+margin_right = 187.0
+margin_bottom = 87.0
+
+[node name="label" parent="pa_error/bt_error" index="0"]
 text = "Cancel"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [editable path="bt_quit"]
 
@@ -155,3 +168,5 @@ __meta__ = {
 [editable path="pa_start/bt_join"]
 
 [editable path="pa_start/bt_local"]
+
+[editable path="pa_error/bt_error"]

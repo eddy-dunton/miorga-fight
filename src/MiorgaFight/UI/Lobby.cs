@@ -32,7 +32,8 @@ public class Lobby : Control {
 	public static GameState state = GameState.TITLE;
 
 	LineEdit nodeAddr;
-	Button nodeHostButton, nodeJoinButton, nodeLocalButton, nodeErrorButton, nodeQuitButton;
+	Button nodeHostButton, nodeJoinButton, nodeLocalButton, nodeQuitButton;
+	RaiseButton nodeErrorButton;
 	Level game;
 	Panel nodeErrorPanel, nodeStartPanel;
 	Label nodeErrorLabel;
@@ -65,7 +66,7 @@ public class Lobby : Control {
 		this.nodeHostButton = GetNode<Button>("pa_start/bt_host");
 		this.nodeJoinButton = GetNode<Button>("pa_start/bt_join");
 		this.nodeLocalButton = GetNode<Button>("pa_start/bt_local");
-		this.nodeErrorButton = GetNode<Button>("pa_error/bt_error");
+		this.nodeErrorButton = GetNode<RaiseButton>("pa_error/bt_error");
 		this.nodeQuitButton = GetNode<Button>("bt_quit");
 
 		this.nodeErrorPanel = GetNode<Panel>("pa_error");

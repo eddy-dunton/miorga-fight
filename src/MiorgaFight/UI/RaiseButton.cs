@@ -5,6 +5,15 @@ namespace MiorgaFight {
 
 public class RaiseButton : Button
 {
+    //Pass this buttons text field straight through to the label
+    public new string Text {
+        set {
+            this.nodeLabel.Text = value;
+        } get {
+            return this.nodeLabel.Text;
+        }
+    }
+
     private Label nodeLabel;
 
     private Vector2 downPosition;
