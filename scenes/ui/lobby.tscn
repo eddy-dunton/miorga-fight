@@ -131,6 +131,7 @@ margin_right = 211.0
 text = "Play Locally"
 
 [node name="pa_error" type="Panel" parent="."]
+visible = false
 modulate = Color( 1, 1, 1, 0.862745 )
 margin_left = 255.0
 margin_top = 200.0
