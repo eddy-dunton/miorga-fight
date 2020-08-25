@@ -158,6 +158,7 @@ public class Lobby : Control {
 
 	void _ServerDisconnected() {
 		this.Reset();
+		this.ShowError("Connection to server lost!");
 	}
 
 	void _OnHostPressed() {
@@ -369,18 +370,24 @@ public class Lobby : Control {
 	}
 
 	//Scrap everything currently going on
-	//Keep the lobby 
+	//Keep the lobby (for multiplayer)
 	public void ResetToCharSelection() {
 		this.RemoveAll();
 
 		//Reset state and action as if this client has just connected
 		Lobby.state = GameState.WAITING;
+		Lobby.role = MultiplayerRole.SPECTATOR;
 		this.SetPlayerId(GameState.CHAR_SELECTION, this.p1Id, this.p2Id);
 	}
 
 	//Reset all the way back to title screen
 	public void Reset() {
 		this.RemoveAll();
+
+		//If online close connection
+		if (Lobby.role != MultiplayerRole.OFFLINE) this.peer.CloseConnection();
+		Lobby.state = GameState.TITLE;
+		Lobby.role = MultiplayerRole.OFFLINE;
 
 		//Reset everything
 		GetTree().ChangeScene("res://scenes/ui/lobby.tscn");
@@ -401,7 +408,7 @@ public class Lobby : Control {
 		foreach (Node n in GetTree().Root.GetChildren()) {
 			if (n is Command || n == this) continue;
 			GetTree().Root.RemoveChild(n);
-			n.Free();
+			n.QueueFree();
 		}
 	}
 
