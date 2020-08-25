@@ -109,7 +109,7 @@ public class Command : Node {
     //Starts pausing the game
     private void PauseStart() {
         //Pause if game is local
-        if (! Lobby.mp) {
+        if (Lobby.role == Lobby.MultiplayerRole.OFFLINE) {
             GetTree().Paused = true;
         }
 

@@ -20,7 +20,7 @@ public class Lobby : Control {
 
 	public const int PORT = 6785;
 
-    public static bool mp = false;
+	public static MultiplayerRole role = MultiplayerRole.OFFLINE;
     public static bool started = false;
 
 	LineEdit nodeAddr;
@@ -31,8 +31,6 @@ public class Lobby : Control {
 
 	//The current state of this client
 	private GameState state;
-
-	public MultiplayerRole role;
 
 	//Is the creation of the game object deferred
 	//Used to work around the fact not enough of the rest of the scene will have loaded before Ready is run
@@ -55,7 +53,6 @@ public class Lobby : Control {
 
 	public override void _Ready()
 	{
-		this.role = MultiplayerRole.OFFLINE;
 		this.state = GameState.WAITING;
 
 		this.nodeAddr = GetNode<LineEdit>("pa_start/tx_address");    
@@ -130,69 +127,6 @@ public class Lobby : Control {
 		}
 	}
 
-	/*
-	//Called when a player connects
-	//Adds that player to the game
-	void _PlayerConnected(int id) {
-		GD.Print(id.ToString() + " connected!");
-
-		if (this.deferred) {
-			this.GameCreate();
-			this.deferred = false;
-		}
-
-		//Don't let the server connect
-		if (id == 1) return;
-
-		//If server
-		if (GetTree().IsNetworkServer()) {
-			//No p1, create p1
-			if (! this.game.HasNode("p1")) {
-				Rpc(nameof(AddPlayer), new object[] {"p1", id});
-				GD.Print(id.ToString() + " is P1!");
-				
-				//if there is a node 2, add that
-				if (this.game.HasNode("p2")) {
-					RpcId(id, nameof(AddPlayer), new object[] {"p2", this.game.GetNode("p2").GetNetworkMaster()});
-				}
-
-				return;
-			} else {
-				//if there is a p1, add it to that players game
-				RpcId(id, nameof(AddPlayer), new object[] {"p1", this.game.GetNode("p1").GetNetworkMaster()});
-			}
-	
-			if (! this.game.HasNode("p2")) {
-				Rpc(nameof(AddPlayer), new object[] {"p2", id});
-				GD.Print(id.ToString() + " is P2!");
-				return;
-			} else {
-				RpcId(id, nameof(AddPlayer), new object[] {"p2", this.game.GetNode("p2").GetNetworkMaster()});
-			}
-
-			GD.Print(id.ToString() + " is spectator!");
-		}
-	}*/
-
-	/*
-	void _PlayerDisconnected(int id) {
-		if (this.p1 != null && this.p1.GetNetworkMaster() == id) {
-			//P1 has disconnected
-			this.GameEnd();
-			this.RemovePlayer(this.p1);
-			this.p1 = null;
-			GD.Print("P1 disconnected");
-			return;
-		} else if (this.p2 != null && this.p2.GetNetworkMaster() == id) {
-			//P1 has disconnected
-			this.GameEnd();
-			this.RemovePlayer(this.p2);
-			this.p2 = null;
-			GD.Print("P2 disconnected");
-			return;
-		} 
-	}*/
-
 	void _PlayerDisconnected(int id) {
 		if (GetTree().GetNetworkUniqueId() == 1) {
 			//Force everyone back to lobby (if you're the server)
@@ -205,21 +139,12 @@ public class Lobby : Control {
 	}
 
 	void _ConnectedToServer() {
-		//Lobby.mp = true;
-		//this.p1Id = -1;
-		//this.p2Id = -1;
+		this.p1Id = -1;
+		this.p2Id = -1;
 
 		this.nodeErrorPanel.Visible = false;
 		this.nodeStartPanel.Visible = true;
 		this.Visible = false;
-		Lobby.mp = true;
-
-		/*
-		foreach (int id in GetTree().GetNetworkConnectedPeers()) {
-			this._PlayerConnected(id);
-		}
-
-		this._PlayerConnected(GetTree().GetNetworkUniqueId());*/
 	} 
 
 	void _ConnectionFailed() {
@@ -228,17 +153,6 @@ public class Lobby : Control {
 
 	void _ServerDisconnected() {
 		this.Reset();
-	}
-
-	void _GameOver(String error = "") {
-		Node game = GetNode("/root/game");
-		if (game != null) {
-			game.Free();
-			this.Visible = true;
-		}
-
-		GetTree().NetworkPeer = null;
-		GD.Print(error);
 	}
 
 	void _OnHostPressed() {
@@ -252,12 +166,11 @@ public class Lobby : Control {
 			return;
 		}
 
-		Lobby.mp = true;
 		this.p1Id = 0;
 		this.p2Id = 0;
 		GetTree().NetworkPeer = this.peer;
 		this.state = GameState.CHAR_SELECTION;
-		this.role = MultiplayerRole.HOST;
+		Lobby.role = MultiplayerRole.HOST;
 	
 		this.Visible = false;
 
@@ -266,7 +179,7 @@ public class Lobby : Control {
 				.Instance() as CharSelection;
 		GetTree().Root.AddChild(cs);
 		//Set the character selection up for multiplayer, with this as a spectator
-		cs.SetMp(this.role);
+		cs.SetMp(Lobby.role);
 		cs.SetCallback(this._MpCSCallback);
 	}
 
@@ -286,12 +199,14 @@ public class Lobby : Control {
 		 
 		this.ShowError("Connecting...", "Cancel");
 		this.state = GameState.WAITING;
-		this.role = MultiplayerRole.SPECTATOR;
+		Lobby.role = MultiplayerRole.SPECTATOR;
 	}
 
 	//Host a regular, local game
 	void _OnLocalPressed() {
-		Lobby.mp = false;
+		Lobby.role = MultiplayerRole.OFFLINE;
+		this.p1Id = 0;
+		this.p2Id = 0;
 		//Move to char selection
 		this.Visible = false;
 		CharSelection cs = (ResourceLoader.Load("res://scenes/ui/char_selection/char_selection.tscn") as PackedScene)
@@ -303,8 +218,7 @@ public class Lobby : Control {
 	//Multiplayer character selection callback, stores the selected characters and moves on to map selection
 	LevelSelection _MpCSCallback(CharSelection cs, PackedScene p1, PackedScene p2) {
 		LevelSelection ls = this._LocalCSCallback(cs, p1, p2);
-		ls.SetMp(this.role);
-		ls.SetCallback(this._MPLSCallback);
+		ls.SetMp(Lobby.role);
 
 		return ls;
 	}
@@ -322,41 +236,22 @@ public class Lobby : Control {
 		//Moves to level selection
 		LevelSelection ls = (ResourceLoader.Load("res://scenes/ui/level_selection.tscn") as PackedScene).Instance() 
 				as LevelSelection;
-		ls.SetCallback(this._LocalLSCallback);
+		ls.SetCallback(this._LSCallback);
 		GetTree().Root.AddChild(ls);
 
 		return ls;
 	}
 
-	int _MPLSCallback(LevelSelection ls, PackedScene level) {
+	int _LSCallback(LevelSelection ls, PackedScene level) {
 		//Remove level selection
 		GetTree().Root.RemoveChild(ls);
 		
 		//Create and goto level
 		this.GameCreate(level);
-		this.GameGoto();
 
 		//Add the players
 		this.AddPlayer("p1", this.p1Id, this.p1Scene);
 		this.AddPlayer("p2", this.p2Id, this.p2Scene);
-
-		//Start the game
-		this.GameStart();
-		return 0;
-	}
-
-
-	int _LocalLSCallback(LevelSelection ls, PackedScene level) {
-		//Remove level selection
-		GetTree().Root.RemoveChild(ls);
-		
-		//Create and goto level
-		this.GameCreate(level);
-		this.GameGoto();
-
-		//Add the players
-		this.AddPlayer("p1", 0, this.p1Scene);
-		this.AddPlayer("p2", 0, this.p2Scene);
 
 		//Start the game
 		this.GameStart();
@@ -386,10 +281,10 @@ public class Lobby : Control {
 
 	//Called by the server once a client has connected, telling them how to set up their game
 	private void SetPlayerId(GameState state, int p1Id, int p2Id) {
-		if (p1Id == GetTree().GetNetworkUniqueId()) this.role = MultiplayerRole.P1;
-		else if (p2Id == GetTree().GetNetworkUniqueId()) this.role = MultiplayerRole.P2;
-		else if (1 == GetTree().GetNetworkUniqueId()) this.role = MultiplayerRole.HOST;
-		else this.role = MultiplayerRole.SPECTATOR;
+		if (p1Id == GetTree().GetNetworkUniqueId()) Lobby.role = MultiplayerRole.P1;
+		else if (p2Id == GetTree().GetNetworkUniqueId()) Lobby.role = MultiplayerRole.P2;
+		else if (1 == GetTree().GetNetworkUniqueId()) Lobby.role = MultiplayerRole.HOST;
+		else Lobby.role = MultiplayerRole.SPECTATOR;
 
 		//One of the players has disconnected, move back to lobby
 		if ((this.p1Id != p1Id) || (this.p2Id != p2Id)) {
@@ -405,7 +300,7 @@ public class Lobby : Control {
 					.Instance() as CharSelection;
 			GetTree().Root.AddChild(cs);
 			//Set the character selection up for multiplayer, with this as a spectator
-			cs.SetMp(this.role);
+			cs.SetMp(Lobby.role);
 			cs.SetCallback(this._MpCSCallback);
 		} 
 
@@ -428,65 +323,14 @@ public class Lobby : Control {
 		this.p2.Start(this.p1, this.game.GetNode("hud/gr_p2") as PlayerHUD);
 	}
 
-	//Ends the game, leaving both players in the game
-	private void GameEnd() {
-		//If the game has started, end it
-		if (Lobby.started) {
-			this.p1.End();
-			this.p2.End();
-			Lobby.started = false;
-		}
-	}
-
-	//Creates a game
-	private void GameCreate() {
-		//Load game
-		this.game = ((ResourceLoader.Load("res://scenes/level/marketharbour.tscn") as PackedScene).Instance()) as Level;
-	}
-
+	//Creates the game then goes to it
 	private void GameCreate(PackedScene map) {
 		this.game = (map.Instance()) as Level;
-	}
 
-	//Goes to the game, from the lobby
-	public void GameGoto() {
 		GetTree().Root.AddChild(this.game);
 		this.Visible = false;
 		Input.SetMouseMode(Input.MouseMode.Hidden);
 	}
-
-	/*
-	//Quits the game
-	public void GameQuit() {
-		this.GameEnd();
-		if (this.p1 != null) {
-			this.RemovePlayer(this.p1);
-			this.p1 = null;
-		}
-		if (this.p2 != null) {
-			this.RemovePlayer(this.p2);
-
-			this.p2 = null;
-		}
-
-		if (Lobby.mp) {
-			Lobby.mp = false;
-			//Close the mulitplayer connection
-			this.peer.CloseConnection();
-			this.peer = null;
-			GetTree().NetworkPeer = null;
-		}
-
-		//Remove the game
-		GetTree().Root.RemoveChild(this.game);
-		this.game.Dispose();
-		this.game = null;
-
-		this.Visible = true;
-
-		(GetNode("/root/Command") as Command).PauseEnd();
-		Input.SetMouseMode(Input.MouseMode.Visible);
-	}*/
 
 	public void AddPlayer(String name, int id, PackedScene player) {
 		Player _new = player.Instance() as Player;
@@ -494,7 +338,7 @@ public class Lobby : Control {
 		
 		_new.SetNetworkMaster(id);
 		
-		if (! Lobby.mp) {
+		if (Lobby.role == MultiplayerRole.OFFLINE) {
 			_new.controls = (name == "p1") ? Player.ControlMethod.PLAYER1 : Player.ControlMethod.PLAYER2; 
 		} else {
 			_new.controls = (id == GetTree().GetNetworkUniqueId()) ? 
