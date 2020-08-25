@@ -28,7 +28,7 @@ public class CharSelection : Control
         }
     }
 
-    private Lobby.MultiplayerRole mp;
+    private Lobby.MultiplayerRole mpRole;
 
     //MP status variables
     public bool mpP1Connected, mpP2Connected, mpP1Confirmed, mpP2Confirmed;
@@ -48,7 +48,7 @@ public class CharSelection : Control
     private CharSelectionDataPanel[] chars;
 
     //Function to be called once the characters are selected
-    private Func<CharSelection, PackedScene, PackedScene, int> callback;
+    private Func<CharSelection, PackedScene, PackedScene, LevelSelection> callback;
 
     private TextureButton nodeP1Button, nodeP2Button, nodePlayButton;
     private Sprite nodeP1Icon, nodeP2Icon, nodeP1Confirmed, nodeP2Confirmed, nodeP1Present, nodeP2Present;
@@ -64,7 +64,7 @@ public class CharSelection : Control
         this.mpP2Confirmed = false;
 
         //Default to offline
-        this.mp = Lobby.MultiplayerRole.OFFLINE;
+        this.mpRole = Lobby.MultiplayerRole.OFFLINE;
 
         //Get nodes
         this.nodeP1Button = GetNode<TextureButton>("pa_player_buttons/bt_p1");
@@ -128,8 +128,8 @@ public class CharSelection : Control
     //When the play button is pressed
     void _OnPlayPressed() {
         //If online, RPC confirmed instead
-        if (this.mp != Lobby.MultiplayerRole.OFFLINE) {
-            Rpc(nameof(this.Confirm), new object[] {this.mp, this.GetSelectedPlayer().selection});
+        if (this.mpRole != Lobby.MultiplayerRole.OFFLINE) {
+            Rpc(nameof(this.Confirm), new object[] {this.mpRole, this.GetSelectedPlayer().selection});
             //this.Confirm(this.mp, this.GetSelectedPlayer().selection);
             this.nodePlayButton.Disabled = true;
             //Disable char list
@@ -151,8 +151,8 @@ public class CharSelection : Control
         if (!this.nodeCharList.IsItemSelectable(index)) return;
 
         this.ShowChar(index);
-        //Don't change anything for spectators
-        if (this.mp == Lobby.MultiplayerRole.SPECTATOR) return;
+        //Don't change anything for spectators or host
+        if (this.mpRole == Lobby.MultiplayerRole.SPECTATOR || this.mpRole == Lobby.MultiplayerRole.HOST) return;
 
         PlayerData d = this.GetSelectedPlayer();
 
@@ -160,7 +160,7 @@ public class CharSelection : Control
         d.icon.Texture = this.nodeCharList.GetItemIcon(index);
 
         //Enable button if both players have selected, or mp (== P1 or P2, specs don't get this far in the function, as long as both players are in the game)
-        if ((this.p1.selection != -1 && this.p2.selection != -1) || (this.mpP1Connected && this.mpP1Connected))
+        if ((this.p1.selection != -1 && this.p2.selection != -1) || (this.mpP1Connected && this.mpP2Connected))
             this.nodePlayButton.Disabled = false;
     }
 
@@ -178,7 +178,7 @@ public class CharSelection : Control
 
         //Both are selected, start the game
         if (this.mpP1Confirmed && this.mpP2Confirmed) {
-            //TODO
+            this.callback(this, this.chars[this.p1.selection].character, this.chars[this.p2.selection].character);
         }
     }
 
@@ -202,8 +202,8 @@ public class CharSelection : Control
 
     //Sets the lobby up for different multiplayer scenarios
     public void SetMp(Lobby.MultiplayerRole role) {
-        this.mp = role;
-        if (this.mp == Lobby.MultiplayerRole.SPECTATOR) {
+        this.mpRole = role;
+        if (this.mpRole == Lobby.MultiplayerRole.SPECTATOR ||this.mpRole == Lobby.MultiplayerRole.HOST) {
             //Disable all buttons
             this.nodeP1Button.Disabled = true;
             this.nodeP2Button.Disabled = true;
@@ -213,13 +213,13 @@ public class CharSelection : Control
             this.nodeP1Icon.Visible = false;
             this.nodeP2Icon.Texture = this.iconUnknown;
             this.nodeP2Icon.Visible = false;
-        } else if (this.mp == Lobby.MultiplayerRole.P1) {
+        } else if (this.mpRole == Lobby.MultiplayerRole.P1) {
             this.nodeP1Button.Pressed = true;
             this.nodeP2Button.Pressed = false;
             this.nodeP2Button.Disabled = true;
             this.nodeP2Icon.Texture = this.iconUnknown;
             this.nodeP2Icon.Visible = false;
-        } else if (this.mp == Lobby.MultiplayerRole.P2) {
+        } else if (this.mpRole == Lobby.MultiplayerRole.P2) {
             this.nodeP1Button.Pressed = false;
             this.nodeP2Button.Pressed = true;
             this.nodeP1Button.Disabled = true;
@@ -252,7 +252,7 @@ public class CharSelection : Control
     }
 
     //Sets the call back lobby to the one provided
-    public void SetCallback(Func<CharSelection, PackedScene, PackedScene, int> c) {
+    public void SetCallback(Func<CharSelection, PackedScene, PackedScene, LevelSelection> c) {
         this.callback = c;
     }
 

@@ -8,7 +8,7 @@ namespace MiorgaFight {
 //And the lobby UI scene which the game starts on
 public class Lobby : Control {
 	public enum MultiplayerRole {
-		SPECTATOR, P1, P2, OFFLINE
+		SPECTATOR, P1, P2, OFFLINE, HOST
 	}
 
 	public enum GameState {
@@ -32,6 +32,8 @@ public class Lobby : Control {
 	//The current state of this client
 	private GameState state;
 
+	public MultiplayerRole role;
+
 	//Is the creation of the game object deferred
 	//Used to work around the fact not enough of the rest of the scene will have loaded before Ready is run
 	//This should be deprecated soon
@@ -53,6 +55,7 @@ public class Lobby : Control {
 
 	public override void _Ready()
 	{
+		this.role = MultiplayerRole.OFFLINE;
 		this.state = GameState.WAITING;
 
 		this.nodeAddr = GetNode<LineEdit>("pa_start/tx_address");    
@@ -209,6 +212,7 @@ public class Lobby : Control {
 		this.nodeErrorPanel.Visible = false;
 		this.nodeStartPanel.Visible = true;
 		this.Visible = false;
+		Lobby.mp = true;
 
 		/*
 		foreach (int id in GetTree().GetNetworkConnectedPeers()) {
@@ -253,6 +257,7 @@ public class Lobby : Control {
 		this.p2Id = 0;
 		GetTree().NetworkPeer = this.peer;
 		this.state = GameState.CHAR_SELECTION;
+		this.role = MultiplayerRole.HOST;
 	
 		this.Visible = false;
 
@@ -261,7 +266,8 @@ public class Lobby : Control {
 				.Instance() as CharSelection;
 		GetTree().Root.AddChild(cs);
 		//Set the character selection up for multiplayer, with this as a spectator
-		cs.SetMp(Lobby.MultiplayerRole.SPECTATOR);
+		cs.SetMp(this.role);
+		cs.SetCallback(this._MpCSCallback);
 	}
 
 	void _OnJoinPressed() {
@@ -280,10 +286,12 @@ public class Lobby : Control {
 		 
 		this.ShowError("Connecting...", "Cancel");
 		this.state = GameState.WAITING;
+		this.role = MultiplayerRole.SPECTATOR;
 	}
 
 	//Host a regular, local game
 	void _OnLocalPressed() {
+		Lobby.mp = false;
 		//Move to char selection
 		this.Visible = false;
 		CharSelection cs = (ResourceLoader.Load("res://scenes/ui/char_selection/char_selection.tscn") as PackedScene)
@@ -291,6 +299,52 @@ public class Lobby : Control {
 		cs.SetCallback(this._LocalCSCallback);
 		GetTree().Root.AddChild(cs);
 	}
+
+	//Multiplayer character selection callback, stores the selected characters and moves on to map selection
+	LevelSelection _MpCSCallback(CharSelection cs, PackedScene p1, PackedScene p2) {
+		LevelSelection ls = this._LocalCSCallback(cs, p1, p2);
+		ls.SetMp(this.role);
+		ls.SetCallback(this._MPLSCallback);
+
+		return ls;
+	}
+
+	//Local character selection callback, stores the selected characters and moves on to level selection
+	//Returns the new level selection
+	LevelSelection _LocalCSCallback(CharSelection cs, PackedScene p1, PackedScene p2) {
+		//Removes the charselection
+		GetTree().Root.RemoveChild(cs);
+
+		//Stores player choices
+		this.p1Scene = p1;
+		this.p2Scene = p2;
+
+		//Moves to level selection
+		LevelSelection ls = (ResourceLoader.Load("res://scenes/ui/level_selection.tscn") as PackedScene).Instance() 
+				as LevelSelection;
+		ls.SetCallback(this._LocalLSCallback);
+		GetTree().Root.AddChild(ls);
+
+		return ls;
+	}
+
+	int _MPLSCallback(LevelSelection ls, PackedScene level) {
+		//Remove level selection
+		GetTree().Root.RemoveChild(ls);
+		
+		//Create and goto level
+		this.GameCreate(level);
+		this.GameGoto();
+
+		//Add the players
+		this.AddPlayer("p1", this.p1Id, this.p1Scene);
+		this.AddPlayer("p2", this.p2Id, this.p2Scene);
+
+		//Start the game
+		this.GameStart();
+		return 0;
+	}
+
 
 	int _LocalLSCallback(LevelSelection ls, PackedScene level) {
 		//Remove level selection
@@ -306,24 +360,6 @@ public class Lobby : Control {
 
 		//Start the game
 		this.GameStart();
-		return 0;
-	}
-
-	//Local character selection callback, stores the selected characters and moves on to map selection
-	int _LocalCSCallback(CharSelection cs, PackedScene p1, PackedScene p2) {
-		//Removes the charselection
-		GetTree().Root.RemoveChild(cs);
-
-		//Stores player choices
-		this.p1Scene = p1;
-		this.p2Scene = p2;
-
-		//Moves to level selection
-		LevelSelection ls = (ResourceLoader.Load("res://scenes/ui/level_selection.tscn") as PackedScene).Instance() 
-				as LevelSelection;
-		ls.SetCallback(this._LocalLSCallback);
-		GetTree().Root.AddChild(ls);
-
 		return 0;
 	}
 
@@ -350,6 +386,11 @@ public class Lobby : Control {
 
 	//Called by the server once a client has connected, telling them how to set up their game
 	private void SetPlayerId(GameState state, int p1Id, int p2Id) {
+		if (p1Id == GetTree().GetNetworkUniqueId()) this.role = MultiplayerRole.P1;
+		else if (p2Id == GetTree().GetNetworkUniqueId()) this.role = MultiplayerRole.P2;
+		else if (1 == GetTree().GetNetworkUniqueId()) this.role = MultiplayerRole.HOST;
+		else this.role = MultiplayerRole.SPECTATOR;
+
 		//One of the players has disconnected, move back to lobby
 		if ((this.p1Id != p1Id) || (this.p2Id != p2Id)) {
 			this.state = state;
@@ -364,9 +405,8 @@ public class Lobby : Control {
 					.Instance() as CharSelection;
 			GetTree().Root.AddChild(cs);
 			//Set the character selection up for multiplayer, with this as a spectator
-			if (p1Id == GetTree().GetNetworkUniqueId()) cs.SetMp(Lobby.MultiplayerRole.P1);
-			else if (p2Id == GetTree().GetNetworkUniqueId()) cs.SetMp(Lobby.MultiplayerRole.P2);
-			else cs.SetMp(Lobby.MultiplayerRole.SPECTATOR);
+			cs.SetMp(this.role);
+			cs.SetCallback(this._MpCSCallback);
 		} 
 
 		if (state == GameState.CHAR_SELECTION) { //if in char selection, pass through
@@ -415,7 +455,7 @@ public class Lobby : Control {
 		Input.SetMouseMode(Input.MouseMode.Hidden);
 	}
 
-
+	/*
 	//Quits the game
 	public void GameQuit() {
 		this.GameEnd();
@@ -446,16 +486,14 @@ public class Lobby : Control {
 
 		(GetNode("/root/Command") as Command).PauseEnd();
 		Input.SetMouseMode(Input.MouseMode.Visible);
-	}
-
-	void AddPlayer(String name, int id) {
-		this.AddPlayer(name, id, ResourceLoader.Load("res://scenes/player/regia.tscn") as PackedScene);
-	}
+	}*/
 
 	public void AddPlayer(String name, int id, PackedScene player) {
 		Player _new = player.Instance() as Player;
 		_new.Name = name;
+		
 		_new.SetNetworkMaster(id);
+		
 		if (! Lobby.mp) {
 			_new.controls = (name == "p1") ? Player.ControlMethod.PLAYER1 : Player.ControlMethod.PLAYER2; 
 		} else {
@@ -476,19 +514,6 @@ public class Lobby : Control {
 		
 		this.game.AddChild(_new);
 		(this.game.GetNode("camera_track") as CameraTrack).Track(_new);
-		
-
-		if (this.p1 != null && this.p2 != null) {
-			this.GameStart();
-		}
-	}
-
-	//Removes a player from the game
-	//Player pointer must also then be set to null
-	void RemovePlayer(Player p) {
-		this.game.RemoveChild(p);
-		(this.game.GetNode("camera_track") as CameraTrack).StopTrack(p);
-		p.Dispose();
 	}
 
 	//Scrap everything currently going on

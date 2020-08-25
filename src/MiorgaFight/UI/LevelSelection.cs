@@ -24,6 +24,8 @@ public class LevelSelection : Control
 
     [Export] LevelSelectionLevelData[] levelData;
 
+    private Lobby.MultiplayerRole mpRole;
+
     private LevelData[] levels;
 
     private Control nodeButtonPanel;
@@ -41,6 +43,7 @@ public class LevelSelection : Control
     private LevelData? level;
 
     public override void _Ready() {
+        this.mpRole = Lobby.MultiplayerRole.OFFLINE;
         this.level = null;
 
         //Gets nodes and sets up connections
@@ -104,6 +107,9 @@ public class LevelSelection : Control
                 break;
             }
         }
+
+        //Allow only the server to call a map change
+        RpcConfig(nameof(this.mpSelected), MultiplayerAPI.RPCMode.Puppetsync);
     }
 
     void _OnSliderChanged(float value) {
@@ -122,7 +128,7 @@ public class LevelSelection : Control
         newlevel.button.Disabled = true;
 
         this.nodeButtonPlay.Disabled = false;
-        this.ShowMap(newlevel, this.level);
+        this.ShowLevel(newlevel, this.level);
         this.level = newlevel;
     }
 
@@ -134,11 +140,14 @@ public class LevelSelection : Control
         }
     
         if (this.level.HasValue) {
-            this.callback(this, this.level.Value.resource.packed);
+            if (this.mpRole == Lobby.MultiplayerRole.OFFLINE)
+                this.callback(this, this.level.Value.resource.packed);
+            else if (this.mpRole == Lobby.MultiplayerRole.HOST)
+                Rpc(nameof(this.mpSelected), Array.IndexOf(this.levels, this.level));
         }
     }
 
-    private void ShowMap(LevelData newlevel, LevelData? oldlevel) {
+    private void ShowLevel(LevelData newlevel, LevelData? oldlevel) {
         if (oldlevel.HasValue) {
             this.nodeLevelViewport.RemoveChild(oldlevel.Value.level);
         }
@@ -151,6 +160,19 @@ public class LevelSelection : Control
         this.nodeLevelText.BbcodeText = newlevel.resource.text;
 
         this.nodeLevelViewport.AddChild(newlevel.level);
+    }
+
+    //Used when a map is selected in multiplayer, passes through by index rather than sending the entire packedscene
+    public void mpSelected(int index) {
+        this.callback(this, this.levels[index].resource.packed);    
+    }
+
+    //Sets up Level selection for multiplayer 
+    public void SetMp(Lobby.MultiplayerRole role) {
+        this.mpRole = role;
+        if (role != Lobby.MultiplayerRole.HOST) {
+            this.nodeButtonPlay.Visible = false;
+        }
     }
 
     public void SetCallback(Func<LevelSelection, PackedScene, int> c) {
