@@ -208,6 +208,7 @@ public class CharSelection : Control
             this.nodeP1Button.Disabled = true;
             this.nodeP2Button.Disabled = true;
             this.nodePlayButton.Disabled = true;
+            this.nodePlayButton.Visible = false;
             this.nodeP1Icon.Texture = this.iconUnknown;
             this.nodeP1Icon.Visible = false;
             this.nodeP2Icon.Texture = this.iconUnknown;
