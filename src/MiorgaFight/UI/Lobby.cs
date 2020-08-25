@@ -20,15 +20,16 @@ public class Lobby : Control {
 		CHAR_SELECTION,
 		//Sat in level selection
 		LEVEL_SELECTION,
+		//In game but not actually playing
+		IN_GAME_NOT_PLAYING,
 		//In game
-		PLAYING
+		IN_GAME_PLAYING
 	}
 
 	public const int PORT = 6785;
 
 	public static MultiplayerRole role = MultiplayerRole.OFFLINE;
 	public static GameState state = GameState.TITLE;
-    public static bool started = false;
 
 	LineEdit nodeAddr;
 	Button nodeHostButton, nodeJoinButton, nodeLocalButton, nodeErrorButton, nodeQuitButton;
@@ -324,8 +325,7 @@ public class Lobby : Control {
 	//Starts the game
 	//Once both players are already in the game
 	public void GameStart() {
-		Lobby.started = true;
-		Lobby.state = GameState.PLAYING;
+		Lobby.state = GameState.IN_GAME_PLAYING;
 
 		this.p1.Start(this.p2, this.game.GetNode("hud/gr_p1") as PlayerHUD);
 		this.p2.Start(this.p1, this.game.GetNode("hud/gr_p2") as PlayerHUD);

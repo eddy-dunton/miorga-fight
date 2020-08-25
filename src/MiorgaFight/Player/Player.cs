@@ -172,7 +172,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		if (this.controls == ControlMethod.REMOTE) return; //Do not check for inputs for remote objects
 
 		//No actions if the game hasn't started yet
-		if (! Lobby.started) return;
+		if (Lobby.state == Lobby.GameState.IN_GAME_NOT_PLAYING) return;
 
 		//Check for actions
 		foreach (Action action in this.actions) {
@@ -249,7 +249,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			}
 		}
 
-		if (Lobby.started) {
+		if (Lobby.state == Lobby.GameState.IN_GAME_PLAYING) {
 			//Catches strange edge cases, most likely caused by multi-threaded physics
 			if (this.DIRECTION == Direction.LEFT && this.Position.x < this.nodeEnemy.Position.x) {
 				this.Restart();
