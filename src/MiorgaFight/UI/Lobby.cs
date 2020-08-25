@@ -12,15 +12,22 @@ public class Lobby : Control {
 	}
 
 	public enum GameState {
+		//On title screen
+		TITLE,
 		//Waiting for player data from server (upon joining)
 		WAITING, 
 		//Sat in character selection
-		CHAR_SELECTION
+		CHAR_SELECTION,
+		//Sat in level selection
+		LEVEL_SELECTION,
+		//In game
+		PLAYING
 	}
 
 	public const int PORT = 6785;
 
 	public static MultiplayerRole role = MultiplayerRole.OFFLINE;
+	public static GameState state = GameState.TITLE;
     public static bool started = false;
 
 	LineEdit nodeAddr;
@@ -28,9 +35,6 @@ public class Lobby : Control {
 	Level game;
 	Panel nodeErrorPanel, nodeStartPanel;
 	Label nodeErrorLabel;
-
-	//The current state of this client
-	private GameState state;
 
 	//Is the creation of the game object deferred
 	//Used to work around the fact not enough of the rest of the scene will have loaded before Ready is run
@@ -53,7 +57,7 @@ public class Lobby : Control {
 
 	public override void _Ready()
 	{
-		this.state = GameState.WAITING;
+		Lobby.state = GameState.TITLE;
 
 		this.nodeAddr = GetNode<LineEdit>("pa_start/tx_address");    
 		
@@ -117,7 +121,7 @@ public class Lobby : Control {
 			//Otherwise just current ids to new player
 			RpcId(id, nameof(this.SetPlayerId), new object[] {GameState.CHAR_SELECTION, this.p1Id, this.p2Id});
 			//Send the new player any confirmations that may have been made in char selection
-			if (this.state == GameState.CHAR_SELECTION) {
+			if (Lobby.state == GameState.CHAR_SELECTION) {
 				CharSelection cs = GetTree().Root.GetNode<CharSelection>("char_selection");
 				if (cs.mpP1Confirmed) 
 					cs.RpcId(id, nameof(cs.Confirm), new object[] {Lobby.MultiplayerRole.P1, cs.p1.selection});
@@ -169,7 +173,7 @@ public class Lobby : Control {
 		this.p1Id = 0;
 		this.p2Id = 0;
 		GetTree().NetworkPeer = this.peer;
-		this.state = GameState.CHAR_SELECTION;
+		Lobby.state = GameState.CHAR_SELECTION;
 		Lobby.role = MultiplayerRole.HOST;
 	
 		this.Visible = false;
@@ -198,13 +202,14 @@ public class Lobby : Control {
 		GetTree().NetworkPeer = this.peer;
 		 
 		this.ShowError("Connecting...", "Cancel");
-		this.state = GameState.WAITING;
+		Lobby.state = GameState.WAITING;
 		Lobby.role = MultiplayerRole.SPECTATOR;
 	}
 
 	//Host a regular, local game
 	void _OnLocalPressed() {
 		Lobby.role = MultiplayerRole.OFFLINE;
+		Lobby.state = GameState.CHAR_SELECTION;
 		this.p1Id = 0;
 		this.p2Id = 0;
 		//Move to char selection
@@ -238,6 +243,8 @@ public class Lobby : Control {
 				as LevelSelection;
 		ls.SetCallback(this._LSCallback);
 		GetTree().Root.AddChild(ls);
+
+		Lobby.state = GameState.LEVEL_SELECTION;
 
 		return ls;
 	}
@@ -288,12 +295,12 @@ public class Lobby : Control {
 
 		//One of the players has disconnected, move back to lobby
 		if ((this.p1Id != p1Id) || (this.p2Id != p2Id)) {
-			this.state = state;
+			Lobby.state = state;
 			this.p1Id = p1Id;	
 			this.p2Id = p2Id;
 			this.ResetToCharSelection();
 		
-		} else if (this.state == GameState.WAITING) { //This player has just joined
+		} else if (Lobby.state == GameState.WAITING) { //This player has just joined
 				
 			//Goto CS as spectator
 			CharSelection cs = (ResourceLoader.Load("res://scenes/ui/char_selection/char_selection.tscn") as PackedScene)
@@ -309,7 +316,7 @@ public class Lobby : Control {
 					.PlayersUpdated(p1Id != 0 ? true : false, p2Id != 0 ? true : false);
 		}
 
-		this.state = state;
+		Lobby.state = state;
 		this.p1Id = p1Id;	
 		this.p2Id = p2Id;
 	}
@@ -318,6 +325,7 @@ public class Lobby : Control {
 	//Once both players are already in the game
 	public void GameStart() {
 		Lobby.started = true;
+		Lobby.state = GameState.PLAYING;
 
 		this.p1.Start(this.p2, this.game.GetNode("hud/gr_p1") as PlayerHUD);
 		this.p2.Start(this.p1, this.game.GetNode("hud/gr_p2") as PlayerHUD);
@@ -366,7 +374,7 @@ public class Lobby : Control {
 		this.RemoveAll();
 
 		//Reset state and action as if this client has just connected
-		this.state = GameState.WAITING;
+		Lobby.state = GameState.WAITING;
 		this.SetPlayerId(GameState.CHAR_SELECTION, this.p1Id, this.p2Id);
 	}
 
