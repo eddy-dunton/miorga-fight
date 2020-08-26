@@ -54,6 +54,7 @@ public class CharSelection : Control
     private Sprite nodeP1Icon, nodeP2Icon, nodeP1Confirmed, nodeP2Confirmed, nodeP1Present, nodeP2Present;
     private ItemList nodeCharList;
     private CharSelectionDataPanel nodeDataPanel;
+    private Label nodeSpectators; // TODO Finish wiring this up
 
     public override void _Ready() {
         //Set mp values to false
