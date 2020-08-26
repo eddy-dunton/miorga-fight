@@ -24,12 +24,19 @@ public class LevelSelection : Control
 
     [Export] LevelSelectionLevelData[] levelData;
 
+    //Textures to use for different players (to be swapped in mp)
+    [Export] private Texture p1ButtonHover, p1ButtonPressed, p2ButtonHover, p2ButtonPressed;
+
     private Lobby.MultiplayerRole mpRole;
+
+    //Map indexes selected in multiplayer
+    private int mpP1Selection, mpP2Selection, mpSelection;
 
     private LevelData[] levels;
 
     private Control nodeButtonPanel;
     private TextureButton nodeButtonPlay;
+    private AnimationPlayer nodeButtonAnim;
     private Sprite nodeLevelSprite;
     private Viewport nodeLevelViewport;
     private Camera2D nodeLevelCamera;
@@ -46,9 +53,18 @@ public class LevelSelection : Control
         this.mpRole = Lobby.MultiplayerRole.OFFLINE;
         this.level = null;
 
+        this.mpP1Selection = -1;
+        this.mpP2Selection = -1;
+        this.mpSelection = -1;
+
         //Gets nodes and sets up connections
         this.nodeButtonPanel = this.GetNode<Control>("pa_buttons");
         this.nodeButtonPlay = this.GetNode<TextureButton>("bt_play");
+        //Animations are only used in mulitplayer
+        this.nodeButtonAnim = this.GetNode<AnimationPlayer>("an_buttons");
+
+        this.nodeButtonAnim.Connect("animation_finished", this, nameof(_OnAnimFinished));
+
 
         this.nodeLevelSprite = this.GetNode<Sprite>("sp_level");
         this.nodeLevelViewport = this.GetNode<Viewport>("vp_level");
@@ -57,9 +73,8 @@ public class LevelSelection : Control
         this.nodeLevelText = this.GetNode<RichTextLabel>("tx_level");
 
         this.nodeButtonPlay.Connect("pressed", this, nameof(_OnPlayPressed));
-
         this.nodeLevelSlider.Connect("value_changed", this, nameof(_OnSliderChanged));
-    
+
         //Checks that number of buttons and levels are the same
         Godot.Collections.Array buttonPanelChildren = this.nodeButtonPanel.GetChildren();
 
@@ -108,8 +123,10 @@ public class LevelSelection : Control
             }
         }
 
-        //Allow only the server to call a map change
-        RpcConfig(nameof(this.mpSelected), MultiplayerAPI.RPCMode.Puppetsync);
+        //Sends only to server
+        RpcConfig(nameof(this.MpSelected), MultiplayerAPI.RPCMode.Remotesync);
+		//Only server can call this
+		RpcConfig(nameof(this.MpChosen), MultiplayerAPI.RPCMode.Remotesync);
     }
 
     void _OnSliderChanged(float value) {
@@ -140,11 +157,100 @@ public class LevelSelection : Control
         }
     
         if (this.level.HasValue) {
-            if (this.mpRole == Lobby.MultiplayerRole.OFFLINE)
+            if (this.mpRole == Lobby.MultiplayerRole.OFFLINE) {
+                //Fire the callback when the animation is finished
                 this.callback(this, this.level.Value.resource.packed);
-            else if (this.mpRole == Lobby.MultiplayerRole.HOST)
-                Rpc(nameof(this.mpSelected), Array.IndexOf(this.levels, this.level));
+            } else { //Online
+				//Disable play button
+				this.nodeButtonPlay.Disabled = true;
+
+				//Disable all the other level buttons
+				foreach (LevelData l in this.levels) {
+					//Skip the current one
+					if (l.Equals(this.level.Value)) continue;
+					l.button.TextureDisabled = null;
+					l.button.Disabled = true;
+				}
+
+				//Send selection to server
+                Rpc(nameof(this.MpSelected), new object[] {Lobby.role, Array.IndexOf(this.levels, this.level)});
+			}
+		}
+    }
+
+    //Performs this object's callback, necessary as delegate functions (which callbacks are) cannot be connected to singals
+    //Only used in mp
+    void _OnAnimFinished(String name) {
+        if (this.callback != null) {
+            this.callback(this, this.levels[this.mpSelection].resource.packed);
         }
+    }
+
+    //Called remoted by a player when they have picked a map
+    public void MpSelected(Lobby.MultiplayerRole role, int index) {
+        if (role == Lobby.MultiplayerRole.P1) this.mpP1Selection = index;
+        else if (role == Lobby.MultiplayerRole.P2) this.mpP2Selection = index;
+        //else {wtf?}
+
+        //Both players have chosen, pass choices through to clients, if host 
+        if (this.mpP1Selection != -1 && this.mpP2Selection != -1 && GetTree().GetNetworkUniqueId() == 1) {
+            //Randomly generate a winner
+            Lobby.MultiplayerRole win = Command.Random(0, 1) == 0 ? Lobby.MultiplayerRole.P1 : Lobby.MultiplayerRole.P2; 
+            Rpc(nameof(MpChosen), new object[] {win, this.mpP1Selection, this.mpP2Selection});
+        }
+    }
+
+    //Called by the host once both p1 and p2 have chosen maps, plays the correct animation
+    public void MpChosen(Lobby.MultiplayerRole winner, int p1, int p2) {
+        //Set mp selection correctly, if they chose the same it doesn't matter who wins
+        this.mpSelection = winner == Lobby.MultiplayerRole.P1 ? p1 : p2;
+
+		//Hide the confirm buttons
+		this.nodeButtonPlay.Visible = false;
+
+		//Make all the buttons fuck off
+		foreach (LevelData l in this.levels) {
+			l.button.TextureDisabled = null;
+			l.button.Disabled = true;
+		}
+
+        //Same level chosen       
+        if (p1 == p2) {
+            this.nodeButtonAnim.GetAnimation("same_chosen").TrackSetPath(0, this.levels[p1].button.GetPath() 
+                    + ":texture_disabled");
+            this.nodeButtonAnim.Play("same_chosen");
+		} else {
+			//Setup buttons
+			this.levels[p1].button.TextureDisabled = this.p1ButtonPressed;
+			this.levels[p2].button.TextureDisabled = this.p2ButtonPressed;
+			
+			String anim = this.mpSelection == p1 ? "diff_chosen_p1" : "diff_chosen_p2";
+		
+			//Set tracks to point to the correct position
+			this.nodeButtonAnim.GetAnimation(anim).TrackSetPath(0, this.levels[p1].button.GetPath() + ":visible");
+			this.nodeButtonAnim.GetAnimation(anim).TrackSetPath(1, this.levels[p2].button.GetPath() + ":visible");
+			this.nodeButtonAnim.Play(anim);
+		} 
+    }
+
+    //Sets up Level selection for multiplayer 
+    public void SetMp(Lobby.MultiplayerRole role) {
+        this.mpRole = role;
+        if (role == Lobby.MultiplayerRole.P2) {
+            //Set buttons to P2 style
+            foreach (LevelData l in this.levels) {
+                l.button.TextureHover = this.p2ButtonHover;
+                l.button.TexturePressed = this.p2ButtonPressed;
+                l.button.TextureDisabled = this.p2ButtonPressed;
+            }
+
+        } else if (role != Lobby.MultiplayerRole.P1) { //All none players
+            this.nodeButtonPlay.Visible = false;
+        }
+    }
+
+    public void SetCallback(Func<LevelSelection, PackedScene, int> c) {
+        this.callback = c;
     }
 
     private void ShowLevel(LevelData newlevel, LevelData? oldlevel) {
@@ -160,22 +266,5 @@ public class LevelSelection : Control
         this.nodeLevelText.BbcodeText = newlevel.resource.text;
 
         this.nodeLevelViewport.AddChild(newlevel.level);
-    }
-
-    //Used when a map is selected in multiplayer, passes through by index rather than sending the entire packedscene
-    public void mpSelected(int index) {
-        this.callback(this, this.levels[index].resource.packed);    
-    }
-
-    //Sets up Level selection for multiplayer 
-    public void SetMp(Lobby.MultiplayerRole role) {
-        this.mpRole = role;
-        if (role != Lobby.MultiplayerRole.HOST) {
-            this.nodeButtonPlay.Visible = false;
-        }
-    }
-
-    public void SetCallback(Func<LevelSelection, PackedScene, int> c) {
-        this.callback = c;
     }
 }}

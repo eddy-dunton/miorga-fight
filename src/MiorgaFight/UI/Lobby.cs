@@ -38,11 +38,6 @@ public class Lobby : Control {
 	Panel nodeErrorPanel, nodeStartPanel;
 	Label nodeErrorLabel;
 
-	//Is the creation of the game object deferred
-	//Used to work around the fact not enough of the rest of the scene will have loaded before Ready is run
-	//This should be deprecated soon
-	private bool deferred;
-
 	private PackedScene p1Scene, p2Scene;
 
 	private Player p1, p2;
@@ -53,7 +48,6 @@ public class Lobby : Control {
 	private NetworkedMultiplayerENet peer;
 
 	public Lobby() {
-		this.deferred = false;
 		Command.lobby = this;
 	}
 
@@ -91,15 +85,6 @@ public class Lobby : Control {
 
 		this.RpcConfig(nameof(this.AddPlayer), MultiplayerAPI.RPCMode.Puppetsync);
 		this.RpcConfig(nameof(this.SetPlayerId), MultiplayerAPI.RPCMode.Remotesync);
-
-		//Host at start
-		foreach (String arg in OS.GetCmdlineArgs()) {
-			if (arg == "--host") {
-				GD.Print("Server will run as host");
-				this.deferred = true;
-				_OnHostPressed();
-			}
-		}
 	}
 
 
@@ -285,7 +270,7 @@ public class Lobby : Control {
 	//Called when the quit button is pressed
 	//Closes the game
 	void _OnQuitPressed() {
-		//I wanted to wire this directly, but it wouldn't let me
+		//I wanted the button directly, but it wouldn't let me
 		GetTree().Quit();
 	}
 
@@ -314,7 +299,8 @@ public class Lobby : Control {
 			cs.SetCallback(this._MpCSCallback);
 		} 
 
-		if (state == GameState.CHAR_SELECTION) { //if in char selection, pass through
+		if (state == GameState.CHAR_SELECTION) { 
+			//if in char selection, pass which players are in through to char selection
 			GetTree().Root.GetNode<CharSelection>("char_selection")
 					.PlayersUpdated(p1Id != 0 ? true : false, p2Id != 0 ? true : false);
 		}
@@ -375,6 +361,9 @@ public class Lobby : Control {
 	public void ResetToCharSelection() {
 		this.RemoveAll();
 
+		//Make cursor visible
+		Input.SetMouseMode(Input.MouseMode.Visible);
+
 		//Reset state and action as if this client has just connected
 		Lobby.state = GameState.WAITING;
 		Lobby.role = MultiplayerRole.SPECTATOR;
@@ -384,6 +373,9 @@ public class Lobby : Control {
 	//Reset all the way back to title screen
 	public void Reset() {
 		this.RemoveAll();
+
+		//Make cursor visible
+		Input.SetMouseMode(Input.MouseMode.Visible);
 
 		//If online close connection
 		if (Lobby.role != MultiplayerRole.OFFLINE) this.peer.CloseConnection();
