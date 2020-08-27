@@ -142,4 +142,16 @@ texture = ExtResource( 10 )
 position = Vector2( 31, 178 )
 texture = ExtResource( 12 )
 
+[node name="la_mp_spectators" type="Label" parent="."]
+visible = false
+margin_left = 24.0
+margin_top = 8.00003
+margin_right = 88.0
+margin_bottom = 38.0
+text = "Spectators: 0"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [editable path="pa_char_data"]

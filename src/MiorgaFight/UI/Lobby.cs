@@ -39,6 +39,7 @@ public class Lobby : Control {
 	Label nodeErrorLabel;
 
 	private PackedScene p1Scene, p2Scene;
+	private PackedScene levelScene;
 
 	private Player p1, p2;
 
@@ -84,9 +85,8 @@ public class Lobby : Control {
 		GetTree().Connect("server_disconnected", this, nameof(_ServerDisconnected));
 
 		this.RpcConfig(nameof(this.SetupClient), MultiplayerAPI.RPCMode.Puppet);
-		this.RpcConfig(nameof(this.SetPlayerId), MultiplayerAPI.RPCMode.Remotesync);
+		this.RpcConfig(nameof(this.ResetToLobby), MultiplayerAPI.RPCMode.Remotesync);
 	}
-
 
 	//Called when a player connects (duh)	
 	void _PlayerConnected(int id) {
@@ -99,17 +99,15 @@ public class Lobby : Control {
 			//If p1 or p2 change, push changes to all clients
 			if (this.p1Id == 0) {
 				this.p1Id = id;
-				Rpc(nameof(this.SetPlayerId), new object[] {this.p1Id, this.p2Id});
+				Rpc(nameof(this.ResetToLobby), new object[] {this.p1Id, this.p2Id});
 			} else if (this.p2Id == 0) {
 				this.p2Id = id;
-				Rpc(nameof(this.SetPlayerId), new object[] {this.p1Id, this.p2Id});
+				Rpc(nameof(this.ResetToLobby), new object[] {this.p1Id, this.p2Id});
 			} else {
 				//Otherwise just current ids to new player
-				RpcId(id, nameof(this.SetupClient), new object[] {GameState.CHAR_SELECTION, this.p1Id, this.p2Id});
-			}
+				RpcId(id, nameof(this.SetupClient), new object[] {this.p1Id, this.p2Id});
 			
-			//Send the new player any confirmations that may have been made in char selection
-			if (Lobby.state == GameState.CHAR_SELECTION) {
+				//Also send through any character selection choices that have been made
 				CharSelection cs = GetTree().Root.GetNode<CharSelection>("char_selection");
 				if (cs.mpP1Confirmed) 
 					cs.RpcId(id, nameof(cs.Confirm), new object[] {Lobby.MultiplayerRole.P1, cs.p1.selection});
@@ -117,17 +115,21 @@ public class Lobby : Control {
 					cs.RpcId(id, nameof(cs.Confirm), new object[] {Lobby.MultiplayerRole.P2, cs.p2.selection});
 			}
 		}
+
+		this.ResetSpectators();
 	}
 
 	void _PlayerDisconnected(int id) {
 		if (GetTree().GetNetworkUniqueId() == 1) {
 			//Force everyone back to lobby (if you're the server)
 			if (id == this.p1Id) {
-				Rpc(nameof(this.SetPlayerId), new object[] {this.GetFirstSpectator(), this.p2Id});
+				Rpc(nameof(this.ResetToLobby), new object[] {this.GetFirstSpectator(), this.p2Id});
 			} else if (id == this.p2Id) {
-				Rpc(nameof(this.SetPlayerId), new object[] {this.p1Id, this.GetFirstSpectator()});
-			}
+				Rpc(nameof(this.ResetToLobby), new object[] {this.p1Id, this.GetFirstSpectator()});
+			} 
 		}
+
+		this.ResetSpectators();
 	}
 
 	void _ConnectedToServer() {
@@ -211,6 +213,9 @@ public class Lobby : Control {
 
 	//Multiplayer character selection callback, stores the selected characters and moves on to map selection
 	LevelSelection _MpCSCallback(CharSelection cs, PackedScene p1, PackedScene p2) {
+		//Disable all new connections
+		this.peer.RefuseNewConnections = true;
+
 		LevelSelection ls = this._LocalCSCallback(cs, p1, p2);
 		ls.SetMp(Lobby.role);
 
@@ -242,6 +247,8 @@ public class Lobby : Control {
 		//Remove level selection
 		GetTree().Root.RemoveChild(ls);
 		
+		this.levelScene = level;
+
 		//Create and goto level
 		this.GameCreate(level);
 
@@ -277,46 +284,48 @@ public class Lobby : Control {
 
 	/*
 		Which of these is called when?
-		It's confusing I know:
-			On player change: SetPlayerId (even if one of these players is this client)
-			On 
+		If a player has changed -> Call SetPlayerId(...) on all clients
+		If a player hasn't changed -> Call SetupClient on just the new spectator
 	*/
 
 	//Called when a player changes, causes the game to reset to character selection 
 	//Including if this client is one of those players
-	private void SetPlayerId(int p1Id, int p2Id) {
-		this.p1Id = p1Id;	
-		this.p2Id = p2Id;
+	private void ResetToLobby(int p1Id, int p2Id) {
+		this.RemoveAll();
+		
+        //Allow new connections
+        GetTree().NetworkPeer.RefuseNewConnections = false;
 
-		//Unless this client has just started, reset
-		this.ResetToCharSelection();
+		//Make cursor visible
+		Input.SetMouseMode(Input.MouseMode.Visible);
+
+		//Reset state and action as if this client has just connected
+		this.SetupClient(p1Id, p2Id);
 	}
 	
 	//Called whenever the game has to be setup
 	//This is called internally when the players have changed
 	//Or by the server if you join late as a spectator
-	private void SetupClient(GameState state, int p1Id, int p2Id) {
+	private void SetupClient(int p1Id, int p2Id) {
 		//Set the role correctly
 		if (p1Id == GetTree().GetNetworkUniqueId()) Lobby.role = MultiplayerRole.P1;
 		else if (p2Id == GetTree().GetNetworkUniqueId()) Lobby.role = MultiplayerRole.P2;
-		else if (1 == GetTree().GetNetworkUniqueId()) Lobby.role = MultiplayerRole.HOST;
 		else Lobby.role = MultiplayerRole.SPECTATOR;
 
 		//Set the player ids
-		this.p1Id = p1Id;	
+		this.p1Id = p1Id;
 		this.p2Id = p2Id;
-
-		//TEMP
+		//It doesn't matter what state you were in, once this is called you're in char selections
 		Lobby.state = GameState.CHAR_SELECTION;
 
-		//Goto CS as spectator
+		//Case reseting lobby
 		CharSelection cs = (ResourceLoader.Load("res://scenes/ui/char_selection/char_selection.tscn") as PackedScene)
 				.Instance() as CharSelection;
 		GetTree().Root.AddChild(cs);
 		//Set the character selection up for multiplayer, with this as a spectator
 		cs.SetMp(Lobby.role);
 		cs.SetCallback(this._MpCSCallback);
-		cs.PlayersUpdated(p1Id != 0 ? true : false, p2Id != 0 ? true : false);
+		cs.PlayersUpdated(p1Id != 0, p2Id != 0);
 	}
 
 	//Starts the game
@@ -362,20 +371,7 @@ public class Lobby : Control {
 		_new.Position = this.game.GetPlayerPosition(_new.DIRECTION);
 		
 		this.game.AddChild(_new);
-		(this.game.GetNode("camera_track") as CameraTrack).Track(_new);
-	}
-
-	//Scrap everything currently going on
-	//Go back to character selection
-	public void ResetToCharSelection() {
-		this.RemoveAll();
-
-		//Make cursor visible
-		Input.SetMouseMode(Input.MouseMode.Visible);
-
-		//Reset state and action as if this client has just connected
-		Lobby.state = GameState.CHAR_SELECTION;
-		this.SetupClient(GameState.CHAR_SELECTION, this.p1Id, this.p2Id);
+		(this.game.GetNode("camera_track") as CameraTrack).Track(_new);	
 	}
 
 	//Reset all the way back to title screen
@@ -392,6 +388,23 @@ public class Lobby : Control {
 
 		//Reset everything
 		GetTree().ChangeScene("res://scenes/ui/lobby.tscn");
+	}
+
+	//Resets the char selection panes number of spectators if it exists
+	//The overhead for this function is pretty small and thus it can be called sparingly
+	//I chose to call this function more than necessary
+	//rather than introduce more complex logic around when this function should be called
+	//Lobby logic is bad enough as is
+	private void ResetSpectators() {
+		if (GetTree().Root.HasNode("char_selection"))
+			GetTree().Root.GetNode<CharSelection>("char_selection").SetSpectators(this.CalcSpectators());
+	}
+
+	//Calculates the number of spectators current connected
+	//should only be called by the host really
+	public int CalcSpectators() {
+		int peers = GetTree().GetNetworkConnectedPeers().Length;
+		return (peers > 2 ? peers - 2 : 0);
 	}
 
 	//Returns the id of the first spectator connected to this game, or 0 if there are none

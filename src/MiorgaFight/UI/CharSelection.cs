@@ -54,6 +54,7 @@ public class CharSelection : Control
     private Sprite nodeP1Icon, nodeP2Icon, nodeP1Confirmed, nodeP2Confirmed, nodeP1Present, nodeP2Present;
     private ItemList nodeCharList;
     private CharSelectionDataPanel nodeDataPanel;
+    private Label nodeSpectators;
 
     public override void _Ready() {
         //Set mp values to false
@@ -77,8 +78,8 @@ public class CharSelection : Control
         this.nodeP2Confirmed = GetNode<Sprite>("pa_player_buttons/sp_ready_p2");
         this.nodeP2Present = GetNode<Sprite>("pa_player_buttons/sp_present_p2");
 
-        
         this.nodePlayButton = GetNode<TextureButton>("bt_play");
+        this.nodeSpectators = GetNode<Label>("la_mp_spectators");
 
         //This is removed the moment the scene is opened
         //However I left it in the scene as it works as a good visual guide as to where the everything is in engine
@@ -236,6 +237,10 @@ public class CharSelection : Control
         
         this.mpP1Confirmed = false;
         this.mpP2Confirmed = false;
+
+        //Set spectator numbers
+        this.nodeSpectators.Visible = true;
+        this.SetSpectators(Command.lobby.CalcSpectators());
     }
 
     //Sets present buttons correctly
@@ -249,6 +254,11 @@ public class CharSelection : Control
 
         this.mpP1Connected = p1;
         this.mpP2Connected = p2;
+    }
+
+    //Sets the current number of spectators
+    public void SetSpectators(int number) {
+        this.nodeSpectators.Text = "Spectators: " + number.ToString();
     }
 
     //Sets the call back lobby to the one provided
