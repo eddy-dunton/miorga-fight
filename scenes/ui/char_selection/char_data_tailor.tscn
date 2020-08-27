@@ -1,7 +1,8 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://scenes/ui/char_selection/char_data_panel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/player/tailor/stances/lax/lax.png" type="Texture" id=2]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/tailor_skeleton.png" type="Texture" id=3]
 [ext_resource path="res://scenes/player/tailor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/player/tailor/fight/sept/alternate/key2.png" type="Texture" id=5]
 [ext_resource path="res://assets/player/tailor/fight/sept/alternate/key1.png" type="Texture" id=6]
@@ -51,6 +52,21 @@
 [ext_resource path="res://assets/player/tailor/walk/key7.png" type="Texture" id=50]
 [ext_resource path="res://assets/player/tailor/stances/hang/idle/key4.png" type="Texture" id=51]
 [ext_resource path="res://assets/player/tailor/walk/key5.png" type="Texture" id=52]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_lax_hover.png" type="Texture" id=58]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/icon_feint.png" type="Texture" id=59]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_attack_hover.png" type="Texture" id=60]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_attack.png" type="Texture" id=61]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_parry.png" type="Texture" id=62]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_highlow.png" type="Texture" id=63]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_both.png" type="Texture" id=64]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_lax.png" type="Texture" id=65]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_highlow_hover.png" type="Texture" id=66]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_parry_hover.png" type="Texture" id=67]
+[ext_resource path="res://resources/theme/font_large.tres" type="DynamicFont" id=68]
+[ext_resource path="res://src/MiorgaFight/UI/CharSelectionActionTreeButton.cs" type="Script" id=69]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_both_hover.png" type="Texture" id=70]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_attack_wide_hover.png" type="Texture" id=71]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_attack_wide.png" type="Texture" id=72]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -59,51 +75,94 @@ animations = [ {
 "name": "high",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 46 ), ExtResource( 28 ), ExtResource( 45 ), ExtResource( 35 ) ],
-"loop": true,
-"name": "low",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 31 ), ExtResource( 29 ), ExtResource( 43 ), ExtResource( 43 ) ],
-"loop": true,
-"name": "low_alt",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "lax",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 32 ), ExtResource( 42 ), ExtResource( 33 ), ExtResource( 49 ), ExtResource( 48 ), ExtResource( 39 ) ],
+"frames": [ ExtResource( 46 ), ExtResource( 28 ), ExtResource( 45 ), ExtResource( 35 ) ],
 "loop": true,
-"name": "low_riposte",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 12 ), ExtResource( 10 ), ExtResource( 22 ), ExtResource( 18 ), ExtResource( 9 ) ],
-"loop": false,
-"name": "high_alt_stage2",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 14 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 17 ) ],
-"loop": false,
-"name": "high_alt_stage1",
-"speed": 12.0
+"name": "low",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 37 ), ExtResource( 38 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 52 ), ExtResource( 47 ), ExtResource( 50 ), ExtResource( 36 ) ],
 "loop": true,
 "name": "walk",
 "speed": 8.0
 }, {
+"frames": [ ExtResource( 21 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 20 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "high_main",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 31 ), ExtResource( 29 ), ExtResource( 43 ), ExtResource( 43 ) ],
+"loop": true,
+"name": "low_alt",
+"speed": 12.0
+}, {
 "frames": [ ExtResource( 19 ), ExtResource( 25 ), ExtResource( 24 ), ExtResource( 23 ), ExtResource( 26 ), ExtResource( 27 ) ],
 "loop": true,
 "name": "low_main",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 21 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 20 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"frames": [ ExtResource( 32 ), ExtResource( 42 ), ExtResource( 33 ), ExtResource( 49 ), ExtResource( 48 ), ExtResource( 39 ) ],
+"loop": true,
+"name": "low_riposte",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 17 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 22 ), ExtResource( 18 ), ExtResource( 9 ) ],
 "loop": false,
-"name": "high_main",
-"speed": 10.0
+"name": "high_alt",
+"speed": 12.0
 } ]
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 58 )
+region_rect = Rect2( 0, 0, 34, 24 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 65 )
+region_rect = Rect2( 0, 0, 34, 24 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 66 )
+region_rect = Rect2( 0, 0, 46, 28 )
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 63 )
+region_rect = Rect2( 0, 0, 46, 28 )
+
+[sub_resource type="StyleBoxTexture" id=10]
+texture = ExtResource( 70 )
+region_rect = Rect2( 0, 0, 20, 24 )
+
+[sub_resource type="StyleBoxTexture" id=11]
+texture = ExtResource( 64 )
+region_rect = Rect2( 0, 0, 20, 24 )
+
+[sub_resource type="StyleBoxTexture" id=6]
+texture = ExtResource( 60 )
+region_rect = Rect2( 0, 0, 20, 24 )
+
+[sub_resource type="StyleBoxTexture" id=7]
+texture = ExtResource( 61 )
+region_rect = Rect2( 0, 0, 20, 24 )
+
+[sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 67 )
+region_rect = Rect2( 0, 0, 20, 24 )
+
+[sub_resource type="StyleBoxTexture" id=9]
+texture = ExtResource( 62 )
+region_rect = Rect2( 0, 0, 20, 24 )
+
+[sub_resource type="StyleBoxTexture" id=12]
+texture = ExtResource( 71 )
+region_rect = Rect2( 0, 0, 40, 24 )
+
+[sub_resource type="StyleBoxTexture" id=13]
+texture = ExtResource( 72 )
+region_rect = Rect2( 0, 0, 40, 24 )
 
 [node name="pa_char_data" instance=ExtResource( 1 )]
 offsets = {
@@ -113,7 +172,289 @@ character = ExtResource( 4 )
 
 [node name="sp_player" parent="." index="0"]
 frames = SubResource( 1 )
-animation = "lax"
+animation = "high_alt"
+frame = 8
+
+[node name="sp_player_mask" parent="." index="1"]
+position = Vector2( 390.21, 220 )
+
+[node name="sp_action_tree" parent="pa_action_tree" index="0"]
+texture = ExtResource( 3 )
+
+[node name="bt_lax" type="Button" parent="pa_action_tree" index="2"]
+margin_left = 634.0
+margin_top = 61.0
+margin_right = 668.0
+margin_bottom = 85.0
+focus_mode = 0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+enabled_focus_mode = 0
+script = ExtResource( 69 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+anim = "lax"
+parentPath = NodePath("../..")
+
+[node name="label" type="Label" parent="pa_action_tree/bt_lax" index="0"]
+margin_left = -1.9386
+margin_top = 2.21422
+margin_right = 38.0614
+margin_bottom = 24.2143
+custom_fonts/font = ExtResource( 68 )
+custom_colors/font_color = Color( 0.988235, 0.74902, 0, 1 )
+text = "lax"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_high" type="Button" parent="pa_action_tree" index="3"]
+margin_left = 583.0
+margin_top = 88.0
+margin_right = 629.0
+margin_bottom = 116.0
+focus_mode = 0
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
+enabled_focus_mode = 0
+script = ExtResource( 69 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+anim = "high"
+parentPath = NodePath("../..")
+
+[node name="label" type="Label" parent="pa_action_tree/bt_high" index="0"]
+margin_left = 4.46002
+margin_top = 2.77545
+margin_right = 44.46
+margin_bottom = 24.7755
+custom_fonts/font = ExtResource( 68 )
+custom_colors/font_color = Color( 0.988235, 0.74902, 0, 1 )
+text = "high"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_high_e" type="Button" parent="pa_action_tree" index="4"]
+margin_left = 582.0
+margin_top = 144.0
+margin_right = 602.0
+margin_bottom = 166.0
+focus_mode = 0
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 11 )
+custom_styles/normal = SubResource( 11 )
+enabled_focus_mode = 0
+script = ExtResource( 69 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+anim = "high_alt"
+parentPath = NodePath("../..")
+end = "high"
+
+[node name="label" type="Label" parent="pa_action_tree/bt_high_e" index="0"]
+margin_left = 2.46002
+margin_top = 1.77545
+margin_right = 22.46
+margin_bottom = 23.7755
+custom_fonts/font = ExtResource( 68 )
+custom_colors/font_color = Color( 0.988235, 0.74902, 0, 1 )
+text = "E"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="icon_feint" type="Sprite" parent="pa_action_tree/bt_high_e" index="1"]
+position = Vector2( 19, 0 )
+texture = ExtResource( 59 )
+
+[node name="bt_high_q" type="Button" parent="pa_action_tree" index="5"]
+margin_left = 612.0
+margin_top = 144.0
+margin_right = 632.0
+margin_bottom = 166.0
+rect_pivot_offset = Vector2( -73.2455, 23.243 )
+focus_mode = 0
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+enabled_focus_mode = 0
+script = ExtResource( 69 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+anim = "high_main"
+parentPath = NodePath("../..")
+end = "low"
+
+[node name="label" type="Label" parent="pa_action_tree/bt_high_q" index="0"]
+margin_left = 1.0
+margin_top = 2.0
+margin_right = 21.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 68 )
+custom_colors/font_color = Color( 0.988235, 0.74902, 0, 1 )
+text = "Q"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_low" type="Button" parent="pa_action_tree" index="6"]
+margin_left = 673.0
+margin_top = 87.0
+margin_right = 719.0
+margin_bottom = 115.0
+focus_mode = 0
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
+enabled_focus_mode = 0
+script = ExtResource( 69 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+anim = "low"
+parentPath = NodePath("../..")
+
+[node name="label" type="Label" parent="pa_action_tree/bt_low" index="0"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 44.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 68 )
+custom_colors/font_color = Color( 0.988235, 0.74902, 0, 1 )
+text = "low"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_low_e" type="Button" parent="pa_action_tree" index="7"]
+margin_left = 676.0
+margin_top = 189.0
+margin_right = 696.0
+margin_bottom = 211.0
+focus_mode = 0
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 9 )
+enabled_focus_mode = 0
+script = ExtResource( 69 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+anim = "low_alt"
+parentPath = NodePath("../..")
+end = "high"
+
+[node name="label" type="Label" parent="pa_action_tree/bt_low_e" index="0"]
+margin_left = 2.46002
+margin_top = 1.77545
+margin_right = 22.46
+margin_bottom = 23.7755
+custom_fonts/font = ExtResource( 68 )
+custom_colors/font_color = Color( 0.988235, 0.74902, 0, 1 )
+text = "E"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_low_q" type="Button" parent="pa_action_tree" index="8"]
+margin_left = 702.0
+margin_top = 189.0
+margin_right = 722.0
+margin_bottom = 211.0
+rect_pivot_offset = Vector2( -73.2455, 23.243 )
+focus_mode = 0
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 9 )
+enabled_focus_mode = 0
+script = ExtResource( 69 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+anim = "low_main"
+parentPath = NodePath("../..")
+end = "low"
+
+[node name="label" type="Label" parent="pa_action_tree/bt_low_q" index="0"]
+margin_left = 1.0
+margin_top = 2.0
+margin_right = 21.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 68 )
+custom_colors/font_color = Color( 0.988235, 0.74902, 0, 1 )
+text = "Q"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_low_qe_e" type="Button" parent="pa_action_tree" index="9"]
+margin_left = 679.0
+margin_top = 241.0
+margin_right = 719.0
+margin_bottom = 263.0
+focus_mode = 0
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 13 )
+custom_styles/focus = SubResource( 13 )
+custom_styles/disabled = SubResource( 13 )
+custom_styles/normal = SubResource( 13 )
+enabled_focus_mode = 0
+script = ExtResource( 69 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+anim = "low_riposte"
+parentPath = NodePath("../..")
+end = "high"
+
+[node name="label" type="Label" parent="pa_action_tree/bt_low_qe_e" index="0"]
+margin_left = 1.0
+margin_top = 2.0
+margin_right = 41.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 68 )
+custom_colors/font_color = Color( 0.988235, 0.74902, 0, 1 )
+text = "E/Q"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="tx_description" parent="." index="4"]
 bbcode_text = "[b]The Tailor[/b] is a man of mystery. A mask conceals expression, displaying only a deceptively stolid visage. Through combat he presents a ballad in dance-like whips and twirls of his blade. He attacks quickly and with a long reach, but is fragile and deals low damage."
