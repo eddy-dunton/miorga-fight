@@ -9,6 +9,7 @@
 pause_mode = 2
 layer = 3
 script = ExtResource( 1 )
+textMp = "(Not) Paused!"
 
 [node name="bg" type="Panel" parent="."]
 modulate = Color( 1, 1, 1, 0.501961 )
@@ -19,9 +20,9 @@ __meta__ = {
 }
 
 [node name="la_paused" type="Label" parent="."]
-margin_left = 345.0
+margin_left = 195.0
 margin_top = 175.0
-margin_right = 435.0
+margin_right = 585.0
 margin_bottom = 197.0
 size_flags_horizontal = 0
 size_flags_vertical = 0

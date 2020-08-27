@@ -115,6 +115,8 @@ public class Lobby : Control {
 					cs.RpcId(id, nameof(cs.Confirm), new object[] {Lobby.MultiplayerRole.P2, cs.p2.selection});
 			}
 		}
+
+		this.ResetSpectators();
 	}
 
 	void _PlayerDisconnected(int id) {
@@ -124,8 +126,10 @@ public class Lobby : Control {
 				Rpc(nameof(this.ResetToLobby), new object[] {this.GetFirstSpectator(), this.p2Id});
 			} else if (id == this.p2Id) {
 				Rpc(nameof(this.ResetToLobby), new object[] {this.p1Id, this.GetFirstSpectator()});
-			}
+			} 
 		}
+
+		this.ResetSpectators();
 	}
 
 	void _ConnectedToServer() {
@@ -384,6 +388,23 @@ public class Lobby : Control {
 
 		//Reset everything
 		GetTree().ChangeScene("res://scenes/ui/lobby.tscn");
+	}
+
+	//Resets the char selection panes number of spectators if it exists
+	//The overhead for this function is pretty small and thus it can be called sparingly
+	//I chose to call this function more than necessary
+	//rather than introduce more complex logic around when this function should be called
+	//Lobby logic is bad enough as is
+	private void ResetSpectators() {
+		if (GetTree().Root.HasNode("char_selection"))
+			GetTree().Root.GetNode<CharSelection>("char_selection").SetSpectators(this.CalcSpectators());
+	}
+
+	//Calculates the number of spectators current connected
+	//should only be called by the host really
+	public int CalcSpectators() {
+		int peers = GetTree().GetNetworkConnectedPeers().Length;
+		return (peers > 2 ? peers - 2 : 0);
 	}
 
 	//Returns the id of the first spectator connected to this game, or 0 if there are none
