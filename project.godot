@@ -27,6 +27,7 @@ Command="*res://src/MiorgaFight/Command.cs"
 
 window/size/width=780
 window/size/height=440
+window/vsync/use_vsync=false
 mouse_cursor/custom_image="res://assets/ui/cursor2x.png"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
