@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=2]
+[gd_scene load_steps=87 format=2]
 
 [ext_resource path="res://scenes/ui/char_selection/char_data_panel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/player/tailor/stances/lax/lax.png" type="Texture" id=2]
@@ -6,22 +6,22 @@
 [ext_resource path="res://scenes/player/tailor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/player/tailor/fight/sept/alternate/key2.png" type="Texture" id=5]
 [ext_resource path="res://assets/player/tailor/fight/sept/alternate/key1.png" type="Texture" id=6]
-[ext_resource path="res://assets/player/tailor/fight/hang/alternate/key3.png" type="Texture" id=7]
-[ext_resource path="res://assets/player/tailor/fight/hang/alternate/key2.png" type="Texture" id=8]
-[ext_resource path="res://assets/player/tailor/fight/hang/alternate/key9.png" type="Texture" id=9]
-[ext_resource path="res://assets/player/tailor/fight/hang/alternate/key6.png" type="Texture" id=10]
-[ext_resource path="res://assets/player/tailor/fight/hang/standard/key3.png" type="Texture" id=11]
-[ext_resource path="res://assets/player/tailor/fight/hang/alternate/key5.png" type="Texture" id=12]
-[ext_resource path="res://assets/player/tailor/fight/hang/standard/key2.png" type="Texture" id=13]
-[ext_resource path="res://assets/player/tailor/fight/hang/alternate/key1.png" type="Texture" id=14]
-[ext_resource path="res://assets/player/tailor/fight/hang/standard/key5.png" type="Texture" id=15]
-[ext_resource path="res://assets/player/tailor/fight/hang/standard/key6.png" type="Texture" id=16]
-[ext_resource path="res://assets/player/tailor/fight/hang/alternate/key4.png" type="Texture" id=17]
-[ext_resource path="res://assets/player/tailor/fight/hang/alternate/key8.png" type="Texture" id=18]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high alt/7.png" type="Texture" id=7]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high alt/8.png" type="Texture" id=8]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high alt/9.png" type="Texture" id=9]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high alt/11.png" type="Texture" id=10]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high main/1.png" type="Texture" id=11]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high alt/10.png" type="Texture" id=12]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high alt/1.png" type="Texture" id=13]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high alt/2.png" type="Texture" id=14]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high main/2.png" type="Texture" id=15]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high main/3.png" type="Texture" id=16]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high main/5.png" type="Texture" id=17]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high main/6.png" type="Texture" id=18]
 [ext_resource path="res://assets/player/tailor/fight/sept/standard/key1.png" type="Texture" id=19]
-[ext_resource path="res://assets/player/tailor/fight/hang/standard/key4.png" type="Texture" id=20]
-[ext_resource path="res://assets/player/tailor/fight/hang/standard/key1.png" type="Texture" id=21]
-[ext_resource path="res://assets/player/tailor/fight/hang/alternate/key7.png" type="Texture" id=22]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high alt/5.png" type="Texture" id=20]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high main/4.png" type="Texture" id=21]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high alt/6.png" type="Texture" id=22]
 [ext_resource path="res://assets/player/tailor/fight/sept/standard/key4.png" type="Texture" id=23]
 [ext_resource path="res://assets/player/tailor/fight/sept/standard/key3.png" type="Texture" id=24]
 [ext_resource path="res://assets/player/tailor/fight/sept/standard/key2.png" type="Texture" id=25]
@@ -52,6 +52,11 @@
 [ext_resource path="res://assets/player/tailor/walk/key7.png" type="Texture" id=50]
 [ext_resource path="res://assets/player/tailor/stances/hang/idle/key4.png" type="Texture" id=51]
 [ext_resource path="res://assets/player/tailor/walk/key5.png" type="Texture" id=52]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high main/10.png" type="Texture" id=53]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high main/8.png" type="Texture" id=54]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high alt/4.png" type="Texture" id=55]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high main/7.png" type="Texture" id=56]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high main/9.png" type="Texture" id=57]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_lax_hover.png" type="Texture" id=58]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/icon_feint.png" type="Texture" id=59]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_attack_hover.png" type="Texture" id=60]
@@ -67,37 +72,28 @@
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_both_hover.png" type="Texture" id=70]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_attack_wide_hover.png" type="Texture" id=71]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_attack_wide.png" type="Texture" id=72]
+[ext_resource path="res://assets/ui/menus/character selection/animations/tailor/high alt/3.png" type="Texture" id=73]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 44 ), ExtResource( 30 ), ExtResource( 34 ), ExtResource( 51 ) ],
+"frames": [ ExtResource( 37 ), ExtResource( 38 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 52 ), ExtResource( 47 ), ExtResource( 50 ), ExtResource( 36 ) ],
 "loop": true,
-"name": "high",
-"speed": 5.0
+"name": "walk",
+"speed": 8.0
 }, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
 "name": "lax",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 46 ), ExtResource( 28 ), ExtResource( 45 ), ExtResource( 35 ) ],
+"frames": [ ExtResource( 44 ), ExtResource( 30 ), ExtResource( 34 ), ExtResource( 51 ) ],
 "loop": true,
-"name": "low",
+"name": "high",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 37 ), ExtResource( 38 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 52 ), ExtResource( 47 ), ExtResource( 50 ), ExtResource( 36 ) ],
+"frames": [ ExtResource( 32 ), ExtResource( 42 ), ExtResource( 33 ), ExtResource( 49 ), ExtResource( 48 ), ExtResource( 39 ) ],
 "loop": true,
-"name": "walk",
-"speed": 8.0
-}, {
-"frames": [ ExtResource( 21 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 20 ), ExtResource( 15 ), ExtResource( 16 ) ],
-"loop": false,
-"name": "high_main",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 31 ), ExtResource( 29 ), ExtResource( 43 ), ExtResource( 43 ) ],
-"loop": true,
-"name": "low_alt",
+"name": "low_riposte",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 19 ), ExtResource( 25 ), ExtResource( 24 ), ExtResource( 23 ), ExtResource( 26 ), ExtResource( 27 ) ],
@@ -105,12 +101,22 @@ animations = [ {
 "name": "low_main",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 32 ), ExtResource( 42 ), ExtResource( 33 ), ExtResource( 49 ), ExtResource( 48 ), ExtResource( 39 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 31 ), ExtResource( 29 ), ExtResource( 43 ), ExtResource( 43 ) ],
 "loop": true,
-"name": "low_riposte",
+"name": "low_alt",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 14 ), ExtResource( 8 ), ExtResource( 7 ), ExtResource( 17 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 22 ), ExtResource( 18 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 46 ), ExtResource( 28 ), ExtResource( 45 ), ExtResource( 35 ) ],
+"loop": true,
+"name": "low",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 56 ), ExtResource( 54 ), ExtResource( 57 ), ExtResource( 53 ) ],
+"loop": false,
+"name": "high_main",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 73 ), ExtResource( 55 ), ExtResource( 20 ), ExtResource( 22 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 10 ) ],
 "loop": false,
 "name": "high_alt",
 "speed": 12.0
@@ -132,27 +138,27 @@ region_rect = Rect2( 0, 0, 46, 28 )
 texture = ExtResource( 63 )
 region_rect = Rect2( 0, 0, 46, 28 )
 
-[sub_resource type="StyleBoxTexture" id=10]
+[sub_resource type="StyleBoxTexture" id=6]
 texture = ExtResource( 70 )
 region_rect = Rect2( 0, 0, 20, 24 )
 
-[sub_resource type="StyleBoxTexture" id=11]
+[sub_resource type="StyleBoxTexture" id=7]
 texture = ExtResource( 64 )
 region_rect = Rect2( 0, 0, 20, 24 )
 
-[sub_resource type="StyleBoxTexture" id=6]
+[sub_resource type="StyleBoxTexture" id=8]
 texture = ExtResource( 60 )
 region_rect = Rect2( 0, 0, 20, 24 )
 
-[sub_resource type="StyleBoxTexture" id=7]
+[sub_resource type="StyleBoxTexture" id=9]
 texture = ExtResource( 61 )
 region_rect = Rect2( 0, 0, 20, 24 )
 
-[sub_resource type="StyleBoxTexture" id=8]
+[sub_resource type="StyleBoxTexture" id=10]
 texture = ExtResource( 67 )
 region_rect = Rect2( 0, 0, 20, 24 )
 
-[sub_resource type="StyleBoxTexture" id=9]
+[sub_resource type="StyleBoxTexture" id=11]
 texture = ExtResource( 62 )
 region_rect = Rect2( 0, 0, 20, 24 )
 
@@ -166,14 +172,15 @@ region_rect = Rect2( 0, 0, 40, 24 )
 
 [node name="pa_char_data" instance=ExtResource( 1 )]
 offsets = {
-
+"high_alt": Vector2( 0, -67 ),
+"high_main": Vector2( 0, -67 )
 }
 character = ExtResource( 4 )
 
 [node name="sp_player" parent="." index="0"]
 frames = SubResource( 1 )
 animation = "high_alt"
-frame = 8
+frame = 10
 
 [node name="sp_player_mask" parent="." index="1"]
 position = Vector2( 390.21, 220 )
@@ -253,11 +260,11 @@ margin_top = 144.0
 margin_right = 602.0
 margin_bottom = 166.0
 focus_mode = 0
-custom_styles/hover = SubResource( 10 )
-custom_styles/pressed = SubResource( 11 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 11 )
-custom_styles/normal = SubResource( 11 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
 enabled_focus_mode = 0
 script = ExtResource( 69 )
 __meta__ = {
@@ -292,11 +299,11 @@ margin_right = 632.0
 margin_bottom = 166.0
 rect_pivot_offset = Vector2( -73.2455, 23.243 )
 focus_mode = 0
-custom_styles/hover = SubResource( 6 )
-custom_styles/pressed = SubResource( 7 )
-custom_styles/focus = SubResource( 7 )
-custom_styles/disabled = SubResource( 7 )
-custom_styles/normal = SubResource( 7 )
+custom_styles/hover = SubResource( 8 )
+custom_styles/pressed = SubResource( 9 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 9 )
 enabled_focus_mode = 0
 script = ExtResource( 69 )
 __meta__ = {
@@ -359,11 +366,11 @@ margin_top = 189.0
 margin_right = 696.0
 margin_bottom = 211.0
 focus_mode = 0
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/focus = SubResource( 9 )
-custom_styles/disabled = SubResource( 9 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 11 )
+custom_styles/normal = SubResource( 11 )
 enabled_focus_mode = 0
 script = ExtResource( 69 )
 __meta__ = {
@@ -394,11 +401,11 @@ margin_right = 722.0
 margin_bottom = 211.0
 rect_pivot_offset = Vector2( -73.2455, 23.243 )
 focus_mode = 0
-custom_styles/hover = SubResource( 8 )
-custom_styles/pressed = SubResource( 9 )
-custom_styles/focus = SubResource( 9 )
-custom_styles/disabled = SubResource( 9 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 10 )
+custom_styles/pressed = SubResource( 11 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 11 )
+custom_styles/normal = SubResource( 11 )
 enabled_focus_mode = 0
 script = ExtResource( 69 )
 __meta__ = {
