@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=2]
+[gd_scene load_steps=109 format=2]
 
 [ext_resource path="res://scenes/ui/char_selection/char_data_panel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/player/tailor/stances/lax/lax.png" type="Texture" id=2]
@@ -94,6 +94,7 @@
 [ext_resource path="res://assets/ui/menus/character selection/movesets/highlights/tailor/low_alt.png" type="Texture" id=92]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/highlights/tailor/low_main.png" type="Texture" id=93]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/highlights/tailor/low_main_riposte.png" type="Texture" id=94]
+[ext_resource path="res://assets/ui/menus/character selection/movesets/components/icon_halt.png" type="Texture" id=95]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -207,7 +208,7 @@ animation = "high_alt"
 frame = 10
 
 [node name="sp_player_mask" parent="." index="1"]
-position = Vector2( 390.21, 220 )
+position = Vector2( 392.099, 220.111 )
 
 [node name="sp_action_tree" parent="pa_action_tree" index="0"]
 texture = ExtResource( 3 )
@@ -279,9 +280,9 @@ __meta__ = {
 }
 
 [node name="bt_high_e" type="Button" parent="pa_action_tree" index="4"]
-margin_left = 582.0
+margin_left = 581.0
 margin_top = 144.0
-margin_right = 602.0
+margin_right = 601.0
 margin_bottom = 166.0
 focus_mode = 0
 custom_styles/hover = SubResource( 6 )
@@ -316,6 +317,10 @@ __meta__ = {
 [node name="icon_feint" type="Sprite" parent="pa_action_tree/bt_high_e" index="1"]
 position = Vector2( 19, 0 )
 texture = ExtResource( 59 )
+
+[node name="icon_halt" type="Sprite" parent="pa_action_tree/bt_high_e" index="2"]
+position = Vector2( 1, 0 )
+texture = ExtResource( 95 )
 
 [node name="bt_high_q" type="Button" parent="pa_action_tree" index="5"]
 margin_left = 612.0
@@ -387,9 +392,9 @@ __meta__ = {
 }
 
 [node name="bt_low_e" type="Button" parent="pa_action_tree" index="7"]
-margin_left = 676.0
+margin_left = 677.0
 margin_top = 189.0
-margin_right = 696.0
+margin_right = 697.0
 margin_bottom = 211.0
 focus_mode = 0
 custom_styles/hover = SubResource( 10 )
@@ -422,9 +427,9 @@ __meta__ = {
 }
 
 [node name="bt_low_q" type="Button" parent="pa_action_tree" index="8"]
-margin_left = 702.0
+margin_left = 701.0
 margin_top = 189.0
-margin_right = 722.0
+margin_right = 721.0
 margin_bottom = 211.0
 rect_pivot_offset = Vector2( -73.2455, 23.243 )
 focus_mode = 0

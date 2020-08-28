@@ -154,6 +154,7 @@ frame_13/delay_sec = 0.0
 frame_14/delay_sec = 0.0
 
 [sub_resource type="AnimatedTexture" id=5]
+flags = 4
 frames = 15
 fps = 6.0
 frame_0/texture = ExtResource( 16 )
@@ -418,6 +419,7 @@ gustEndFrame = 3
 position = Vector2( 99.6298, 166.299 )
 frames = SubResource( 8 )
 animation = "idle"
+frame = 1
 speed_scale = 1.1
 playing = true
 script = ExtResource( 63 )
