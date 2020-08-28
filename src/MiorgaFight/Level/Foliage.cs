@@ -25,7 +25,7 @@ public class Foliage : AnimatedSprite
 			return;
 		}
 
-		parent.AddFoliage(this);
+		parent.foliage.Add(this);
 		
 		this.Connect("animation_finished", this, nameof(_OnAnimationFinished));    
 		this.Connect("frame_changed", this, nameof(_OnFrameChanged));

@@ -1,19 +1,15 @@
 using Godot;
-using System;
+using System.Collections.Generic;
 
 namespace MiorgaFight {
 
-public class FoliageTimer : Timer
+public class FoliageTimer : AnimationPlayer
 {
-	//Minimum number of zones that will be moved through in a second
-	[Export] private int zonesPerSecondMin;
-	//zonesPerSecondMin Converted into waitTime (1 / zonesPerSecondMin)
-	private float waitTimeMax;
-	//Maximum number of zones that will be moved thorugh in a second
-	[Export] private int zonesPerSecondMax;
-	//zonesPerSecondMax Converted into waitTime (1 / zonesPerSecondMax)
-	private float waitTimeMin;
-
+	//Minimum number of pixels that will be moved through in a second
+	[Export] private int pxPerSecondMin;
+	//Maximum number of pixels that will be moved thorugh in a second
+	[Export] private int pxPerSecondMax;
+	
 	//Lowest possible base speed scale for foliage (when zones / second = min)
 	[Export] private float speedScaleMin;
 	//Highest possible base speed scale for the foliage (when zones / second = max)
@@ -43,18 +39,16 @@ public class FoliageTimer : Timer
 	private bool gusting;
 	private float gustWaitTime;
 
-	// Called when the node enters the scene tree for the first time.
+	/*// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
-	{   
-		//These are intentionally swapped round (cos of you 1 / x you wally)
-		this.waitTimeMin = 1 / (float) this.zonesPerSecondMax;
-		this.waitTimeMax = 1 / (float) this.zonesPerSecondMin;
-
+	{ 
 		this.parent = this.FindParent("level") as Level;
 		if (this.parent == null) {
 			GD.Print("Error: FoliageTimer._Ready(...): Finding parent level");
 			return;
 		}
+
+		this.PopulateAnimation(this.parent.foliage);
 
 		this.Connect("timeout", this, nameof(_OnTimeout));
 		this.position = this.parent.foliagePositions;
@@ -62,6 +56,8 @@ public class FoliageTimer : Timer
 		this.ResetCycle();
 	}
 
+	//Redo this
+	//Was called when the time ends
 	void _OnTimeout() {
 		if (this.gusting) {
 			this.position --;
@@ -70,7 +66,6 @@ public class FoliageTimer : Timer
 			//Once gust has passed through all the positions, reset
 			if (this.position + this.gustLength < -this.parent.foliagePositions) {this.ResetCycle();}
 		} else { //Gust gap has ended, start gust
-			this.WaitTime = this.gustWaitTime;
 			this.gusting = true;
 		}
 	}
@@ -111,5 +106,25 @@ public class FoliageTimer : Timer
 		//Set the gap to next gust
 		this.WaitTime = (float) Command.Random(this.gustGapMin, this.gustGapMax);
 		this.gusting = false;
+	}*/
+
+	//Uses the list provided to contruct a the wave animation
+	private void PopulateAnimation() {
+		Animation wave = this.GetAnimation("wave");
+		wave.Clear();
+
+		int i;
+		Dictionary<string, Godot.Collections.Array> dict;
+		foreach (Foliage f in this.parent.foliage) {
+			//Create new track and get index
+			i = wave.AddTrack(Animation.TrackType.Method);
+			wave.TrackSetPath(i, this.GetPath());
+			//The format for a function call is a Godot.Collections.Dictionary with keys "method" and "args"
+			//The value for method should be the method name and args should be a Godot.Collections.Array with the
+			//arguments for that method in it
+			//It should look like this {method: nameof(this.startWave), args: [index of f]}
+			dict = new Dictionary<string, Godot.Collections.Array>();
+			dict.Add(nameof(this.startWave), )
+		}
 	}
 }}
