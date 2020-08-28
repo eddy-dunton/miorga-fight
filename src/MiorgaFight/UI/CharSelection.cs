@@ -231,7 +231,7 @@ public class CharSelection : Control
         }
 
         //Turn these off (as players updated should be called after set MP)
-        this.p2.nodePresent.Texture = this.iconPlayerNotPresent;
+        this.p1.nodePresent.Texture = this.iconPlayerNotPresent;
         this.p2.nodePresent.Texture = this.iconPlayerNotPresent;
         
         this.p1.mpConnected = false;
@@ -248,7 +248,7 @@ public class CharSelection : Control
     //Sets present buttons correctly
     //p1 & p2 should be whether the player is now connected
     public void PlayersUpdated(bool p1, bool p2) {
-        this.p2.nodePresent.Texture = p1 ? this.iconPlayerPresent : this.iconPlayerNotPresent;
+        this.p1.nodePresent.Texture = p1 ? this.iconPlayerPresent : this.iconPlayerNotPresent;
         this.p2.nodePresent.Texture = p2 ? this.iconPlayerPresent : this.iconPlayerNotPresent;
 
         this.p1.nodeIcon.Visible = p1;
