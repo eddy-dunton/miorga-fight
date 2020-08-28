@@ -109,9 +109,9 @@ public class Lobby : Control {
 			
 				//Also send through any character selection choices that have been made
 				CharSelection cs = GetTree().Root.GetNode<CharSelection>("char_selection");
-				if (cs.mpP1Confirmed) 
+				if (cs.p1.mpConfirmed) 
 					cs.RpcId(id, nameof(cs.Confirm), new object[] {Lobby.MultiplayerRole.P1, cs.p1.selection});
-				if (cs.mpP2Confirmed) 
+				if (cs.p2.mpConfirmed) 
 					cs.RpcId(id, nameof(cs.Confirm), new object[] {Lobby.MultiplayerRole.P2, cs.p2.selection});
 			}
 		}

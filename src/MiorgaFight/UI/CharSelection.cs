@@ -10,30 +10,34 @@ public class CharSelection : Control
     //Stores all the data for a specific player
     public class PlayerData {
         //This data holders current selection
-        public int selection;
-        //The button to select this data holder
-        public TextureButton button;
+        public int selection;        
         //The other players data holder
         public PlayerData other;
+
+
+        //NODESs
+        //The button to select this data holder
+        public TextureButton nodeButton;
         //This players button icon
-        public Sprite icon;
+        public Sprite nodeIcon;
+        //This players confirmed sprite (used in mp)
+        public Sprite nodeConfirmed;
+        //The tick or cross to show if this player is connected
+        public Sprite nodePresent;
 
-        public string name;
+        //MP status variables
+        public bool mpConnected, mpConfirmed;
 
-        public PlayerData(string name, TextureButton button, Sprite icon) {
+        public PlayerData() {
             this.selection = -1;
-            this.name = name;
-            this.button = button;
-            this.icon = icon;
+
+            //Start off with these at false
+            this.mpConnected = false;
+            this.mpConfirmed = false;
         }
     }
 
     private Lobby.MultiplayerRole mpRole;
-
-    //MP status variables
-    public bool mpP1Connected, mpP2Connected, mpP1Confirmed, mpP2Confirmed;
-
-    public PlayerData p1, p2;
 
     //Character scenes in packed format
     //These are then instanced into the charScenes array 
@@ -50,33 +54,33 @@ public class CharSelection : Control
     //Function to be called once the characters are selected
     private Func<CharSelection, PackedScene, PackedScene, LevelSelection> callback;
 
-    private TextureButton nodeP1Button, nodeP2Button, nodePlayButton;
-    private Sprite nodeP1Icon, nodeP2Icon, nodeP1Confirmed, nodeP2Confirmed, nodeP1Present, nodeP2Present;
+    private TextureButton nodePlayButton;
     private ItemList nodeCharList;
     private CharSelectionDataPanel nodeDataPanel;
     private Label nodeSpectators;
 
-    public override void _Ready() {
-        //Set mp values to false
-        this.mpP1Connected = false;
-        this.mpP2Connected = false;
-        
-        this.mpP1Confirmed = false;
-        this.mpP2Confirmed = false;
 
+
+    //Player datas
+    public PlayerData p1, p2;
+
+    public override void _Ready() {
         //Default to offline
         this.mpRole = Lobby.MultiplayerRole.OFFLINE;
 
+        this.p1 = new PlayerData();
+        this.p2 = new PlayerData();
+
         //Get nodes
-        this.nodeP1Button = GetNode<TextureButton>("pa_player_buttons/bt_p1");
-        this.nodeP1Icon = GetNode<Sprite>("pa_player_buttons/sp_p1");
-        this.nodeP1Confirmed = GetNode<Sprite>("pa_player_buttons/sp_ready_p1");
-        this.nodeP1Present = GetNode<Sprite>("pa_player_buttons/sp_present_p1");
+        this.p1.nodeButton = GetNode<TextureButton>("pa_player_buttons/bt_p1");
+        this.p1.nodeIcon = GetNode<Sprite>("pa_player_buttons/sp_p1");
+        this.p1.nodeConfirmed = GetNode<Sprite>("pa_player_buttons/sp_ready_p1");
+        this.p1.nodePresent = GetNode<Sprite>("pa_player_buttons/sp_present_p1");
         
-        this.nodeP2Button = GetNode<TextureButton>("pa_player_buttons/bt_p2");
-        this.nodeP2Icon = GetNode<Sprite>("pa_player_buttons/sp_p2");
-        this.nodeP2Confirmed = GetNode<Sprite>("pa_player_buttons/sp_ready_p2");
-        this.nodeP2Present = GetNode<Sprite>("pa_player_buttons/sp_present_p2");
+        this.p2.nodeButton = GetNode<TextureButton>("pa_player_buttons/bt_p2");
+        this.p2.nodeIcon = GetNode<Sprite>("pa_player_buttons/sp_p2");
+        this.p2.nodeConfirmed = GetNode<Sprite>("pa_player_buttons/sp_ready_p2");
+        this.p2.nodePresent = GetNode<Sprite>("pa_player_buttons/sp_present_p2");
 
         this.nodePlayButton = GetNode<TextureButton>("bt_play");
         this.nodeSpectators = GetNode<Label>("la_mp_spectators");
@@ -86,17 +90,15 @@ public class CharSelection : Control
         //And also means that this.nodeDataPanel will not be left null
         this.nodeDataPanel = GetNode<CharSelectionDataPanel>("pa_char_data");
 
-        this.p1 = new PlayerData("Player 1", this.nodeP1Button, this.nodeP1Icon);
-        this.p2 = new PlayerData("Player 2", this.nodeP2Button, this.nodeP2Icon);
         this.p1.other = this.p2;
         this.p2.other = this.p1;
         
         this.nodeCharList = GetNode<ItemList>("il_selection");
 
         //Connect player buttons
-        this.nodeP1Button.Connect("pressed", this, nameof(this._OnPlayerPressed), 
+        this.p1.nodeButton.Connect("pressed", this, nameof(this._OnPlayerPressed), 
                 new Godot.Collections.Array(new byte[] {1}));
-        this.nodeP2Button.Connect("pressed", this, nameof(this._OnPlayerPressed), 
+        this.p2.nodeButton.Connect("pressed", this, nameof(this._OnPlayerPressed), 
                 new Godot.Collections.Array(new byte[] {2}));
         this.nodePlayButton.Connect("pressed", this, nameof(this._OnPlayPressed));
     
@@ -114,8 +116,8 @@ public class CharSelection : Control
     void _OnPlayerPressed(byte pressed) {
         PlayerData d = (pressed == 1) ? this.p1 : this.p2;
 
-        d.button.Pressed = true;
-        d.other.button.Pressed = false;
+        d.nodeButton.Pressed = true;
+        d.other.nodeButton.Pressed = false;
         
         //Change the itemlist to the current selected item if there is one
         if (d.selection != -1) {this.nodeCharList.Select(d.selection);}
@@ -158,27 +160,27 @@ public class CharSelection : Control
         PlayerData d = this.GetSelectedPlayer();
 
         d.selection = index;
-        d.icon.Texture = this.nodeCharList.GetItemIcon(index);
+        d.nodeIcon.Texture = this.nodeCharList.GetItemIcon(index);
 
         //Enable button if both players have selected, or mp (== P1 or P2, specs don't get this far in the function, as long as both players are in the game)
-        if ((this.p1.selection != -1 && this.p2.selection != -1) || (this.mpP1Connected && this.mpP2Connected))
+        if ((this.p1.selection != -1 && this.p2.selection != -1) || (this.p1.mpConnected && this.p2.mpConnected))
             this.nodePlayButton.Disabled = false;
     }
 
     //Sets a player selection to be confirmed
     public void Confirm(Lobby.MultiplayerRole p, int selection) {
         if (p == Lobby.MultiplayerRole.P1) {
-            this.nodeP1Confirmed.Visible = true;
+            this.p1.nodeConfirmed.Visible = true;
             this.p1.selection = selection; 
-            this.mpP1Confirmed = true;
+            this.p1.mpConfirmed = true;
         } else if (p == Lobby.MultiplayerRole.P2) {
-            this.nodeP2Confirmed.Visible = true;
+            this.p2.nodeConfirmed.Visible = true;
             this.p2.selection = selection;
-            this.mpP2Confirmed = true;
+            this.p2.mpConfirmed = true;
         } else {} //Cry I guess?
 
         //Both are selected, start the game
-        if (this.mpP1Confirmed && this.mpP2Confirmed) {
+        if (this.p1.mpConfirmed && this.p2.mpConfirmed) {
             this.callback(this, this.chars[this.p1.selection].character, this.chars[this.p2.selection].character);
         }
     }
@@ -206,37 +208,37 @@ public class CharSelection : Control
         this.mpRole = role;
         if (this.mpRole == Lobby.MultiplayerRole.SPECTATOR ||this.mpRole == Lobby.MultiplayerRole.HOST) {
             //Disable all buttons
-            this.nodeP1Button.Disabled = true;
-            this.nodeP2Button.Disabled = true;
+            this.p1.nodeButton.Disabled = true;
+            this.p2.nodeButton.Disabled = true;
             this.nodePlayButton.Disabled = true;
             this.nodePlayButton.Visible = false;
-            this.nodeP1Icon.Texture = this.iconUnknown;
-            this.nodeP1Icon.Visible = false;
-            this.nodeP2Icon.Texture = this.iconUnknown;
-            this.nodeP2Icon.Visible = false;
+            this.p1.nodeIcon.Texture = this.iconUnknown;
+            this.p1.nodeIcon.Visible = false;
+            this.p2.nodeIcon.Texture = this.iconUnknown;
+            this.p2.nodeIcon.Visible = false;
         } else if (this.mpRole == Lobby.MultiplayerRole.P1) {
-            this.nodeP1Button.Pressed = true;
-            this.nodeP2Button.Pressed = false;
-            this.nodeP2Button.Disabled = true;
-            this.nodeP2Icon.Texture = this.iconUnknown;
-            this.nodeP2Icon.Visible = false;
+            this.p1.nodeButton.Pressed = true;
+            this.p2.nodeButton.Pressed = false;
+            this.p2.nodeButton.Disabled = true;
+            this.p2.nodeIcon.Texture = this.iconUnknown;
+            this.p2.nodeIcon.Visible = false;
         } else if (this.mpRole == Lobby.MultiplayerRole.P2) {
-            this.nodeP1Button.Pressed = false;
-            this.nodeP2Button.Pressed = true;
-            this.nodeP1Button.Disabled = true;
-            this.nodeP1Icon.Texture = this.iconUnknown;
-            this.nodeP1Icon.Visible = false;
+            this.p1.nodeButton.Pressed = false;
+            this.p2.nodeButton.Pressed = true;
+            this.p1.nodeButton.Disabled = true;
+            this.p1.nodeIcon.Texture = this.iconUnknown;
+            this.p1.nodeIcon.Visible = false;
         }
 
         //Turn these off (as players updated should be called after set MP)
-        this.nodeP1Present.Texture = this.iconPlayerNotPresent;
-        this.nodeP2Present.Texture = this.iconPlayerNotPresent;
+        this.p2.nodePresent.Texture = this.iconPlayerNotPresent;
+        this.p2.nodePresent.Texture = this.iconPlayerNotPresent;
         
-        this.mpP1Connected = false;
-        this.mpP2Connected = false;
+        this.p1.mpConnected = false;
+        this.p2.mpConnected = false;
         
-        this.mpP1Confirmed = false;
-        this.mpP2Confirmed = false;
+        this.p1.mpConfirmed = false;
+        this.p2.mpConfirmed = false;
 
         //Set spectator numbers
         this.nodeSpectators.Visible = true;
@@ -246,14 +248,14 @@ public class CharSelection : Control
     //Sets present buttons correctly
     //p1 & p2 should be whether the player is now connected
     public void PlayersUpdated(bool p1, bool p2) {
-        this.nodeP1Present.Texture = p1 ? this.iconPlayerPresent : this.iconPlayerNotPresent;
-        this.nodeP2Present.Texture = p2 ? this.iconPlayerPresent : this.iconPlayerNotPresent;
+        this.p2.nodePresent.Texture = p1 ? this.iconPlayerPresent : this.iconPlayerNotPresent;
+        this.p2.nodePresent.Texture = p2 ? this.iconPlayerPresent : this.iconPlayerNotPresent;
 
-        this.nodeP1Icon.Visible = p1;
-        this.nodeP2Icon.Visible = p2;
+        this.p1.nodeIcon.Visible = p1;
+        this.p2.nodeIcon.Visible = p2;
 
-        this.mpP1Connected = p1;
-        this.mpP2Connected = p2;
+        this.p1.mpConnected = p1;
+        this.p2.mpConnected = p2;
     }
 
     //Sets the current number of spectators
@@ -268,6 +270,6 @@ public class CharSelection : Control
 
     //Returns the currently selected player data
     private PlayerData GetSelectedPlayer() {
-        return this.nodeP1Button.Pressed ? this.p1 : this.p2;
+        return this.p1.nodeButton.Pressed ? this.p1 : this.p2;
     }
 }}
