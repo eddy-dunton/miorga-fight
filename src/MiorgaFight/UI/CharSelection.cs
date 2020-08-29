@@ -57,9 +57,7 @@ public class CharSelection : Control
     private TextureButton nodePlayButton;
     private ItemList nodeCharList;
     private CharSelectionDataPanel nodeDataPanel;
-    private Label nodeSpectators;
-
-
+    private Label nodeSpectators, nodeHostingOn;
 
     //Player datas
     public PlayerData p1, p2;
@@ -84,6 +82,7 @@ public class CharSelection : Control
 
         this.nodePlayButton = GetNode<TextureButton>("bt_play");
         this.nodeSpectators = GetNode<Label>("la_mp_spectators");
+        this.nodeHostingOn = GetNode<Label>("la_mp_hosting_on");
 
         //This is removed the moment the scene is opened
         //However I left it in the scene as it works as a good visual guide as to where the everything is in engine
@@ -103,6 +102,12 @@ public class CharSelection : Control
         this.nodePlayButton.Connect("pressed", this, nameof(this._OnPlayPressed));
     
         this.nodeCharList.Connect("item_selected", this, nameof(this._OnCharSelected));
+
+        //Show hosting on text
+        if (Lobby.role == Lobby.MultiplayerRole.HOST) {
+            this.nodeHostingOn.Visible = true;
+            this.nodeHostingOn.Text = "Hosting On: " + Command.GetLocalIP();
+        }
 
         //Map PackedScenes in charScenes into Control nodes in chars
         this.chars = charScenes.Select(character => character.Instance() as CharSelectionDataPanel).ToArray();
