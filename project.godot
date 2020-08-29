@@ -203,6 +203,7 @@ quality/driver/fallback_to_gles2=true
 quality/2d/use_pixel_snap=true
 threads/thread_model=2
 quality/filters/anisotropic_filter_level=1
+vram_compression/import_etc=true
 environment/default_environment="res://default_env.tres"
 quality/stretch/mode="viewport"
 quality/stretch/aspect="keep"

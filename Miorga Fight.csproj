@@ -70,6 +70,7 @@
     <Compile Include="src\MiorgaFight\UI\HUD.cs" />
     <Compile Include="src\MiorgaFight\UI\LevelSelection.cs" />
     <Compile Include="src\MiorgaFight\UI\LevelSelectionLevelData.cs" />
+    <Compile Include="src\MiorgaFight\UI\MobileControls.cs" />
     <Compile Include="src\MiorgaFight\UI\PauseMenu.cs" />
     <Compile Include="src\MiorgaFight\Player\PlayerHUD.cs" />
     <Compile Include="src\MiorgaFight\Player\PlayerOverlay.cs" />

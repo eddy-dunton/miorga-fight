@@ -1,8 +1,8 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
-[sub_resource type="DynamicFontData" id=1]
+[sub_resource type="DynamicFontData" id=6]
 antialiased = false
 font_path = "res://assets/font/PIXEARG_.TTF"
 
 [resource]
-font_data = SubResource( 1 )
+font_data = SubResource( 6 )
