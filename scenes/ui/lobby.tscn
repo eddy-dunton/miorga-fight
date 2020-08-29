@@ -101,6 +101,7 @@ margin_left = 1.0
 margin_top = 60.0
 margin_right = 105.0
 margin_bottom = 83.0
+disableOnMobile = true
 
 [node name="label" parent="pa_start/bt_host" index="0"]
 margin_left = 2.0
@@ -125,6 +126,7 @@ custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 2 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 2 )
+disableOnMobile = true
 
 [node name="label" parent="pa_start/bt_local" index="0"]
 margin_right = 211.0

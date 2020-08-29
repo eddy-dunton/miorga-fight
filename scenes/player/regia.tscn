@@ -110,11 +110,6 @@ extents = Vector2( 23, 46 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 85 ), ExtResource( 82 ) ],
-"loop": true,
-"name": "high",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 40 ), ExtResource( 43 ) ],
 "loop": false,
 "name": "trans_low->high",
@@ -125,29 +120,14 @@ animations = [ {
 "name": "trans_high_main->low",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 42 ) ],
-"loop": false,
-"name": "trans_lax->high",
-"speed": 10.0
-}, {
 "frames": [ ExtResource( 50 ), ExtResource( 49 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 59 ), ExtResource( 52 ), ExtResource( 55 ), ExtResource( 57 ), ExtResource( 56 ), ExtResource( 58 ), ExtResource( 54 ), ExtResource( 53 ) ],
 "loop": false,
 "name": "flinch",
 "speed": 20.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 81 ) ],
-"loop": true,
-"name": "lax",
-"speed": 1.5
-}, {
 "frames": [ ExtResource( 74 ), ExtResource( 75 ), ExtResource( 72 ), ExtResource( 76 ) ],
 "loop": true,
 "name": "trans_low_main->high",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 30 ), ExtResource( 23 ), ExtResource( 31 ), ExtResource( 35 ), ExtResource( 28 ), ExtResource( 28 ), ExtResource( 25 ), ExtResource( 25 ) ],
-"loop": false,
-"name": "high_attack_main",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 83 ), ExtResource( 87 ), ExtResource( 86 ), ExtResource( 84 ) ],
@@ -170,16 +150,6 @@ animations = [ {
 "name": "low_attack_main",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 51 ) ],
-"loop": false,
-"name": "trans_high_alt->low",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 13 ), ExtResource( 39 ), ExtResource( 38 ), ExtResource( 33 ), ExtResource( 21 ), ExtResource( 24 ) ],
-"loop": true,
-"name": "low_parry_alt",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 29 ), ExtResource( 29 ), ExtResource( 27 ), ExtResource( 36 ), ExtResource( 26 ), ExtResource( 26 ), ExtResource( 32 ), ExtResource( 32 ) ],
 "loop": false,
 "name": "high_attack_alt",
@@ -189,6 +159,36 @@ animations = [ {
 "loop": true,
 "name": "walk",
 "speed": 8.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 39 ), ExtResource( 38 ), ExtResource( 33 ), ExtResource( 21 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "low_parry_alt",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 30 ), ExtResource( 23 ), ExtResource( 31 ), ExtResource( 35 ), ExtResource( 28 ), ExtResource( 28 ), ExtResource( 25 ), ExtResource( 25 ) ],
+"loop": false,
+"name": "high_attack_main",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 42 ) ],
+"loop": false,
+"name": "trans_lax->high",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 51 ) ],
+"loop": false,
+"name": "trans_high_alt->low",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 81 ) ],
+"loop": true,
+"name": "lax",
+"speed": 1.5
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 85 ), ExtResource( 82 ) ],
+"loop": true,
+"name": "high",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]

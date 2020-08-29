@@ -9,6 +9,9 @@ public class Command : Node {
     //Reference to Lobby
     public static Lobby lobby;
 
+    private static bool mobile = OS.GetName() == "Android"; 
+    public static bool IsMobile() {return mobile;}
+
     private static Random random = new Random();
 
     //Returns a pseudo random double between min and max (inclusive)
