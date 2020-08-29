@@ -103,10 +103,15 @@ public class CharSelection : Control
     
         this.nodeCharList.Connect("item_selected", this, nameof(this._OnCharSelected));
 
-        //Show hosting on text
+        //Show "Hosting on: " text if for the host
         if (Lobby.role == Lobby.MultiplayerRole.HOST) {
             this.nodeHostingOn.Visible = true;
-            this.nodeHostingOn.Text = "Hosting On: " + Command.GetLocalIP();
+            this.nodeHostingOn.Text = "Hosting on: " + Command.GetLocalIP();
+        }
+
+        //Show the spectator numbers online
+        if (Lobby.role != Lobby.MultiplayerRole.OFFLINE) {
+            this.nodeSpectators.Visible = true;
         }
 
         //Map PackedScenes in charScenes into Control nodes in chars

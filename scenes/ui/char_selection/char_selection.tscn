@@ -143,6 +143,7 @@ position = Vector2( 31, 178 )
 texture = ExtResource( 12 )
 
 [node name="la_mp_spectators" type="Label" parent="."]
+visible = false
 margin_left = 24.0
 margin_top = 8.00003
 margin_right = 88.0
