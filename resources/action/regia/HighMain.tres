@@ -3,7 +3,7 @@
 [ext_resource path="res://src/MiorgaFight/Action/Attack.cs" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 85.932, 65.4951 )
+extents = Vector2( 85.932, 34.733 )
 
 [resource]
 script = ExtResource( 1 )
@@ -17,7 +17,7 @@ transition = "trans_high_main->low"
 transitionTo = 1
 animateTransition = true
 hitbox = SubResource( 1 )
-hitboxoffset = Vector2( -8, 21 )
+hitboxoffset = Vector2( -16.139, -1.522 )
 hitframe = 4
 halt = false
 damage = 60
