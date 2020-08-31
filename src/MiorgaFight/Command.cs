@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Net;
+using System.Linq;
 
 namespace MiorgaFight {
 
@@ -8,6 +10,9 @@ namespace MiorgaFight {
 public class Command : Node {
     //Reference to Lobby
     public static Lobby lobby;
+
+    private static bool mobile = OS.GetName() == "Android"; 
+    public static bool IsMobile() {return mobile;}
 
     private static Random random = new Random();
 
@@ -30,6 +35,18 @@ public class Command : Node {
         newEvent.Action = action;
         newEvent.Pressed = pressed;
         return newEvent;
+    }
+
+    public static string GetLocalIP()
+    {
+        if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable()) return null;
+
+        IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+
+        return host
+            .AddressList
+            .FirstOrDefault(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+            .ToString();
     }
 
     //Class used to map joysticks to keyboard commands

@@ -75,6 +75,9 @@ public abstract class Action : Resource {
     public bool IsPossible(Player player, InputEvent input) {
         //I don't like the way this works
 
+        //For those actions which are not possible
+        if (this.triggerInput == "" || this.triggerInput == null) return false;
+
         //Colossal return statement
         //Sorry
         return (input.IsActionPressed(player.inputPrefix + this.triggerInput) && //Correct action has been pressed 

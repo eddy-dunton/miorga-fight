@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://src/MiorgaFight/UI/FpsCounter.cs" type="Script" id=1]
 [ext_resource path="res://src/MiorgaFight/Player/PlayerHUD.cs" type="Script" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://assets/ui/titlecards/round8.png" type="Texture" id=20]
 [ext_resource path="res://assets/ui/titlecards/round6.png" type="Texture" id=21]
 [ext_resource path="res://assets/ui/titlecards/round9.png" type="Texture" id=22]
+[ext_resource path="res://src/MiorgaFight/UI/MobileControls.cs" type="Script" id=23]
+[ext_resource path="res://resources/theme/theme.tres" type="Theme" id=24]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -45,30 +47,25 @@ animations = [ {
 "name": "round9",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 13 ) ],
-"loop": true,
-"name": "go",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 21 ) ],
-"loop": true,
-"name": "round6",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 19 ) ],
-"loop": true,
-"name": "round7",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 20 ) ],
 "loop": true,
 "name": "round8",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "go",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 16 ), ExtResource( 15 ) ],
 "loop": true,
 "name": "wins",
 "speed": 12.0
+}, {
+"frames": [ ExtResource( 19 ) ],
+"loop": true,
+"name": "round7",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 12 ) ],
 "loop": false,
@@ -80,14 +77,19 @@ animations = [ {
 "name": "round3",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 11 ) ],
+"loop": false,
+"name": "round4",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 9 ) ],
 "loop": false,
 "name": "round2",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ) ],
-"loop": false,
-"name": "round4",
+"frames": [ ExtResource( 21 ) ],
+"loop": true,
+"name": "round6",
 "speed": 5.0
 } ]
 
@@ -164,6 +166,26 @@ tracks/2/keys = {
 "method": "play"
 } ]
 }
+
+[sub_resource type="StyleBoxFlat" id=5]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="DynamicFontData" id=6]
+antialiased = false
+font_path = "res://assets/font/PIXEARG_.TTF"
+
+[sub_resource type="DynamicFont" id=7]
+outline_size = 2
+font_data = SubResource( 6 )
 
 [node name="hud" type="CanvasLayer"]
 pause_mode = 2
@@ -280,3 +302,124 @@ frames = SubResource( 1 )
 anims/cards_fade = SubResource( 2 )
 anims/cards_fade_long = SubResource( 3 )
 anims/win = SubResource( 4 )
+
+[node name="pa_mobile_controls" type="Control" parent="."]
+theme = ExtResource( 24 )
+script = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pa_left" type="Control" parent="pa_mobile_controls"]
+margin_top = 100.0
+margin_right = 150.0
+margin_bottom = 300.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_up" type="Button" parent="pa_mobile_controls/pa_left"]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_left = 40.0
+margin_right = 110.0
+margin_bottom = 60.0
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
+text = "Up"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_left" type="Button" parent="pa_mobile_controls/pa_left"]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_top = 70.0
+margin_right = 70.0
+margin_bottom = 130.0
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
+text = "Left"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_right" type="Button" parent="pa_mobile_controls/pa_left"]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_left = 80.0
+margin_top = 70.0
+margin_right = 150.0
+margin_bottom = 130.0
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
+text = "Right"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_down" type="Button" parent="pa_mobile_controls/pa_left"]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_left = 40.0
+margin_top = 140.0
+margin_right = 110.0
+margin_bottom = 200.0
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
+text = "Down"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pa_right" type="Control" parent="pa_mobile_controls"]
+margin_left = 710.0
+margin_top = 135.0
+margin_right = 780.0
+margin_bottom = 265.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_main" type="Button" parent="pa_mobile_controls/pa_right"]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_right = 70.0
+margin_bottom = 60.0
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
+text = "Main"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_alt" type="Button" parent="pa_mobile_controls/pa_right"]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_top = 70.0
+margin_right = 70.0
+margin_bottom = 130.0
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
+text = "Alt"
+__meta__ = {
+"_edit_use_anchors_": false
+}

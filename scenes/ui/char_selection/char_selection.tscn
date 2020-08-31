@@ -154,4 +154,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="la_mp_hosting_on" type="Label" parent="."]
+visible = false
+margin_left = 513.0
+margin_top = 8.0
+margin_right = 768.0
+margin_bottom = 38.0
+text = "Hosting on: "
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [editable path="pa_char_data"]

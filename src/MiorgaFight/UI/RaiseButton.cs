@@ -5,6 +5,8 @@ namespace MiorgaFight {
 
 public class RaiseButton : Button
 {
+    [Export] private bool disableOnMobile = false; 
+
     //Pass this buttons text field straight through to the label
     public new string Text {
         set {
@@ -21,6 +23,11 @@ public class RaiseButton : Button
 
     public override void _Ready()
     {
+        if (this.disableOnMobile && Command.IsMobile()) {
+            this.Visible = false;
+            return;
+        }
+
         this.nodeLabel = GetNode<Label>("label");
         this.Connect("mouse_entered", this, nameof(_TextUp));
         this.Connect("button_up", this, nameof(_TextUp));
