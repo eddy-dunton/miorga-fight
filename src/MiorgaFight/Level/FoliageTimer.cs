@@ -57,9 +57,15 @@ public class FoliageTimer : Timer
 		}
 
 		this.Connect("timeout", this, nameof(_OnTimeout));
-		this.position = this.parent.foliagePositions;
 		//Reset cycle for start
 		this.ResetCycle();
+
+		//Set position to start 
+		//Reset the position to minimum
+		this.position = Int32.MinValue;
+		
+		//Reset wait time to start first gust quickly
+		this.WaitTime = 0.25f;
 	}
 
 	void _OnTimeout() {
