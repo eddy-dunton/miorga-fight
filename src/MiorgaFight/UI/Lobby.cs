@@ -293,8 +293,8 @@ public class Lobby : Control {
 	private void ResetToLobby(int p1Id, int p2Id) {
 		this.RemoveAll();
 		
-        //Allow new connections
-        GetTree().NetworkPeer.RefuseNewConnections = false;
+		//Allow new connections
+		GetTree().NetworkPeer.RefuseNewConnections = false;
 
 		//Make cursor visible
 		Input.SetMouseMode(Input.MouseMode.Visible);
