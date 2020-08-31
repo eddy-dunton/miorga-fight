@@ -8,6 +8,9 @@ public class MobileControls : Control
     private Button nodeUp, nodeLeft, nodeRight, nodeDown, nodeMain, nodeAlt;
 
     public override void _Ready() {
+        //Allows it to be hidden in editor
+        this.Visible = true;
+
         //Left panel
         this.nodeUp = this.SetupButton("pa_left/bt_up", "p1_up");
         this.nodeLeft = this.SetupButton("pa_left/bt_left", "p1_left");
