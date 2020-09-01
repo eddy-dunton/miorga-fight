@@ -406,6 +406,9 @@ public class Lobby : Control {
 	public void Reset() {
 		this.RemoveAll();
 
+		//Unpause game (if it is paused)
+		Command.command.PauseEnd();
+
 		//Make cursor visible
 		Input.SetMouseMode(Input.MouseMode.Visible);
 

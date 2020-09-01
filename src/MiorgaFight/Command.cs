@@ -10,6 +10,7 @@ namespace MiorgaFight {
 public class Command : Node {
     //Reference to Lobby
     public static Lobby lobby;
+    public static Command command;
 
     private static bool mobile = OS.GetName() == "Android"; 
     public static bool IsMobile() {return mobile;}
@@ -74,7 +75,9 @@ public class Command : Node {
         new JoystickMapping("ctrlr_right", "p1_right")
     };
 
-    public Command() {}
+    public Command() {
+        Command.command = this;
+    }
 
     public override void _Ready() {
         //Continue through pauses
