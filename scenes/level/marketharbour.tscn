@@ -60,8 +60,7 @@ texture = ExtResource( 3 )
 
 [node name="rain" type="Particles2D" parent="bg/bg_layer2" index="1"]
 position = Vector2( 0, -250 )
-amount = 300
-lifetime = 2.0
+amount = 1000
 preprocess = 5.0
 visibility_rect = Rect2( -600, -300, 1200, 400 )
 local_coords = false
@@ -106,8 +105,7 @@ follow_viewport_enable = true
 
 [node name="rain" type="Particles2D" parent="overlay_layer" index="0"]
 position = Vector2( 0, -250 )
-amount = 200
-lifetime = 2.0
+amount = 250
 preprocess = 5.0
 visibility_rect = Rect2( -600, -300, 1200, 400 )
 local_coords = false
