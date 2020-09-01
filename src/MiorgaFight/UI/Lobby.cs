@@ -181,7 +181,7 @@ public class Lobby : Control {
 				.Instance() as CharSelection;
 		GetTree().Root.AddChild(cs);
 		//Set the character selection up for multiplayer, with this as a spectator
-		cs.SetMp(Lobby.role);
+		cs.SetMp();
 		cs.SetCallback(this._MpCSCallback);
 		cs.PlayersUpdated(true, false); //Get the player connected sprites set correctly
 	}
@@ -331,7 +331,7 @@ public class Lobby : Control {
 				.Instance() as CharSelection;
 		GetTree().Root.AddChild(cs);
 		//Set the character selection up for multiplayer, with this as a spectator
-		cs.SetMp(Lobby.role);
+		cs.SetMp();
 		cs.SetCallback(this._MpCSCallback);
 		cs.PlayersUpdated(p1Id != 0, p2Id != 0);
 

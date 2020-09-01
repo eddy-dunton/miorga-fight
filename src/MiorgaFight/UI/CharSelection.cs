@@ -37,8 +37,6 @@ public class CharSelection : Control
         }
     }
 
-    private Lobby.MultiplayerRole mpRole;
-
     //Character scenes in packed format
     //These are then instanced into the charScenes array 
     [Export] private List<PackedScene> charScenes; 
@@ -65,9 +63,6 @@ public class CharSelection : Control
     public PlayerData p1, p2;
 
     public override void _Ready() {
-        //Default to offline
-        this.mpRole = Lobby.MultiplayerRole.OFFLINE;
-
         this.p1 = new PlayerData();
         this.p2 = new PlayerData();
 
@@ -145,8 +140,8 @@ public class CharSelection : Control
     //When the play button is pressed
     void _OnPlayPressed() {
         //If online, RPC confirmed instead
-        if (this.mpRole != Lobby.MultiplayerRole.OFFLINE) {
-            Rpc(nameof(this.Confirm), new object[] {this.mpRole, this.GetSelectedPlayer().selection});
+        if (Lobby.role != Lobby.MultiplayerRole.OFFLINE) {
+            Rpc(nameof(this.Confirm), new object[] {Lobby.role, this.GetSelectedPlayer().selection});
             //this.Confirm(this.mp, this.GetSelectedPlayer().selection);
             this.nodePlayButton.Disabled = true;
             //Disable char list
@@ -169,7 +164,7 @@ public class CharSelection : Control
 
         this.ShowChar(index);
         //Don't change anything for spectators
-        if (this.mpRole == Lobby.MultiplayerRole.SPECTATOR) return;
+        if (Lobby.role == Lobby.MultiplayerRole.SPECTATOR) return;
 
         PlayerData d = this.GetSelectedPlayer();
 
@@ -224,9 +219,9 @@ public class CharSelection : Control
     }
 
     //Sets the lobby up for different multiplayer scenarios
-    public void SetMp(Lobby.MultiplayerRole role) {
-        this.mpRole = role;
-        if (this.mpRole == Lobby.MultiplayerRole.SPECTATOR) {
+    //Ensure Lobby.role is correct before calling this, as is depends on it
+    public void SetMp() {
+        if (Lobby.role == Lobby.MultiplayerRole.SPECTATOR) {
             //Disable all buttons
             this.p1.nodeButton.Disabled = true;
             this.p2.nodeButton.Disabled = true;
@@ -236,14 +231,14 @@ public class CharSelection : Control
             this.p1.nodeIcon.Visible = false;
             this.p2.nodeIcon.Texture = this.iconUnknown;
             this.p2.nodeIcon.Visible = false;
-        } else if (this.mpRole == Lobby.MultiplayerRole.P1) {
+        } else if (Lobby.role == Lobby.MultiplayerRole.P1) {
             this.p1.nodeButton.Pressed = true;
             this.p2.nodeButton.Pressed = false;
             this.p2.nodeButton.Disabled = true;
             this.p2.nodeIcon.Texture = this.iconUnknown;
             this.p2.nodeIcon.Visible = false;
             this.nodeRoleButton.Text = "Spectate";
-        } else if (this.mpRole == Lobby.MultiplayerRole.P2) {
+        } else if (Lobby.role == Lobby.MultiplayerRole.P2) {
             this.p1.nodeButton.Pressed = false;
             this.p2.nodeButton.Pressed = true;
             this.p1.nodeButton.Disabled = true;
