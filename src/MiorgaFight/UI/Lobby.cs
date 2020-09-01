@@ -434,9 +434,9 @@ public class Lobby : Control {
 	//Calculates the number of spectators current connected
 	//should only be called by the host really
 	public int CalcSpectators() {
-		//Peers() + 1 - All other players + this one
+		//Peers() + 1 - All other clients + this one
 		int c = GetTree().GetNetworkConnectedPeers().Length + 1;
-		if (this.p1Id != 0) c--; //Decrement for each player which is actually playing
+		if (this.p1Id != 0) c--; //Decrement for each client which is actually playing
 		if (this.p2Id != 0) c--;
 
 		return c;
