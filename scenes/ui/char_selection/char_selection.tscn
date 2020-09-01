@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/ui/char_selection/char_data_regia.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/menus/character selection/icons/regia.png" type="Texture" id=2]
@@ -20,6 +20,9 @@
 [ext_resource path="res://assets/ui/menus/character selection/character selection.png" type="Texture" id=18]
 [ext_resource path="res://assets/ui/menus/character selection/player buttons/p2_selected.png" type="Texture" id=19]
 [ext_resource path="res://scenes/ui/raise_button.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/ui/menus/character selection/button_quit_hover.png" type="Texture" id=21]
+[ext_resource path="res://assets/ui/menus/character selection/button_quit.png" type="Texture" id=22]
+[ext_resource path="res://assets/ui/menus/character selection/button_quit_disabled.png" type="Texture" id=23]
 
 [sub_resource type="StyleBoxFlat" id=1]
 draw_center = false
@@ -79,6 +82,21 @@ texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 3 )
 texture_hover = ExtResource( 17 )
 texture_disabled = ExtResource( 15 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_quit" type="TextureButton" parent="."]
+margin_left = 41.0
+margin_top = 406.0
+margin_right = 84.0
+margin_bottom = 427.0
+focus_mode = 0
+texture_normal = ExtResource( 22 )
+texture_pressed = ExtResource( 22 )
+texture_hover = ExtResource( 21 )
+texture_disabled = ExtResource( 23 )
 stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false

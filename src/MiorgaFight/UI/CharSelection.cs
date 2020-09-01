@@ -52,7 +52,7 @@ public class CharSelection : Control
     //Function to be called once the characters are selected
     private Func<CharSelection, PackedScene, PackedScene, LevelSelection> callback;
 
-    private TextureButton nodePlayButton;
+    private TextureButton nodePlayButton, nodeQuitButton;
     private ItemList nodeCharList;
     private CharSelectionDataPanel nodeDataPanel;
     private Label nodeSpectators, nodeHostingOn;
@@ -78,6 +78,7 @@ public class CharSelection : Control
         this.p2.nodePresent = GetNode<Sprite>("pa_player_buttons/sp_present_p2");
 
         this.nodePlayButton = GetNode<TextureButton>("bt_play");
+        this.nodeQuitButton = GetNode<TextureButton>("bt_quit");
         this.nodeSpectators = GetNode<Label>("la_mp_spectators");
         this.nodeHostingOn = GetNode<Label>("la_mp_hosting_on");
         this.nodeRoleButton = GetNode<RaiseButton>("bt_role");
@@ -98,20 +99,15 @@ public class CharSelection : Control
         this.p2.nodeButton.Connect("pressed", this, nameof(this._OnPlayerPressed), 
                 new Godot.Collections.Array(new byte[] {2}));
         this.nodePlayButton.Connect("pressed", this, nameof(this._OnPlayPressed));
+        this.nodeQuitButton.Connect("pressed", Command.lobby, nameof(Command.lobby.Reset));
         this.nodeRoleButton.Connect("pressed", this, nameof(this._OnRolePressed));
 
         this.nodeCharList.Connect("item_selected", this, nameof(this._OnCharSelected));
 
-        //Show "Hosting on: " text if for the host
-        if (Lobby.IsHost()) {
-            this.nodeHostingOn.Visible = true;
-            this.nodeHostingOn.Text = "Hosting on: " + Command.GetLocalIP();
-        }
-
-        //Show the spectator numbers online
-        if (Lobby.role != Lobby.MultiplayerRole.OFFLINE) {
-            this.nodeSpectators.Visible = true;
-        }
+        //Set mp specific bits to false
+        this.nodeSpectators.Visible = false;
+        this.nodeHostingOn.Visible = false;
+        this.nodeRoleButton.Visible = false;
 
         //Map PackedScenes in charScenes into Control nodes in chars
         this.chars = charScenes.Select(character => character.Instance() as CharSelectionDataPanel).ToArray();
@@ -261,6 +257,12 @@ public class CharSelection : Control
         this.nodeSpectators.Visible = true;
         this.nodeRoleButton.Visible = true;
         this.SetSpectators(Command.lobby.CalcSpectators());
+
+        //Show "Hosting on: " text if for the host
+        if (Lobby.IsHost()) {
+            this.nodeHostingOn.Visible = true;
+            this.nodeHostingOn.Text = "Hosting on: " + Command.GetLocalIP();
+        }
     }
 
     //Sets present buttons correctly
