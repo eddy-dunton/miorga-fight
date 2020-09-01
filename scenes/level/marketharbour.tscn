@@ -9,37 +9,31 @@
 [ext_resource path="res://assets/level/marketharbour/level_overlay.png" type="Texture" id=7]
 [ext_resource path="res://assets/level/marketharbour/particles/rain.png" type="Texture" id=8]
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="LineShape2D" id=2]
+normal = Vector2( 1, 0 )
+
+[sub_resource type="LineShape2D" id=3]
+normal = Vector2( -1, 0 )
+
+[sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
-emission_box_extents = Vector3( 500, 1, 1 )
+emission_box_extents = Vector3( 600, 1, 1 )
 flag_disable_z = true
-direction = Vector3( 0, 10, 0 )
-spread = 0.0
+direction = Vector3( 1, 10, 0 )
+spread = 1.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 250.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-
-[sub_resource type="LineShape2D" id=1]
-normal = Vector2( 1, 0 )
-
-[sub_resource type="LineShape2D" id=2]
-normal = Vector2( -1, 0 )
+angle = 5.0
+angle_random = 0.1
 
 [node name="level" instance=ExtResource( 1 )]
 POSITION_LEFT = -300.0
 POSITION_RIGHT = 300.0
 POSITION_Y = 110.0
 
-[node name="rain" type="Particles2D" parent="." index="0"]
-position = Vector2( 0, -300 )
-amount = 1000
-lifetime = 3.0
-visibility_rect = Rect2( -9999, -9999, 99999, 99999 )
-process_material = SubResource( 3 )
-texture = ExtResource( 8 )
-
-[node name="bg" type="ParallaxBackground" parent="." index="1"]
+[node name="bg" type="ParallaxBackground" parent="." index="0"]
 
 [node name="bg_layer4" type="ParallaxLayer" parent="bg" index="0"]
 motion_scale = Vector2( 0.05, 1 )
@@ -76,18 +70,15 @@ texture = ExtResource( 2 )
 [node name="sprite" type="Sprite" parent="bg/bg_base" index="0"]
 texture = ExtResource( 6 )
 
-[node name="arena" type="StaticBody2D" parent="." index="2"]
+[node name="arena" type="StaticBody2D" parent="." index="1"]
 
 [node name="ar_wall_left" type="CollisionShape2D" parent="arena" index="0"]
 position = Vector2( -537, 172 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="ar_wall_right" type="CollisionShape2D" parent="arena" index="1"]
 position = Vector2( 536.891, 180 )
-shape = SubResource( 2 )
-
-[node name="hud" parent="." index="3"]
-layer = 2
+shape = SubResource( 3 )
 
 [node name="gr_p1" parent="hud" index="1"]
 visible = false
@@ -98,10 +89,20 @@ visible = false
 [node name="pa_mobile_controls" parent="hud" index="6"]
 visible = false
 
-[node name="overlay_layer" type="CanvasLayer" parent="." index="4"]
+[node name="overlay_layer" type="CanvasLayer" parent="." index="3"]
 follow_viewport_enable = true
 
-[node name="level_overlay1" type="Sprite" parent="overlay_layer" index="0"]
+[node name="rain" type="Particles2D" parent="overlay_layer" index="0"]
+position = Vector2( 0, -250 )
+amount = 1000
+lifetime = 2.0
+preprocess = 5.0
+visibility_rect = Rect2( -600, -300, 1200, 400 )
+local_coords = false
+process_material = SubResource( 1 )
+texture = ExtResource( 8 )
+
+[node name="level_overlay1" type="Sprite" parent="overlay_layer" index="1"]
 texture = ExtResource( 7 )
 
 [editable path="hud"]
