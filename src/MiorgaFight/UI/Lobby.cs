@@ -434,12 +434,10 @@ public class Lobby : Control {
 	//Calculates the number of spectators current connected
 	//should only be called by the host really
 	public int CalcSpectators() {
-		int c = 0;
-		//Iterate through all connected
-		foreach(int id in GetTree().GetNetworkConnectedPeers()) {
-			if (id != this.p1Id && id != this.p2Id) c++; //Increment c for every player connection
-		}
-		if (Lobby.role == MultiplayerRole.SPECTATOR) c++; //Increment c if this is spectating
+		//Peers() + 1 - All other players + this one
+		int c = GetTree().GetNetworkConnectedPeers().Length + 1;
+		if (this.p1Id != 0) c--; //Decrement for each player which is actually playing
+		if (this.p2Id != 0) c--;
 
 		return c;
 	}
