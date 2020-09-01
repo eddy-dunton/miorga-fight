@@ -142,7 +142,5 @@ public class Command : Node {
         GetTree().Paused = false;
 
         Input.SetMouseMode(Input.MouseMode.Hidden);
-
-        GetTree().Root.RemoveChild(Command.pauseMenu);
     }
 }}

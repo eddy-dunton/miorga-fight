@@ -19,6 +19,11 @@ public class PauseMenu : CanvasLayer {
         }
         //Connect the resume button to end pause
         GetNode("bt_resume").Connect("pressed", GetNode("/root/Command"), nameof(Command.PauseEnd));
-        GetNode("bt_quit").Connect("pressed", Command.lobby, nameof(Lobby.Reset));
+        GetNode("bt_quit").Connect("pressed", this, nameof(this._OnQuitPressed));
+    }
+
+    void _OnQuitPressed() {
+        GetTree().Root.RemoveChild(this);
+        Command.lobby.Reset();
     }
 }}
