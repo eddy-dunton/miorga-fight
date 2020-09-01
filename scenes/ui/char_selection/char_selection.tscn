@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/ui/char_selection/char_data_regia.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/menus/character selection/icons/regia.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm_hover.png" type="Texture" id=17]
 [ext_resource path="res://assets/ui/menus/character selection/character selection.png" type="Texture" id=18]
 [ext_resource path="res://assets/ui/menus/character selection/player buttons/p2_selected.png" type="Texture" id=19]
+[ext_resource path="res://scenes/ui/raise_button.tscn" type="PackedScene" id=20]
 
 [sub_resource type="StyleBoxFlat" id=1]
 draw_center = false
@@ -148,6 +149,7 @@ margin_left = 24.0
 margin_top = 8.00003
 margin_right = 88.0
 margin_bottom = 38.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Spectators: 0"
 valign = 1
 __meta__ = {
@@ -160,6 +162,7 @@ margin_left = 513.0
 margin_top = 8.0
 margin_right = 768.0
 margin_bottom = 38.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Hosting on: "
 align = 2
 valign = 1
@@ -167,4 +170,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="bt_role" parent="." instance=ExtResource( 20 )]
+visible = false
+margin_left = 106.0
+margin_top = 13.0
+margin_right = 210.0
+margin_bottom = 36.0
+
+[node name="label" parent="bt_role" index="0"]
+text = "Play"
+
 [editable path="pa_char_data"]
+
+[editable path="bt_role"]

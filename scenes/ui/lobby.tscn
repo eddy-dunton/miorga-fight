@@ -101,7 +101,6 @@ margin_left = 1.0
 margin_top = 60.0
 margin_right = 105.0
 margin_bottom = 83.0
-disableOnMobile = true
 
 [node name="label" parent="pa_start/bt_host" index="0"]
 margin_left = 2.0

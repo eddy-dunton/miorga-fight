@@ -58,6 +58,8 @@ public class CharSelection : Control
     private ItemList nodeCharList;
     private CharSelectionDataPanel nodeDataPanel;
     private Label nodeSpectators, nodeHostingOn;
+    private RaiseButton nodeRoleButton;
+
 
     //Player datas
     public PlayerData p1, p2;
@@ -83,6 +85,7 @@ public class CharSelection : Control
         this.nodePlayButton = GetNode<TextureButton>("bt_play");
         this.nodeSpectators = GetNode<Label>("la_mp_spectators");
         this.nodeHostingOn = GetNode<Label>("la_mp_hosting_on");
+        this.nodeRoleButton = GetNode<RaiseButton>("bt_role");
 
         //This is removed the moment the scene is opened
         //However I left it in the scene as it works as a good visual guide as to where the everything is in engine
@@ -100,7 +103,8 @@ public class CharSelection : Control
         this.p2.nodeButton.Connect("pressed", this, nameof(this._OnPlayerPressed), 
                 new Godot.Collections.Array(new byte[] {2}));
         this.nodePlayButton.Connect("pressed", this, nameof(this._OnPlayPressed));
-    
+        this.nodeRoleButton.Connect("pressed", this, nameof(this._OnRolePressed));
+
         this.nodeCharList.Connect("item_selected", this, nameof(this._OnCharSelected));
 
         //Show "Hosting on: " text if for the host
@@ -177,6 +181,12 @@ public class CharSelection : Control
             this.nodePlayButton.Disabled = false;
     }
 
+    //Requests from the server that his player be moved to spectate
+    void _OnRolePressed() {
+        //Make the spectate request to the server
+        Command.lobby.RpcId(1, nameof(Command.lobby.ChangeRole), new object[] {GetTree().GetNetworkUniqueId()});
+    }
+
     //Sets a player selection to be confirmed
     public void Confirm(Lobby.MultiplayerRole p, int selection) {
         if (p == Lobby.MultiplayerRole.P1) {
@@ -232,12 +242,14 @@ public class CharSelection : Control
             this.p2.nodeButton.Disabled = true;
             this.p2.nodeIcon.Texture = this.iconUnknown;
             this.p2.nodeIcon.Visible = false;
+            this.nodeRoleButton.Text = "Spectate";
         } else if (this.mpRole == Lobby.MultiplayerRole.P2) {
             this.p1.nodeButton.Pressed = false;
             this.p2.nodeButton.Pressed = true;
             this.p1.nodeButton.Disabled = true;
             this.p1.nodeIcon.Texture = this.iconUnknown;
             this.p1.nodeIcon.Visible = false;
+            this.nodeRoleButton.Text = "Spectate";
         }
 
         //Turn these off (as players updated should be called after set MP)
@@ -252,6 +264,7 @@ public class CharSelection : Control
 
         //Set spectator numbers
         this.nodeSpectators.Visible = true;
+        this.nodeRoleButton.Visible = true;
         this.SetSpectators(Command.lobby.CalcSpectators());
     }
 
@@ -266,6 +279,12 @@ public class CharSelection : Control
 
         this.p1.mpConnected = p1;
         this.p2.mpConnected = p2;
+
+        //Hide spectate button if no longer available
+        if (Lobby.role == Lobby.MultiplayerRole.SPECTATOR) {
+            //Hides play button if both players are connected, shows it if not
+            this.nodeRoleButton.Visible = !(p1 && p2);
+        }
     }
 
     //Sets the current number of spectators

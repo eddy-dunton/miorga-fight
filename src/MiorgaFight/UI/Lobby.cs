@@ -91,6 +91,7 @@ public class Lobby : Control {
 
 		this.RpcConfig(nameof(this.SetupClient), MultiplayerAPI.RPCMode.Puppet);
 		this.RpcConfig(nameof(this.ResetToLobby), MultiplayerAPI.RPCMode.Remotesync);
+		this.RpcConfig(nameof(this.ChangeRole), MultiplayerAPI.RPCMode.Remotesync);
 	}
 
 	//Called when a player connects (duh)	
@@ -128,9 +129,9 @@ public class Lobby : Control {
 		if (Lobby.IsHost()) {
 			//Force everyone back to lobby (if you're the server)
 			if (id == this.p1Id) {
-				Rpc(nameof(this.ResetToLobby), new object[] {this.GetFirstSpectator(), this.p2Id});
+				Rpc(nameof(this.ResetToLobby), new object[] {0, this.p2Id});
 			} else if (id == this.p2Id) {
-				Rpc(nameof(this.ResetToLobby), new object[] {this.p1Id, this.GetFirstSpectator()});
+				Rpc(nameof(this.ResetToLobby), new object[] {this.p1Id, 0});
 			} 
 		}
 
@@ -166,12 +167,12 @@ public class Lobby : Control {
 			return;
 		}
 
-		this.p1Id = 0;
+		this.p1Id = 1;
 		this.p2Id = 0;
 		GetTree().NetworkPeer = this.peer;
 		Lobby.state = GameState.CHAR_SELECTION;
 		//Hosts should start out as a spectator
-		Lobby.role = MultiplayerRole.SPECTATOR;
+		Lobby.role = MultiplayerRole.P1;
 	
 		this.Visible = false;
 
@@ -182,6 +183,7 @@ public class Lobby : Control {
 		//Set the character selection up for multiplayer, with this as a spectator
 		cs.SetMp(Lobby.role);
 		cs.SetCallback(this._MpCSCallback);
+		cs.PlayersUpdated(true, false); //Get the player connected sprites set correctly
 	}
 
 	void _OnJoinPressed() {
@@ -332,6 +334,26 @@ public class Lobby : Control {
 		cs.SetMp(Lobby.role);
 		cs.SetCallback(this._MpCSCallback);
 		cs.PlayersUpdated(p1Id != 0, p2Id != 0);
+
+		this.ResetSpectators();
+	}
+
+	public void ChangeRole(int id) {
+		if (! Lobby.IsHost()) return; //None hosts can fuck off
+
+		//P1 -> Spectator
+		if (this.p1Id == id) {
+			//Issue player change to all clients
+			Rpc(nameof(this.ResetToLobby), new object[] {0, this.p2Id});
+		} else if (this.p2Id == id) {
+			Rpc(nameof(this.ResetToLobby), new object[] {this.p1Id, 0});
+		} else {// Is spectator
+			if (this.p1Id == 0) {//P1 empty, take over
+				Rpc(nameof(this.ResetToLobby), new object[] {id, this.p2Id});
+			} else if (this.p2Id == 0) {//P1 empty, take over
+				Rpc(nameof(this.ResetToLobby), new object[] {this.p1Id, id});
+			}
+		}
 	}
 
 	//Starts the game
@@ -409,18 +431,14 @@ public class Lobby : Control {
 	//Calculates the number of spectators current connected
 	//should only be called by the host really
 	public int CalcSpectators() {
-		int peers = GetTree().GetNetworkConnectedPeers().Length;
-		return (peers > 2 ? peers - 2 : 0);
-	}
-
-	//Returns the id of the first spectator connected to this game, or 0 if there are none
-	private int GetFirstSpectator() {
-		foreach (int id in GetTree().GetNetworkConnectedPeers()) {
-			if (id != 1 && id != this.p1Id && id != this.p2Id) return id;
+		int c = 0;
+		//Iterate through all connected
+		foreach(int id in GetTree().GetNetworkConnectedPeers()) {
+			if (id != this.p1Id && id != this.p2Id) c++; //Increment c for every player connection
 		}
+		if (Lobby.role == MultiplayerRole.SPECTATOR) c++; //Increment c if this is spectating
 
-		//None, return 0
-		return 0;
+		return c;
 	}
 
 	//Removes everything other than this and Command from the root node
