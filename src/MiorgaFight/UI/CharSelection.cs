@@ -104,7 +104,7 @@ public class CharSelection : Control
         this.nodeCharList.Connect("item_selected", this, nameof(this._OnCharSelected));
 
         //Show "Hosting on: " text if for the host
-        if (Lobby.role == Lobby.MultiplayerRole.HOST) {
+        if (Lobby.IsHost()) {
             this.nodeHostingOn.Visible = true;
             this.nodeHostingOn.Text = "Hosting on: " + Command.GetLocalIP();
         }
@@ -164,8 +164,8 @@ public class CharSelection : Control
         if (!this.nodeCharList.IsItemSelectable(index)) return;
 
         this.ShowChar(index);
-        //Don't change anything for spectators or host
-        if (this.mpRole == Lobby.MultiplayerRole.SPECTATOR || this.mpRole == Lobby.MultiplayerRole.HOST) return;
+        //Don't change anything for spectators
+        if (this.mpRole == Lobby.MultiplayerRole.SPECTATOR) return;
 
         PlayerData d = this.GetSelectedPlayer();
 
@@ -216,7 +216,7 @@ public class CharSelection : Control
     //Sets the lobby up for different multiplayer scenarios
     public void SetMp(Lobby.MultiplayerRole role) {
         this.mpRole = role;
-        if (this.mpRole == Lobby.MultiplayerRole.SPECTATOR ||this.mpRole == Lobby.MultiplayerRole.HOST) {
+        if (this.mpRole == Lobby.MultiplayerRole.SPECTATOR) {
             //Disable all buttons
             this.p1.nodeButton.Disabled = true;
             this.p2.nodeButton.Disabled = true;

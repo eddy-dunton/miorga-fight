@@ -193,7 +193,7 @@ public class LevelSelection : Control
         //else {wtf?}
 
         //Both players have chosen, pass choices through to clients, if host 
-        if (this.mpP1Selection != -1 && this.mpP2Selection != -1 && GetTree().GetNetworkUniqueId() == 1) {
+        if (this.mpP1Selection != -1 && this.mpP2Selection != -1 && Lobby.IsHost()) {
             //Randomly generate a winner
             Lobby.MultiplayerRole win = Command.Random(0, 1) == 0 ? Lobby.MultiplayerRole.P1 : Lobby.MultiplayerRole.P2; 
             Rpc(nameof(MpChosen), new object[] {win, this.mpP1Selection, this.mpP2Selection});

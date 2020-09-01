@@ -315,7 +315,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Passes straight through to ChangeHP_(..) in singleplayer
 	public void ChangeHP(int newhp) {
 		if (Lobby.role != Lobby.MultiplayerRole.OFFLINE) {
-			if (GetTree().GetNetworkUniqueId() == 1) { //check for server
+			if (Lobby.IsHost()) { //Only issue commands if host
 				RpcUnreliable(nameof(this.ChangeHP_), new object[] {newhp});
 			}
 		} else {
@@ -363,7 +363,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Passes straight through to Hurt_(..) in singleplayer
 	public void Hurt(int damage, bool halting = false) {
 		if (Lobby.role != Lobby.MultiplayerRole.OFFLINE) {
-			if (GetTree().GetNetworkUniqueId() == 1) { //check for server
+			if (Lobby.IsHost()) { //Only issue commands if host
 				RpcUnreliable(nameof(this.Hurt_), new object[] {damage, halting});
 			}
 		} else {
@@ -393,7 +393,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Passes straight through to Parried_(..) in singleplayer
 	public void Parried(Attack attack, Parry by) {
 		if (Lobby.role != Lobby.MultiplayerRole.OFFLINE) {
-			if (GetTree().GetNetworkUniqueId() == 1) { //check for server
+			if (Lobby.IsHost()) { //Only issue calls if host
 				RpcUnreliable(nameof(this.Parried_ByIndex_), new object[] 
 						{this.actions.IndexOf(attack), this.nodeEnemy.actions.IndexOf(by)});
 			}

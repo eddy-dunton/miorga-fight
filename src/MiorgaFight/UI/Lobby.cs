@@ -8,7 +8,7 @@ namespace MiorgaFight {
 //And the lobby UI scene which the game starts on
 public class Lobby : Control {
 	public enum MultiplayerRole {
-		SPECTATOR, P1, P2, OFFLINE, HOST
+		SPECTATOR, P1, P2, OFFLINE
 	}
 
 	public enum GameState {
@@ -30,6 +30,11 @@ public class Lobby : Control {
 
 	public static MultiplayerRole role = MultiplayerRole.OFFLINE;
 	public static GameState state = GameState.TITLE;
+
+	//Returns whether this game is hosting or not
+	public static bool IsHost() {
+		return (Command.lobby.GetTree().GetNetworkUniqueId() == 1);
+	}
 
 	LineEdit nodeAddr;
 	Button nodeHostButton, nodeJoinButton, nodeLocalButton, nodeQuitButton;
@@ -95,7 +100,7 @@ public class Lobby : Control {
 		//Don't let the server get in here (I don't think it can anyway tbf)
 		if (id == 1) return;
 
-		if (GetTree().GetNetworkUniqueId() == 1) {
+		if (Lobby.IsHost()) {
 			//If p1 or p2 change, push changes to all clients
 			if (this.p1Id == 0) {
 				this.p1Id = id;
@@ -120,7 +125,7 @@ public class Lobby : Control {
 	}
 
 	void _PlayerDisconnected(int id) {
-		if (GetTree().GetNetworkUniqueId() == 1) {
+		if (Lobby.IsHost()) {
 			//Force everyone back to lobby (if you're the server)
 			if (id == this.p1Id) {
 				Rpc(nameof(this.ResetToLobby), new object[] {this.GetFirstSpectator(), this.p2Id});
@@ -165,7 +170,8 @@ public class Lobby : Control {
 		this.p2Id = 0;
 		GetTree().NetworkPeer = this.peer;
 		Lobby.state = GameState.CHAR_SELECTION;
-		Lobby.role = MultiplayerRole.HOST;
+		//Hosts should start out as a spectator
+		Lobby.role = MultiplayerRole.SPECTATOR;
 	
 		this.Visible = false;
 
