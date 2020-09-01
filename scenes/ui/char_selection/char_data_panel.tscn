@@ -2,12 +2,13 @@
 
 [ext_resource path="res://src/MiorgaFight/UI/CharSelectionDataPanel.cs" type="Script" id=1]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/key.png" type="Texture" id=2]
-[ext_resource path="res://resources/theme/font_bold.tres" type="DynamicFont" id=3]
 [ext_resource path="res://assets/ui/menus/character selection/character mask.png" type="Texture" id=4]
+[ext_resource path="res://resources/theme/theme.tres" type="Theme" id=5]
 
 [node name="pa_char_data" type="Control"]
 margin_right = 40.0
 margin_bottom = 40.0
+theme = ExtResource( 5 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -44,8 +45,6 @@ margin_left = 261.0
 margin_top = 289.0
 margin_right = 437.0
 margin_bottom = 398.0
-custom_fonts/bold_font = ExtResource( 3 )
-custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false

@@ -32,29 +32,9 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "round10",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 14 ) ],
-"loop": true,
-"name": "final",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 22 ) ],
-"loop": true,
-"name": "round9",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 20 ) ],
-"loop": true,
-"name": "round8",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 13 ) ],
-"loop": true,
-"name": "go",
+"frames": [ ExtResource( 12 ) ],
+"loop": false,
+"name": "round5",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 16 ), ExtResource( 15 ) ],
@@ -67,19 +47,14 @@ animations = [ {
 "name": "round7",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 12 ) ],
-"loop": false,
-"name": "round5",
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "final",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ) ],
-"loop": false,
-"name": "round3",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ) ],
-"loop": false,
-"name": "round4",
+"frames": [ ExtResource( 20 ) ],
+"loop": true,
+"name": "round8",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 9 ) ],
@@ -87,9 +62,34 @@ animations = [ {
 "name": "round2",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 22 ) ],
+"loop": true,
+"name": "round9",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": false,
+"name": "round4",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 21 ) ],
 "loop": true,
 "name": "round6",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "go",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": false,
+"name": "round3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "round10",
 "speed": 5.0
 } ]
 

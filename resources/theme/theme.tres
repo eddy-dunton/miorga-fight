@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=14 format=2]
+[gd_resource type="Theme" load_steps=15 format=2]
 
 [ext_resource path="res://resources/theme/font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/ui/slider/grabber_highlight.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/ui/slider/grabber.png" type="Texture" id=5]
 [ext_resource path="res://assets/ui/slider/grabber_disabled.png" type="Texture" id=6]
 [ext_resource path="res://assets/ui/slider/slider200.png" type="Texture" id=7]
+[ext_resource path="res://resources/theme/font_bold.tres" type="DynamicFont" id=8]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 4 )
@@ -48,3 +49,29 @@ HSlider/icons/tick = null
 HSlider/styles/grabber_area = SubResource( 4 )
 HSlider/styles/grabber_area_highlight = SubResource( 5 )
 HSlider/styles/slider = SubResource( 6 )
+Label/colors/font_color = Color( 0.121569, 0.101961, 0.0745098, 1 )
+Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+Label/constants/line_spacing = 3
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/fonts/font = null
+Label/styles/normal = null
+RichTextLabel/colors/default_color = Color( 0.121569, 0.101961, 0.0745098, 1 )
+RichTextLabel/colors/font_color_selected = Color( 0.49, 0.49, 0.49, 1 )
+RichTextLabel/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+RichTextLabel/colors/selection_color = Color( 0.1, 0.1, 1, 0.8 )
+RichTextLabel/constants/line_separation = 1
+RichTextLabel/constants/shadow_as_outline = 0
+RichTextLabel/constants/shadow_offset_x = 1
+RichTextLabel/constants/shadow_offset_y = 1
+RichTextLabel/constants/table_hseparation = 3
+RichTextLabel/constants/table_vseparation = 3
+RichTextLabel/fonts/bold_font = ExtResource( 8 )
+RichTextLabel/fonts/bold_italics_font = null
+RichTextLabel/fonts/italics_font = null
+RichTextLabel/fonts/mono_font = null
+RichTextLabel/fonts/normal_font = null
+RichTextLabel/styles/focus = null
+RichTextLabel/styles/normal = null
