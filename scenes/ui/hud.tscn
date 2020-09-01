@@ -27,9 +27,14 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 12 ) ],
+"frames": [  ],
 "loop": false,
-"name": "round5",
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": false,
+"name": "round4",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ) ],
@@ -37,14 +42,19 @@ animations = [ {
 "name": "round3",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 14 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
-"name": "final",
+"name": "round10",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ) ],
-"loop": false,
-"name": "round4",
+"frames": [ ExtResource( 16 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "wins",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 19 ) ],
+"loop": true,
+"name": "round7",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 20 ) ],
@@ -57,24 +67,14 @@ animations = [ {
 "name": "round6",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 13 ) ],
-"loop": true,
-"name": "go",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 19 ) ],
-"loop": true,
-"name": "round7",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 16 ), ExtResource( 15 ) ],
-"loop": true,
-"name": "wins",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 9 ) ],
+"frames": [ ExtResource( 12 ) ],
 "loop": false,
-"name": "round2",
+"name": "round5",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "final",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 22 ) ],
@@ -82,14 +82,14 @@ animations = [ {
 "name": "round9",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "round10",
+"frames": [ ExtResource( 9 ) ],
+"loop": false,
+"name": "round2",
 "speed": 5.0
 }, {
-"frames": [  ],
-"loop": false,
-"name": "default",
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "go",
 "speed": 5.0
 } ]
 
@@ -189,7 +189,6 @@ font_data = SubResource( 6 )
 
 [node name="hud" type="CanvasLayer"]
 pause_mode = 2
-layer = 99
 script = ExtResource( 3 )
 p1Card = ExtResource( 17 )
 p2Card = ExtResource( 18 )
