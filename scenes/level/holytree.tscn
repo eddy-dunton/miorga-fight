@@ -142,6 +142,7 @@ frame_13/delay_sec = 0.0
 frame_14/delay_sec = 0.0
 
 [sub_resource type="AnimatedTexture" id=4]
+flags = 4
 frames = 15
 fps = 5.0
 frame_0/texture = ExtResource( 16 )
@@ -728,8 +729,33 @@ script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
-[node name="pa_mobile_controls" parent="hud" index="6"]
-visible = false
+[node name="bt_up" parent="hud/pa_mobile_controls/pa_left" index="0"]
+margin_left = 0.0
+margin_top = -16.0
+margin_right = 70.0
+margin_bottom = 44.0
+
+[node name="bt_left" parent="hud/pa_mobile_controls/pa_left" index="1"]
+margin_top = 263.0
+margin_bottom = 323.0
+
+[node name="bt_right" parent="hud/pa_mobile_controls/pa_left" index="2"]
+margin_top = 262.0
+margin_bottom = 322.0
+
+[node name="bt_down" parent="hud/pa_mobile_controls/pa_left" index="3"]
+margin_left = 0.0
+margin_top = 52.0
+margin_right = 70.0
+margin_bottom = 112.0
+
+[node name="bt_main" parent="hud/pa_mobile_controls/pa_right" index="0"]
+margin_top = -51.0
+margin_bottom = 9.0
+
+[node name="bt_alt" parent="hud/pa_mobile_controls/pa_right" index="1"]
+margin_top = 17.0
+margin_bottom = 77.0
 
 [node name="camera_track" parent="." index="9"]
 position = Vector2( 0, 131 )
