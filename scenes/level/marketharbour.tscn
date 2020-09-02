@@ -9,7 +9,7 @@
 [ext_resource path="res://assets/level/marketharbour/level_overlay.png" type="Texture" id=7]
 [ext_resource path="res://assets/level/marketharbour/particles/rain.png" type="Texture" id=8]
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
 emission_box_extents = Vector3( 650, 1, 1 )
 flag_disable_z = true
@@ -22,6 +22,8 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 16.7
 angle_random = 0.2
+scale = 0.75
+scale_random = 1.0
 color = Color( 1, 1, 1, 0.784314 )
 
 [sub_resource type="LineShape2D" id=2]
@@ -30,7 +32,7 @@ normal = Vector2( 1, 0 )
 [sub_resource type="LineShape2D" id=3]
 normal = Vector2( -1, 0 )
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticlesMaterial" id=4]
 emission_shape = 2
 emission_box_extents = Vector3( 650, 1, 1 )
 flag_disable_z = true
@@ -43,10 +45,10 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 16.7
 angle_random = 0.2
+scale_random = 0.25
 color = Color( 1, 1, 1, 0.784314 )
 
-[sub_resource type="Animation" id=4]
-resource_name = "strike"
+[sub_resource type="Animation" id=5]
 length = 1.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("an_lightning/lightning:energy")
@@ -61,12 +63,12 @@ tracks/0/keys = {
 "values": [ 0.0, 0.0, 3.0, 0.0 ]
 }
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0, 0.5, 1 )
 colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1 )
 
-[sub_resource type="GradientTexture" id=6]
-gradient = SubResource( 5 )
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
 width = 1024
 
 [node name="level" instance=ExtResource( 1 )]
@@ -104,7 +106,7 @@ lifetime = 2.0
 preprocess = 5.0
 visibility_rect = Rect2( -600, -300, 1200, 400 )
 local_coords = false
-process_material = SubResource( 7 )
+process_material = SubResource( 1 )
 texture = ExtResource( 8 )
 
 [node name="level_overlay2" type="Sprite" parent="bg/bg_layer2" index="2"]
@@ -149,18 +151,18 @@ amount = 250
 preprocess = 5.0
 visibility_rect = Rect2( -600, -300, 1200, 400 )
 local_coords = false
-process_material = SubResource( 1 )
+process_material = SubResource( 4 )
 texture = ExtResource( 8 )
 
 [node name="level_overlay1" type="Sprite" parent="overlay_layer" index="1"]
 texture = ExtResource( 7 )
 
 [node name="an_lightning" type="AnimationPlayer" parent="." index="4"]
-anims/strike = SubResource( 4 )
+anims/strike = SubResource( 5 )
 
 [node name="lightning" type="Light2D" parent="an_lightning" index="0"]
 scale = Vector2( 1, 512 )
-texture = SubResource( 6 )
+texture = SubResource( 7 )
 energy = 0.0
 range_layer_min = -512
 range_layer_max = 512
