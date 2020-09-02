@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/level/level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/level/marketharbour/level_back1.png" type="Texture" id=2]
@@ -45,6 +45,11 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0.0, 0.0, 2.0, 0.0 ]
 }
+
+[sub_resource type="Gradient" id=5]
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
 
 [node name="level" instance=ExtResource( 1 )]
 POSITION_LEFT = -300.0
@@ -135,9 +140,9 @@ texture = ExtResource( 7 )
 anims/strike = SubResource( 4 )
 
 [node name="lightning" type="Light2D" parent="an_lightning" index="0"]
-position = Vector2( 29.1542, 0 )
-scale = Vector2( 23.6195, 1 )
-texture = ExtResource( 8 )
+position = Vector2( 29.1542, 34.1882 )
+scale = Vector2( 23.6195, 2.36753 )
+texture = SubResource( 6 )
 texture_scale = 50.0
 energy = 0.0
 range_layer_min = -512
