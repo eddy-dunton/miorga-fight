@@ -147,7 +147,8 @@ follow_viewport_enable = true
 
 [node name="rain" type="Particles2D" parent="overlay_layer" index="0"]
 position = Vector2( 0, -250 )
-amount = 250
+amount = 300
+lifetime = 1.2
 preprocess = 5.0
 visibility_rect = Rect2( -600, -300, 1200, 400 )
 local_coords = false
