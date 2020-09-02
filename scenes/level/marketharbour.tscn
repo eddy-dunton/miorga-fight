@@ -158,6 +158,7 @@ texture = ExtResource( 8 )
 texture = ExtResource( 7 )
 
 [node name="an_lightning" type="AnimationPlayer" parent="." index="4"]
+playback_speed = 2.0
 anims/strike = SubResource( 5 )
 
 [node name="lightning" type="Light2D" parent="an_lightning" index="0"]
