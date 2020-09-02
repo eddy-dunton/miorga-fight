@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://scenes/level/level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/level/marketharbour/level_back1.png" type="Texture" id=2]
@@ -8,6 +8,23 @@
 [ext_resource path="res://assets/level/marketharbour/level_base.png" type="Texture" id=6]
 [ext_resource path="res://assets/level/marketharbour/level_overlay.png" type="Texture" id=7]
 [ext_resource path="res://assets/level/marketharbour/particles/rain.png" type="Texture" id=8]
+[ext_resource path="res://src/MiorgaFight/Level/Lightning.cs" type="Script" id=9]
+[ext_resource path="res://assets/level/marketharbour/animations/lightning/fore/akey3.png" type="Texture" id=10]
+[ext_resource path="res://assets/level/marketharbour/animations/lightning/fore/akey1.png" type="Texture" id=11]
+[ext_resource path="res://assets/level/marketharbour/animations/lightning/fore/akey2.png" type="Texture" id=12]
+[ext_resource path="res://assets/level/marketharbour/animations/lightning/fore/akey4.png" type="Texture" id=13]
+[ext_resource path="res://assets/level/marketharbour/animations/lightning/fore/akey5.png" type="Texture" id=14]
+[ext_resource path="res://assets/level/marketharbour/animations/lightning/fore/akey6.png" type="Texture" id=15]
+[ext_resource path="res://assets/level/marketharbour/animations/lightning/fore/akey8.png" type="Texture" id=16]
+[ext_resource path="res://assets/level/marketharbour/animations/lightning/back/akey7.png" type="Texture" id=17]
+[ext_resource path="res://assets/level/marketharbour/animations/lightning/back/akey3.png" type="Texture" id=18]
+[ext_resource path="res://assets/level/marketharbour/animations/lightning/back/akey1.png" type="Texture" id=19]
+[ext_resource path="res://assets/level/marketharbour/animations/lightning/back/akey4.png" type="Texture" id=20]
+[ext_resource path="res://assets/level/marketharbour/animations/lightning/fore/akey7.png" type="Texture" id=21]
+[ext_resource path="res://assets/level/marketharbour/animations/lightning/back/akey8.png" type="Texture" id=22]
+[ext_resource path="res://assets/level/marketharbour/animations/lightning/back/akey5.png" type="Texture" id=23]
+[ext_resource path="res://assets/level/marketharbour/animations/lightning/back/akey6.png" type="Texture" id=24]
+[ext_resource path="res://assets/level/marketharbour/animations/lightning/back/akey2.png" type="Texture" id=25]
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
@@ -62,6 +79,42 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0.0, 0.0, 3.0, 0.0 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("an_lightning/strike_fg:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 2 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("an_lightning/strike_fg:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("an_lightning/strike_fg:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "a_pre" ]
+}
 
 [sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0, 0.5, 1 )
@@ -70,6 +123,32 @@ colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1 )
 [sub_resource type="GradientTexture" id=7]
 gradient = SubResource( 6 )
 width = 1024
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ ExtResource( 15 ), ExtResource( 21 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "a_post",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": false,
+"name": "a_pre",
+"speed": 100.0
+} ]
+
+[sub_resource type="SpriteFrames" id=9]
+animations = [ {
+"frames": [ ExtResource( 24 ), ExtResource( 17 ), ExtResource( 22 ) ],
+"loop": true,
+"name": "a_post",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 19 ), ExtResource( 25 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 23 ) ],
+"loop": true,
+"name": "a_pre",
+"speed": 5.0
+} ]
 
 [node name="level" instance=ExtResource( 1 )]
 POSITION_LEFT = -300.0
@@ -161,6 +240,7 @@ texture = ExtResource( 7 )
 [node name="an_lightning" type="AnimationPlayer" parent="." index="4"]
 playback_speed = 2.0
 anims/strike = SubResource( 5 )
+script = ExtResource( 9 )
 
 [node name="lightning" type="Light2D" parent="an_lightning" index="0"]
 scale = Vector2( 1, 512 )
@@ -168,5 +248,16 @@ texture = SubResource( 7 )
 energy = 0.0
 range_layer_min = -512
 range_layer_max = 512
+
+[node name="strike_fg" type="AnimatedSprite" parent="an_lightning" index="1"]
+frames = SubResource( 8 )
+animation = "a_post"
+frame = 2
+playing = true
+
+[node name="strike_bg" type="AnimatedSprite" parent="an_lightning" index="2"]
+visible = false
+frames = SubResource( 9 )
+animation = "a_post"
 
 [editable path="hud"]
