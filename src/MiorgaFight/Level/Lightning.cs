@@ -127,6 +127,9 @@ public class Lightning : AnimationPlayer
             this.nodeLightning.RangeItemCullMask = this.bgLightMask;
         }
 
+        //Randomise whether the sprite should be flipped
+        target.FlipH = Command.RandomBool();
+
         //Randomise speed
         this.PlaybackSpeed = (float) Command.Random(this.minStrikeSpeed, this.maxStrikeSpeed);
 
@@ -141,13 +144,11 @@ public class Lightning : AnimationPlayer
         //Point paths to the correct place
         anim.TrackSetPath(1, new NodePath(targetPath.ToString() + ":frame"));
         anim.TrackSetPath(2, new NodePath(targetPath.ToString() + ":playing"));
-
         anim.TrackSetPath(3, new NodePath(targetPath.ToString() + ":animation"));
         //Sets the starting animation
         anim.TrackSetKeyValue(3, 0, spriteAnims[0]);
         //Swap "pre" for "post" and set ending animation
         anim.TrackSetKeyValue(3, 1, spriteAnims[1]);
-
 
         this.Play("strike");
     }

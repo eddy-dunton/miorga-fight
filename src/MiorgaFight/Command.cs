@@ -26,6 +26,9 @@ public class Command : Node {
 
     //Returns a random element of enumerable
     public static T Random<T>(IEnumerable<T> enumerable) => enumerable.ElementAt(Random(0, enumerable.Count() - 1));
+    
+    //Returns a random boolean
+    public static bool RandomBool() => Random(0,1) == 1;
 
     //Returns s mapped from range(a1, a2) to range(b1 , b2)
     public static double Map(double a1, double a2, double b1, double b2, double s) => 
