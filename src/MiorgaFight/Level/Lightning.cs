@@ -8,9 +8,9 @@ namespace MiorgaFight {
 public class Lightning : AnimationPlayer
 {
     //Path to the foreground AnimatedSprite
-    [Export] private NodePath foreground;
+    [Export] private NodePath fgPath;
     //Path to the background AnimatedSprite
-    [Export] private NodePath background;
+    [Export] private NodePath bgPath;
 
     //Width of the area affected by lightning
     [Export] private double width;
@@ -48,11 +48,15 @@ public class Lightning : AnimationPlayer
     private string[][] bgAnims;
 
     private Light2D nodeLightning;
+    private AnimatedSprite fg;
+    private AnimatedSprite bg;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         this.nodeLightning = this.GetNode<Light2D>("lightning");
+        this.fg = this.GetNode<AnimatedSprite>(this.fgPath);
+        this.bg = this.GetNode<AnimatedSprite>(this.bgPath);
 
         this.Connect("animation_finished", this, nameof(this._OnAnimationFinished));
         //Queue up an animation
@@ -60,23 +64,21 @@ public class Lightning : AnimationPlayer
 
         //Calculate animation sets for foreground and background 
 
-        SpriteFrames f = this.GetNode<AnimatedSprite>(this.foreground).Frames;
         //Find all starting animations, which have a matching post
-        IEnumerable<string> startAnims = f.GetAnimationNames().Where(
+        IEnumerable<string> startAnims = this.fg.Frames.GetAnimationNames().Where(
             x => 
             x.EndsWith("pre") && 
-            f.HasAnimation(x.Replace("pre", "post")));
+            this.fg.Frames.HasAnimation(x.Replace("pre", "post")));
 
         //Contructs an array of arrays, each containing a matching pre and post animation, from start anims
         this.fgAnims = startAnims.Select(x => new string[] {x, x.Replace("pre", "post")}).ToArray();
 
         //Repeat with bgAnims
-        f = this.GetNode<AnimatedSprite>(this.background).Frames;
         //Find all starting animations, which have a matching post
-        startAnims = f.GetAnimationNames().Where(
+        startAnims = this.bg.Frames.GetAnimationNames().Where(
             x => 
             x.EndsWith("pre") && 
-            f.HasAnimation(x.Replace("pre", "post")));
+            this.bg.Frames.HasAnimation(x.Replace("pre", "post")));
 
         //Contructs an array of arrays, each containing a matching pre and post animation, from start anims
         this.bgAnims = startAnims.Select(x => new string[] {x, x.Replace("pre", "post")}).ToArray();
@@ -93,31 +95,34 @@ public class Lightning : AnimationPlayer
 
     //Sets up (and then fires off a strike)
     void Strike() {
+        AnimatedSprite target;
         NodePath targetPath;
         string[] spriteAnims;
         double strength;
 
         //Randomly select whether the foreground or background will strike
         if (Command.Random(0.0,1.0) <= this.fgStrikeChance) { //Foreground strike
-            targetPath = this.foreground;
+            target = this.fg;
+            targetPath = this.fgPath;
             spriteAnims = Command.Random(this.fgAnims);
             strength = Command.Random(this.fgMinStrength, this.fgMaxStrength);
 
             //Change position
-            Vector2 pos = this.GetNode<AnimatedSprite>(this.foreground).Position;
+            Vector2 pos = this.fg.Position;
             pos.x = (float) this.GetFGPosition(this.width);
-            this.GetNode<AnimatedSprite>(this.foreground).Position = pos;
+            this.fg.Position = pos;
             this.nodeLightning.Position = pos;
             this.nodeLightning.RangeItemCullMask = this.fgLightMask;
         } else { //Background strike
-            targetPath = this.background;
+            target = this.bg;
+            targetPath = this.bgPath;
             spriteAnims = Command.Random(this.bgAnims);
             strength = Command.Random(this.bgMinStrength, bgMaxStrength);
 
             //Change position
-            Vector2 pos = this.GetNode<AnimatedSprite>(this.background).Position;
+            Vector2 pos = this.bg.Position;
             pos.x = (float) this.GetBGPosition(this.width);
-            this.GetNode<AnimatedSprite>(this.background).Position = pos;
+            this.bg.Position = pos;
             this.nodeLightning.Position = pos;
             this.nodeLightning.RangeItemCullMask = this.bgLightMask;
         }
