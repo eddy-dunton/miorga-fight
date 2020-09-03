@@ -20,6 +20,10 @@ public class Lightning : AnimationPlayer
     [Export] private double maxStrikeGap;
     //Strength is multiplied by this when calculating the length of the gradient of lighting that's used
     [Export] private double strengthWidthMultiplyer;
+    //Minimum playback speed which the animations will run at
+    [Export] private double minStrikeSpeed;
+    //Maxiumu playback speed which the animations will run at
+    [Export] private double maxStrikeSpeed;
 
     //Probabilty that a strike will hit the foregound (between 0.0 and 1.0, anything above 1 will garrantee a fg hit)
     [Export] private double fgStrikeChance;
@@ -118,8 +122,8 @@ public class Lightning : AnimationPlayer
             this.nodeLightning.RangeItemCullMask = this.bgLightMask;
         }
 
-        //TODO continue here:
-        //Randomise speed (ish)
+        //Randomise speed
+        this.PlaybackSpeed = (float) Command.Random(this.minStrikeSpeed, this.maxStrikeSpeed);
 
         //Map strength to width
         (this.nodeLightning.Texture as GradientTexture).Width = (int) (strength * this.strengthWidthMultiplyer); 
