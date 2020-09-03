@@ -214,7 +214,6 @@ texture = ExtResource( 2 )
 
 [node name="strike_fg" type="AnimatedSprite" parent="bg/bg_base" index="0"]
 frames = SubResource( 3 )
-animation = "a_pre"
 
 [node name="sprite" type="Sprite" parent="bg/bg_base" index="1"]
 texture = ExtResource( 6 )
@@ -261,7 +260,7 @@ anims/strike = SubResource( 7 )
 script = ExtResource( 9 )
 foreground = NodePath("../bg/bg_base/strike_fg")
 background = NodePath("../bg/bg_layer2/strike_bg")
-bgWidth = 1000.0
+width = 1000.0
 
 [node name="lightning" type="Light2D" parent="an_lightning" index="0"]
 scale = Vector2( 1, 512 )

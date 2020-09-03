@@ -10,7 +10,7 @@ public class Lightning : AnimationPlayer
     [Export] private NodePath foreground;
     [Export] private NodePath background;
 
-    [Export] private double bgWidth;
+    [Export] private double width;
 
     //Animations for foreground and background
     //Is each is an list of arrays, each containing 2 strings, 0 is the start animation, 1 is the end animation
@@ -65,19 +65,25 @@ public class Lightning : AnimationPlayer
         if (Command.Random(0,1) == 1) { //Foreground strike
             targetPath = this.foreground;
             spriteAnims = Command.Random(this.fgAnims);
+
+            //Change position
+            Vector2 pos = this.GetNode<AnimatedSprite>(this.foreground).Position;
+            pos.x = (float) this.GetFGPosition(this.width);
+            this.GetNode<AnimatedSprite>(this.foreground).Position = pos;
+            this.GetNode<Light2D>("lightning").Position = pos;
         } else { //Background strike
             targetPath = this.background;
             spriteAnims = Command.Random(this.bgAnims);
 
             //Change position
             Vector2 pos = this.GetNode<AnimatedSprite>(this.background).Position;
-            pos.x = (float) this.GetBGPosition(this.bgWidth);
+            pos.x = (float) this.GetBGPosition(this.width);
             this.GetNode<AnimatedSprite>(this.background).Position = pos;
+            this.GetNode<Light2D>("lightning").Position = pos;
         }
 
         //TODO continue here:
         //Randomise speed (ish)
-        //Randomise fg positions
 
         //Point paths to the correct place
         Animation anim = this.GetAnimation("strike");
@@ -92,6 +98,25 @@ public class Lightning : AnimationPlayer
 
 
         this.Play("strike");
+    }
+
+    //Generates a position for a foreground strike
+    private double GetFGPosition(double width) {
+        double x = Command.Random(0.0,1.0);
+
+        //Foregound positions are distrobuted by the following curve: https://www.desmos.com/calculator/ln2sf8feza
+        //The probablity of them striking any position on the level follows a sine curve where the levels width = x
+        double y = x;
+
+        y -= 0.5;
+        y *= 2;
+        y = Math.Asin(y);
+        y /= Math.PI;
+
+        y += 0.5;
+
+        //Maps y: 0-1 => (-width/2) => width/2
+        return Command.Map(0.0, 1.0, -(width/2), width/2, y);
     }
 
     //Generates a position for a background strike
