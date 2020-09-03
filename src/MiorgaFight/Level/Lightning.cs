@@ -7,19 +7,49 @@ namespace MiorgaFight {
 
 public class Lightning : AnimationPlayer
 {
+    //Path to the foreground AnimatedSprite
     [Export] private NodePath foreground;
+    //Path to the background AnimatedSprite
     [Export] private NodePath background;
 
+    //Width of the area affected by lightning
     [Export] private double width;
+    //Minimum gap (in seconds) between strikes
+    [Export] private double minStrikeGap;
+    //Maximum gap (in seconds) between strikes
+    [Export] private double maxStrikeGap;
+    //Strength is multiplied by this when calculating the length of the gradient of lighting that's used
+    [Export] private double strengthWidthMultiplyer;
+
+    //Probabilty that a strike will hit the foregound (between 0.0 and 1.0, anything above 1 will garrantee a fg hit)
+    [Export] private double fgStrikeChance;
+    //Minimum strength of a foreground strike
+    [Export] private double fgMinStrength;
+    //Maximum strength of a foreground strike
+    [Export] private double fgMaxStrength;
+    //Light map used in a foreground strike 
+    [Export] private int fgLightMask;
+
+    //Minimum strength of a background strike
+    [Export] private double bgMinStrength;
+    //Maximum strength of a background strike
+    [Export] private double bgMaxStrength;
+    //Light mask used in a background strike
+    [Export] private int bgLightMask;
+
 
     //Animations for foreground and background
     //Is each is an list of arrays, each containing 2 strings, 0 is the start animation, 1 is the end animation
     private string[][] fgAnims;
     private string[][] bgAnims;
 
+    private Light2D nodeLightning;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        this.nodeLightning = this.GetNode<Light2D>("lightning");
+
         this.Connect("animation_finished", this, nameof(this._OnAnimationFinished));
         //Queue up an animation
         this._OnAnimationFinished("");
@@ -52,7 +82,8 @@ public class Lightning : AnimationPlayer
     //Sets up a timer which calls creates a new strike after a random amount of time
     void _OnAnimationFinished(String anim) {
         //Create a timer, which will pause when the game is paused
-        SceneTreeTimer timer = GetTree().CreateTimer((float) Command.Random(1.0, 1.0), false);
+        SceneTreeTimer timer = GetTree().CreateTimer(
+                (float) Command.Random(this.minStrikeGap, this.maxStrikeGap), false);
         timer.Connect("timeout", this, nameof(this.Strike));
     }
 
@@ -60,33 +91,45 @@ public class Lightning : AnimationPlayer
     void Strike() {
         NodePath targetPath;
         string[] spriteAnims;
+        double strength;
 
         //Randomly select whether the foreground or background will strike
-        if (Command.Random(0,1) == 1) { //Foreground strike
+        if (Command.Random(0.0,1.0) <= this.fgStrikeChance) { //Foreground strike
             targetPath = this.foreground;
             spriteAnims = Command.Random(this.fgAnims);
+            strength = Command.Random(this.fgMinStrength, this.fgMaxStrength);
 
             //Change position
             Vector2 pos = this.GetNode<AnimatedSprite>(this.foreground).Position;
             pos.x = (float) this.GetFGPosition(this.width);
             this.GetNode<AnimatedSprite>(this.foreground).Position = pos;
-            this.GetNode<Light2D>("lightning").Position = pos;
+            this.nodeLightning.Position = pos;
+            this.nodeLightning.RangeItemCullMask = this.fgLightMask;
         } else { //Background strike
             targetPath = this.background;
             spriteAnims = Command.Random(this.bgAnims);
+            strength = Command.Random(this.bgMinStrength, bgMaxStrength);
 
             //Change position
             Vector2 pos = this.GetNode<AnimatedSprite>(this.background).Position;
             pos.x = (float) this.GetBGPosition(this.width);
             this.GetNode<AnimatedSprite>(this.background).Position = pos;
-            this.GetNode<Light2D>("lightning").Position = pos;
+            this.nodeLightning.Position = pos;
+            this.nodeLightning.RangeItemCullMask = this.bgLightMask;
         }
 
         //TODO continue here:
         //Randomise speed (ish)
 
-        //Point paths to the correct place
+        //Map strength to width
+        (this.nodeLightning.Texture as GradientTexture).Width = (int) (strength * this.strengthWidthMultiplyer); 
+
         Animation anim = this.GetAnimation("strike");
+
+        //Set strength in animation
+        anim.TrackSetKeyValue(0, 2, strength);
+
+        //Point paths to the correct place
         anim.TrackSetPath(1, new NodePath(targetPath.ToString() + ":frame"));
         anim.TrackSetPath(2, new NodePath(targetPath.ToString() + ":playing"));
 

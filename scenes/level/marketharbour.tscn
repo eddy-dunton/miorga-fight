@@ -122,7 +122,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4, 0.6, 1 ),
+"times": PoolRealArray( 0.1, 0.4, 0.6, 1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 4, 0, 2 ]
@@ -134,7 +134,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
+"times": PoolRealArray( 0.1 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
@@ -146,7 +146,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.6, 1.2 ),
+"times": PoolRealArray( 0.1, 0.6, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ "a_pre", "a_post", "default" ]
@@ -171,15 +171,18 @@ POSITION_Y = 110.0
 motion_scale = Vector2( 0.05, 1 )
 
 [node name="sprite" type="Sprite" parent="bg/bg_layer4" index="0"]
+light_mask = 3
 texture = ExtResource( 5 )
 
 [node name="level_overlay3" type="Sprite" parent="bg/bg_layer4" index="1"]
+light_mask = 3
 texture = ExtResource( 7 )
 
 [node name="bg_layer3" type="ParallaxLayer" parent="bg" index="1"]
 motion_scale = Vector2( 0.3, 1 )
 
 [node name="sprite" type="Sprite" parent="bg/bg_layer3" index="0"]
+light_mask = 3
 texture = ExtResource( 4 )
 
 [node name="bg_layer2" type="ParallaxLayer" parent="bg" index="2"]
@@ -261,6 +264,15 @@ script = ExtResource( 9 )
 foreground = NodePath("../bg/bg_base/strike_fg")
 background = NodePath("../bg/bg_layer2/strike_bg")
 width = 1000.0
+minStrikeGap = 1.0
+maxStrikeGap = 1.0
+strengthWidthMultiplyer = 512.0
+fgMinStrength = 2.0
+fgMaxStrength = 4.0
+fgLightMask = 3
+bgMinStrength = 1.0
+bgMaxStrength = 2.0
+bgLightMask = 2
 
 [node name="lightning" type="Light2D" parent="an_lightning" index="0"]
 scale = Vector2( 1, 512 )
