@@ -267,6 +267,7 @@ width = 1000.0
 minStrikeGap = 1.0
 maxStrikeGap = 1.0
 strengthWidthMultiplyer = 512.0
+fgStrikeChance = 0.1
 fgMinStrength = 2.0
 fgMaxStrength = 4.0
 fgLightMask = 3
