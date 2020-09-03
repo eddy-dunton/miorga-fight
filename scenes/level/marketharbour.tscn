@@ -231,6 +231,9 @@ shape = SubResource( 4 )
 position = Vector2( 536.891, 180 )
 shape = SubResource( 5 )
 
+[node name="la_fps" parent="hud" index="0"]
+visible = true
+
 [node name="gr_p1" parent="hud" index="1"]
 visible = false
 
@@ -264,8 +267,8 @@ script = ExtResource( 9 )
 foreground = NodePath("../bg/bg_base/strike_fg")
 background = NodePath("../bg/bg_layer2/strike_bg")
 width = 1000.0
-minStrikeGap = 1.0
-maxStrikeGap = 1.0
+minStrikeGap = 2.5
+maxStrikeGap = 10.0
 strengthWidthMultiplyer = 512.0
 fgStrikeChance = 0.1
 fgMinStrength = 2.0
