@@ -26,7 +26,25 @@
 [ext_resource path="res://assets/level/marketharbour/animations/lightning/back/akey6.png" type="Texture" id=24]
 [ext_resource path="res://assets/level/marketharbour/animations/lightning/back/akey2.png" type="Texture" id=25]
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [  ],
+"loop": false,
+"name": "default",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 24 ), ExtResource( 17 ), ExtResource( 22 ) ],
+"loop": true,
+"name": "a_post",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 19 ), ExtResource( 25 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 23 ) ],
+"loop": true,
+"name": "a_pre",
+"speed": 5.0
+} ]
+
+[sub_resource type="ParticlesMaterial" id=2]
 emission_shape = 2
 emission_box_extents = Vector3( 650, 1, 1 )
 flag_disable_z = true
@@ -43,13 +61,31 @@ scale = 0.75
 scale_random = 1.0
 color = Color( 1, 1, 1, 0.784314 )
 
-[sub_resource type="LineShape2D" id=2]
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [  ],
+"loop": false,
+"name": "default",
+"speed": 0.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 21 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "a_post",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": false,
+"name": "a_pre",
+"speed": 100.0
+} ]
+
+[sub_resource type="LineShape2D" id=4]
 normal = Vector2( 1, 0 )
 
-[sub_resource type="LineShape2D" id=3]
+[sub_resource type="LineShape2D" id=5]
 normal = Vector2( -1, 0 )
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=6]
 emission_shape = 2
 emission_box_extents = Vector3( 650, 1, 1 )
 flag_disable_z = true
@@ -65,34 +101,34 @@ angle_random = 0.2
 scale_random = 0.25
 color = Color( 1, 1, 1, 0.784314 )
 
-[sub_resource type="Animation" id=5]
-length = 1.1
+[sub_resource type="Animation" id=7]
+length = 1.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("an_lightning/lightning:energy")
+tracks/0/path = NodePath("lightning:energy")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 0.55, 1.001 ),
+"times": PoolRealArray( 0, 0.65, 0.7, 1.001 ),
 "transitions": PoolRealArray( 1, 1, 1, 0.0980732 ),
 "update": 0,
 "values": [ 0.0, 0.0, 3.0, 0.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("an_lightning/strike_fg:frame")
+tracks/1/path = NodePath("../bg/bg_base/strike_fg:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.4, 0.6, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 2 ]
+"values": [ 0, 4, 0, 2 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("an_lightning/strike_fg:playing")
+tracks/2/path = NodePath("../bg/bg_base/strike_fg:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -104,51 +140,25 @@ tracks/2/keys = {
 "values": [ false ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("an_lightning/strike_fg:animation")
+tracks/3/path = NodePath("../bg/bg_base/strike_fg:animation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.6, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ "a_pre" ]
+"values": [ "a_pre", "a_post", "default" ]
 }
 
-[sub_resource type="Gradient" id=6]
+[sub_resource type="Gradient" id=8]
 offsets = PoolRealArray( 0, 0.5, 1 )
 colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1 )
 
-[sub_resource type="GradientTexture" id=7]
-gradient = SubResource( 6 )
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
 width = 1024
-
-[sub_resource type="SpriteFrames" id=8]
-animations = [ {
-"frames": [ ExtResource( 15 ), ExtResource( 21 ), ExtResource( 16 ) ],
-"loop": false,
-"name": "a_post",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 14 ) ],
-"loop": false,
-"name": "a_pre",
-"speed": 100.0
-} ]
-
-[sub_resource type="SpriteFrames" id=9]
-animations = [ {
-"frames": [ ExtResource( 24 ), ExtResource( 17 ), ExtResource( 22 ) ],
-"loop": true,
-"name": "a_post",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 19 ), ExtResource( 25 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 23 ) ],
-"loop": true,
-"name": "a_pre",
-"speed": 5.0
-} ]
 
 [node name="level" instance=ExtResource( 1 )]
 POSITION_LEFT = -300.0
@@ -175,20 +185,23 @@ texture = ExtResource( 4 )
 [node name="bg_layer2" type="ParallaxLayer" parent="bg" index="2"]
 motion_scale = Vector2( 0.3, 1 )
 
-[node name="sprite" type="Sprite" parent="bg/bg_layer2" index="0"]
+[node name="strike_bg" type="AnimatedSprite" parent="bg/bg_layer2" index="0"]
+frames = SubResource( 1 )
+
+[node name="sprite" type="Sprite" parent="bg/bg_layer2" index="1"]
 texture = ExtResource( 3 )
 
-[node name="rain" type="Particles2D" parent="bg/bg_layer2" index="1"]
+[node name="rain" type="Particles2D" parent="bg/bg_layer2" index="2"]
 position = Vector2( 0, -250 )
 amount = 1000
 lifetime = 2.0
 preprocess = 5.0
 visibility_rect = Rect2( -600, -300, 1200, 400 )
 local_coords = false
-process_material = SubResource( 1 )
+process_material = SubResource( 2 )
 texture = ExtResource( 8 )
 
-[node name="level_overlay2" type="Sprite" parent="bg/bg_layer2" index="2"]
+[node name="level_overlay2" type="Sprite" parent="bg/bg_layer2" index="3"]
 texture = ExtResource( 7 )
 
 [node name="bg_layer1" type="ParallaxLayer" parent="bg" index="3"]
@@ -199,18 +212,22 @@ texture = ExtResource( 2 )
 
 [node name="bg_base" type="ParallaxLayer" parent="bg" index="4"]
 
-[node name="sprite" type="Sprite" parent="bg/bg_base" index="0"]
+[node name="strike_fg" type="AnimatedSprite" parent="bg/bg_base" index="0"]
+frames = SubResource( 3 )
+animation = "a_pre"
+
+[node name="sprite" type="Sprite" parent="bg/bg_base" index="1"]
 texture = ExtResource( 6 )
 
 [node name="arena" type="StaticBody2D" parent="." index="1"]
 
 [node name="ar_wall_left" type="CollisionShape2D" parent="arena" index="0"]
 position = Vector2( -537, 172 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [node name="ar_wall_right" type="CollisionShape2D" parent="arena" index="1"]
 position = Vector2( 536.891, 180 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="gr_p1" parent="hud" index="1"]
 visible = false
@@ -231,33 +248,26 @@ lifetime = 1.2
 preprocess = 5.0
 visibility_rect = Rect2( -600, -300, 1200, 400 )
 local_coords = false
-process_material = SubResource( 4 )
+process_material = SubResource( 6 )
 texture = ExtResource( 8 )
 
 [node name="level_overlay1" type="Sprite" parent="overlay_layer" index="1"]
 texture = ExtResource( 7 )
 
 [node name="an_lightning" type="AnimationPlayer" parent="." index="4"]
+root_node = NodePath(".")
 playback_speed = 2.0
-anims/strike = SubResource( 5 )
+anims/strike = SubResource( 7 )
 script = ExtResource( 9 )
+foreground = NodePath("../bg/bg_base/strike_fg")
+background = NodePath("../bg/bg_layer2/strike_bg")
+bgWidth = 1000.0
 
 [node name="lightning" type="Light2D" parent="an_lightning" index="0"]
 scale = Vector2( 1, 512 )
-texture = SubResource( 7 )
+texture = SubResource( 9 )
 energy = 0.0
 range_layer_min = -512
 range_layer_max = 512
-
-[node name="strike_fg" type="AnimatedSprite" parent="an_lightning" index="1"]
-frames = SubResource( 8 )
-animation = "a_post"
-frame = 2
-playing = true
-
-[node name="strike_bg" type="AnimatedSprite" parent="an_lightning" index="2"]
-visible = false
-frames = SubResource( 9 )
-animation = "a_post"
 
 [editable path="hud"]
