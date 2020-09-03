@@ -57,7 +57,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 16.7
 angle_random = 0.2
-scale = 0.75
+scale = 0.5
 scale_random = 1.0
 color = Color( 1, 1, 1, 0.784314 )
 
