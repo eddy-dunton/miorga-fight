@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Net;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace MiorgaFight {
 
@@ -18,14 +19,13 @@ public class Command : Node {
     private static Random random = new Random();
 
     //Returns a pseudo random double between min and max (inclusive)
-    public static double Random(double min, double max) {
-        return min + (random.NextDouble() / (1 / (max - min)));
-    }
+    public static double Random(double min, double max) => min + (random.NextDouble() / (1 / (max - min)));
 
     //Returns a pseudo int double between min and max (inclusive)
-    public static int Random(int min, int max) {
-        return min + (random.Next() % (max - min + 1));    
-    }
+    public static int Random(int min, int max) => min + (random.Next() % (max - min + 1));    
+
+    //Returns a random element of enumerable
+    public static T Random<T>(IEnumerable<T> enumerable) => enumerable.ElementAt(Random(0, enumerable.Count() - 1));
 
     //Returns s mapped from range(a1, a2) to range(b1 , b2)
     public static double Map(double a1, double a2, double b1, double b2, double s) => 
