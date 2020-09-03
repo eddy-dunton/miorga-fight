@@ -143,6 +143,12 @@ public class Lightning : AnimationPlayer
 
         //Point paths to the correct place
         anim.TrackSetPath(1, new NodePath(targetPath.ToString() + ":frame"));
+        //Set frames to correct frames used on the animation used
+        //Index 1 is at the end of the end of the pre strike, set it to the final frame in the animation
+        anim.TrackSetKeyValue(1, 1, target.Frames.GetFrameCount(spriteAnims[0]) - 1);
+        //Index 3 is at the end of the end of the post strike, set it to the final frame in the animation
+        anim.TrackSetKeyValue(1, 3, target.Frames.GetFrameCount(spriteAnims[1]) - 1);
+
         anim.TrackSetPath(2, new NodePath(targetPath.ToString() + ":playing"));
         anim.TrackSetPath(3, new NodePath(targetPath.ToString() + ":animation"));
         //Sets the starting animation
