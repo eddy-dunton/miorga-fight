@@ -159,13 +159,16 @@ public class Lightning : AnimationPlayer
         this.Play("strike");
     }
 
+    //I'm well aware the math in both of these functions can be simplified
+    //However I have chosen not to
+    //I believe it is easier to understand in its current form, as it lines up better with the theory and the graphs
+    //The performance effect will be minimal, as it is only adding a handful of instructions every 2.5 - 10 seconds
+
     //Generates a position for a foreground strike
     private double GetFGPosition(double width) {
-        double x = Command.Random(0.0,1.0);
-
         //Foregound positions are distrobuted by the following curve: https://www.desmos.com/calculator/ln2sf8feza
         //The probablity of them striking any position on the level follows a sine curve where the levels width = x
-        double y = x;
+        double y = Command.Random(0.0,1.0);
 
         y -= 0.5;
         y *= 2;
