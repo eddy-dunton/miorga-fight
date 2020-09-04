@@ -52,11 +52,10 @@ public class CharSelection : Control
     //Function to be called once the characters are selected
     private Func<CharSelection, PackedScene, PackedScene, LevelSelection> callback;
 
-    private TextureButton nodePlayButton, nodeQuitButton;
+    private TextureButton nodePlayButton, nodeQuitButton, nodeRoleButton;
     private ItemList nodeCharList;
     private CharSelectionDataPanel nodeDataPanel;
     private Label nodeSpectators, nodeHostingOn;
-    private RaiseButton nodeRoleButton;
 
 
     //Player datas
@@ -81,7 +80,7 @@ public class CharSelection : Control
         this.nodeQuitButton = GetNode<TextureButton>("bt_quit");
         this.nodeSpectators = GetNode<Label>("la_mp_spectators");
         this.nodeHostingOn = GetNode<Label>("la_mp_hosting_on");
-        this.nodeRoleButton = GetNode<RaiseButton>("bt_role");
+        this.nodeRoleButton = GetNode<TextureButton>("bt_role");
 
         //This is removed the moment the scene is opened
         //However I left it in the scene as it works as a good visual guide as to where the everything is in engine
@@ -233,14 +232,12 @@ public class CharSelection : Control
             this.p2.nodeButton.Disabled = true;
             this.p2.nodeIcon.Texture = this.iconUnknown;
             this.p2.nodeIcon.Visible = false;
-            this.nodeRoleButton.Text = "Spectate";
         } else if (Lobby.role == Lobby.MultiplayerRole.P2) {
             this.p1.nodeButton.Pressed = false;
             this.p2.nodeButton.Pressed = true;
             this.p1.nodeButton.Disabled = true;
             this.p1.nodeIcon.Texture = this.iconUnknown;
             this.p1.nodeIcon.Visible = false;
-            this.nodeRoleButton.Text = "Spectate";
         }
 
         //Turn these off (as players updated should be called after set MP)
@@ -286,7 +283,7 @@ public class CharSelection : Control
 
     //Sets the current number of spectators
     public void SetSpectators(int number) {
-        this.nodeSpectators.Text = "Spectators: " + number.ToString();
+        this.nodeSpectators.Text = number.ToString();
     }
 
     //Sets the call back lobby to the one provided
