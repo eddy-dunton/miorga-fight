@@ -61,6 +61,7 @@
     <Compile Include="src\MiorgaFight\Level\Foliage.cs" />
     <Compile Include="src\MiorgaFight\Level\FoliageTimer.cs" />
     <Compile Include="src\MiorgaFight\Level\Lightning.cs" />
+    <Compile Include="src\MiorgaFight\Level\WaveSection.cs" />
     <Compile Include="src\MiorgaFight\UI\CharSelection.cs" />
     <Compile Include="src\MiorgaFight\UI\CharSelectionActionTreeButton.cs" />
     <Compile Include="src\MiorgaFight\UI\CharSelectionDataPanel.cs" />
