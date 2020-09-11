@@ -62,4 +62,8 @@ public class HUD : CanvasLayer
 
         this.nodeCardsPlayer.Play("win");
     }
+
+    public void ResetToLobby() {
+        Command.lobby.ResetToLobby(Command.lobby.p1Id, Command.lobby.p2Id);
+    }
 }}

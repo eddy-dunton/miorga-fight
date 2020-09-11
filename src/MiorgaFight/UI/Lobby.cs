@@ -295,21 +295,6 @@ public class Lobby : Control {
 		If a player has changed -> Call SetPlayerId(...) on all clients
 		If a player hasn't changed -> Call SetupClient on just the new spectator
 	*/
-
-	//Called when a player changes, causes the game to reset to character selection 
-	//Including if this client is one of those players
-	private void ResetToLobby(int p1Id, int p2Id) {
-		this.RemoveAll();
-		
-		//Allow new connections
-		GetTree().NetworkPeer.RefuseNewConnections = false;
-
-		//Make cursor visible
-		Input.SetMouseMode(Input.MouseMode.Visible);
-
-		//Reset state and action as if this client has just connected
-		this.SetupClient(p1Id, p2Id);
-	}
 	
 	//Called whenever the game has to be setup
 	//This is called internally when the players have changed
@@ -402,11 +387,32 @@ public class Lobby : Control {
 		(this.game.GetNode("camera_track") as CameraTrack).Track(_new);	
 	}
 
+	//Called when a player changes, causes the game to reset to character selection or once a game has ended 
+	//Including if this client is one of those players
+	public void ResetToLobby(int p1Id, int p2Id) {
+		GetTree().Paused = false;
+
+		this.RemoveAll();
+		
+		//Make cursor visible
+		Input.SetMouseMode(Input.MouseMode.Visible);
+
+		if (Lobby.role != MultiplayerRole.OFFLINE) { //Multiplayer	
+			//Allow new connections
+			if (GetTree().NetworkPeer != null) GetTree().NetworkPeer.RefuseNewConnections = false;
+			
+			//Reset state and action as if this client has just connected
+			this.SetupClient(p1Id, p2Id);
+		} else { //Singleplayer
+			this._OnLocalPressed();
+		}
+	}
+
 	//Reset all the way back to title screen
 	public void Reset() {
 		//Unpause game (if it is paused)
-		Command.command.PauseEnd();
-		
+		GetTree().Paused = false;
+
 		this.RemoveAll();
 
 		//Make cursor visible

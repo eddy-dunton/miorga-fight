@@ -127,7 +127,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "win"
-length = 3.0
+length = 8.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("sp_win_player:visible")
 tracks/0/interp = 1
@@ -164,6 +164,20 @@ tracks/2/keys = {
 "values": [ {
 "args": [ "wins", false ],
 "method": "play"
+} ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "ResetToLobby"
 } ]
 }
 
@@ -297,6 +311,7 @@ position = Vector2( 390, 150 )
 [node name="sp_cards" type="AnimatedSprite" parent="."]
 position = Vector2( 390, 220 )
 frames = SubResource( 1 )
+animation = "wins"
 
 [node name="an_cards" type="AnimationPlayer" parent="."]
 anims/cards_fade = SubResource( 2 )
