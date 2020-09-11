@@ -15,6 +15,8 @@ public class HUD : CanvasLayer
 
     private Sprite nodeCardsPlayerWin;
 
+    private Control nodeGroupP1, nodeGroupP2, nodeMobileControls;
+
     public override void _Ready()
     {
         this.nodeCardsSprite = this.GetNode<AnimatedSprite>("sp_cards");
@@ -24,6 +26,10 @@ public class HUD : CanvasLayer
         this.nodeCardsPlayerWin = this.GetNode<Sprite>("sp_win_player");
         //Ensure that this is hidden
         this.nodeCardsPlayerWin.Visible = false;
+
+        this.nodeGroupP1 = this.GetNode<Control>("gr_p1");
+        this.nodeGroupP2 = this.GetNode<Control>("gr_p2");
+        if (Command.IsMobile()) this.nodeMobileControls = this.GetNode<Control>("pa_mobile_controls");
     }
 
     public void ChangeRound(int round) {
@@ -48,6 +54,11 @@ public class HUD : CanvasLayer
         this.nodeCardsSprite.Modulate = new Color(255,255,255,255);
         this.nodeCardsSprite.Playing = false;
         this.nodeCardsSprite.Animation = "default";
+
+        //Hide the rest of the HUD
+        this.nodeGroupP1.Visible = false;
+        this.nodeGroupP2.Visible = false;
+        if (Command.IsMobile()) this.nodeMobileControls.Visible = false;
 
         this.nodeCardsPlayer.Play("win");
     }
