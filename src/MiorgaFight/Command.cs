@@ -19,7 +19,7 @@ public class Command : Node {
     private static Random random = new Random();
 
     //Returns a pseudo random double between min and max (inclusive)
-    public static double Random(double min, double max) => min + (random.NextDouble() / (1 / (max - min)));
+    public static double Random(double min, double max) => min + (random.NextDouble() / (2 / (max - min)));
 
     //Returns a pseudo int double between min and max (inclusive)
     public static int Random(int min, int max) => min + (random.Next() % (max - min + 1));    
@@ -72,10 +72,14 @@ public class Command : Node {
 
     //List of all joystick mappings
     private static JoystickMapping[] joystickMappings = {
-        new JoystickMapping("ctrlr_down", "p1_down"),
-        new JoystickMapping("ctrlr_up", "p1_up"),
-        new JoystickMapping("ctrlr_left", "p1_left"),
-        new JoystickMapping("ctrlr_right", "p1_right")
+        new JoystickMapping("ctrlr_1_down", "p1_down"),
+        new JoystickMapping("ctrlr_1_up", "p1_up"),
+        new JoystickMapping("ctrlr_1_left", "p1_left"),
+        new JoystickMapping("ctrlr_1_right", "p1_right"),
+        new JoystickMapping("ctrlr_2_down", "p2_down"),
+        new JoystickMapping("ctrlr_2_up", "p2_up"),
+        new JoystickMapping("ctrlr_2_left", "p2_left"),
+        new JoystickMapping("ctrlr_2_right", "p2_right")
     };
 
     public Command() {
