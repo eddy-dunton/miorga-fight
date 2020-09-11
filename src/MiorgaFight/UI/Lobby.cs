@@ -404,10 +404,10 @@ public class Lobby : Control {
 
 	//Reset all the way back to title screen
 	public void Reset() {
-		this.RemoveAll();
-
 		//Unpause game (if it is paused)
 		Command.command.PauseEnd();
+		
+		this.RemoveAll();
 
 		//Make cursor visible
 		Input.SetMouseMode(Input.MouseMode.Visible);
