@@ -5,11 +5,14 @@ namespace MiorgaFight {
 
 public class MobileControls : Control
 {
-    private Button nodeUp, nodeLeft, nodeRight, nodeDown, nodeMain, nodeAlt;
+    private Button nodeUp, nodeLeft, nodeRight, nodeDown, nodeMain, nodeAlt, nodePause;
 
     public override void _Ready() {
         //Allows it to be hidden in editor
         this.Visible = true;
+
+        //You'll never guess what this does
+        this.nodePause = this.SetupButton("bt_pause", "com_pause");
 
         //Left panel
         this.nodeUp = this.SetupButton("pa_left/bt_up", "p1_up");

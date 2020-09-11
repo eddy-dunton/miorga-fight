@@ -37,6 +37,11 @@ animations = [ {
 "name": "round4",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 21 ) ],
+"loop": true,
+"name": "round6",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 10 ) ],
 "loop": false,
 "name": "round3",
@@ -47,34 +52,9 @@ animations = [ {
 "name": "round10",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 16 ), ExtResource( 15 ) ],
-"loop": true,
-"name": "wins",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 19 ) ],
-"loop": true,
-"name": "round7",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 20 ) ],
-"loop": true,
-"name": "round8",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 21 ) ],
-"loop": true,
-"name": "round6",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 12 ) ],
 "loop": false,
 "name": "round5",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 14 ) ],
-"loop": true,
-"name": "final",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 22 ) ],
@@ -82,14 +62,34 @@ animations = [ {
 "name": "round9",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ) ],
-"loop": false,
-"name": "round2",
+"frames": [ ExtResource( 19 ) ],
+"loop": true,
+"name": "round7",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 13 ) ],
 "loop": true,
 "name": "go",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 20 ) ],
+"loop": true,
+"name": "round8",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "wins",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": false,
+"name": "round2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "final",
 "speed": 5.0
 } ]
 
@@ -306,6 +306,23 @@ anims/win = SubResource( 4 )
 [node name="pa_mobile_controls" type="Control" parent="."]
 theme = ExtResource( 24 )
 script = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_pause" type="Button" parent="pa_mobile_controls"]
+modulate = Color( 1, 1, 1, 0.784314 )
+margin_left = 340.0
+margin_top = 18.0
+margin_right = 440.0
+margin_bottom = 48.0
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
+text = "Pause"
 __meta__ = {
 "_edit_use_anchors_": false
 }
