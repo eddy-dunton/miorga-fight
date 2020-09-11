@@ -349,6 +349,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public void Wins() {
 		GetTree().Paused = true;
 		this.hud.parent.Win(this.DIRECTION);
+		Lobby.state = Lobby.GameState.IN_GAME_NOT_PLAYING;
 	}
 
 	//Changes this player score to the 

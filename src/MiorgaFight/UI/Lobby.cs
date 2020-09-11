@@ -20,7 +20,7 @@ public class Lobby : Control {
 		CHAR_SELECTION,
 		//Sat in level selection
 		LEVEL_SELECTION,
-		//In game but not actually playing
+		//In game but not actually playing, currently only used once the game is over
 		IN_GAME_NOT_PLAYING,
 		//In game
 		IN_GAME_PLAYING

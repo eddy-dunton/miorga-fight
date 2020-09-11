@@ -146,7 +146,8 @@ public class Command : Node {
     }
 
     public void PauseEnd() {
-        GetTree().Paused = false;
+        //Do not unpause if game is won
+        if (Lobby.state != Lobby.GameState.IN_GAME_NOT_PLAYING) GetTree().Paused = false;
 
         GetTree().Root.RemoveChild(Command.pauseMenu);
 
