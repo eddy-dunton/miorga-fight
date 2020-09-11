@@ -144,6 +144,8 @@ public class Command : Node {
     public void PauseEnd() {
         GetTree().Paused = false;
 
+        GetTree().Root.RemoveChild(Command.pauseMenu);
+
         Input.SetMouseMode(Input.MouseMode.Hidden);
     }
 }}
