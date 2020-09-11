@@ -21,4 +21,5 @@ hitboxoffset = Vector2( -34.867, 71.146 )
 hitframe = 3
 halt = false
 damage = 25
+knockback = 25
 requiresSuccessfulParry = false

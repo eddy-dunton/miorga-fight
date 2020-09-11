@@ -362,19 +362,19 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//public wrapper function for Hurt_(..)
 	//Used to ensure that Hurt_(..) is only called by the server in multiplayer
 	//Passes straight through to Hurt_(..) in singleplayer
-	public void Hurt(int damage, bool halting = false) {
+	public void Hurt(int damage, int knockback, bool halting = false) {
 		if (Lobby.role != Lobby.MultiplayerRole.OFFLINE) {
 			if (Lobby.IsHost()) { //Only issue commands if host
-				RpcUnreliable(nameof(this.Hurt_), new object[] {damage, halting});
+				RpcUnreliable(nameof(this.Hurt_), new object[] {damage, knockback, halting});
 			}
 		} else {
-			this.Hurt_(damage, halting);
+			this.Hurt_(damage, knockback, halting);
 		}
 	}
 
 	//Called when a player is damaged
 	//Halting is true if the player received halting damage
-	private void Hurt_(int damage, bool halting = false) {
+	private void Hurt_(int damage, int knockback, bool halting = false) {
 		if (halting || (this.state != State.ATTACK && this.state != State.PARRY)) {
 			//Minus here as he's moving away from the damage
 			if (halting) {
@@ -382,7 +382,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 				else if (this.state == State.PARRY) this.parry.Cut(this);
 			}
 
-			this.Knockback(damage);
+			this.Knockback(knockback);
 		}
 
 		this.nodeOverlayTrack.Play("blood_mid");

@@ -15,6 +15,8 @@ public class Attack : Action {
 
     [Export] public int damage;
 
+    [Export] public int knockback;
+
     //True if the attack requires a successful parry in order to be pulled off
     //For this to work correctly triggerAnimation must be a parry, else this will not work
     [Export] private bool requiresSuccessfulParry;
@@ -55,7 +57,7 @@ public class Attack : Action {
             }
 			else { 
                 //Attack not parried
-                player.nodeEnemy.Hurt(damage, this.halt);
+                player.nodeEnemy.Hurt(this.damage, this.knockback, this.halt);
             }
         }
     }
