@@ -16,6 +16,13 @@ public class CharSelectionDataPanel : Control
 
     private string onAnimEnd;
 
+    //List of all buttons on this panel, buttons add themselves to this panel
+    public List<RaiseButton> buttons;
+
+    public CharSelectionDataPanel() {
+        this.buttons = new List<RaiseButton>();
+    }
+
     public override void _Ready()
     {
         this.nodePlayerSprite = GetNode<AnimatedSprite>("sp_player");
@@ -27,8 +34,21 @@ public class CharSelectionDataPanel : Control
     }
 
     //Resets this panel back to its original state
-    public void Reset() {
+    //P1 is whether the player selecting a character is p1 or not
+    public void Reset(bool p1) {
         this.Play("lax");
+        
+        //Change text to P1 or P2 bindings, if playing offline
+        if (Lobby.role == Lobby.MultiplayerRole.OFFLINE) {
+            string main = p1 ? "Q" : "I"; //Main actions are on Q if p1 and I otherwise
+            string alt = p1 ? "E" : "P"; //Main actions are on E if p1 and P otherwise
+
+            foreach (RaiseButton b in this.buttons) {
+                if (b.Text == "Q" || b.Text == "I") b.Text = main;
+                else if (b.Text == "E" || b.Text == "P") b.Text = alt;
+                else if (b.Text == "E/Q" || b.Text == "P/I") b.Text = alt + "/" + main;
+            }
+        }
     }
 
     public void Play(String anim, string onEnd = null, Texture overlay = null) {

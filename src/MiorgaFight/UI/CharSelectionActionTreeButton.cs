@@ -22,6 +22,8 @@ public class CharSelectionActionTreeButton : RaiseButton
     {
         base._Ready();
         this.parent = GetNode<CharSelectionDataPanel>(parentPath);
+        this.parent.buttons.Add(this);
+
         this.Connect("pressed", this, nameof(this._OnPressed));
     }
 

@@ -203,13 +203,14 @@ public class CharSelection : Control
             this.RemoveChild(this.nodeDataPanel);
         }
 
-        //if index is -1 then the data panel is supposed to just be removed
+        //if index is -1 then the data panel is supposed to just be removed (so do not add a new one)
         if (index != -1) { 
             //Set the pointer to the new data panel
             this.nodeDataPanel = this.chars[index];
+            
             //Add the new data panel
             this.AddChild(this.nodeDataPanel);
-            this.nodeDataPanel.Reset();
+            this.nodeDataPanel.Reset(this.p1.nodeButton.Pressed);
         }
     }
 
