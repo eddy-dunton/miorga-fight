@@ -126,9 +126,14 @@ animations = [ {
 "name": "b_pre",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 40 ), ExtResource( 28 ), ExtResource( 33 ) ],
+"frames": [ ExtResource( 24 ), ExtResource( 17 ), ExtResource( 22 ) ],
 "loop": false,
-"name": "b_post",
+"name": "a_post",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 39 ), ExtResource( 31 ), ExtResource( 38 ) ],
+"loop": false,
+"name": "c_post",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 37 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 29 ), ExtResource( 30 ) ],
@@ -136,19 +141,14 @@ animations = [ {
 "name": "c_pre",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 24 ), ExtResource( 17 ), ExtResource( 22 ) ],
+"frames": [ ExtResource( 40 ), ExtResource( 28 ), ExtResource( 33 ) ],
 "loop": false,
-"name": "a_post",
+"name": "b_post",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 19 ), ExtResource( 25 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 23 ) ],
 "loop": false,
 "name": "a_pre",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 39 ), ExtResource( 31 ), ExtResource( 38 ) ],
-"loop": false,
-"name": "c_post",
 "speed": 5.0
 } ]
 
@@ -377,13 +377,14 @@ process_material = SubResource( 2 )
 texture = ExtResource( 8 )
 
 [node name="wave_control" type="Node2D" parent="bg/bg_layer2" index="3"]
-position = Vector2( 73, -1 )
+position = Vector2( 86, 1 )
 script = ExtResource( 113 )
 duration = 3.0
 
 [node name="group_1" type="Node2D" parent="bg/bg_layer2/wave_control" index="0"]
 
 [node name="wave_1" type="AnimatedSprite" parent="bg/bg_layer2/wave_control/group_1" index="0"]
+position = Vector2( 4, -1 )
 frames = SubResource( 3 )
 frame = 6
 playing = true
@@ -394,32 +395,37 @@ frame = 2
 playing = true
 
 [node name="wave_3" type="AnimatedSprite" parent="bg/bg_layer2/wave_control/group_1" index="2"]
+position = Vector2( 4, -1 )
 frames = SubResource( 5 )
 frame = 6
 playing = true
 
 [node name="wave_4" type="AnimatedSprite" parent="bg/bg_layer2/wave_control/group_1" index="3"]
+position = Vector2( 4, -1 )
 frames = SubResource( 6 )
 frame = 8
 playing = true
 
 [node name="wave_5" type="AnimatedSprite" parent="bg/bg_layer2/wave_control/group_1" index="4"]
+position = Vector2( 4, -1 )
 frames = SubResource( 7 )
 frame = 8
 playing = true
 
 [node name="wave_6" type="AnimatedSprite" parent="bg/bg_layer2/wave_control/group_1" index="5"]
+position = Vector2( 4, -1 )
 frames = SubResource( 8 )
 frame = 12
 playing = true
 
 [node name="wave_7" type="AnimatedSprite" parent="bg/bg_layer2/wave_control/group_1" index="6"]
+position = Vector2( 4, -1 )
 frames = SubResource( 9 )
 frame = 10
 playing = true
 
 [node name="wave_8" type="AnimatedSprite" parent="bg/bg_layer2/wave_control/group_1" index="7"]
-position = Vector2( 1, 0 )
+position = Vector2( 4, -1 )
 frames = SubResource( 10 )
 frame = 11
 playing = true
@@ -427,6 +433,7 @@ playing = true
 [node name="group_2" type="Node2D" parent="bg/bg_layer2/wave_control" index="1"]
 
 [node name="wave_1" type="AnimatedSprite" parent="bg/bg_layer2/wave_control/group_2" index="0"]
+position = Vector2( 4, -1 )
 frames = SubResource( 3 )
 frame = 6
 playing = true
@@ -437,32 +444,37 @@ frame = 2
 playing = true
 
 [node name="wave_3" type="AnimatedSprite" parent="bg/bg_layer2/wave_control/group_2" index="2"]
+position = Vector2( 4, -1 )
 frames = SubResource( 5 )
 frame = 6
 playing = true
 
 [node name="wave_4" type="AnimatedSprite" parent="bg/bg_layer2/wave_control/group_2" index="3"]
+position = Vector2( 4, -1 )
 frames = SubResource( 6 )
 frame = 8
 playing = true
 
 [node name="wave_5" type="AnimatedSprite" parent="bg/bg_layer2/wave_control/group_2" index="4"]
+position = Vector2( 4, -1 )
 frames = SubResource( 7 )
 frame = 8
 playing = true
 
 [node name="wave_6" type="AnimatedSprite" parent="bg/bg_layer2/wave_control/group_2" index="5"]
+position = Vector2( 4, -1 )
 frames = SubResource( 8 )
 frame = 12
 playing = true
 
 [node name="wave_7" type="AnimatedSprite" parent="bg/bg_layer2/wave_control/group_2" index="6"]
+position = Vector2( 4, -1 )
 frames = SubResource( 9 )
 frame = 10
 playing = true
 
 [node name="wave_8" type="AnimatedSprite" parent="bg/bg_layer2/wave_control/group_2" index="7"]
-position = Vector2( 1, 0 )
+position = Vector2( 4, -1 )
 frames = SubResource( 10 )
 frame = 11
 playing = true
@@ -541,6 +553,7 @@ bgMaxStrength = 2.0
 bgLightMask = 2
 
 [node name="lightning" type="Light2D" parent="an_lightning" index="0"]
+position = Vector2( -0.0625, -0.0625 )
 scale = Vector2( 1, 512 )
 texture = SubResource( 17 )
 energy = 0.0
