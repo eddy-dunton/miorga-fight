@@ -91,15 +91,30 @@ animations = [ {
 "name": "low_parry_alt",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 41 ), ExtResource( 62 ), ExtResource( 43 ), ExtResource( 56 ) ],
+"frames": [ ExtResource( 13 ), ExtResource( 30 ), ExtResource( 46 ), ExtResource( 45 ) ],
 "loop": true,
-"name": "low",
+"name": "high",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 18 ), ExtResource( 18 ), ExtResource( 55 ), ExtResource( 59 ), ExtResource( 61 ), ExtResource( 52 ), ExtResource( 24 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 73 ), ExtResource( 75 ) ],
+"loop": false,
+"name": "low_attack_main",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 15 ), ExtResource( 15 ), ExtResource( 49 ), ExtResource( 66 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 16 ), ExtResource( 64 ), ExtResource( 77 ), ExtResource( 28 ), ExtResource( 34 ), ExtResource( 78 ), ExtResource( 27 ) ],
+"loop": false,
+"name": "high_attack_main",
+"speed": 12.0
 }, {
 "frames": [ ExtResource( 2 ), ExtResource( 40 ) ],
 "loop": true,
 "name": "lax",
 "speed": 1.5
+}, {
+"frames": [ ExtResource( 41 ), ExtResource( 62 ), ExtResource( 43 ), ExtResource( 56 ) ],
+"loop": true,
+"name": "low",
+"speed": 5.0
 }, {
 "frames": [ ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 32 ), ExtResource( 76 ), ExtResource( 74 ), ExtResource( 25 ), ExtResource( 58 ), ExtResource( 63 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 70 ), ExtResource( 26 ) ],
 "loop": false,
@@ -109,21 +124,6 @@ animations = [ {
 "frames": [ ExtResource( 42 ), ExtResource( 42 ), ExtResource( 42 ), ExtResource( 60 ), ExtResource( 57 ), ExtResource( 31 ), ExtResource( 51 ), ExtResource( 39 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 68 ), ExtResource( 69 ), ExtResource( 22 ) ],
 "loop": false,
 "name": "low_parry_alt_riposte",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 13 ), ExtResource( 30 ), ExtResource( 46 ), ExtResource( 45 ) ],
-"loop": true,
-"name": "high",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 15 ), ExtResource( 15 ), ExtResource( 15 ), ExtResource( 49 ), ExtResource( 66 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 16 ), ExtResource( 64 ), ExtResource( 77 ), ExtResource( 28 ), ExtResource( 34 ), ExtResource( 78 ), ExtResource( 27 ) ],
-"loop": false,
-"name": "high_attack_main",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 18 ), ExtResource( 18 ), ExtResource( 18 ), ExtResource( 55 ), ExtResource( 59 ), ExtResource( 61 ), ExtResource( 52 ), ExtResource( 24 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 73 ), ExtResource( 75 ) ],
-"loop": false,
-"name": "low_attack_main",
 "speed": 12.0
 } ]
 
@@ -174,6 +174,7 @@ character = ExtResource( 4 )
 [node name="sp_player" parent="." index="0"]
 frames = SubResource( 1 )
 animation = "lax"
+frame = 1
 
 [node name="pa_action_tree" parent="." index="2"]
 margin_right = 40.0
