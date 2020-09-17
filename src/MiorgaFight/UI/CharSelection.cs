@@ -56,7 +56,7 @@ public class CharSelection : Control
     private ItemList nodeCharList;
     private CharSelectionDataPanel nodeDataPanel;
     private Label nodeSpectators, nodeHostingOn;
-
+    private Sprite nodeSpectatorIcon;
 
     //Player datas
     public PlayerData p1, p2;
@@ -79,6 +79,7 @@ public class CharSelection : Control
         this.nodePlayButton = GetNode<TextureButton>("bt_play");
         this.nodeQuitButton = GetNode<TextureButton>("bt_quit");
         this.nodeSpectators = GetNode<Label>("la_mp_spectators");
+        this.nodeSpectatorIcon = GetNode<Sprite>("sp_mp_spectators");
         this.nodeHostingOn = GetNode<Label>("la_mp_hosting_on");
         this.nodeRoleButton = GetNode<TextureButton>("bt_role");
 
@@ -105,6 +106,7 @@ public class CharSelection : Control
 
         //Set mp specific bits to false
         this.nodeSpectators.Visible = false;
+        this.nodeSpectatorIcon.Visible = false;
         this.nodeHostingOn.Visible = false;
         this.nodeRoleButton.Visible = false;
 
@@ -253,6 +255,7 @@ public class CharSelection : Control
 
         //Set spectator numbers
         this.nodeSpectators.Visible = true;
+        this.nodeSpectatorIcon.Visible = true;
         this.nodeRoleButton.Visible = true;
         this.SetSpectators(Command.lobby.CalcSpectators());
 

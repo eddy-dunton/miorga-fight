@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://resources/theme/theme.tres" type="Theme" id=1]
+[ext_resource path="res://resources/ui/theme/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/MiorgaFight/UI/RaiseButton.cs" type="Script" id=2]
+
 
 [node name="raise_button" type="Button"]
 margin_right = 104.0

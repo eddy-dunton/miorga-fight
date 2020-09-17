@@ -67,7 +67,7 @@
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_lax.png" type="Texture" id=65]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_highlow_hover.png" type="Texture" id=66]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_parry_hover.png" type="Texture" id=67]
-[ext_resource path="res://resources/theme/font_large.tres" type="DynamicFont" id=68]
+[ext_resource path="res://resources/ui/theme/font_large.tres" type="DynamicFont" id=68]
 [ext_resource path="res://src/MiorgaFight/UI/CharSelectionActionTreeButton.cs" type="Script" id=69]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_both_hover.png" type="Texture" id=70]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_attack_wide_hover.png" type="Texture" id=71]
@@ -109,6 +109,7 @@
 [ext_resource path="res://assets/ui/menus/character selection/animations/tailor/low altriposte/2.png" type="Texture" id=107]
 [ext_resource path="res://assets/ui/menus/character selection/animations/tailor/low altriposte/5.png" type="Texture" id=108]
 [ext_resource path="res://assets/ui/menus/character selection/animations/tailor/low altriposte/11.png" type="Texture" id=109]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

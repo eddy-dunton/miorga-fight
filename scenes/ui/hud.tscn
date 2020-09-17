@@ -23,7 +23,8 @@
 [ext_resource path="res://assets/ui/titlecards/round6.png" type="Texture" id=21]
 [ext_resource path="res://assets/ui/titlecards/round9.png" type="Texture" id=22]
 [ext_resource path="res://src/MiorgaFight/UI/MobileControls.cs" type="Script" id=23]
-[ext_resource path="res://resources/theme/theme.tres" type="Theme" id=24]
+[ext_resource path="res://resources/ui/theme/theme.tres" type="Theme" id=24]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

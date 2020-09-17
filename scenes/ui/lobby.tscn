@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/MiorgaFight/UI/Lobby.cs" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://resources/theme/theme.tres" type="Theme" id=3]
+[ext_resource path="res://resources/ui/theme/theme.tres" type="Theme" id=3]
 [ext_resource path="res://assets/ui/button214x23_hover.png" type="Texture" id=4]
 [ext_resource path="res://assets/ui/button214x23.png" type="Texture" id=5]
 [ext_resource path="res://scenes/ui/raise_button.tscn" type="PackedScene" id=6]
@@ -52,7 +52,7 @@ __meta__ = {
 }
 
 [node name="bg" type="Sprite" parent="."]
-position = Vector2( 391, 243 )
+position = Vector2( 391.111, 243.111 )
 texture = ExtResource( 2 )
 
 [node name="bt_quit" parent="." instance=ExtResource( 6 )]
@@ -104,6 +104,7 @@ focus_mode = 1
 size_flags_horizontal = 2
 size_flags_vertical = 2
 text = "127.0.0.1"
+clear_button_enabled = true
 caret_blink = true
 caret_blink_speed = 0.5
 __meta__ = {
