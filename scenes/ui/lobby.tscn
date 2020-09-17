@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/MiorgaFight/UI/Lobby.cs" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -8,6 +8,11 @@
 [ext_resource path="res://scenes/ui/raise_button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/ui/button214x23_disabled.png" type="Texture" id=7]
 [ext_resource path="res://assets/ui/button214x23_focused.png" type="Texture" id=8]
+[ext_resource path="res://assets/ui/address_focused.png" type="Texture" id=9]
+
+[sub_resource type="StyleBoxTexture" id=6]
+texture = ExtResource( 9 )
+region_rect = Rect2( 0, 0, 214, 23 )
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 4 )
@@ -17,15 +22,15 @@ region_rect = Rect2( 0, 0, 214, 23 )
 texture = ExtResource( 5 )
 region_rect = Rect2( 0, 0, 214, 23 )
 
-[sub_resource type="StyleBoxTexture" id=5]
+[sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 8 )
 region_rect = Rect2( 0, 0, 214, 23 )
 
-[sub_resource type="StyleBoxTexture" id=3]
+[sub_resource type="StyleBoxTexture" id=4]
 texture = ExtResource( 7 )
 region_rect = Rect2( 0, 0, 214, 23 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.172549, 0.164706, 0.196078, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -60,6 +65,8 @@ margin_left = 22.0
 margin_top = 22.0
 margin_right = 126.0
 margin_bottom = 45.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath("../pa_start/tx_address")
 focus_neighbour_bottom = NodePath("../pa_start/tx_address")
 
@@ -95,14 +102,15 @@ __meta__ = {
 
 [node name="tx_address" type="LineEdit" parent="pa_start"]
 margin_left = 1.0
-margin_top = 30.0
+margin_top = 32.0
 margin_right = 215.0
-margin_bottom = 54.0
+margin_bottom = 55.0
 focus_neighbour_left = NodePath("../../bt_quit")
 focus_neighbour_bottom = NodePath("../bt_host")
 focus_mode = 1
 size_flags_horizontal = 2
 size_flags_vertical = 2
+custom_styles/focus = SubResource( 6 )
 text = "127.0.0.1"
 clear_button_enabled = true
 caret_blink = true
@@ -146,8 +154,8 @@ focus_neighbour_left = NodePath("../../bt_quit")
 focus_neighbour_top = NodePath("../bt_host")
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/disabled = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 2 )
 disableOnMobile = true
 
@@ -162,7 +170,7 @@ margin_left = 255.0
 margin_top = 200.0
 margin_right = 525.0
 margin_bottom = 300.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
