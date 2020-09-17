@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm_hover.png" type="Texture" id=1]
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm_disabled.png" type="Texture" id=2]
-[ext_resource path="res://resources/theme/theme.tres" type="Theme" id=3]
+[ext_resource path="res://resources/ui/theme/theme.tres" type="Theme" id=3]
 [ext_resource path="res://assets/ui/menus/map selection/iconselect.png" type="Texture" id=4]
 [ext_resource path="res://assets/ui/menus/map selection/iconhover.png" type="Texture" id=5]
 [ext_resource path="res://assets/ui/menus/map selection/icons/holytree.png" type="Texture" id=6]
@@ -15,6 +15,7 @@
 [ext_resource path="res://assets/ui/slider/slider390.png" type="Texture" id=14]
 [ext_resource path="res://assets/ui/menus/map selection/iconhoverp2.png" type="Texture" id=15]
 [ext_resource path="res://assets/ui/menus/map selection/iconselectp2.png" type="Texture" id=16]
+
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("vp_level")

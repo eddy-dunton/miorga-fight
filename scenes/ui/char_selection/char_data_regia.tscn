@@ -18,7 +18,7 @@
 [ext_resource path="res://assets/ui/menus/character selection/animations/regia/high main/6.png" type="Texture" id=16]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_parry.png" type="Texture" id=17]
 [ext_resource path="res://assets/ui/menus/character selection/animations/regia/low main/1.png" type="Texture" id=18]
-[ext_resource path="res://resources/theme/font_large.tres" type="DynamicFont" id=19]
+[ext_resource path="res://resources/ui/theme/font_large.tres" type="DynamicFont" id=19]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/icon_feint.png" type="Texture" id=20]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/components/block_parry_hover.png" type="Texture" id=21]
 [ext_resource path="res://assets/ui/menus/character selection/animations/regia/low alt/parryriposte/11.png" type="Texture" id=22]
@@ -83,6 +83,7 @@
 [ext_resource path="res://assets/ui/menus/character selection/movesets/highlights/regia/lowparry.png" type="Texture" id=81]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/highlights/regia/lowparryriposte.png" type="Texture" id=82]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/highlights/regia/lowmain.png" type="Texture" id=83]
+
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {

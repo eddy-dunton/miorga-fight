@@ -3,7 +3,7 @@
 [ext_resource path="res://scenes/ui/char_selection/char_data_regia.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/menus/character selection/icons/regia.png" type="Texture" id=2]
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm.png" type="Texture" id=3]
-[ext_resource path="res://resources/theme/theme.tres" type="Theme" id=4]
+[ext_resource path="res://resources/ui/theme/theme.tres" type="Theme" id=4]
 [ext_resource path="res://scenes/ui/char_selection/char_data_tailor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/ui/menus/character selection/player buttons/p2_unselected.png" type="Texture" id=6]
 [ext_resource path="res://assets/ui/menus/character selection/icons/tailor.png" type="Texture" id=7]
@@ -25,6 +25,7 @@
 [ext_resource path="res://assets/ui/menus/character selection/button_quit_disabled.png" type="Texture" id=23]
 [ext_resource path="res://assets/ui/menus/character selection/player buttons/role_change.png" type="Texture" id=24]
 [ext_resource path="res://assets/ui/menus/character selection/icon_spectator.png" type="Texture" id=25]
+
 
 [sub_resource type="StyleBoxFlat" id=1]
 draw_center = false
