@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=2]
+[gd_scene load_steps=114 format=2]
 
 [ext_resource path="res://assets/level/holytree/level_base_nofoliage.png" type="Texture" id=1]
 [ext_resource path="res://assets/level/holytree/foliage/light/lightgrass1/key0.png" type="Texture" id=2]
@@ -93,6 +93,7 @@
 [ext_resource path="res://assets/level/holytree/tree sprite/mid_key5.png" type="Texture" id=91]
 [ext_resource path="res://assets/level/holytree/tree sprite/right_key5.png" type="Texture" id=92]
 [ext_resource path="res://src/MiorgaFight/Level/ParticlePauser.cs" type="Script" id=93]
+[ext_resource path="res://assets/sound/environment/woodlandcalm.wav" type="AudioStream" id=94]
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
@@ -113,6 +114,7 @@ angle_random = 1.0
 [sub_resource type="ImageTexture" id=2]
 
 [sub_resource type="AnimatedTexture" id=3]
+flags = 4
 frames = 15
 frame_0/texture = ExtResource( 16 )
 frame_1/texture = ExtResource( 11 )
@@ -142,6 +144,7 @@ frame_13/delay_sec = 0.0
 frame_14/delay_sec = 0.0
 
 [sub_resource type="AnimatedTexture" id=4]
+flags = 4
 frames = 15
 fps = 5.0
 frame_0/texture = ExtResource( 16 )
@@ -172,7 +175,7 @@ frame_13/delay_sec = 0.0
 frame_14/delay_sec = 0.0
 
 [sub_resource type="AnimatedTexture" id=5]
-flags = 7
+flags = 4
 frames = 15
 fps = 6.0
 frame_0/texture = ExtResource( 16 )
@@ -370,7 +373,11 @@ POSITION_LEFT = -250.0
 POSITION_RIGHT = 250.0
 POSITION_Y = 150.0
 
-[node name="tr_foliage" type="Timer" parent="." index="0"]
+[node name="bg_noise" type="AudioStreamPlayer" parent="." index="0"]
+stream = ExtResource( 94 )
+autoplay = true
+
+[node name="tr_foliage" type="Timer" parent="." index="1"]
 wait_time = 0.01
 autostart = true
 script = ExtResource( 64 )
@@ -384,7 +391,7 @@ gustLegnthMax = 3000
 gustGapMin = 1.0
 gustGapMax = 5.0
 
-[node name="particle_pauser" type="Node" parent="." index="1"]
+[node name="particle_pauser" type="Node" parent="." index="2"]
 pause_mode = 2
 script = ExtResource( 93 )
 
@@ -423,7 +430,7 @@ local_coords = false
 process_material = SubResource( 1 )
 texture = SubResource( 5 )
 
-[node name="bg" type="ParallaxBackground" parent="." index="2"]
+[node name="bg" type="ParallaxBackground" parent="." index="3"]
 
 [node name="bg_sky" type="ParallaxLayer" parent="bg" index="0"]
 position = Vector2( 0, 125 )
@@ -466,6 +473,7 @@ texture = ExtResource( 54 )
 position = Vector2( -251, -27 )
 frames = SubResource( 6 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -475,7 +483,6 @@ gustEndFrame = 3
 position = Vector2( 22.1139, -1.168 )
 frames = SubResource( 7 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -485,18 +492,18 @@ gustEndFrame = 3
 position = Vector2( 306, -38 )
 frames = SubResource( 8 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
-[node name="foliage" type="Node2D" parent="." index="3"]
+[node name="foliage" type="Node2D" parent="." index="4"]
 
 [node name="darkgrass2_1" type="AnimatedSprite" parent="foliage" index="0"]
 position = Vector2( -53.8861, 156.832 )
 frames = SubResource( 9 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -506,6 +513,7 @@ gustEndFrame = 3
 position = Vector2( 59.1368, 186.962 )
 frames = SubResource( 10 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -525,7 +533,6 @@ gustEndFrame = 3
 position = Vector2( -48.4977, 176.636 )
 frames = SubResource( 11 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -535,12 +542,13 @@ gustEndFrame = 3
 position = Vector2( -44.265, 241.622 )
 frames = SubResource( 12 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
-[node name="arena" type="StaticBody2D" parent="." index="4"]
+[node name="arena" type="StaticBody2D" parent="." index="5"]
 
 [node name="ar_wall_left" type="CollisionShape2D" parent="arena" index="0"]
 position = Vector2( -520, 180 )
@@ -550,14 +558,13 @@ shape = SubResource( 13 )
 position = Vector2( 520, 180 )
 shape = SubResource( 14 )
 
-[node name="fg" type="Node2D" parent="." index="5"]
+[node name="fg" type="Node2D" parent="." index="6"]
 z_index = 1
 
 [node name="lightgrass2_1" type="AnimatedSprite" parent="fg" index="0"]
 position = Vector2( -129.182, 273.344 )
 frames = SubResource( 15 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -567,6 +574,7 @@ gustEndFrame = 3
 position = Vector2( 301.751, 240.015 )
 frames = SubResource( 16 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -576,6 +584,7 @@ gustEndFrame = 3
 position = Vector2( -209.921, 226.905 )
 frames = SubResource( 16 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -585,6 +594,7 @@ gustEndFrame = 3
 position = Vector2( -470.626, 263.988 )
 frames = SubResource( 16 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -594,6 +604,7 @@ gustEndFrame = 3
 position = Vector2( 150.561, 266.474 )
 frames = SubResource( 17 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -603,6 +614,7 @@ gustEndFrame = 3
 position = Vector2( 68.0362, 239.386 )
 frames = SubResource( 17 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -612,6 +624,7 @@ gustEndFrame = 3
 position = Vector2( 336.287, 247.425 )
 frames = SubResource( 17 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -621,6 +634,7 @@ gustEndFrame = 3
 position = Vector2( -432.015, 266.474 )
 frames = SubResource( 17 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -630,7 +644,6 @@ gustEndFrame = 3
 position = Vector2( 51.0268, 268.733 )
 frames = SubResource( 18 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -640,7 +653,6 @@ gustEndFrame = 3
 position = Vector2( -192.761, 244.354 )
 frames = SubResource( 18 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -650,7 +662,6 @@ gustEndFrame = 3
 position = Vector2( -325.682, 302.311 )
 frames = SubResource( 18 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -660,7 +671,6 @@ gustEndFrame = 3
 position = Vector2( -411.357, 266.403 )
 frames = SubResource( 18 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -670,7 +680,6 @@ gustEndFrame = 3
 position = Vector2( -6.29233, 251.284 )
 frames = SubResource( 18 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -680,7 +689,6 @@ gustEndFrame = 3
 position = Vector2( 175.766, 244.354 )
 frames = SubResource( 18 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -690,7 +698,6 @@ gustEndFrame = 3
 position = Vector2( 372.944, 253.804 )
 frames = SubResource( 18 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -700,7 +707,6 @@ gustEndFrame = 3
 position = Vector2( -303.951, 253.868 )
 frames = SubResource( 18 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -710,7 +716,6 @@ gustEndFrame = 3
 position = Vector2( 466.732, 241.169 )
 frames = SubResource( 18 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -720,6 +725,7 @@ gustEndFrame = 3
 position = Vector2( -174.815, 277.497 )
 frames = SubResource( 10 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -729,6 +735,7 @@ gustEndFrame = 3
 position = Vector2( -339.549, 270.253 )
 frames = SubResource( 19 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -762,7 +769,7 @@ margin_bottom = 9.0
 margin_top = 17.0
 margin_bottom = 77.0
 
-[node name="camera_track" parent="." index="7"]
+[node name="camera_track" parent="." index="8"]
 position = Vector2( 0, 131 )
 
 [editable path="hud"]
