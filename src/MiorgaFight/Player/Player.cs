@@ -54,14 +54,15 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	private Stance STANCE_LAX, STANCE_LOW, STANCE_HIGH;
 
 	//Nodes
-	public Level nodeLevel;
+	public Level level;
 	public PlayerAnimation nodeAnimateSprite;
 	public CollisionShape2D nodeCollision;
 	public Player nodeEnemy;
 	public Particles2D nodeSparks;
 	public PlayerOverlay nodeOverlayTrack;
 	public PlayerOverlay nodeOverlayNoTrack;
-	
+	public AudioStreamPlayer2D nodeFootsteps;
+
 	//Current HUD, may be null, if there is no HUD
 	public PlayerHUD hud;
 
@@ -86,12 +87,16 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	}
 
 	public override void _Ready() {
-		this.nodeLevel = GetParent() as Level;
+		this.level = GetParent() as Level;
+
 		this.nodeAnimateSprite = GetNode<AnimatedSprite>("animate_sprite") as PlayerAnimation;
 		this.nodeCollision = GetNode<CollisionShape2D>("collision");
 		this.nodeSparks = GetNode<Particles2D>("animate_sprite/sparks");
 		this.nodeOverlayTrack = GetNode<AnimatedSprite>("animate_sprite/overlay_track") as PlayerOverlay;
 		this.nodeOverlayNoTrack = GetNode<AnimatedSprite>("overlay_notrack") as PlayerOverlay;
+		this.nodeFootsteps = GetNode<AudioStreamPlayer2D>("footsteps") as AudioStreamPlayer2D;
+
+		this.nodeFootsteps.Connect("finished", this, nameof(FootstepStart));
 
 		//Load stances
 		STANCE_LAX = new Stance("lax", LAX_SPRITE);
@@ -151,7 +156,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 
 	//Called when the at the end of round, moves players back and resets HP
 	public void Restart() {
-		this.Position = this.nodeLevel.GetPlayerPosition(this.DIRECTION);
+		this.Position = this.level.GetPlayerPosition(this.DIRECTION);
 		//Only reset locally
 		//stops RPC calls going off to other clients which may not have finished setting up their game
 		this.ChangeHP_(this.HP_MAX);
@@ -500,11 +505,25 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Starts to walk 
 	private void WalkStart() {
 		this.nodeAnimateSprite.Play("walk", this.IsWalkingBackwards());
+		this.FootstepStart();
 	}
 
 	//Walk ends
 	private void WalkEnd() {
 		this.nodeAnimateSprite.Reset();
+		this.FootstepStop();
+	}
+
+	//Starts playing footstep sounds
+	//Will play random footstep sounds from the current levels sounds
+	void FootstepStart() {
+		this.nodeFootsteps.Stream = Command.Random(this.level.footsteps);
+		this.nodeFootsteps.Play();
+	}
+
+	//Stops playing footstep sounds
+	void FootstepStop() {
+		this.nodeFootsteps.Stop();
 	}
 
 	//Returns this players hitbox as a shape and a transform

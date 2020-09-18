@@ -117,40 +117,35 @@ animations = [ {
 "name": "trans_high_main->low",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 74 ), ExtResource( 75 ), ExtResource( 72 ), ExtResource( 76 ) ],
-"loop": true,
-"name": "trans_low_main->high",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 83 ), ExtResource( 87 ), ExtResource( 86 ), ExtResource( 84 ) ],
 "loop": true,
 "name": "low",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 102 ), ExtResource( 103 ), ExtResource( 106 ), ExtResource( 104 ), ExtResource( 104 ) ],
-"loop": true,
-"name": "low_parry_alt_riposte",
-"speed": 12.0
 }, {
 "frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 85 ), ExtResource( 82 ) ],
 "loop": true,
 "name": "high",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 40 ), ExtResource( 43 ) ],
-"loop": false,
-"name": "trans_low->high",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 50 ), ExtResource( 49 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 59 ), ExtResource( 52 ), ExtResource( 55 ), ExtResource( 57 ), ExtResource( 56 ), ExtResource( 58 ), ExtResource( 54 ), ExtResource( 53 ) ],
-"loop": false,
-"name": "flinch",
-"speed": 20.0
-}, {
 "frames": [ ExtResource( 5 ), ExtResource( 81 ) ],
 "loop": true,
 "name": "lax",
 "speed": 1.5
+}, {
+"frames": [ ExtResource( 41 ), ExtResource( 43 ) ],
+"loop": false,
+"name": "trans_high->low",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 102 ), ExtResource( 103 ), ExtResource( 106 ), ExtResource( 104 ), ExtResource( 104 ) ],
+"loop": true,
+"name": "low_parry_alt_riposte",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 40 ), ExtResource( 43 ) ],
+"loop": false,
+"name": "trans_low->high",
+"speed": 12.0
 }, {
 "frames": [ ExtResource( 42 ) ],
 "loop": false,
@@ -160,11 +155,6 @@ animations = [ {
 "frames": [ ExtResource( 30 ), ExtResource( 23 ), ExtResource( 31 ), ExtResource( 35 ), ExtResource( 28 ), ExtResource( 28 ), ExtResource( 25 ), ExtResource( 25 ) ],
 "loop": false,
 "name": "high_attack_main",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 41 ), ExtResource( 43 ) ],
-"loop": false,
-"name": "trans_high->low",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 20 ), ExtResource( 22 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 19 ) ],
@@ -191,6 +181,16 @@ animations = [ {
 "loop": true,
 "name": "walk",
 "speed": 8.0
+}, {
+"frames": [ ExtResource( 74 ), ExtResource( 75 ), ExtResource( 72 ), ExtResource( 76 ) ],
+"loop": true,
+"name": "trans_low_main->high",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 50 ), ExtResource( 49 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 59 ), ExtResource( 52 ), ExtResource( 55 ), ExtResource( 57 ), ExtResource( 56 ), ExtResource( 58 ), ExtResource( 54 ), ExtResource( 53 ) ],
+"loop": false,
+"name": "flinch",
+"speed": 20.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
@@ -217,11 +217,11 @@ actions = [ ExtResource( 34 ), ExtResource( 16 ), ExtResource( 101 ), ExtResourc
 SPEED = 100
 HP_MAX = 100
 
-[node name="collision" parent="." index="0"]
+[node name="collision" parent="." index="1"]
 position = Vector2( 10, 37 )
 shape = SubResource( 1 )
 
-[node name="animate_sprite" parent="." index="1"]
+[node name="animate_sprite" parent="." index="2"]
 frames = SubResource( 2 )
 animation = "low_parry_alt_riposte"
 frame = 1
@@ -256,7 +256,7 @@ offsets = {
 "blood_mid": Vector2( 40, 38 )
 }
 
-[node name="overlay_notrack" parent="." index="2"]
+[node name="overlay_notrack" parent="." index="3"]
 frames = SubResource( 5 )
 animation = "high_main_attack_feint"
 offsets = {

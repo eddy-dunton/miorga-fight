@@ -21,6 +21,9 @@ public class Level : Node2D
 	[Export] private float POSITION_RIGHT;
 	[Export] private float POSITION_Y;
 
+	//Sounds which are played as the players walk
+	[Export] public AudioStream[] footsteps;
+
 	public Level() {
 		this.foliage = new Dictionary<int, Foliage>();
 	}
