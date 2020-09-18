@@ -5,7 +5,6 @@
 [ext_resource path="res://assets/ui/menus/character selection/character mask.png" type="Texture" id=4]
 [ext_resource path="res://resources/ui/theme/theme.tres" type="Theme" id=5]
 
-
 [node name="pa_char_data" type="Control"]
 margin_right = 40.0
 margin_bottom = 40.0

@@ -55,7 +55,6 @@ public class CharSelection : Control
     private ItemList nodeCharList;
     private CharSelectionDataPanel nodeDataPanel;
     private Label nodeSpectators, nodeHostingOn;
-    private Sprite nodeSpectatorIcon;
 
     //Player datas
     public PlayerData p1, p2;
@@ -75,12 +74,12 @@ public class CharSelection : Control
         this.p2.nodeConfirmed = GetNode<Sprite>("pa_player_buttons/sp_ready_p2");
         this.p2.nodePresent = GetNode<Sprite>("pa_player_buttons/sp_present_p2");
 
+        this.nodeRoleButton = GetNode<TextureButton>("pa_player_buttons/bt_role");
+
         this.nodePlayButton = GetNode<TextureButton>("bt_play");
         this.nodeQuitButton = GetNode<TextureButton>("bt_quit");
         this.nodeSpectators = GetNode<Label>("la_mp_spectators");
-        this.nodeSpectatorIcon = GetNode<Sprite>("sp_mp_spectators");
         this.nodeHostingOn = GetNode<Label>("la_mp_hosting_on");
-        this.nodeRoleButton = GetNode<TextureButton>("bt_role");
 
         //This is removed the moment the scene is opened
         //However I left it in the scene as it works as a good visual guide as to where the everything is in engine
@@ -105,7 +104,6 @@ public class CharSelection : Control
 
         //Set mp specific bits to false
         this.nodeSpectators.Visible = false;
-        this.nodeSpectatorIcon.Visible = false;
         this.nodeHostingOn.Visible = false;
         this.nodeRoleButton.Visible = false;
 
@@ -255,7 +253,6 @@ public class CharSelection : Control
 
         //Set spectator numbers
         this.nodeSpectators.Visible = true;
-        this.nodeSpectatorIcon.Visible = true;
         this.nodeRoleButton.Visible = true;
         this.SetSpectators(Command.lobby.CalcSpectators());
 
