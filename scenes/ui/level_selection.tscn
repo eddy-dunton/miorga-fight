@@ -179,6 +179,7 @@ focus_neighbour_top = NodePath("../sl_level")
 focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath(".")
 disabled = true
+shortcut_in_tooltip = false
 shortcut = SubResource( 7 )
 texture_normal = ExtResource( 11 )
 texture_pressed = ExtResource( 11 )

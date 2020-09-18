@@ -263,6 +263,7 @@ focus_neighbour_top = NodePath("../il_selection")
 focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath(".")
 disabled = true
+shortcut_in_tooltip = false
 action_mode = 0
 shortcut = SubResource( 6 )
 texture_normal = ExtResource( 3 )
