@@ -92,6 +92,8 @@ public class Lobby : Control {
 		this.RpcConfig(nameof(this.SetupClient), MultiplayerAPI.RPCMode.Puppet);
 		this.RpcConfig(nameof(this.ResetToLobby), MultiplayerAPI.RPCMode.Remotesync);
 		this.RpcConfig(nameof(this.ChangeRole), MultiplayerAPI.RPCMode.Remotesync);
+	
+		this.GrabFocus();
 	}
 
 	//Called when a player connects (duh)	
@@ -281,6 +283,7 @@ public class Lobby : Control {
 		
 		this.nodeStartPanel.Visible = true;
 		this.nodeErrorPanel.Visible = false;
+		this.GrabFocus();
 	}
 
 	//Called when the quit button is pressed
@@ -463,5 +466,6 @@ public class Lobby : Control {
 		this.nodeErrorPanel.Visible = true;
 		this.nodeErrorLabel.Text = msg;
 		this.nodeErrorButton.Text = buttonmsg;
+		this.nodeErrorButton.GrabFocus();
 	}
 }}
