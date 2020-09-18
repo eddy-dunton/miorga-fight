@@ -117,28 +117,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="bt_play" type="TextureButton" parent="."]
-margin_left = 682.0
-margin_top = 406.0
-margin_right = 761.0
-margin_bottom = 426.0
-focus_neighbour_left = NodePath("../il_selection")
-focus_neighbour_top = NodePath("../il_selection")
-focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath(".")
-disabled = true
-action_mode = 0
-shortcut = SubResource( 6 )
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 3 )
-texture_hover = ExtResource( 17 )
-texture_disabled = ExtResource( 15 )
-texture_focused = ExtResource( 26 )
-stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="bt_quit" type="TextureButton" parent="."]
 margin_left = 41.0
 margin_top = 14.0
@@ -271,6 +249,28 @@ margin_bottom = 38.0
 text = "Hosting on: "
 align = 2
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bt_play" type="TextureButton" parent="."]
+margin_left = 682.0
+margin_top = 406.0
+margin_right = 761.0
+margin_bottom = 427.0
+focus_neighbour_left = NodePath("../il_selection")
+focus_neighbour_top = NodePath("../il_selection")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+disabled = true
+action_mode = 0
+shortcut = SubResource( 6 )
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 17 )
+texture_disabled = ExtResource( 15 )
+texture_focused = ExtResource( 26 )
+stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
