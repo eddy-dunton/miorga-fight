@@ -10,6 +10,8 @@ public class PauseMenu : CanvasLayer {
 
     private Label nodeText;
 
+    private Button nodeResume, nodeQuit; 
+
     public override void _Ready() {
         this.nodeText = this.GetNode<Label>("la_paused");
 
@@ -18,8 +20,13 @@ public class PauseMenu : CanvasLayer {
             this.nodeText.Text = this.textMp;
         }
         //Connect the resume button to end pause
-        GetNode("bt_resume").Connect("pressed", this, nameof(this._OnContinuePressed));
-        GetNode("bt_quit").Connect("pressed", this, nameof(this._OnQuitPressed));
+        this.nodeResume = GetNode<Button>("bt_resume");
+        this.nodeResume.Connect("pressed", this, nameof(this._OnContinuePressed));
+
+        this.nodeQuit = GetNode<Button>("bt_quit"); 
+        this.nodeQuit.Connect("pressed", this, nameof(this._OnQuitPressed));
+
+        this.nodeResume.GrabFocus();
     }
 
     void _OnContinuePressed() {
