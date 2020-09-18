@@ -1,26 +1,36 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/MiorgaFight/UI/Lobby.cs" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://resources/theme/theme.tres" type="Theme" id=3]
+[ext_resource path="res://resources/ui/theme/theme.tres" type="Theme" id=3]
 [ext_resource path="res://assets/ui/button214x23_hover.png" type="Texture" id=4]
 [ext_resource path="res://assets/ui/button214x23.png" type="Texture" id=5]
 [ext_resource path="res://scenes/ui/raise_button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/ui/button214x23_disabled.png" type="Texture" id=7]
+[ext_resource path="res://assets/ui/button214x23_focused.png" type="Texture" id=8]
+[ext_resource path="res://assets/ui/address_focused.png" type="Texture" id=9]
 
 [sub_resource type="StyleBoxTexture" id=1]
-texture = ExtResource( 4 )
+texture = ExtResource( 9 )
 region_rect = Rect2( 0, 0, 214, 23 )
 
 [sub_resource type="StyleBoxTexture" id=2]
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 214, 23 )
 
 [sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 214, 23 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 214, 23 )
+
+[sub_resource type="StyleBoxTexture" id=5]
 texture = ExtResource( 7 )
 region_rect = Rect2( 0, 0, 214, 23 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.172549, 0.164706, 0.196078, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -35,6 +45,11 @@ corner_detail = 1
 anti_aliasing = false
 
 [node name="lobby" type="Control"]
+focus_neighbour_left = NodePath("pa_start/bt_host")
+focus_neighbour_top = NodePath("pa_start/tx_address")
+focus_neighbour_right = NodePath("pa_start/bt_join")
+focus_neighbour_bottom = NodePath("pa_start/bt_local")
+focus_mode = 2
 theme = ExtResource( 3 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -42,7 +57,7 @@ __meta__ = {
 }
 
 [node name="bg" type="Sprite" parent="."]
-position = Vector2( 391, 243 )
+position = Vector2( 391.111, 243.111 )
 texture = ExtResource( 2 )
 
 [node name="bt_quit" parent="." instance=ExtResource( 6 )]
@@ -50,6 +65,10 @@ margin_left = 22.0
 margin_top = 22.0
 margin_right = 126.0
 margin_bottom = 45.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../pa_start/tx_address")
+focus_neighbour_bottom = NodePath("../pa_start/tx_address")
 
 [node name="label" parent="bt_quit" index="0"]
 text = "Quit"
@@ -83,13 +102,17 @@ __meta__ = {
 
 [node name="tx_address" type="LineEdit" parent="pa_start"]
 margin_left = 1.0
-margin_top = 30.0
+margin_top = 32.0
 margin_right = 215.0
-margin_bottom = 54.0
+margin_bottom = 55.0
+focus_neighbour_left = NodePath("../../bt_quit")
+focus_neighbour_bottom = NodePath("../bt_host")
 focus_mode = 1
 size_flags_horizontal = 2
 size_flags_vertical = 2
+custom_styles/focus = SubResource( 1 )
 text = "127.0.0.1"
+clear_button_enabled = true
 caret_blink = true
 caret_blink_speed = 0.5
 __meta__ = {
@@ -101,6 +124,10 @@ margin_left = 1.0
 margin_top = 60.0
 margin_right = 105.0
 margin_bottom = 83.0
+focus_neighbour_left = NodePath("../../bt_quit")
+focus_neighbour_top = NodePath("../tx_address")
+focus_neighbour_right = NodePath("../bt_join")
+focus_neighbour_bottom = NodePath("../bt_local")
 
 [node name="label" parent="pa_start/bt_host" index="0"]
 margin_left = 2.0
@@ -111,6 +138,9 @@ margin_left = 111.0
 margin_top = 60.0
 margin_right = 215.0
 margin_bottom = 83.0
+focus_neighbour_left = NodePath("../bt_host")
+focus_neighbour_top = NodePath("../tx_address")
+focus_neighbour_bottom = NodePath("../bt_local")
 
 [node name="label" parent="pa_start/bt_join" index="0"]
 text = "Join"
@@ -120,11 +150,13 @@ margin_left = 1.0
 margin_top = 86.0
 margin_right = 215.0
 margin_bottom = 109.0
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 2 )
-custom_styles/disabled = SubResource( 3 )
-custom_styles/normal = SubResource( 2 )
+focus_neighbour_left = NodePath("../../bt_quit")
+focus_neighbour_top = NodePath("../bt_host")
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 3 )
 disableOnMobile = true
 
 [node name="label" parent="pa_start/bt_local" index="0"]
@@ -138,7 +170,7 @@ margin_left = 255.0
 margin_top = 200.0
 margin_right = 525.0
 margin_bottom = 300.0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -147,6 +179,7 @@ __meta__ = {
 margin_top = 20.0
 margin_right = 270.0
 margin_bottom = 60.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Connecting..."
 align = 1
 valign = 1
@@ -159,6 +192,10 @@ margin_left = 83.0
 margin_top = 64.0
 margin_right = 187.0
 margin_bottom = 87.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
 
 [node name="label" parent="pa_error/bt_error" index="0"]
 text = "Cancel"

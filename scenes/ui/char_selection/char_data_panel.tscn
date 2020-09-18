@@ -3,7 +3,7 @@
 [ext_resource path="res://src/MiorgaFight/UI/CharSelectionDataPanel.cs" type="Script" id=1]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/key.png" type="Texture" id=2]
 [ext_resource path="res://assets/ui/menus/character selection/character mask.png" type="Texture" id=4]
-[ext_resource path="res://resources/theme/theme.tres" type="Theme" id=5]
+[ext_resource path="res://resources/ui/theme/theme.tres" type="Theme" id=5]
 
 [node name="pa_char_data" type="Control"]
 margin_right = 40.0

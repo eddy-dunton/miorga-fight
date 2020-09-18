@@ -14,7 +14,6 @@ public class CharSelection : Control
         //The other players data holder
         public PlayerData other;
 
-
         //NODESs
         //The button to select this data holder
         public TextureButton nodeButton;
@@ -57,7 +56,6 @@ public class CharSelection : Control
     private CharSelectionDataPanel nodeDataPanel;
     private Label nodeSpectators, nodeHostingOn;
 
-
     //Player datas
     public PlayerData p1, p2;
 
@@ -76,11 +74,12 @@ public class CharSelection : Control
         this.p2.nodeConfirmed = GetNode<Sprite>("pa_player_buttons/sp_ready_p2");
         this.p2.nodePresent = GetNode<Sprite>("pa_player_buttons/sp_present_p2");
 
+        this.nodeRoleButton = GetNode<TextureButton>("pa_player_buttons/bt_role");
+
         this.nodePlayButton = GetNode<TextureButton>("bt_play");
         this.nodeQuitButton = GetNode<TextureButton>("bt_quit");
         this.nodeSpectators = GetNode<Label>("la_mp_spectators");
         this.nodeHostingOn = GetNode<Label>("la_mp_hosting_on");
-        this.nodeRoleButton = GetNode<TextureButton>("bt_role");
 
         //This is removed the moment the scene is opened
         //However I left it in the scene as it works as a good visual guide as to where the everything is in engine
@@ -114,6 +113,7 @@ public class CharSelection : Control
         this.RpcConfig(nameof(this.Confirm), MultiplayerAPI.RPCMode.Remotesync);
 
         this.ShowChar(-1);
+        this.GrabFocus();
     }
 
     //When one of the player buttons is pressed

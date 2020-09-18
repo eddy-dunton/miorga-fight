@@ -1,9 +1,9 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scenes/ui/char_selection/char_data_regia.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/menus/character selection/icons/regia.png" type="Texture" id=2]
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm.png" type="Texture" id=3]
-[ext_resource path="res://resources/theme/theme.tres" type="Theme" id=4]
+[ext_resource path="res://resources/ui/theme/theme.tres" type="Theme" id=4]
 [ext_resource path="res://scenes/ui/char_selection/char_data_tailor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/ui/menus/character selection/player buttons/p2_unselected.png" type="Texture" id=6]
 [ext_resource path="res://assets/ui/menus/character selection/icons/tailor.png" type="Texture" id=7]
@@ -19,13 +19,38 @@
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm_hover.png" type="Texture" id=17]
 [ext_resource path="res://assets/ui/menus/character selection/character selection.png" type="Texture" id=18]
 [ext_resource path="res://assets/ui/menus/character selection/player buttons/p2_selected.png" type="Texture" id=19]
-[ext_resource path="res://assets/ui/menus/character selection/player buttons/role_change_press.png" type="Texture" id=20]
+[ext_resource path="res://assets/ui/menus/character selection/player buttons/p_focused.png" type="Texture" id=20]
 [ext_resource path="res://assets/ui/menus/character selection/button_quit_hover.png" type="Texture" id=21]
 [ext_resource path="res://assets/ui/menus/character selection/button_quit.png" type="Texture" id=22]
 [ext_resource path="res://assets/ui/menus/character selection/button_quit_disabled.png" type="Texture" id=23]
-[ext_resource path="res://assets/ui/menus/character selection/player buttons/role_change.png" type="Texture" id=24]
+[ext_resource path="res://assets/ui/menus/character selection/player buttons/spectator_focused.png" type="Texture" id=24]
+[ext_resource path="res://assets/ui/menus/character selection/player buttons/spectator_selected.png" type="Texture" id=25]
+[ext_resource path="res://assets/ui/menus/character selection/button_confirm_focus.png" type="Texture" id=26]
+[ext_resource path="res://assets/ui/menus/character selection/character_list_focus.png" type="Texture" id=27]
+[ext_resource path="res://assets/ui/menus/character selection/button_quit_focus.png" type="Texture" id=28]
+[ext_resource path="res://assets/ui/menus/character selection/player buttons/spectator_unselected.png" type="Texture" id=29]
 
 [sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.839216, 0.745098, 0.662745, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.890196, 0.0862745, 0.0862745, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 27 )
+margin_left = 20.0
+margin_right = 35.0
+margin_top = 10.0
+
+[sub_resource type="StyleBoxFlat" id=3]
 draw_center = false
 border_width_left = 2
 border_width_top = 2
@@ -39,9 +64,23 @@ corner_radius_bottom_left = 2
 corner_detail = 1
 anti_aliasing = false
 
-[sub_resource type="StyleBoxEmpty" id=2]
+[sub_resource type="StyleBoxTexture" id=4]
+margin_left = 20.0
+margin_top = 10.0
+
+[sub_resource type="InputEventAction" id=5]
+device = -1
+action = "ui_jump_to_confirm"
+
+[sub_resource type="ShortCut" id=6]
+shortcut = SubResource( 5 )
 
 [node name="char_selection" type="Control"]
+focus_neighbour_left = NodePath("pa_player_buttons/bt_p1")
+focus_neighbour_top = NodePath("bt_quit")
+focus_neighbour_right = NodePath("il_selection")
+focus_neighbour_bottom = NodePath("bt_role")
+focus_mode = 2
 theme = ExtResource( 4 )
 script = ExtResource( 14 )
 __meta__ = {
@@ -57,33 +96,23 @@ position = Vector2( 390, 220 )
 texture = ExtResource( 18 )
 
 [node name="il_selection" type="ItemList" parent="."]
-margin_left = 110.0
-margin_top = 50.0
-margin_right = 144.0
-margin_bottom = 405.0
+margin_left = 91.0
+margin_top = 41.0
+margin_right = 193.0
+margin_bottom = 410.0
 rect_clip_content = false
-focus_mode = 0
-custom_styles/selected = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
+focus_neighbour_left = NodePath("../pa_player_buttons/bt_p1")
+focus_neighbour_top = NodePath("../bt_quit")
+focus_neighbour_right = NodePath("../pa_char_data/tx_description")
+focus_neighbour_bottom = NodePath("../bt_role")
+custom_styles/selected_focus = SubResource( 1 )
+custom_styles/bg_focus = SubResource( 2 )
+custom_styles/selected = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
 items = [ "", ExtResource( 2 ), false, "", ExtResource( 7 ), false ]
 max_columns = 2
-icon_mode = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="bt_play" type="TextureButton" parent="."]
-margin_left = 682.0
-margin_top = 406.0
-margin_right = 761.0
-margin_bottom = 426.0
-focus_mode = 0
-disabled = true
-texture_normal = ExtResource( 3 )
-texture_pressed = ExtResource( 3 )
-texture_hover = ExtResource( 17 )
-texture_disabled = ExtResource( 15 )
-stretch_mode = 2
+same_column_width = true
+fixed_column_width = 32
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -93,11 +122,16 @@ margin_left = 41.0
 margin_top = 14.0
 margin_right = 84.0
 margin_bottom = 35.0
-focus_mode = 0
+focus_neighbour_left = NodePath("../pa_player_buttons/bt_p1")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../il_selection")
+focus_neighbour_bottom = NodePath("../pa_player_buttons/bt_p1")
+action_mode = 0
 texture_normal = ExtResource( 22 )
 texture_pressed = ExtResource( 22 )
 texture_hover = ExtResource( 21 )
 texture_disabled = ExtResource( 23 )
+texture_focused = ExtResource( 28 )
 stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -105,20 +139,31 @@ __meta__ = {
 
 [node name="pa_char_data" parent="." instance=ExtResource( 9 )]
 
+[node name="sp_player_mask" parent="pa_char_data" index="1"]
+position = Vector2( 390, 220.354 )
+
 [node name="pa_player_buttons" type="Control" parent="."]
 margin_left = 3.0
-margin_top = 53.0
+margin_top = 43.0
 margin_right = 38.0
-margin_bottom = 388.0
+margin_bottom = 378.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="bt_p1" type="TextureButton" parent="pa_player_buttons"]
 margin_right = 35.0
 margin_bottom = 168.0
-focus_mode = 0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../../bt_quit")
+focus_neighbour_right = NodePath("../../il_selection")
+focus_neighbour_bottom = NodePath("../bt_p2")
 toggle_mode = true
 pressed = true
+action_mode = 0
 texture_normal = ExtResource( 16 )
 texture_pressed = ExtResource( 8 )
+texture_focused = ExtResource( 20 )
 stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -141,10 +186,15 @@ margin_top = 167.0
 margin_right = 35.0
 margin_bottom = 335.0
 rect_pivot_offset = Vector2( 382.757, 26 )
-focus_mode = 0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../bt_p1")
+focus_neighbour_right = NodePath("../../il_selection")
+focus_neighbour_bottom = NodePath("../bt_role")
 toggle_mode = true
+action_mode = 0
 texture_normal = ExtResource( 6 )
 texture_pressed = ExtResource( 19 )
+texture_focused = ExtResource( 20 )
 stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -162,11 +212,29 @@ texture = ExtResource( 10 )
 position = Vector2( 31, 178 )
 texture = ExtResource( 12 )
 
+[node name="bt_role" type="TextureButton" parent="pa_player_buttons"]
+margin_top = 333.0
+margin_right = 104.0
+margin_bottom = 373.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../bt_p2")
+focus_neighbour_right = NodePath("../../il_selection")
+focus_neighbour_bottom = NodePath(".")
+theme = ExtResource( 4 )
+action_mode = 0
+texture_normal = ExtResource( 29 )
+texture_pressed = ExtResource( 25 )
+texture_hover = ExtResource( 29 )
+texture_focused = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="la_mp_spectators" type="Label" parent="."]
 margin_left = 5.0
-margin_top = 18.0
+margin_top = 391.0
 margin_right = 69.0
-margin_bottom = 48.0
+margin_bottom = 421.0
 text = "0"
 valign = 1
 __meta__ = {
@@ -185,17 +253,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="bt_role" type="TextureButton" parent="."]
-margin_left = 3.0
-margin_top = 388.0
-margin_right = 107.0
-margin_bottom = 428.0
-focus_mode = 0
-theme = ExtResource( 4 )
-enabled_focus_mode = 0
-texture_normal = ExtResource( 24 )
-texture_pressed = ExtResource( 20 )
-texture_hover = ExtResource( 24 )
-texture_focused = ExtResource( 24 )
+[node name="bt_play" type="TextureButton" parent="."]
+margin_left = 682.0
+margin_top = 406.0
+margin_right = 761.0
+margin_bottom = 427.0
+focus_neighbour_left = NodePath("../il_selection")
+focus_neighbour_top = NodePath("../il_selection")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+disabled = true
+shortcut_in_tooltip = false
+action_mode = 0
+shortcut = SubResource( 6 )
+texture_normal = ExtResource( 3 )
+texture_pressed = ExtResource( 3 )
+texture_hover = ExtResource( 17 )
+texture_disabled = ExtResource( 15 )
+texture_focused = ExtResource( 26 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [editable path="pa_char_data"]

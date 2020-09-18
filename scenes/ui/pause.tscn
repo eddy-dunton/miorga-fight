@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/MiorgaFight/UI/PauseMenu.cs" type="Script" id=1]
-[ext_resource path="res://resources/theme/theme.tres" type="Theme" id=2]
-[ext_resource path="res://resources/theme/font_large_bold.tres" type="DynamicFont" id=3]
+[ext_resource path="res://resources/ui/theme/theme.tres" type="Theme" id=2]
+[ext_resource path="res://resources/ui/theme/font_large_bold.tres" type="DynamicFont" id=3]
 [ext_resource path="res://scenes/ui/raise_button.tscn" type="PackedScene" id=4]
 
 [node name="pause" type="CanvasLayer"]
@@ -40,6 +40,10 @@ margin_left = 338.0
 margin_top = 217.0
 margin_right = 442.0
 margin_bottom = 240.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../bt_quit")
 
 [node name="label" parent="bt_resume" index="0"]
 text = "Resume"
@@ -49,6 +53,10 @@ margin_left = 338.0
 margin_top = 250.0
 margin_right = 442.0
 margin_bottom = 273.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../bt_resume")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
 
 [node name="label" parent="bt_quit" index="0"]
 text = "Quit"
