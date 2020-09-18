@@ -14,7 +14,6 @@ public class CharSelection : Control
         //The other players data holder
         public PlayerData other;
 
-
         //NODESs
         //The button to select this data holder
         public TextureButton nodeButton;
@@ -116,6 +115,7 @@ public class CharSelection : Control
         this.RpcConfig(nameof(this.Confirm), MultiplayerAPI.RPCMode.Remotesync);
 
         this.ShowChar(-1);
+        this.GrabFocus();
     }
 
     //When one of the player buttons is pressed

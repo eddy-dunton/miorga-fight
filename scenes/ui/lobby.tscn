@@ -10,27 +10,27 @@
 [ext_resource path="res://assets/ui/button214x23_focused.png" type="Texture" id=8]
 [ext_resource path="res://assets/ui/address_focused.png" type="Texture" id=9]
 
-[sub_resource type="StyleBoxTexture" id=6]
+[sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 9 )
 region_rect = Rect2( 0, 0, 214, 23 )
 
-[sub_resource type="StyleBoxTexture" id=1]
+[sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 4 )
 region_rect = Rect2( 0, 0, 214, 23 )
 
-[sub_resource type="StyleBoxTexture" id=2]
+[sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 5 )
 region_rect = Rect2( 0, 0, 214, 23 )
 
-[sub_resource type="StyleBoxTexture" id=3]
+[sub_resource type="StyleBoxTexture" id=4]
 texture = ExtResource( 8 )
 region_rect = Rect2( 0, 0, 214, 23 )
 
-[sub_resource type="StyleBoxTexture" id=4]
+[sub_resource type="StyleBoxTexture" id=5]
 texture = ExtResource( 7 )
 region_rect = Rect2( 0, 0, 214, 23 )
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.172549, 0.164706, 0.196078, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -110,7 +110,7 @@ focus_neighbour_bottom = NodePath("../bt_host")
 focus_mode = 1
 size_flags_horizontal = 2
 size_flags_vertical = 2
-custom_styles/focus = SubResource( 6 )
+custom_styles/focus = SubResource( 1 )
 text = "127.0.0.1"
 clear_button_enabled = true
 caret_blink = true
@@ -152,11 +152,11 @@ margin_right = 215.0
 margin_bottom = 109.0
 focus_neighbour_left = NodePath("../../bt_quit")
 focus_neighbour_top = NodePath("../bt_host")
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/normal = SubResource( 2 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 3 )
 disableOnMobile = true
 
 [node name="label" parent="pa_start/bt_local" index="0"]
@@ -170,7 +170,7 @@ margin_left = 255.0
 margin_top = 200.0
 margin_right = 525.0
 margin_bottom = 300.0
-custom_styles/panel = SubResource( 5 )
+custom_styles/panel = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -192,6 +192,10 @@ margin_left = 83.0
 margin_top = 64.0
 margin_right = 187.0
 margin_bottom = 87.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
 
 [node name="label" parent="pa_error/bt_error" index="0"]
 text = "Cancel"
