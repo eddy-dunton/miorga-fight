@@ -127,6 +127,8 @@ public class LevelSelection : Control
 		RpcConfig(nameof(this.MpSelected), MultiplayerAPI.RPCMode.Remotesync);
 		//Only server can call this
 		RpcConfig(nameof(this.MpChosen), MultiplayerAPI.RPCMode.Remotesync);
+
+		this.GrabFocus();
 	}
 
 	void _OnSliderChanged(float value) {
