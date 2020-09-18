@@ -25,7 +25,7 @@
 [ext_resource path="res://assets/ui/menus/character selection/button_quit_disabled.png" type="Texture" id=23]
 [ext_resource path="res://assets/ui/menus/character selection/player buttons/spectator_focused.png" type="Texture" id=24]
 [ext_resource path="res://assets/ui/menus/character selection/player buttons/spectator_selected.png" type="Texture" id=25]
-[ext_resource path="res://assets/ui/cursor_hover.png" type="Texture" id=26]
+[ext_resource path="res://assets/ui/menus/character selection/button_confirm_focus.png" type="Texture" id=26]
 [ext_resource path="res://assets/ui/menus/character selection/character_list_focus.png" type="Texture" id=27]
 [ext_resource path="res://assets/ui/menus/character selection/button_quit_focus.png" type="Texture" id=28]
 [ext_resource path="res://assets/ui/menus/character selection/player buttons/spectator_unselected.png" type="Texture" id=29]
