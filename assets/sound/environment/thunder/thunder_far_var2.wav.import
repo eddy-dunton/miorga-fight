@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/thunder_far_var2.wav-4530465a24c0474fe775d0d686dfeb7e.sample"
+
+[deps]
+
+source_file="res://assets/sound/environment/thunder/thunder_far_var2.wav"
+dest_files=[ "res://.import/thunder_far_var2.wav-4530465a24c0474fe775d0d686dfeb7e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

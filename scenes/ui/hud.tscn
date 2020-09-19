@@ -25,7 +25,6 @@
 [ext_resource path="res://src/MiorgaFight/UI/MobileControls.cs" type="Script" id=23]
 [ext_resource path="res://resources/ui/theme/theme.tres" type="Theme" id=24]
 
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [  ],
@@ -38,19 +37,34 @@ animations = [ {
 "name": "round7",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 20 ) ],
-"loop": true,
-"name": "round8",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 9 ) ],
 "loop": false,
 "name": "round2",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 16 ), ExtResource( 15 ) ],
 "loop": true,
-"name": "round10",
+"name": "wins",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "go",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": false,
+"name": "round3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": false,
+"name": "round4",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "final",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 22 ) ],
@@ -63,34 +77,19 @@ animations = [ {
 "name": "round5",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 14 ) ],
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
-"name": "final",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 16 ), ExtResource( 15 ) ],
-"loop": true,
-"name": "wins",
-"speed": 12.0
-}, {
-"frames": [ ExtResource( 10 ) ],
-"loop": false,
-"name": "round3",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ) ],
-"loop": false,
-"name": "round4",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 13 ) ],
-"loop": true,
-"name": "go",
+"name": "round10",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 21 ) ],
 "loop": true,
 "name": "round6",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 20 ) ],
+"loop": true,
+"name": "round8",
 "speed": 5.0
 } ]
 
@@ -312,7 +311,6 @@ position = Vector2( 390, 150 )
 [node name="sp_cards" type="AnimatedSprite" parent="."]
 position = Vector2( 390, 220 )
 frames = SubResource( 1 )
-animation = "wins"
 
 [node name="an_cards" type="AnimationPlayer" parent="."]
 anims/cards_fade = SubResource( 2 )

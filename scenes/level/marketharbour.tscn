@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=2]
+[gd_scene load_steps=141 format=2]
 
 [ext_resource path="res://scenes/level/level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/level/marketharbour/level_back1.png" type="Texture" id=2]
@@ -118,6 +118,11 @@
 [ext_resource path="res://assets/sound/player/footsteps/wet stone/wetstone_var3.wav" type="AudioStream" id=116]
 [ext_resource path="res://assets/sound/player/footsteps/wet stone/wetstone_var1.wav" type="AudioStream" id=117]
 [ext_resource path="res://assets/sound/player/footsteps/wet stone/wetstone_var4.wav" type="AudioStream" id=118]
+[ext_resource path="res://assets/sound/environment/thunder/thunder_distant_var1.wav" type="AudioStream" id=119]
+[ext_resource path="res://assets/sound/environment/thunder/thunder_far_var2.wav" type="AudioStream" id=120]
+[ext_resource path="res://assets/sound/environment/thunder/thunder_distant_var2.wav" type="AudioStream" id=121]
+[ext_resource path="res://assets/sound/environment/thunder/thunder_close.wav" type="AudioStream" id=122]
+[ext_resource path="res://assets/sound/environment/thunder/thunder_far_var1.wav" type="AudioStream" id=123]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -141,11 +146,6 @@ animations = [ {
 "name": "c_pre",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 39 ), ExtResource( 31 ), ExtResource( 38 ) ],
-"loop": false,
-"name": "c_post",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 40 ), ExtResource( 28 ), ExtResource( 33 ) ],
 "loop": false,
 "name": "b_post",
@@ -154,6 +154,11 @@ animations = [ {
 "frames": [ ExtResource( 24 ), ExtResource( 17 ), ExtResource( 22 ) ],
 "loop": false,
 "name": "a_post",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 39 ), ExtResource( 31 ), ExtResource( 38 ) ],
+"loop": false,
+"name": "c_post",
 "speed": 5.0
 } ]
 
@@ -279,7 +284,7 @@ scale_random = 0.25
 color = Color( 1, 1, 1, 0.784314 )
 
 [sub_resource type="Animation" id=15]
-length = 1.5
+length = 8.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("lightning:energy")
 tracks/0/interp = 1
@@ -327,6 +332,20 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ "a_pre", "a_post", "default" ]
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath("thunder")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.8 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0.0 ],
+"method": "play"
+} ]
 }
 
 [sub_resource type="Gradient" id=16]
@@ -562,6 +581,8 @@ fgLightMask = 3
 bgMinStrength = 1.0
 bgMaxStrength = 2.0
 bgLightMask = 2
+fgThunder = [ ExtResource( 122 ) ]
+bgThunder = [ ExtResource( 119 ), ExtResource( 121 ), ExtResource( 123 ), ExtResource( 120 ) ]
 
 [node name="lightning" type="Light2D" parent="an_lightning" index="0"]
 position = Vector2( -0.0625, -0.0625 )
@@ -570,5 +591,8 @@ texture = SubResource( 17 )
 energy = 0.0
 range_layer_min = -512
 range_layer_max = 512
+
+[node name="thunder" type="AudioStreamPlayer2D" parent="an_lightning" index="1"]
+max_distance = 4000.0
 
 [editable path="hud"]
