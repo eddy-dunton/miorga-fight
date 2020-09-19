@@ -149,7 +149,7 @@ frame_13/delay_sec = 0.0
 frame_14/delay_sec = 0.0
 
 [sub_resource type="AnimatedTexture" id=4]
-flags = 7
+flags = 4
 frames = 15
 fps = 5.0
 frame_0/texture = ExtResource( 16 )
@@ -180,7 +180,7 @@ frame_13/delay_sec = 0.0
 frame_14/delay_sec = 0.0
 
 [sub_resource type="AnimatedTexture" id=5]
-flags = 4
+flags = 7
 frames = 15
 fps = 6.0
 frame_0/texture = ExtResource( 16 )
@@ -480,7 +480,6 @@ texture = ExtResource( 54 )
 position = Vector2( -251, -27 )
 frames = SubResource( 6 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -490,6 +489,7 @@ gustEndFrame = 3
 position = Vector2( 22.1139, -1.168 )
 frames = SubResource( 7 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -499,6 +499,7 @@ gustEndFrame = 3
 position = Vector2( 306, -38 )
 frames = SubResource( 8 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -507,27 +508,25 @@ gustEndFrame = 3
 [node name="foliage" type="Node2D" parent="." index="4"]
 
 [node name="darkgrass2_1" type="AnimatedSprite" parent="foliage" index="0"]
-position = Vector2( -53.8861, 156.832 )
+position = Vector2( -54, 157 )
 frames = SubResource( 9 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="darkgrass1_1" type="AnimatedSprite" parent="foliage" index="1"]
-position = Vector2( 59.1368, 186.962 )
+position = Vector2( 59, 187 )
 frames = SubResource( 10 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="lightgrass1_1" type="AnimatedSprite" parent="foliage" index="2"]
-position = Vector2( 99.6298, 166.299 )
+position = Vector2( 100, 166 )
 frames = SubResource( 11 )
 animation = "idle"
 speed_scale = 1.1
@@ -537,19 +536,19 @@ gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="lightgrass1_2" type="AnimatedSprite" parent="foliage" index="3"]
-position = Vector2( -48.4977, 176.636 )
+position = Vector2( -48, 177 )
 frames = SubResource( 11 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="lightgrass3_1" type="AnimatedSprite" parent="foliage" index="4"]
-position = Vector2( -44.265, 241.622 )
+position = Vector2( -44, 242 )
 frames = SubResource( 12 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -569,19 +568,19 @@ shape = SubResource( 14 )
 z_index = 1
 
 [node name="lightgrass2_1" type="AnimatedSprite" parent="fg" index="0"]
-position = Vector2( -129.182, 273.344 )
+position = Vector2( -129, 273 )
 frames = SubResource( 15 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="medgrass1_1" type="AnimatedSprite" parent="fg" index="1"]
-position = Vector2( 301.751, 240.015 )
+position = Vector2( 302, 240 )
 frames = SubResource( 16 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
@@ -591,158 +590,159 @@ gustEndFrame = 3
 position = Vector2( -209.921, 226.905 )
 frames = SubResource( 16 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="medgrass1_3" type="AnimatedSprite" parent="fg" index="3"]
-position = Vector2( -470.626, 263.988 )
+position = Vector2( -471, 264 )
 frames = SubResource( 16 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="medgrass2_1" type="AnimatedSprite" parent="fg" index="4"]
-position = Vector2( 150.561, 266.474 )
+position = Vector2( 151, 266 )
 frames = SubResource( 17 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="medgrass2_4" type="AnimatedSprite" parent="fg" index="5"]
-position = Vector2( 68.0362, 239.386 )
+position = Vector2( 68, 239 )
 frames = SubResource( 17 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="medgrass2_2" type="AnimatedSprite" parent="fg" index="6"]
-position = Vector2( 336.287, 247.425 )
+position = Vector2( 336, 247 )
 frames = SubResource( 17 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="medgrass2_3" type="AnimatedSprite" parent="fg" index="7"]
-position = Vector2( -432.015, 266.474 )
+position = Vector2( -432, 266 )
 frames = SubResource( 17 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="medgrass3_1" type="AnimatedSprite" parent="fg" index="8"]
-position = Vector2( 51.0268, 268.733 )
+position = Vector2( 51, 267 )
 frames = SubResource( 18 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="medgrass3_2" type="AnimatedSprite" parent="fg" index="9"]
-position = Vector2( -192.761, 244.354 )
+position = Vector2( -193, 244 )
 frames = SubResource( 18 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="medgrass3_4" type="AnimatedSprite" parent="fg" index="10"]
-position = Vector2( -325.682, 302.311 )
+position = Vector2( -326, 302 )
 frames = SubResource( 18 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="medgrass3_5" type="AnimatedSprite" parent="fg" index="11"]
-position = Vector2( -411.357, 266.403 )
+position = Vector2( -411, 266 )
 frames = SubResource( 18 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="medgrass3_6" type="AnimatedSprite" parent="fg" index="12"]
-position = Vector2( -6.29233, 251.284 )
+position = Vector2( -6, 251 )
 frames = SubResource( 18 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="medgrass3_7" type="AnimatedSprite" parent="fg" index="13"]
-position = Vector2( 175.766, 244.354 )
+position = Vector2( 176, 244 )
 frames = SubResource( 18 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="medgrass3_8" type="AnimatedSprite" parent="fg" index="14"]
-position = Vector2( 372.944, 253.804 )
+position = Vector2( 373, 254 )
 frames = SubResource( 18 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="medgrass3_3" type="AnimatedSprite" parent="fg" index="15"]
-position = Vector2( -303.951, 253.868 )
+position = Vector2( -304, 254 )
 frames = SubResource( 18 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="medgrass3_9" type="AnimatedSprite" parent="fg" index="16"]
-position = Vector2( 466.732, 241.169 )
+position = Vector2( 467, 241 )
 frames = SubResource( 18 )
 animation = "idle"
+frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="darkgrass1_2" type="AnimatedSprite" parent="fg" index="17"]
-position = Vector2( -174.815, 277.497 )
+position = Vector2( -175, 277 )
 frames = SubResource( 10 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
 gustEndFrame = 3
 
 [node name="darkgrass3_1" type="AnimatedSprite" parent="fg" index="18"]
-position = Vector2( -339.549, 270.253 )
+position = Vector2( -340, 270 )
 frames = SubResource( 19 )
 animation = "idle"
-frame = 1
 playing = true
 script = ExtResource( 63 )
 gustStartFrame = 2
