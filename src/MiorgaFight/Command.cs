@@ -22,7 +22,7 @@ public class Command : Node {
     public static double Random(double min, double max) => Command.Map(0.0, 1.0, min, max, random.NextDouble());
 
     //Returns a pseudo int double between min and max (inclusive)
-    public static int Random(int min, int max) => min + (random.Next() % (max - min + 1));    
+    public static int Random(int min, int max) => min + (random.Next() % (max - min));    
 
     //Returns a random element of enumerable
     public static T Random<T>(IEnumerable<T> enumerable) => enumerable.ElementAt(Random(0, enumerable.Count() - 1));
