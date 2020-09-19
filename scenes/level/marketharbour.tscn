@@ -581,6 +581,8 @@ bgMaxStrength = 2.0
 bgLightMask = 2
 fgThunder = [ ExtResource( 122 ) ]
 bgThunder = [ ExtResource( 123 ), ExtResource( 120 ) ]
+thunderMinVolume = -20.0
+thunderMaxVolume = -5.0
 
 [node name="lightning" type="Light2D" parent="an_lightning" index="0"]
 position = Vector2( -0.0625, -0.0625 )
