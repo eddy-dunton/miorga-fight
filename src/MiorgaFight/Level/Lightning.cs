@@ -46,13 +46,18 @@ public class Lightning : AnimationPlayer
     [Export] private AudioStream[] fgThunder;
     [Export] private AudioStream[] bgThunder;
 
+    //Volume for thunder to be played at when a strike is at min strength
+    [Export] private double thunderMinVolume;
+    //Volume for thunder to be played at when a strike is at max strength
+    [Export] private double thunderMaxVolume;
+
     //Animations for foreground and background
     //Is each is an list of arrays, each containing 2 strings, 0 is the start animation, 1 is the end animation
     private string[][] fgAnims;
     private string[][] bgAnims;
 
     private Light2D nodeLightning;
-    private AudioStreamPlayer2D nodeThunder;
+    private AudioStreamPlayer nodeThunder;
     private AnimatedSprite fg;
     private AnimatedSprite bg;
 
@@ -60,7 +65,7 @@ public class Lightning : AnimationPlayer
     public override void _Ready()
     {
         this.nodeLightning = this.GetNode<Light2D>("lightning");
-        this.nodeThunder = this.GetNode<AudioStreamPlayer2D>("thunder");
+        this.nodeThunder = this.GetNode<AudioStreamPlayer>("thunder");
         this.fg = this.GetNode<AnimatedSprite>(this.fgPath);
         this.bg = this.GetNode<AnimatedSprite>(this.bgPath);
 
@@ -124,7 +129,7 @@ public class Lightning : AnimationPlayer
 
             //Setup thunder
             this.nodeThunder.Stream = Command.Random(this.fgThunder);
-            this.nodeThunder.Position = pos;
+
         } else { //Background strike
             target = this.bg;
             targetPath = this.bgPath;
@@ -142,8 +147,11 @@ public class Lightning : AnimationPlayer
 
             //Setup thunder
             this.nodeThunder.Stream = Command.Random(this.bgThunder);
-            this.nodeThunder.Position = pos;
         }
+
+        //Map thunder volume to strenth
+        this.nodeThunder.VolumeDb = (float) Command.Map(this.bgMinStrength, this.fgMaxStrength, 
+                this.thunderMinVolume, this.thunderMaxVolume, strength);
 
         //Randomise whether the sprite should be flipped
         target.FlipH = Command.RandomBool();
