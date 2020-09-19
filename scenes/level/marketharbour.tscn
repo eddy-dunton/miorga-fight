@@ -141,14 +141,14 @@ animations = [ {
 "name": "a_pre",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 39 ), ExtResource( 31 ), ExtResource( 38 ) ],
+"loop": false,
+"name": "c_post",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 37 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 29 ), ExtResource( 30 ) ],
 "loop": true,
 "name": "c_pre",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 40 ), ExtResource( 28 ), ExtResource( 33 ) ],
-"loop": false,
-"name": "b_post",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 24 ), ExtResource( 17 ), ExtResource( 22 ) ],
@@ -156,9 +156,9 @@ animations = [ {
 "name": "a_post",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 39 ), ExtResource( 31 ), ExtResource( 38 ) ],
+"frames": [ ExtResource( 40 ), ExtResource( 28 ), ExtResource( 33 ) ],
 "loop": false,
-"name": "c_post",
+"name": "b_post",
 "speed": 5.0
 } ]
 
@@ -593,6 +593,7 @@ range_layer_min = -512
 range_layer_max = 512
 
 [node name="thunder" type="AudioStreamPlayer2D" parent="an_lightning" index="1"]
+volume_db = -19.184
 max_distance = 4000.0
 
 [editable path="hud"]
