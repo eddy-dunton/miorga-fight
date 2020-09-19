@@ -19,7 +19,7 @@ public class Command : Node {
     private static Random random = new Random();
 
     //Returns a pseudo random double between min and max (inclusive)
-    public static double Random(double min, double max) => min + (random.NextDouble() / (max - min));
+    public static double Random(double min, double max) => Command.Map(0.0, 1.0, min, max, random.NextDouble());
 
     //Returns a pseudo int double between min and max (inclusive)
     public static int Random(int min, int max) => min + (random.Next() % (max - min + 1));    
