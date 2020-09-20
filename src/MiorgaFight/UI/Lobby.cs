@@ -97,6 +97,8 @@ public class Lobby : Control {
 	}
 
 	public override void _Input(InputEvent input) {
+		if (!this.Visible) return; //Make sure this doesn't snap up input when it's not in the foreground
+
 		if (input.IsActionPressed("ui_jump_to_back")) this.nodeQuitButton.GrabFocus();
 	}
 
