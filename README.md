@@ -7,6 +7,13 @@ Miorga is the world's first and best side-on action fighting game designed by Br
 ### Windows:
  - Download the latest Windows build from releases
  
+### Android:
+ - Download the latest .apk from releases:
+   - You will first have to allow installs from Unknown sources
+   - Your phone will constantly complain about how this isn't safe and you shouldn't install it this way so only do it if you're really dangerous and enjoy living life on the edge
+   - Sorry, but I'm not paying to whack it on the playstore for no one to download it
+ - If you don't trust us you can build it yourself, it's not to complex 
+ 
 ### Mac & Linux:
  - Build it yourself (see below)
  
