@@ -116,6 +116,12 @@ public class CharSelection : Control
         this.GrabFocus();
     }
 
+    
+	public override void _Input(InputEvent input) {
+		if (input.IsActionPressed("ui_jump_to_confirm")) this.nodePlayButton.GrabFocus();
+        else if (input.IsActionPressed("ui_jump_to_back")) this.nodeQuitButton.GrabFocus();
+    }
+
     //When one of the player buttons is pressed
     void _OnPlayerPressed(byte pressed) {
         PlayerData d = (pressed == 1) ? this.p1 : this.p2;

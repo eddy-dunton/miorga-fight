@@ -131,6 +131,11 @@ public class LevelSelection : Control
 		this.GrabFocus();
 	}
 
+	public override void _Input(InputEvent input) {
+		if (input.IsActionPressed("ui_jump_to_confirm")) this.nodeButtonPlay.GrabFocus();
+		
+	}
+
 	void _OnSliderChanged(float value) {
 		this.nodeLevelCamera.Position = new Vector2(value, this.nodeLevelCamera.Position.y);
 	}

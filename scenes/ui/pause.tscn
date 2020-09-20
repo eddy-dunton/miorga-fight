@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/MiorgaFight/UI/PauseMenu.cs" type="Script" id=1]
 [ext_resource path="res://resources/ui/theme/theme.tres" type="Theme" id=2]
-[ext_resource path="res://resources/ui/theme/font_large_bold.tres" type="DynamicFont" id=3]
 [ext_resource path="res://scenes/ui/raise_button.tscn" type="PackedScene" id=4]
+
+[sub_resource type="DynamicFontData" id=1]
+antialiased = false
+font_path = "res://assets/font/PIXEAB__.TTF"
+
+[sub_resource type="DynamicFont" id=2]
+outline_size = 2
+outline_color = Color( 0.866667, 0.819608, 0.760784, 1 )
+font_data = SubResource( 1 )
 
 [node name="pause" type="CanvasLayer"]
 pause_mode = 2
@@ -27,7 +35,7 @@ margin_bottom = 197.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 2 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "Paused!"
 align = 1
 valign = 1

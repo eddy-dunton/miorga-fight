@@ -96,6 +96,12 @@ public class Lobby : Control {
 		this.GrabFocus();
 	}
 
+	public override void _Input(InputEvent input) {
+		if (!this.Visible) return; //Make sure this doesn't snap up input when it's not in the foreground
+
+		if (input.IsActionPressed("ui_jump_to_back")) this.nodeQuitButton.GrabFocus();
+	}
+
 	//Called when a player connects (duh)	
 	void _PlayerConnected(int id) {
 		GD.Print(id.ToString() + " connected!");
