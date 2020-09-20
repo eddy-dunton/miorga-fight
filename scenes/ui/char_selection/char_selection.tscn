@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://scenes/ui/char_selection/char_data_regia.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/menus/character selection/icons/regia.png" type="Texture" id=2]
@@ -46,6 +46,7 @@ anti_aliasing = false
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 27 )
+region_rect = Rect2( 0, 0, 102, 369 )
 margin_left = 20.0
 margin_right = 35.0
 margin_top = 10.0
@@ -67,13 +68,6 @@ anti_aliasing = false
 [sub_resource type="StyleBoxTexture" id=4]
 margin_left = 20.0
 margin_top = 10.0
-
-[sub_resource type="InputEventAction" id=5]
-device = -1
-action = "ui_jump_to_confirm"
-
-[sub_resource type="ShortCut" id=6]
-shortcut = SubResource( 5 )
 
 [node name="char_selection" type="Control"]
 focus_neighbour_left = NodePath("pa_player_buttons/bt_p1")
@@ -103,8 +97,8 @@ margin_bottom = 410.0
 rect_clip_content = false
 focus_neighbour_left = NodePath("../pa_player_buttons/bt_p1")
 focus_neighbour_top = NodePath("../bt_quit")
-focus_neighbour_right = NodePath("../pa_char_data/tx_description")
-focus_neighbour_bottom = NodePath("../bt_role")
+focus_neighbour_right = NodePath("../bt_play")
+focus_neighbour_bottom = NodePath("../bt_play")
 custom_styles/selected_focus = SubResource( 1 )
 custom_styles/bg_focus = SubResource( 2 )
 custom_styles/selected = SubResource( 3 )
@@ -265,7 +259,6 @@ focus_neighbour_bottom = NodePath(".")
 disabled = true
 shortcut_in_tooltip = false
 action_mode = 0
-shortcut = SubResource( 6 )
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 3 )
 texture_hover = ExtResource( 17 )

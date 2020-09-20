@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm_hover.png" type="Texture" id=1]
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm_disabled.png" type="Texture" id=2]
@@ -24,15 +24,7 @@ viewport_path = NodePath("vp_level")
 texture = ExtResource( 14 )
 region_rect = Rect2( 0, 0, 390, 10 )
 
-[sub_resource type="InputEventAction" id=6]
-device = -1
-action = "ui_jump_to_confirm"
-
-[sub_resource type="ShortCut" id=7]
-shortcut = SubResource( 6 )
-
-[sub_resource type="Animation" id=3]
-resource_name = "diff_chosen_p1"
+[sub_resource type="Animation" id=5]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("pa_buttons/bt_holytree:visible")
@@ -59,8 +51,7 @@ tracks/1/keys = {
 "values": [ true, false, true, false, true, false, true, false, true, false, true, false ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "diff_chosen_p2"
+[sub_resource type="Animation" id=6]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("pa_buttons/bt_holytree:visible")
@@ -87,7 +78,7 @@ tracks/1/keys = {
 "values": [ true, false, true, false, true, false, true, false, true, false, true, true ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=7]
 length = 2.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("pa_buttons/bt_holytree:texture_pressed")
@@ -180,7 +171,6 @@ focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath(".")
 disabled = true
 shortcut_in_tooltip = false
-shortcut = SubResource( 7 )
 texture_normal = ExtResource( 11 )
 texture_pressed = ExtResource( 11 )
 texture_hover = ExtResource( 1 )
@@ -205,9 +195,9 @@ position = Vector2( 196, 128 )
 texture = ExtResource( 9 )
 
 [node name="an_buttons" type="AnimationPlayer" parent="."]
-anims/diff_chosen_p1 = SubResource( 3 )
-anims/diff_chosen_p2 = SubResource( 4 )
-anims/same_chosen = SubResource( 5 )
+anims/diff_chosen_p1 = SubResource( 5 )
+anims/diff_chosen_p2 = SubResource( 6 )
+anims/same_chosen = SubResource( 7 )
 
 [node name="pa_buttons" type="Control" parent="."]
 __meta__ = {

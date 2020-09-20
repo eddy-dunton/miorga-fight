@@ -25,7 +25,6 @@
 [ext_resource path="res://src/MiorgaFight/UI/MobileControls.cs" type="Script" id=23]
 [ext_resource path="res://resources/ui/theme/theme.tres" type="Theme" id=24]
 
-
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [  ],
@@ -33,39 +32,19 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 19 ) ],
-"loop": true,
-"name": "round7",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 20 ) ],
-"loop": true,
-"name": "round8",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 9 ) ],
-"loop": false,
-"name": "round2",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "round10",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 22 ) ],
-"loop": true,
-"name": "round9",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 12 ) ],
 "loop": false,
 "name": "round5",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 14 ) ],
+"frames": [ ExtResource( 10 ) ],
+"loop": false,
+"name": "round3",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 21 ) ],
 "loop": true,
-"name": "final",
+"name": "round6",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 16 ), ExtResource( 15 ) ],
@@ -73,9 +52,19 @@ animations = [ {
 "name": "wins",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 10 ) ],
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "go",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
 "loop": false,
-"name": "round3",
+"name": "round2",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 22 ) ],
+"loop": true,
+"name": "round9",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 11 ) ],
@@ -83,14 +72,24 @@ animations = [ {
 "name": "round4",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 13 ) ],
+"frames": [ ExtResource( 20 ) ],
 "loop": true,
-"name": "go",
+"name": "round8",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 21 ) ],
+"frames": [ ExtResource( 14 ) ],
 "loop": true,
-"name": "round6",
+"name": "final",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "round10",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 19 ) ],
+"loop": true,
+"name": "round7",
 "speed": 5.0
 } ]
 

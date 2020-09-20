@@ -20,21 +20,22 @@ position = Vector2( 349, 181 )
 playing = true
 
 [node name="sp_player_mask" type="Light2D" parent="."]
-position = Vector2( 390, 220 )
+position = Vector2( 390.134, 220 )
 texture = ExtResource( 4 )
 mode = 3
 range_item_cull_mask = 2
 
 [node name="pa_action_tree" type="Control" parent="."]
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_left = 547.0
+margin_top = 49.0
+margin_right = 747.0
+margin_bottom = 299.0
 
 [node name="sp_action_tree" type="Sprite" parent="pa_action_tree"]
-position = Vector2( 647, 174 )
+position = Vector2( 100, 125 )
 
 [node name="sp_action_overlay" type="Sprite" parent="pa_action_tree"]
-position = Vector2( 647, 174 )
+position = Vector2( 100, 125 )
 
 [node name="sp_key" type="Sprite" parent="."]
 position = Vector2( 612.996, 348.881 )
