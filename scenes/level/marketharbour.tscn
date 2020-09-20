@@ -126,21 +126,6 @@ animations = [ {
 "name": "b_pre",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 24 ), ExtResource( 17 ), ExtResource( 22 ) ],
-"loop": false,
-"name": "a_post",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 39 ), ExtResource( 31 ), ExtResource( 38 ) ],
-"loop": false,
-"name": "c_post",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 37 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 29 ), ExtResource( 30 ) ],
-"loop": true,
-"name": "c_pre",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 40 ), ExtResource( 28 ), ExtResource( 33 ) ],
 "loop": false,
 "name": "b_post",
@@ -149,6 +134,21 @@ animations = [ {
 "frames": [ ExtResource( 19 ), ExtResource( 25 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 23 ) ],
 "loop": false,
 "name": "a_pre",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 37 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 29 ), ExtResource( 30 ) ],
+"loop": true,
+"name": "c_pre",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 24 ), ExtResource( 17 ), ExtResource( 22 ) ],
+"loop": false,
+"name": "a_post",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 39 ), ExtResource( 31 ), ExtResource( 38 ) ],
+"loop": false,
+"name": "c_post",
 "speed": 5.0
 } ]
 
@@ -240,15 +240,15 @@ animations = [ {
 "name": "default",
 "speed": 0.0
 }, {
-"frames": [ ExtResource( 15 ), ExtResource( 21 ), ExtResource( 16 ) ],
-"loop": false,
-"name": "a_post",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 14 ) ],
 "loop": false,
 "name": "a_pre",
 "speed": 100.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 21 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "a_post",
+"speed": 5.0
 } ]
 
 [sub_resource type="LineShape2D" id=12]
@@ -377,6 +377,7 @@ process_material = SubResource( 2 )
 texture = ExtResource( 8 )
 
 [node name="wave_control" type="Node2D" parent="bg/bg_layer2" index="3"]
+visible = false
 position = Vector2( 86, 1 )
 script = ExtResource( 113 )
 duration = 3.0
