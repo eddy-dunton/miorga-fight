@@ -96,6 +96,10 @@ public class Lobby : Control {
 		this.GrabFocus();
 	}
 
+	public override void _Input(InputEvent input) {
+		if (input.IsActionPressed("ui_jump_to_back")) this.nodeQuitButton.GrabFocus();
+	}
+
 	//Called when a player connects (duh)	
 	void _PlayerConnected(int id) {
 		GD.Print(id.ToString() + " connected!");
