@@ -42,12 +42,22 @@ public class Lightning : AnimationPlayer
     [Export] private int bgLightMask;
 
 
+    //Thunder to be played for a fg strike
+    [Export] private AudioStream[] fgThunder;
+    [Export] private AudioStream[] bgThunder;
+
+    //Volume for thunder to be played at when a strike is at min strength
+    [Export] private double thunderMinVolume;
+    //Volume for thunder to be played at when a strike is at max strength
+    [Export] private double thunderMaxVolume;
+
     //Animations for foreground and background
     //Is each is an list of arrays, each containing 2 strings, 0 is the start animation, 1 is the end animation
     private string[][] fgAnims;
     private string[][] bgAnims;
 
     private Light2D nodeLightning;
+    private AudioStreamPlayer nodeThunder;
     private AnimatedSprite fg;
     private AnimatedSprite bg;
 
@@ -55,6 +65,7 @@ public class Lightning : AnimationPlayer
     public override void _Ready()
     {
         this.nodeLightning = this.GetNode<Light2D>("lightning");
+        this.nodeThunder = this.GetNode<AudioStreamPlayer>("thunder");
         this.fg = this.GetNode<AnimatedSprite>(this.fgPath);
         this.bg = this.GetNode<AnimatedSprite>(this.bgPath);
 
@@ -111,8 +122,14 @@ public class Lightning : AnimationPlayer
             Vector2 pos = this.fg.Position;
             pos.x = (float) this.GetFGPosition(this.width);
             this.fg.Position = pos;
+
+            //Setup lightning
             this.nodeLightning.Position = pos;
             this.nodeLightning.RangeItemCullMask = this.fgLightMask;
+
+            //Setup thunder
+            this.nodeThunder.Stream = Command.Random(this.fgThunder);
+
         } else { //Background strike
             target = this.bg;
             targetPath = this.bgPath;
@@ -123,9 +140,18 @@ public class Lightning : AnimationPlayer
             Vector2 pos = this.bg.Position;
             pos.x = (float) this.GetBGPosition(this.width);
             this.bg.Position = pos;
+
+            //Setup lightning
             this.nodeLightning.Position = pos;
             this.nodeLightning.RangeItemCullMask = this.bgLightMask;
+
+            //Setup thunder
+            this.nodeThunder.Stream = Command.Random(this.bgThunder);
         }
+
+        //Map thunder volume to strenth
+        this.nodeThunder.VolumeDb = (float) Command.Map(this.bgMinStrength, this.fgMaxStrength, 
+                this.thunderMinVolume, this.thunderMaxVolume, strength);
 
         //Randomise whether the sprite should be flipped
         target.FlipH = Command.RandomBool();
@@ -156,6 +182,9 @@ public class Lightning : AnimationPlayer
         //Swap "pre" for "post" and set ending animation
         anim.TrackSetKeyValue(3, 1, spriteAnims[1]);
 
+        //Set thunder delay to be proportional to strength (4 / strength), for a range of 0.5 - 3.5
+        anim.TrackSetKeyTime(4, 0, (float) ((4 / strength) - 0.5));
+
         this.Play("strike");
     }
 
@@ -165,7 +194,7 @@ public class Lightning : AnimationPlayer
     //The performance effect will be minimal, as it is only adding a handful of instructions every 2.5 - 10 seconds
 
     //Generates a position for a foreground strike
-    private double GetFGPosition(double width) {
+    public double GetFGPosition(double width) {
         //Foregound positions are distrobuted by the following curve: https://www.desmos.com/calculator/ln2sf8feza
         //The probablity of them striking any position on the level follows a sine curve where the levels width = x
         double y = Command.Random(0.0,1.0);
@@ -182,7 +211,7 @@ public class Lightning : AnimationPlayer
     }
 
     //Generates a position for a background strike
-    private double GetBGPosition(double width) {
+    public double GetBGPosition(double width) {
         double x = Command.Random(0.0,1.0);
 
         //background positions are distrobuted by the following curve: https://www.desmos.com/calculator/anbokqxx2q

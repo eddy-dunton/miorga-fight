@@ -22,9 +22,9 @@ public class FoliageTimer : Timer
 	[Export] private float speedScaleVar;
 
 	//Minimum possible length of gust (in zones)
-	[Export] private int gustLegnthMin;
+	[Export] private int gustLengthMin;
 	//Maximmum possible length of gust (in zones)
-	[Export] private int gustLegnthMax;
+	[Export] private int gustLengthMax;
 
 	//Minimum length (in sec between gusts)
 	[Export] private float gustGapMin;
@@ -112,7 +112,7 @@ public class FoliageTimer : Timer
 		}
 
 		//Randomly generate gust length
-		this.gustLength = Command.Random(this.gustLegnthMin, this.gustLegnthMax);
+		this.gustLength = Command.Random(this.gustLengthMin, this.gustLengthMax);
 
 		//Set the gap to next gust
 		this.WaitTime = (float) Command.Random(this.gustGapMin, this.gustGapMax);

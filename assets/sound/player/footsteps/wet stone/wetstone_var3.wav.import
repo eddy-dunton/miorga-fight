@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/wetstone_var3.wav-f4860ae8488180c582825582184c4593.sample"
+
+[deps]
+
+source_file="res://assets/sound/player/footsteps/wet stone/wetstone_var3.wav"
+dest_files=[ "res://.import/wetstone_var3.wav-f4860ae8488180c582825582184c4593.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
