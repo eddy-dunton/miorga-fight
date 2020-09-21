@@ -5,7 +5,13 @@ namespace MiorgaFight {
 
 public class PlayerHUD : Control
 {
-    [Export] private float healthbarDelay;
+    //Amount of base healthbar dealy (when damage = 0)
+    [Export] private float healthbarDelayStart;
+
+    //Delay regression
+    [Export] private float healthbarDelayRegression;
+
+    //Healthbar delay length = start + (damage / regression)
 
     public HUD parent;
     public Sprite[] lives; 
@@ -51,10 +57,12 @@ public class PlayerHUD : Control
 
     //Sets the current value of the health bar (and runs the backlay)
     public void SetHealth(int hp) {
+        double damage = this.nodeHP.Value - (double) hp;
         this.nodeHP.Value = hp;
 
         //Setup timer to update the backlay
-        SceneTreeTimer timer = GetTree().CreateTimer(this.healthbarDelay, false);
+        SceneTreeTimer timer = GetTree().CreateTimer((
+                float) (this.healthbarDelayStart + damage / this.healthbarDelayRegression), false);
         timer.Connect("timeout", this, nameof(SetBacklayValue), new Godot.Collections.Array(new object[] {hp}));
     }
 
