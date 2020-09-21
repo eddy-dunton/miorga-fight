@@ -57,20 +57,23 @@ public class PlayerHUD : Control
 
     //Sets the current value of the health bar (and runs the backlay)
     public void SetHealth(int hp) {
+        //If hp is increasing then do so immediately
+        if (hp > this.nodeHP.Value) {
+            this.nodeHP.Value = hp;
+            this.nodeHPBacklay.Value = hp;
+            return;
+        }
+
         double damage = this.nodeHP.Value - (double) hp;
         this.nodeHP.Value = hp;
+
+        //Character is dead, do not add backlay timer
+        if (hp <= 0) return;
 
         //Setup timer to update the backlay
         SceneTreeTimer timer = GetTree().CreateTimer((
                 float) (this.healthbarDelayStart + damage / this.healthbarDelayRegression), false);
         timer.Connect("timeout", this, nameof(SetBacklayValue), new Godot.Collections.Array(new object[] {hp}));
-    }
-
-    //Resets health bar and the backlay to its max value
-    //Not actually used
-    public void ResetHealth() {
-        this.nodeHP.Value = this.nodeHP.MaxValue;
-        this.nodeHPBacklay.Value = this.nodeHPBacklay.MaxValue;
     }
 
     void SetBacklayValue(int value) {
