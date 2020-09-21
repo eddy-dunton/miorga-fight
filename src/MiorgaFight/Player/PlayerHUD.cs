@@ -5,14 +5,19 @@ namespace MiorgaFight {
 
 public class PlayerHUD : Control
 {
+    [Export] private float healthbarDelay;
+
     public HUD parent;
-    public TextureProgress nodeHP;
     public Sprite[] lives; 
 
+    private TextureProgress nodeHP;
+    private ProgressBar nodeHPBacklay;
+    
     public override void _Ready() {
         //Get nodes
         this.nodeHP = this.GetNode<TextureProgress>("pb_health");
-        
+        this.nodeHPBacklay = this.GetNode<ProgressBar>("pb_health/pb_backlay");
+
         //Populate lives
         this.lives = new Sprite[5];
         for (int i = 1; i <= 5; i ++) {
@@ -36,5 +41,31 @@ public class PlayerHUD : Control
         for (int i = 4; i > lives; i --) {
             this.lives[i].Visible = false;    
         }
+    }
+
+    //Sets the max value of the health bar
+    public void SetMaxHealth(int hp) {
+        this.nodeHP.MaxValue = hp;
+        this.nodeHPBacklay.MaxValue = hp;
+    }
+
+    //Sets the current value of the health bar (and runs the backlay)
+    public void SetHealth(int hp) {
+        this.nodeHP.Value = hp;
+
+        //Setup timer to update the backlay
+        SceneTreeTimer timer = GetTree().CreateTimer(this.healthbarDelay, false);
+        timer.Connect("timeout", this, nameof(SetBacklayValue), new Godot.Collections.Array(new object[] {hp}));
+    }
+
+    //Resets health bar and the backlay to its max value
+    //Not actually used
+    public void ResetHealth() {
+        this.nodeHP.Value = this.nodeHP.MaxValue;
+        this.nodeHPBacklay.Value = this.nodeHPBacklay.MaxValue;
+    }
+
+    void SetBacklayValue(int value) {
+        this.nodeHPBacklay.Value = value;
     }
 }}

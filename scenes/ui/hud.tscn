@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://src/MiorgaFight/UI/FpsCounter.cs" type="Script" id=1]
 [ext_resource path="res://src/MiorgaFight/Player/PlayerHUD.cs" type="Script" id=2]
@@ -25,16 +25,26 @@
 [ext_resource path="res://src/MiorgaFight/UI/MobileControls.cs" type="Script" id=23]
 [ext_resource path="res://resources/ui/theme/theme.tres" type="Theme" id=24]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 0.74902, 0.25098, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+anti_aliasing = false
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
 "frames": [  ],
 "loop": false,
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 19 ) ],
+"frames": [ ExtResource( 13 ) ],
 "loop": true,
-"name": "round7",
+"name": "go",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 9 ) ],
@@ -47,9 +57,9 @@ animations = [ {
 "name": "wins",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 13 ) ],
+"frames": [ ExtResource( 19 ) ],
 "loop": true,
-"name": "go",
+"name": "round7",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ) ],
@@ -57,29 +67,19 @@ animations = [ {
 "name": "round3",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ) ],
-"loop": false,
-"name": "round4",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 14 ) ],
-"loop": true,
-"name": "final",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 22 ) ],
-"loop": true,
-"name": "round9",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 12 ) ],
 "loop": false,
 "name": "round5",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 11 ) ],
+"loop": false,
+"name": "round4",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 22 ) ],
 "loop": true,
-"name": "round10",
+"name": "round9",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 21 ) ],
@@ -91,10 +91,19 @@ animations = [ {
 "loop": true,
 "name": "round8",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "round10",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ) ],
+"loop": true,
+"name": "final",
+"speed": 5.0
 } ]
 
-[sub_resource type="Animation" id=2]
-resource_name = "cards_fade"
+[sub_resource type="Animation" id=4]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("sp_cards:modulate")
@@ -109,8 +118,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "cards_fade_long"
+[sub_resource type="Animation" id=5]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("sp_cards:modulate")
@@ -125,8 +133,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "win"
+[sub_resource type="Animation" id=6]
 length = 8.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("sp_win_player:visible")
@@ -181,7 +188,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=7]
 draw_center = false
 border_width_left = 2
 border_width_top = 2
@@ -193,13 +200,13 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 anti_aliasing = false
 
-[sub_resource type="DynamicFontData" id=6]
+[sub_resource type="DynamicFontData" id=8]
 antialiased = false
 font_path = "res://assets/font/PIXEARG_.TTF"
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=9]
 outline_size = 2
-font_data = SubResource( 6 )
+font_data = SubResource( 8 )
 
 [node name="hud" type="CanvasLayer"]
 pause_mode = 2
@@ -226,6 +233,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+healthbarDelay = 1.5
 
 [node name="pb_health" type="TextureProgress" parent="gr_p1"]
 light_mask = -2147483647
@@ -240,6 +248,14 @@ texture_progress = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="pb_backlay" type="ProgressBar" parent="gr_p1/pb_health"]
+show_behind_parent = true
+margin_right = 304.0
+margin_bottom = 18.0
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+percent_visible = false
 
 [node name="sp_lives_1" type="Sprite" parent="gr_p1"]
 position = Vector2( 32, 60 )
@@ -268,6 +284,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+healthbarDelay = 1.5
 
 [node name="pb_health" type="TextureProgress" parent="gr_p2"]
 anchor_left = 1.0
@@ -281,6 +298,20 @@ value = 100.0
 texture_over = ExtResource( 4 )
 texture_progress = ExtResource( 5 )
 fill_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="pb_backlay" type="ProgressBar" parent="gr_p2/pb_health"]
+show_behind_parent = true
+margin_left = 304.0
+margin_right = 608.0
+margin_bottom = 18.0
+rect_scale = Vector2( -1, 1 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+value = 50.0
+percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -310,12 +341,12 @@ position = Vector2( 390, 150 )
 
 [node name="sp_cards" type="AnimatedSprite" parent="."]
 position = Vector2( 390, 220 )
-frames = SubResource( 1 )
+frames = SubResource( 3 )
 
 [node name="an_cards" type="AnimationPlayer" parent="."]
-anims/cards_fade = SubResource( 2 )
-anims/cards_fade_long = SubResource( 3 )
-anims/win = SubResource( 4 )
+anims/cards_fade = SubResource( 4 )
+anims/cards_fade_long = SubResource( 5 )
+anims/win = SubResource( 6 )
 
 [node name="pa_mobile_controls" type="Control" parent="."]
 theme = ExtResource( 24 )
@@ -330,12 +361,12 @@ margin_left = 340.0
 margin_top = 18.0
 margin_right = 440.0
 margin_bottom = 48.0
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = SubResource( 7 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "Pause"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -354,12 +385,12 @@ modulate = Color( 1, 1, 1, 0.784314 )
 margin_left = 40.0
 margin_right = 110.0
 margin_bottom = 60.0
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = SubResource( 7 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "^"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -370,12 +401,12 @@ modulate = Color( 1, 1, 1, 0.784314 )
 margin_top = 70.0
 margin_right = 70.0
 margin_bottom = 130.0
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = SubResource( 7 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "<"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -387,12 +418,12 @@ margin_left = 80.0
 margin_top = 70.0
 margin_right = 150.0
 margin_bottom = 130.0
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = SubResource( 7 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = ">"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -406,12 +437,12 @@ margin_right = 110.0
 margin_bottom = 200.0
 rect_rotation = 180.0
 rect_pivot_offset = Vector2( 35, 30 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = SubResource( 7 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "^"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -430,12 +461,12 @@ __meta__ = {
 modulate = Color( 1, 1, 1, 0.784314 )
 margin_right = 70.0
 margin_bottom = 60.0
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = SubResource( 7 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "A"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -446,12 +477,12 @@ modulate = Color( 1, 1, 1, 0.784314 )
 margin_top = 70.0
 margin_right = 70.0
 margin_bottom = 130.0
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/focus = SubResource( 5 )
-custom_styles/disabled = SubResource( 5 )
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = SubResource( 7 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 9 )
 text = "B"
 __meta__ = {
 "_edit_use_anchors_": false

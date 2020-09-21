@@ -143,7 +143,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Must be called externally
 	public void Start(Player enemy, PlayerHUD hud) {
  		this.hud = hud;
-		this.hud.nodeHP.MaxValue = this.HP_MAX;
+		this.hud.SetMaxHealth(this.HP_MAX);
 		this.hud.Visible = true;
 		this.parrySuccessful = false;
 
@@ -332,7 +332,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		//Ensures hp is not above max
 		this.hp = Math.Min(this.HP_MAX, newhp);
 
-		this.hud.nodeHP.Value = this.hp;
+		this.hud.SetHealth(this.hp);
 
 		if (this.hp <= 0) 
 			this.LoseLife();
