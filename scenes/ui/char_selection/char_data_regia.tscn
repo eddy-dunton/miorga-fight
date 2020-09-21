@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=2]
+[gd_scene load_steps=94 format=2]
 
 [ext_resource path="res://scenes/ui/char_selection/char_data_panel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/player/regia/stances/lax.png" type="Texture" id=2]
@@ -83,27 +83,33 @@
 [ext_resource path="res://assets/ui/menus/character selection/movesets/highlights/regia/lowparry.png" type="Texture" id=81]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/highlights/regia/lowparryriposte.png" type="Texture" id=82]
 [ext_resource path="res://assets/ui/menus/character selection/movesets/highlights/regia/lowmain.png" type="Texture" id=83]
+[ext_resource path="res://assets/sound/ui/click_focushover.wav" type="AudioStream" id=84]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 18 ), ExtResource( 18 ), ExtResource( 18 ), ExtResource( 55 ), ExtResource( 59 ), ExtResource( 61 ), ExtResource( 52 ), ExtResource( 24 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 73 ), ExtResource( 75 ) ],
-"loop": false,
-"name": "low_attack_main",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 13 ), ExtResource( 30 ), ExtResource( 46 ), ExtResource( 45 ) ],
 "loop": true,
 "name": "high",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 40 ) ],
+"loop": true,
+"name": "lax",
+"speed": 1.5
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 18 ), ExtResource( 18 ), ExtResource( 55 ), ExtResource( 59 ), ExtResource( 61 ), ExtResource( 52 ), ExtResource( 24 ), ExtResource( 53 ), ExtResource( 54 ), ExtResource( 73 ), ExtResource( 75 ) ],
+"loop": false,
+"name": "low_attack_main",
+"speed": 12.0
 }, {
 "frames": [ ExtResource( 42 ), ExtResource( 42 ), ExtResource( 42 ), ExtResource( 60 ), ExtResource( 57 ), ExtResource( 31 ), ExtResource( 51 ), ExtResource( 39 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 68 ), ExtResource( 69 ), ExtResource( 22 ) ],
 "loop": false,
 "name": "low_parry_alt_riposte",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 44 ), ExtResource( 44 ), ExtResource( 44 ), ExtResource( 65 ), ExtResource( 67 ), ExtResource( 5 ), ExtResource( 14 ), ExtResource( 50 ), ExtResource( 72 ), ExtResource( 33 ), ExtResource( 71 ) ],
+"frames": [ ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 32 ), ExtResource( 76 ), ExtResource( 74 ), ExtResource( 25 ), ExtResource( 58 ), ExtResource( 63 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 70 ), ExtResource( 26 ) ],
 "loop": false,
-"name": "low_parry_alt",
+"name": "high_attack_alt",
 "speed": 12.0
 }, {
 "frames": [ ExtResource( 15 ), ExtResource( 15 ), ExtResource( 15 ), ExtResource( 49 ), ExtResource( 66 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 16 ), ExtResource( 64 ), ExtResource( 77 ), ExtResource( 28 ), ExtResource( 34 ), ExtResource( 78 ), ExtResource( 27 ) ],
@@ -116,14 +122,9 @@ animations = [ {
 "name": "low",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 40 ) ],
-"loop": true,
-"name": "lax",
-"speed": 1.5
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 32 ), ExtResource( 76 ), ExtResource( 74 ), ExtResource( 25 ), ExtResource( 58 ), ExtResource( 63 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 70 ), ExtResource( 26 ) ],
+"frames": [ ExtResource( 44 ), ExtResource( 44 ), ExtResource( 44 ), ExtResource( 65 ), ExtResource( 67 ), ExtResource( 5 ), ExtResource( 14 ), ExtResource( 50 ), ExtResource( 72 ), ExtResource( 33 ), ExtResource( 71 ) ],
 "loop": false,
-"name": "high_attack_alt",
+"name": "low_parry_alt",
 "speed": 12.0
 } ]
 
@@ -191,6 +192,7 @@ script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+audioHover = ExtResource( 84 )
 anim = "lax"
 parentPath = NodePath("../..")
 
@@ -224,6 +226,7 @@ script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+audioHover = ExtResource( 84 )
 anim = "high"
 parentPath = NodePath("../..")
 
@@ -257,6 +260,7 @@ script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+audioHover = ExtResource( 84 )
 anim = "high_attack_main"
 parentPath = NodePath("../..")
 end = "low"
@@ -296,6 +300,7 @@ script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+audioHover = ExtResource( 84 )
 anim = "high_attack_alt"
 parentPath = NodePath("../..")
 end = "low"
@@ -331,6 +336,7 @@ script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+audioHover = ExtResource( 84 )
 anim = "low"
 parentPath = NodePath("../..")
 
@@ -364,6 +370,7 @@ script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+audioHover = ExtResource( 84 )
 anim = "low_parry_alt"
 parentPath = NodePath("../..")
 end = "low"
@@ -400,6 +407,7 @@ script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+audioHover = ExtResource( 84 )
 anim = "low_parry_alt_riposte"
 parentPath = NodePath("../..")
 end = "high"
@@ -436,6 +444,7 @@ script = ExtResource( 35 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+audioHover = ExtResource( 84 )
 anim = "low_attack_main"
 parentPath = NodePath("../..")
 end = "high"

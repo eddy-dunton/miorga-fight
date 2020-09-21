@@ -1,8 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://resources/ui/theme/theme.tres" type="Theme" id=1]
 [ext_resource path="res://src/MiorgaFight/UI/RaiseButton.cs" type="Script" id=2]
-
+[ext_resource path="res://assets/sound/ui/click_focushover.wav" type="AudioStream" id=3]
 
 [node name="raise_button" type="Button"]
 margin_right = 104.0
@@ -13,6 +13,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+audioHover = ExtResource( 3 )
 
 [node name="label" type="Label" parent="."]
 margin_left = 3.0

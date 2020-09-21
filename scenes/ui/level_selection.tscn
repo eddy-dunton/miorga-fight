@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm_hover.png" type="Texture" id=1]
 [ext_resource path="res://assets/ui/menus/character selection/button_confirm_disabled.png" type="Texture" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://assets/ui/slider/slider390.png" type="Texture" id=14]
 [ext_resource path="res://assets/ui/menus/map selection/iconhoverp2.png" type="Texture" id=15]
 [ext_resource path="res://assets/ui/menus/map selection/iconselectp2.png" type="Texture" id=16]
+[ext_resource path="res://src/MiorgaFight/UI/AudioTextureButton.cs" type="Script" id=17]
+[ext_resource path="res://assets/sound/ui/click_focushover.wav" type="AudioStream" id=18]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("vp_level")
@@ -24,7 +26,7 @@ viewport_path = NodePath("vp_level")
 texture = ExtResource( 14 )
 region_rect = Rect2( 0, 0, 390, 10 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("pa_buttons/bt_holytree:visible")
@@ -51,7 +53,7 @@ tracks/1/keys = {
 "values": [ true, false, true, false, true, false, true, false, true, false, true, false ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("pa_buttons/bt_holytree:visible")
@@ -78,7 +80,7 @@ tracks/1/keys = {
 "values": [ true, false, true, false, true, false, true, false, true, false, true, true ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=5]
 length = 2.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("pa_buttons/bt_holytree:texture_pressed")
@@ -161,10 +163,10 @@ __meta__ = {
 }
 
 [node name="bt_play" type="TextureButton" parent="."]
-margin_left = 684.806
-margin_top = 403.428
-margin_right = 763.806
-margin_bottom = 424.428
+margin_left = 685.0
+margin_top = 403.0
+margin_right = 764.0
+margin_bottom = 424.0
 focus_neighbour_left = NodePath("../pa_buttons/bt_marketharbour")
 focus_neighbour_top = NodePath("../sl_level")
 focus_neighbour_right = NodePath(".")
@@ -177,9 +179,11 @@ texture_hover = ExtResource( 1 )
 texture_disabled = ExtResource( 2 )
 texture_focused = ExtResource( 13 )
 stretch_mode = 2
+script = ExtResource( 17 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+audioHover = ExtResource( 18 )
 
 [node name="pa_icons" type="Control" parent="."]
 __meta__ = {
@@ -195,9 +199,9 @@ position = Vector2( 196, 128 )
 texture = ExtResource( 9 )
 
 [node name="an_buttons" type="AnimationPlayer" parent="."]
-anims/diff_chosen_p1 = SubResource( 5 )
-anims/diff_chosen_p2 = SubResource( 6 )
-anims/same_chosen = SubResource( 7 )
+anims/diff_chosen_p1 = SubResource( 3 )
+anims/diff_chosen_p2 = SubResource( 4 )
+anims/same_chosen = SubResource( 5 )
 
 [node name="pa_buttons" type="Control" parent="."]
 __meta__ = {

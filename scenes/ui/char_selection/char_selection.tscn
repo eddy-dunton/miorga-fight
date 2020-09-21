@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://scenes/ui/char_selection/char_data_regia.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/menus/character selection/icons/regia.png" type="Texture" id=2]
@@ -29,6 +29,8 @@
 [ext_resource path="res://assets/ui/menus/character selection/character_list_focus.png" type="Texture" id=27]
 [ext_resource path="res://assets/ui/menus/character selection/button_quit_focus.png" type="Texture" id=28]
 [ext_resource path="res://assets/ui/menus/character selection/player buttons/spectator_unselected.png" type="Texture" id=29]
+[ext_resource path="res://src/MiorgaFight/UI/AudioTextureButton.cs" type="Script" id=30]
+[ext_resource path="res://assets/sound/ui/click_focushover.wav" type="AudioStream" id=31]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.839216, 0.745098, 0.662745, 1 )
@@ -127,9 +129,11 @@ texture_hover = ExtResource( 21 )
 texture_disabled = ExtResource( 23 )
 texture_focused = ExtResource( 28 )
 stretch_mode = 2
+script = ExtResource( 30 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+audioHover = ExtResource( 31 )
 
 [node name="pa_char_data" parent="." instance=ExtResource( 9 )]
 
@@ -265,8 +269,10 @@ texture_hover = ExtResource( 17 )
 texture_disabled = ExtResource( 15 )
 texture_focused = ExtResource( 26 )
 stretch_mode = 2
+script = ExtResource( 30 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+audioHover = ExtResource( 31 )
 
 [editable path="pa_char_data"]

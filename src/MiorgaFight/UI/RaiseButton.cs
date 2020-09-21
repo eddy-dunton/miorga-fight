@@ -3,7 +3,7 @@ using System;
 
 namespace MiorgaFight {
 
-public class RaiseButton : Button
+public class RaiseButton : AudioButton
 {
 	[Export] private bool disableOnMobile = false; 
 
@@ -17,18 +17,22 @@ public class RaiseButton : Button
 	}
 
 	private Label nodeLabel;
+	private AudioStreamPlayer nodeSfx;
 
 	private Vector2 downPosition;
 	private Vector2 upPosition;
 
 	public override void _Ready()
 	{
+		base._Ready();
+		
 		if (this.disableOnMobile && Command.IsMobile()) {
 			this.Visible = false;
 			return;
 		}
 
 		this.nodeLabel = GetNode<Label>("label");
+
 		this.Connect("mouse_entered", this, nameof(_TextUp));
 		this.Connect("button_up", this, nameof(_TextUp));
 		this.Connect("focus_entered", this, nameof(_TextUp));
@@ -42,6 +46,7 @@ public class RaiseButton : Button
 	}
 
 	void _TextUp() {
+		base.PlayHover();
 		this.nodeLabel.RectPosition = this.upPosition;
 	}
 
