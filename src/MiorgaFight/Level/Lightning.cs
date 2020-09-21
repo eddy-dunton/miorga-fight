@@ -182,8 +182,8 @@ public class Lightning : AnimationPlayer
         //Swap "pre" for "post" and set ending animation
         anim.TrackSetKeyValue(3, 1, spriteAnims[1]);
 
-        //Set thunder delay to be proportional to strength (4 / strength), for a range of 0.5 - 3.5
-        anim.TrackSetKeyTime(4, 0, (float) ((4 / strength) - 0.5));
+        //Set thunder delay to be proportional to strength (8 / strength) - 1.5, for a range of 0.5 - 6.5
+        anim.TrackSetKeyTime(4, 0, (float) ((8 / strength) - 1.5));
 
         this.Play("strike");
     }
