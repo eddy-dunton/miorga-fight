@@ -26,6 +26,9 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 
 	[Export] int HP_MAX;
 
+	//All of this characters sfx, along with 
+	[Export] Dictionary<string, SoundEffect> sfx;
+
 	public ControlMethod controls;
 
 	public Direction DIRECTION;
@@ -33,6 +36,9 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public Stance stance;
 
 	public State state;
+
+	//Currently playing soundeffect
+	public SoundEffect sound;
 
 	//The players current attack, null if not attacking
 	public Attack attack;
@@ -62,6 +68,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public PlayerOverlay nodeOverlayTrack;
 	public PlayerOverlay nodeOverlayNoTrack;
 	public AudioStreamPlayer2D nodeFootsteps;
+	public AudioStreamPlayer2D nodeSfx;
 
 	//Current HUD, may be null, if there is no HUD
 	public PlayerHUD hud;
@@ -89,14 +96,14 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public override void _Ready() {
 		this.level = GetParent() as Level;
 
-		this.nodeAnimateSprite = GetNode<AnimatedSprite>("animate_sprite") as PlayerAnimation;
+		this.nodeAnimateSprite = GetNode<PlayerAnimation>("animate_sprite");
 		this.nodeCollision = GetNode<CollisionShape2D>("collision");
 		this.nodeSparks = GetNode<Particles2D>("animate_sprite/sparks");
-		this.nodeOverlayTrack = GetNode<AnimatedSprite>("animate_sprite/overlay_track") as PlayerOverlay;
-		this.nodeOverlayNoTrack = GetNode<AnimatedSprite>("overlay_notrack") as PlayerOverlay;
-		this.nodeFootsteps = GetNode<AudioStreamPlayer2D>("footsteps") as AudioStreamPlayer2D;
-
-		this.nodeFootsteps.Connect("finished", this, nameof(FootstepStart));
+		this.nodeOverlayTrack = GetNode<PlayerOverlay>("animate_sprite/overlay_track");
+		this.nodeOverlayNoTrack = GetNode<PlayerOverlay>("overlay_notrack");
+		
+		this.nodeSfx = GetNode<AudioStreamPlayer2D>("sfx");
+		this.nodeSfx.Connect("finished", this, nameof(_OnSfxFinished));
 
 		//Load stances
 		STANCE_LAX = new Stance("lax", LAX_SPRITE);
@@ -263,6 +270,42 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		}
 
 		this.lastVelocity = this.velocity;
+	}
+
+	void _OnSfxFinished() {
+		if (this.sound == null) {
+			GD.Print("ERROR: Player._OnSfxFinished: Called but player.sound  is null");
+			return;
+		}
+
+		if (this.sound.repeat) { //sfx sound repeat, play another random sound
+			this.nodeSfx.Stream = Command.Random(this.sound.streams);
+			this.nodeSfx.Play();
+		} else {
+			this.sound = null;
+			this.nodeSfx.Stop();
+		}
+	}
+
+	//Plays a sound from this players sound effects
+	public void PlaySfx(SoundEffect sound) {
+		this.sound = sound;
+		this.nodeSfx.Stream = Command.Random(sound.streams);
+		this.nodeSfx.Play();
+	}
+	
+	//Plays a sound
+	public void PlaySfx(string name) {
+		SoundEffect sound;
+		if (! this.sfx.TryGetValue(name, out sound)) return; //Check that the sound actually exists
+
+		this.PlaySfx(sound);
+	}
+
+	//Stops the current sound from being played
+	public void StopSfx() {
+		this.sound = null;
+		this.nodeSfx.Stop();
 	}
 
 	//Necessary to make RPC happy
@@ -505,25 +548,15 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Starts to walk 
 	private void WalkStart() {
 		this.nodeAnimateSprite.Play("walk", this.IsWalkingBackwards());
-		this.FootstepStart();
+		this.PlaySfx(this.level.footsteps);
 	}
 
 	//Walk ends
 	private void WalkEnd() {
 		this.nodeAnimateSprite.Reset();
-		this.FootstepStop();
-	}
-
-	//Starts playing footstep sounds
-	//Will play random footstep sounds from the current levels sounds
-	void FootstepStart() {
-		this.nodeFootsteps.Stream = Command.Random(this.level.footsteps);
-		this.nodeFootsteps.Play();
-	}
-
-	//Stops playing footstep sounds
-	void FootstepStop() {
-		this.nodeFootsteps.Stop();
+		if (this.sound == this.level.footsteps) {
+			this.StopSfx();
+		}
 	}
 
 	//Returns this players hitbox as a shape and a transform

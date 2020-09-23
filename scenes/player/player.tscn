@@ -76,6 +76,8 @@ script = ExtResource( 1 )
 
 [node name="footsteps" type="AudioStreamPlayer2D" parent="."]
 
+[node name="sfx" type="AudioStreamPlayer2D" parent="."]
+
 [node name="collision" type="CollisionShape2D" parent="."]
 
 [node name="animate_sprite" type="AnimatedSprite" parent="."]
