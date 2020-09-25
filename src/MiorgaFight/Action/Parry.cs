@@ -65,5 +65,7 @@ public class Parry : Action
     public void Success(Player player) {
         player.nodeSparks.Emitting = true;
         player.parrySuccessful = true;
+        //Play sound if it exists
+        if (this.successSound != null) player.PlaySfx(this.successSound);
     }
 }}
