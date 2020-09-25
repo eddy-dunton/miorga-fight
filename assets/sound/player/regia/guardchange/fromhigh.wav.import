@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/fromhigh.wav-b7803ff6e20a8e309177c03181fc35b1.sample"
+
+[deps]
+
+source_file="res://assets/sound/player/regia/guardchange/fromhigh.wav"
+dest_files=[ "res://.import/fromhigh.wav-b7803ff6e20a8e309177c03181fc35b1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

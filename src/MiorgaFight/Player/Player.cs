@@ -192,7 +192,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 				if (Lobby.role == Lobby.MultiplayerRole.OFFLINE) {
 					action.Start(this);
 				} else {
-					RpcUnreliable(nameof(this.ActionStart), new object[] {this.actions.IndexOf(action)});
+					RpcMaybeReliable(nameof(this.ActionStart), new object[] {this.actions.IndexOf(action)});
 				}
 				//Mark input as dealt with
 				GetTree().SetInputAsHandled();
@@ -349,7 +349,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		}
 
 		if (Lobby.role != Lobby.MultiplayerRole.OFFLINE && this.controls != ControlMethod.REMOTE && this.state != State.ATTACK && this.state != State.PARRY) 
-			RpcUnreliable(nameof(this.ChangeState), new object[] {newState});
+			RpcMaybeReliable(nameof(this.ChangeState), new object[] {newState});
 	}
 
 	
@@ -365,7 +365,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public void ChangeHP(int newhp) {
 		if (Lobby.role != Lobby.MultiplayerRole.OFFLINE) {
 			if (Lobby.IsHost()) { //Only issue commands if host
-				RpcUnreliable(nameof(this.ChangeHP_), new object[] {newhp});
+				RpcMaybeReliable(nameof(this.ChangeHP_), new object[] {newhp});
 			}
 		} else {
 			this.ChangeHP_(newhp);
@@ -393,10 +393,14 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		SceneTreeTimer tmr = GetTree().CreateTimer(1f, true);
 		tmr.Connect("timeout", this, nameof(StartNewRound));
 		GetTree().Paused = true;
+
+		Lobby.state = Lobby.GameState.IN_GAME_NOT_PLAYING;
 	}
 
 	//Called when a new wave has to be started
 	public void StartNewRound() {
+		Lobby.state = Lobby.GameState.IN_GAME_PLAYING;
+
 		//Check that the pause screen is not present, if so unpause
 		if (! Command.command.OnPauseScreen()) GetTree().Paused = false;
 
@@ -429,7 +433,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public void Hurt(int damage, int knockback, bool halting = false) {
 		if (Lobby.role != Lobby.MultiplayerRole.OFFLINE) {
 			if (Lobby.IsHost()) { //Only issue commands if host
-				RpcUnreliable(nameof(this.Hurt_), new object[] {damage, knockback, halting});
+				RpcMaybeReliable(nameof(this.Hurt_), new object[] {damage, knockback, halting});
 			}
 		} else {
 			this.Hurt_(damage, knockback, halting);
@@ -459,7 +463,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public void Parried(Attack attack, Parry by) {
 		if (Lobby.role != Lobby.MultiplayerRole.OFFLINE) {
 			if (Lobby.IsHost()) { //Only issue calls if host
-				RpcUnreliable(nameof(this.Parried_ByIndex_), new object[] 
+				RpcMaybeReliable(nameof(this.Parried_ByIndex_), new object[] 
 						{this.actions.IndexOf(attack), this.nodeEnemy.actions.IndexOf(by)});
 			}
 		} else {
@@ -604,6 +608,24 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			this.velocity.x -= SPEED;
 	}
 	
+	//Peforms an RPC call, with reliablity depending on Lobby.highLatency
+	private object RpcMaybeReliable(string method, params object[] args) {
+		if (Lobby.highLatency) {
+			return this.Rpc(method, args);
+		} else {
+			return this.RpcUnreliable(method, args);
+		}
+	}
+
+	//Peforms an RPC call on a single peer, with reliablity depending on Lobby.highLatency
+	private object RpcMaybeReliableId(int id, string method, params object[] args) {
+		if (Lobby.highLatency) {
+			return this.RpcId(id, method, args);
+		} else {
+			return this.RpcUnreliableId(id, method, args);
+		}
+	}
+
 	Node2D CameraTrack.Trackable.GetTrackingNode() {
 		//Gets camera to play nice
 		return this.nodeCollision;
