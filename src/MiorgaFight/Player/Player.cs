@@ -393,10 +393,14 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		SceneTreeTimer tmr = GetTree().CreateTimer(1f, true);
 		tmr.Connect("timeout", this, nameof(StartNewRound));
 		GetTree().Paused = true;
+
+		Lobby.state = Lobby.GameState.IN_GAME_NOT_PLAYING;
 	}
 
 	//Called when a new wave has to be started
 	public void StartNewRound() {
+		Lobby.state = Lobby.GameState.IN_GAME_PLAYING;
+
 		//Check that the pause screen is not present, if so unpause
 		if (! Command.command.OnPauseScreen()) GetTree().Paused = false;
 
