@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/high_main_sfx_var2.wav-50ca615f40ff43e933eeb5d31cc5a5cd.sample"
+
+[deps]
+
+source_file="res://assets/sound/player/regia/abilities/high_main_sfx_var2.wav"
+dest_files=[ "res://.import/high_main_sfx_var2.wav-50ca615f40ff43e933eeb5d31cc5a5cd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

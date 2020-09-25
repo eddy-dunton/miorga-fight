@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/high_main_fs_wetstone.wav-0195b185a5e118bf222b13e2bce9e03e.sample"
+
+[deps]
+
+source_file="res://assets/sound/player/regia/abilities/high_main_fs_wetstone.wav"
+dest_files=[ "res://.import/high_main_fs_wetstone.wav-0195b185a5e118bf222b13e2bce9e03e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
