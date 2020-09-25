@@ -30,6 +30,8 @@ public class Lobby : Control {
 
 	public static MultiplayerRole role = MultiplayerRole.OFFLINE;
 	public static GameState state = GameState.TITLE;
+	//Whether the 
+	public static bool highLatency = false;
 
 	//Returns whether this game is hosting or not
 	public static bool IsHost() {
