@@ -389,6 +389,21 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			return;
 		}
 
+		//Create short timer
+		SceneTreeTimer tmr = GetTree().CreateTimer(1f, true);
+		tmr.Connect("timeout", this, nameof(StartNewRound));
+		GetTree().Paused = true;
+	}
+
+	//Called when a new wave has to be started
+	public void StartNewRound() {
+		//Check that the pause screen is not present, if so unpause
+		if (! Command.command.OnPauseScreen()) GetTree().Paused = false;
+
+		//Clear any overlays
+		this.nodeOverlayTrack.Visible = false;
+		this.nodeOverlayNoTrack.Visible = false;
+
 		this.ChangeLives(this.lives - 1);
 		this.Restart();
 		this.nodeEnemy.Restart();

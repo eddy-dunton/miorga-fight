@@ -160,4 +160,7 @@ public class Command : Node {
 
         Input.SetMouseMode(Input.MouseMode.Hidden);
     }
+
+    //returns whether the game is on the pause screen or not
+    public bool OnPauseScreen() => GetTree().Root.IsAParentOf(Command.pauseMenu);
 }}
