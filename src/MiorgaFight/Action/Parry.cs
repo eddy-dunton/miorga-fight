@@ -19,6 +19,9 @@ public class Parry : Action
     //Position of this parry's hitbox, relative to the sprite of this Parry 
     [Export] public Vector2 hitboxoffset;
 
+    //Sound to played when the parry is successful
+    [Export] public SoundEffect successSound;
+
     public Parry() {
         this.type = Action.Type.PARRY;
     }

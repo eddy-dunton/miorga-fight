@@ -32,7 +32,10 @@ public class PlayerAnimation : AnimatedSprite {
         if (!this.data.TryGetValue(anim, out this.current)) {
             this.current = new AnimationData();
         }
-                    
+
+        //Play sfx if present
+        if (this.current.sound != null) this.parent.PlaySfx(this.current.sound);
+
         //Set this position
         this.Position = this.current.offset;
     }

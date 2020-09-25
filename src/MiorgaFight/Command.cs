@@ -28,7 +28,11 @@ public class Command : Node {
     }
 
     //Returns a random element of enumerable
-    public static T Random<T>(IEnumerable<T> enumerable) => enumerable.ElementAt(Random(0, enumerable.Count() - 1));
+    public static T Random<T>(IEnumerable<T> enumerable) {
+        if (enumerable.Count() == 0) return default(T);
+
+        else return enumerable.ElementAt(Random(0, enumerable.Count() - 1));
+    } 
     
     //Returns a random boolean
     public static bool RandomBool() => Random(0,1) == 1;

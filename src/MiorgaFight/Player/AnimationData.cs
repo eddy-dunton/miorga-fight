@@ -14,6 +14,8 @@ public class AnimationData : Resource
     //Shape of the hitbox
     [Export] public Shape2D[] hitbox;
 
+    [Export] public SoundEffect sound;
+
     //If the length of hitbox and hitbox_offset are not the same Godot will most likely throw a fit
 
     //Sets deafults
@@ -23,5 +25,7 @@ public class AnimationData : Resource
         this.hitboxOffset = new Vector2[0];
 
         this.hitbox = new Shape2D[0];
+
+        this.sound = null;
     }
 }}
