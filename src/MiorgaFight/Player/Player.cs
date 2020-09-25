@@ -26,6 +26,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 
 	[Export] int HP_MAX;
 
+	[Export] float FOOTSTEP_VOLUME;
+
 	//All of this characters sfx, along with 
 	[Export] Dictionary<string, SoundEffect> sfx;
 
@@ -67,7 +69,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public Particles2D nodeSparks;
 	public PlayerOverlay nodeOverlayTrack;
 	public PlayerOverlay nodeOverlayNoTrack;
-	public AudioStreamPlayer2D nodeFootsteps;
 	public AudioStreamPlayer2D nodeSfx;
 
 	//Current HUD, may be null, if there is no HUD
@@ -84,7 +85,6 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//1 if the player is facing right and -1 if facing left
 	//Seems redundant but I couldn't get the enums to play nicely with the editor
 	public Vector2 SCALEFACTOR;
-
 
 	public Player() {
 		this.attack = null;
@@ -291,6 +291,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	public void PlaySfx(SoundEffect sound) {
 		this.sound = sound;
 		this.nodeSfx.Stream = Command.Random(sound.streams);
+		this.nodeSfx.VolumeDb = sound.volume;
 		this.nodeSfx.Play();
 	}
 	
@@ -549,6 +550,8 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	private void WalkStart() {
 		this.nodeAnimateSprite.Play("walk", this.IsWalkingBackwards());
 		this.PlaySfx(this.level.footsteps);
+		//Set volume separately to normal way
+		this.nodeSfx.VolumeDb = this.FOOTSTEP_VOLUME; 
 	}
 
 	//Walk ends

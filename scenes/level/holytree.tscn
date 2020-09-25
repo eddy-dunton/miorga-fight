@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=2]
+[gd_scene load_steps=115 format=2]
 
 [ext_resource path="res://assets/level/holytree/level_base_nofoliage.png" type="Texture" id=1]
 [ext_resource path="res://assets/level/holytree/foliage/light/lightgrass1/key0.png" type="Texture" id=2]
@@ -94,9 +94,7 @@
 [ext_resource path="res://assets/level/holytree/tree sprite/right_key5.png" type="Texture" id=92]
 [ext_resource path="res://src/MiorgaFight/Level/ParticlePauser.cs" type="Script" id=93]
 [ext_resource path="res://assets/sound/environment/woodlandcalm.wav" type="AudioStream" id=94]
-[ext_resource path="res://assets/sound/player/footsteps/grass/grass_var3.wav" type="AudioStream" id=95]
-[ext_resource path="res://assets/sound/player/footsteps/grass/grass_var1.wav" type="AudioStream" id=97]
-[ext_resource path="res://assets/sound/player/footsteps/grass/grass_var2.wav" type="AudioStream" id=98]
+[ext_resource path="res://resources/sfx/footsteps/holytree.tres" type="Resource" id=95]
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 2
@@ -117,6 +115,7 @@ angle_random = 1.0
 [sub_resource type="ImageTexture" id=2]
 
 [sub_resource type="AnimatedTexture" id=3]
+flags = 4
 frames = 15
 frame_0/texture = ExtResource( 16 )
 frame_1/texture = ExtResource( 11 )
@@ -177,7 +176,7 @@ frame_13/delay_sec = 0.0
 frame_14/delay_sec = 0.0
 
 [sub_resource type="AnimatedTexture" id=5]
-flags = 4
+flags = 7
 frames = 15
 fps = 6.0
 frame_0/texture = ExtResource( 16 )
@@ -374,7 +373,7 @@ foliageWidth = 1000
 POSITION_LEFT = -250.0
 POSITION_RIGHT = 250.0
 POSITION_Y = 150.0
-footsteps = [ ExtResource( 97 ), ExtResource( 98 ), ExtResource( 95 ) ]
+footsteps = ExtResource( 95 )
 
 [node name="bg_noise" type="AudioStreamPlayer" parent="." index="0"]
 stream = ExtResource( 94 )

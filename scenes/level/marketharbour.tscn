@@ -1,4 +1,4 @@
-[gd_scene load_steps=139 format=2]
+[gd_scene load_steps=136 format=2]
 
 [ext_resource path="res://scenes/level/level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/level/marketharbour/level_back1.png" type="Texture" id=2]
@@ -114,10 +114,7 @@
 [ext_resource path="res://assets/level/marketharbour/animations/waves/sec8_3.png" type="Texture" id=112]
 [ext_resource path="res://src/MiorgaFight/Level/WaveSection.cs" type="Script" id=113]
 [ext_resource path="res://assets/sound/environment/heavyrain.wav" type="AudioStream" id=114]
-[ext_resource path="res://assets/sound/player/footsteps/wet stone/wetstone_var2.wav" type="AudioStream" id=115]
-[ext_resource path="res://assets/sound/player/footsteps/wet stone/wetstone_var3.wav" type="AudioStream" id=116]
-[ext_resource path="res://assets/sound/player/footsteps/wet stone/wetstone_var1.wav" type="AudioStream" id=117]
-[ext_resource path="res://assets/sound/player/footsteps/wet stone/wetstone_var4.wav" type="AudioStream" id=118]
+[ext_resource path="res://resources/sfx/footsteps/marketharbour.tres" type="Resource" id=115]
 [ext_resource path="res://assets/sound/environment/thunder/thunder_far_var2.wav" type="AudioStream" id=120]
 [ext_resource path="res://assets/sound/environment/thunder/thunder_close.wav" type="AudioStream" id=122]
 [ext_resource path="res://assets/sound/environment/thunder/thunder_far_var1.wav" type="AudioStream" id=123]
@@ -129,9 +126,9 @@ animations = [ {
 "name": "default",
 "speed": 0.0
 }, {
-"frames": [ ExtResource( 40 ), ExtResource( 28 ), ExtResource( 33 ) ],
+"frames": [ ExtResource( 41 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 32 ), ExtResource( 34 ) ],
 "loop": false,
-"name": "b_post",
+"name": "b_pre",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 24 ), ExtResource( 17 ), ExtResource( 22 ) ],
@@ -144,19 +141,19 @@ animations = [ {
 "name": "c_post",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 37 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 29 ), ExtResource( 30 ) ],
-"loop": true,
-"name": "c_pre",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 41 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 32 ), ExtResource( 34 ) ],
-"loop": false,
-"name": "b_pre",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 19 ), ExtResource( 25 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 23 ) ],
 "loop": false,
 "name": "a_pre",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 40 ), ExtResource( 28 ), ExtResource( 33 ) ],
+"loop": false,
+"name": "b_post",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 37 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 29 ), ExtResource( 30 ) ],
+"loop": true,
+"name": "c_pre",
 "speed": 5.0
 } ]
 
@@ -358,7 +355,7 @@ width = 1024
 POSITION_LEFT = -300.0
 POSITION_RIGHT = 300.0
 POSITION_Y = 110.0
-footsteps = [ ExtResource( 117 ), ExtResource( 115 ), ExtResource( 116 ), ExtResource( 118 ) ]
+footsteps = ExtResource( 115 )
 
 [node name="bg_noise" type="AudioStreamPlayer" parent="." index="0"]
 stream = ExtResource( 114 )
