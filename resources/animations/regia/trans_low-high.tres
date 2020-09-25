@@ -1,6 +1,7 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=4 format=2]
 
 [ext_resource path="res://src/MiorgaFight/Player/AnimationData.cs" type="Script" id=1]
+[ext_resource path="res://resources/sfx/regia/between_guards.tres" type="Resource" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 13, -75, 18, -50, 8, -35, 37, 13, 0, 13, 0, -79 )
@@ -10,3 +11,4 @@ script = ExtResource( 1 )
 offset = Vector2( 0, 0 )
 hitboxOffset = PoolVector2Array( 13.145, 69.939 )
 hitbox = [ SubResource( 1 ) ]
+sound = ExtResource( 2 )
