@@ -42,9 +42,14 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 13 ) ],
+"frames": [ ExtResource( 14 ) ],
 "loop": true,
-"name": "go",
+"name": "final",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 19 ) ],
+"loop": true,
+"name": "round7",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 9 ) ],
@@ -52,14 +57,29 @@ animations = [ {
 "name": "round2",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 8 ) ],
+"loop": true,
+"name": "round10",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 16 ), ExtResource( 15 ) ],
 "loop": true,
 "name": "wins",
 "speed": 12.0
 }, {
-"frames": [ ExtResource( 19 ) ],
+"frames": [ ExtResource( 11 ) ],
+"loop": false,
+"name": "round4",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 22 ) ],
 "loop": true,
-"name": "round7",
+"name": "round9",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 13 ) ],
+"loop": true,
+"name": "go",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 10 ) ],
@@ -72,16 +92,6 @@ animations = [ {
 "name": "round5",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ) ],
-"loop": false,
-"name": "round4",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 22 ) ],
-"loop": true,
-"name": "round9",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 21 ) ],
 "loop": true,
 "name": "round6",
@@ -90,16 +100,6 @@ animations = [ {
 "frames": [ ExtResource( 20 ) ],
 "loop": true,
 "name": "round8",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 8 ) ],
-"loop": true,
-"name": "round10",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 14 ) ],
-"loop": true,
-"name": "final",
 "speed": 5.0
 } ]
 
@@ -319,19 +319,19 @@ __meta__ = {
 }
 
 [node name="sp_lives_1" type="Sprite" parent="gr_p2"]
-position = Vector2( 720, 61 )
+position = Vector2( 747, 61 )
 texture = ExtResource( 6 )
 
 [node name="sp_lives_2" type="Sprite" parent="gr_p2"]
-position = Vector2( 729, 61 )
-texture = ExtResource( 6 )
-
-[node name="sp_lives_3" type="Sprite" parent="gr_p2"]
 position = Vector2( 738, 61 )
 texture = ExtResource( 6 )
 
+[node name="sp_lives_3" type="Sprite" parent="gr_p2"]
+position = Vector2( 729, 61 )
+texture = ExtResource( 6 )
+
 [node name="sp_lives_4" type="Sprite" parent="gr_p2"]
-position = Vector2( 747, 61 )
+position = Vector2( 720, 61 )
 texture = ExtResource( 6 )
 
 [node name="sp_lives_5" type="Sprite" parent="gr_p2"]
