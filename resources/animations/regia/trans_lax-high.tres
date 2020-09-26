@@ -3,7 +3,6 @@
 [ext_resource path="res://src/MiorgaFight/Player/AnimationData.cs" type="Script" id=1]
 [ext_resource path="res://resources/sfx/regia/stances/to_high.tres" type="Resource" id=2]
 
-
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 35, -85, 45, -50, 38, -10, 37, 13, 0, 0 )
 

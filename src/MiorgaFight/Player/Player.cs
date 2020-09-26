@@ -25,7 +25,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	[Export] int SPEED;
 
 	[Export] int HP_MAX;
-	
+
 	//All of this characters sfx, along with 
 	[Export] Dictionary<string, SoundEffect> sfx;
 
@@ -451,6 +451,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 			this.Knockback(knockback);
 		}
 
+		this.PlaySfx("hurt");
 		this.nodeOverlayTrack.Play("blood_mid");
 		this.ChangeHP(this.hp - damage);
 	}

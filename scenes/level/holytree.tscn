@@ -144,7 +144,6 @@ frame_13/delay_sec = 0.0
 frame_14/delay_sec = 0.0
 
 [sub_resource type="AnimatedTexture" id=4]
-flags = 4
 frames = 15
 fps = 5.0
 frame_0/texture = ExtResource( 16 )

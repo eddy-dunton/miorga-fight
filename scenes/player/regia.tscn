@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=2]
+[gd_scene load_steps=114 format=2]
 
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://resources/animations/regia/low_parry_alt_riposte.tres" type="Resource" id=2]
@@ -70,6 +70,7 @@
 [ext_resource path="res://assets/player/particles/bloodmid/6.png" type="Texture" id=68]
 [ext_resource path="res://resources/sfx/regia/footsteps.tres" type="Resource" id=69]
 [ext_resource path="res://assets/player/particles/bloodmid/7.png" type="Texture" id=70]
+[ext_resource path="res://resources/sfx/regia/hurt.tres" type="Resource" id=71]
 [ext_resource path="res://assets/player/regia/fight/low/standard/afterhit/return/key3.png" type="Texture" id=72]
 [ext_resource path="res://assets/player/regia/fight/low/standard/afterhit/return/key1.png" type="Texture" id=74]
 [ext_resource path="res://assets/player/regia/fight/low/standard/afterhit/return/key2.png" type="Texture" id=75]
@@ -218,7 +219,8 @@ actions = [ ExtResource( 34 ), ExtResource( 16 ), ExtResource( 101 ), ExtResourc
 SPEED = 100
 HP_MAX = 100
 sfx = {
-"footsteps": ExtResource( 69 )
+"footsteps": ExtResource( 69 ),
+"hurt": ExtResource( 71 )
 }
 
 [node name="collision" parent="." index="1"]

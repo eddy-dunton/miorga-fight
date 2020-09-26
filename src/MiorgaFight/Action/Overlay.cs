@@ -11,6 +11,8 @@ public class Overlay : Action {
 
     [Export] public OverlayOption overlay;
 
+    [Export] public SoundEffect feintSound;
+
     //Cancel the players current action
     [Export] public bool cancel;
 
@@ -27,7 +29,10 @@ public class Overlay : Action {
                 break;
         }
 
-        this.End(player);
+        if (this.cancel) {
+           player.PlaySfx(this.feintSound);
+           this.End(player);
+        }
     }
 
     //Should be immpossible
