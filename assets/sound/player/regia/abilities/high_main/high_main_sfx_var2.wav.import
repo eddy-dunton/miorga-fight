@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/high_main_sfx_var2.wav-50ca615f40ff43e933eeb5d31cc5a5cd.sample"
+path="res://.import/high_main_sfx_var2.wav-74a46ba1de10dd367ca1ac2739116b93.sample"
 
 [deps]
 
-source_file="res://assets/sound/player/regia/abilities/high_main_sfx_var2.wav"
-dest_files=[ "res://.import/high_main_sfx_var2.wav-50ca615f40ff43e933eeb5d31cc5a5cd.sample" ]
+source_file="res://assets/sound/player/regia/abilities/high_main/high_main_sfx_var2.wav"
+dest_files=[ "res://.import/high_main_sfx_var2.wav-74a46ba1de10dd367ca1ac2739116b93.sample" ]
 
 [params]
 

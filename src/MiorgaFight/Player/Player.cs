@@ -25,9 +25,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	[Export] int SPEED;
 
 	[Export] int HP_MAX;
-
-	[Export] float FOOTSTEP_VOLUME;
-
+	
 	//All of this characters sfx, along with 
 	[Export] Dictionary<string, SoundEffect> sfx;
 
@@ -279,7 +277,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 		}
 
 		if (this.sound.repeat) { //sfx sound repeat, play another random sound
-			this.nodeSfx.Stream = Command.Random(this.sound.streams);
+			//this.nodeSfx.Stream = Command.Random(this.sound.streams);
 			this.nodeSfx.Play();
 		} else {
 			this.sound = null;
@@ -290,7 +288,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Plays a sound from this players sound effects
 	public void PlaySfx(SoundEffect sound) {
 		this.sound = sound;
-		this.nodeSfx.Stream = Command.Random(sound.streams);
+		this.nodeSfx.Stream = sound.Get(this.level.soundscape);
 		this.nodeSfx.VolumeDb = sound.volume;
 		this.nodeSfx.Play();
 	}
@@ -568,15 +566,13 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Starts to walk 
 	private void WalkStart() {
 		this.nodeAnimateSprite.Play("walk", this.IsWalkingBackwards());
-		this.PlaySfx(this.level.footsteps);
-		//Set volume separately to normal way
-		this.nodeSfx.VolumeDb = this.FOOTSTEP_VOLUME; 
+		this.PlaySfx("footsteps");
 	}
 
 	//Walk ends
 	private void WalkEnd() {
 		this.nodeAnimateSprite.Reset();
-		if (this.sound == this.level.footsteps) {
+		if (this.sound == this.sfx["footsteps"]) {
 			this.StopSfx();
 		}
 	}

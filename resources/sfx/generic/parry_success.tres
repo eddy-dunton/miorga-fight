@@ -1,10 +1,11 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=2 format=2]
 
 [ext_resource path="res://src/MiorgaFight/SoundEffect.cs" type="Script" id=1]
-[ext_resource path="res://assets/sound/player/parrysuccess.wav" type="AudioStream" id=2]
 
 [resource]
 script = ExtResource( 1 )
-streams = [ ExtResource( 2 ) ]
+streams = {
+
+}
 volume = 0.0
 repeat = false

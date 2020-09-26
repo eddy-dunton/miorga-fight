@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=2]
+[gd_scene load_steps=135 format=2]
 
 [ext_resource path="res://scenes/level/level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/level/marketharbour/level_back1.png" type="Texture" id=2]
@@ -114,26 +114,15 @@
 [ext_resource path="res://assets/level/marketharbour/animations/waves/sec8_3.png" type="Texture" id=112]
 [ext_resource path="res://src/MiorgaFight/Level/WaveSection.cs" type="Script" id=113]
 [ext_resource path="res://assets/sound/environment/heavyrain.wav" type="AudioStream" id=114]
-[ext_resource path="res://resources/sfx/footsteps/marketharbour.tres" type="Resource" id=115]
 [ext_resource path="res://assets/sound/environment/thunder/thunder_far_var2.wav" type="AudioStream" id=120]
 [ext_resource path="res://assets/sound/environment/thunder/thunder_close.wav" type="AudioStream" id=122]
 [ext_resource path="res://assets/sound/environment/thunder/thunder_far_var1.wav" type="AudioStream" id=123]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [  ],
-"loop": false,
-"name": "default",
-"speed": 0.0
-}, {
 "frames": [ ExtResource( 41 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 32 ), ExtResource( 34 ) ],
 "loop": false,
 "name": "b_pre",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 24 ), ExtResource( 17 ), ExtResource( 22 ) ],
-"loop": false,
-"name": "a_post",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 39 ), ExtResource( 31 ), ExtResource( 38 ) ],
@@ -146,15 +135,25 @@ animations = [ {
 "name": "a_pre",
 "speed": 5.0
 }, {
+"frames": [ ExtResource( 37 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 29 ), ExtResource( 30 ) ],
+"loop": true,
+"name": "c_pre",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 24 ), ExtResource( 17 ), ExtResource( 22 ) ],
+"loop": false,
+"name": "a_post",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 40 ), ExtResource( 28 ), ExtResource( 33 ) ],
 "loop": false,
 "name": "b_post",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 37 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 29 ), ExtResource( 30 ) ],
-"loop": true,
-"name": "c_pre",
-"speed": 5.0
+"frames": [  ],
+"loop": false,
+"name": "default",
+"speed": 0.0
 } ]
 
 [sub_resource type="ParticlesMaterial" id=2]
@@ -240,20 +239,20 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
-"frames": [  ],
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 14 ) ],
 "loop": false,
-"name": "default",
-"speed": 0.0
+"name": "a_pre",
+"speed": 100.0
 }, {
 "frames": [ ExtResource( 15 ), ExtResource( 21 ), ExtResource( 16 ) ],
 "loop": false,
 "name": "a_post",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"frames": [  ],
 "loop": false,
-"name": "a_pre",
-"speed": 100.0
+"name": "default",
+"speed": 0.0
 } ]
 
 [sub_resource type="LineShape2D" id=12]
@@ -355,7 +354,7 @@ width = 1024
 POSITION_LEFT = -300.0
 POSITION_RIGHT = 300.0
 POSITION_Y = 110.0
-footsteps = ExtResource( 115 )
+soundscape = 2
 
 [node name="bg_noise" type="AudioStreamPlayer" parent="." index="0"]
 stream = ExtResource( 114 )

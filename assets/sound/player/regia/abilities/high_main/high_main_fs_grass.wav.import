@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/high_main_fs_grass.wav-3eb2406ef26017394282d0339fe4866d.sample"
+path="res://.import/high_main_fs_grass.wav-706a3608add5ea2b0c31b71e20d35688.sample"
 
 [deps]
 
-source_file="res://assets/sound/player/regia/abilities/high_main_fs_grass.wav"
-dest_files=[ "res://.import/high_main_fs_grass.wav-3eb2406ef26017394282d0339fe4866d.sample" ]
+source_file="res://assets/sound/player/regia/abilities/high_main/high_main_fs_grass.wav"
+dest_files=[ "res://.import/high_main_fs_grass.wav-706a3608add5ea2b0c31b71e20d35688.sample" ]
 
 [params]
 
