@@ -7,8 +7,9 @@ public class SoundEffect : Resource
 {
 	//Different types of sound
 	public enum Soundscape {
-		ANY, //Used for when there isn't a specific soundscape for a audiostream, should not be used by levels
-		GRASS, WETSTONE
+		ANY = 0, //Used for when there isn't a specific soundscape for a audiostream, should not be used by levels
+		GRASS = 1,
+        WETSTONE = 2
 	}
 
     //A random one of these will be played

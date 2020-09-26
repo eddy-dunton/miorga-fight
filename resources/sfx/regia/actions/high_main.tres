@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=6 format=2]
+
+[ext_resource path="res://src/MiorgaFight/SoundEffect.cs" type="Script" id=1]
+[ext_resource path="res://assets/sound/player/regia/abilities/high_main/premade/var1_wetstone.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sound/player/regia/abilities/high_main/premade/var2_grass.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sound/player/regia/abilities/high_main/premade/var2_wetstone.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sound/player/regia/abilities/high_main/premade/var1_grass.wav" type="AudioStream" id=5]
+
+[resource]
+script = ExtResource( 1 )
+streams = {
+1: [ ExtResource( 5 ), ExtResource( 3 ) ],
+2: [ ExtResource( 2 ), ExtResource( 4 ) ]
+}
+volume = 0.0
+repeat = false
