@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/hurt_var_rare.wav-9f1236f27bbef2a79b77da221d0c8949.sample"
+
+[deps]
+
+source_file="res://assets/sound/player/regia/hurt/hurt_var_rare.wav"
+dest_files=[ "res://.import/hurt_var_rare.wav-9f1236f27bbef2a79b77da221d0c8949.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
