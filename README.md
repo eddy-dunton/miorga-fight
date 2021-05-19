@@ -39,3 +39,22 @@ Steps:
 3) Use whatever build settings you plan on using
 4) Pray
 5) Press Export
+
+## Screenshots
+
+![Title](https://user-images.githubusercontent.com/42977035/118854556-c69dc680-b8cc-11eb-94a8-8dbd08cbf7e2.png)
+
+![Char](https://user-images.githubusercontent.com/42977035/118854583-cc93a780-b8cc-11eb-8c17-252349096d9f.png)
+
+![level](https://user-images.githubusercontent.com/42977035/118854600-d1f0f200-b8cc-11eb-89b7-1e899d0c3c53.png)
+
+![fight start](https://user-images.githubusercontent.com/42977035/118854629-d9180000-b8cc-11eb-97ef-c64b6c06e1c1.png)
+
+![mid fight](https://user-images.githubusercontent.com/42977035/118854694-e339fe80-b8cc-11eb-8742-84c2e8873459.png)
+![mid strike ](https://user-images.githubusercontent.com/42977035/118854709-e59c5880-b8cc-11eb-95aa-da740c408d16.png)
+![holy tree](https://user-images.githubusercontent.com/42977035/118854722-e92fdf80-b8cc-11eb-82da-aba16bd57728.png)
+![pause](https://user-images.githubusercontent.com/42977035/118854726-ea610c80-b8cc-11eb-8247-a1c04a61040d.png)
+
+
+
+
