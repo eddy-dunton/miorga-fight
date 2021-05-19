@@ -1,3 +1,16 @@
-[gd_resource type="Resource" format=2]
+[gd_resource type="Resource" load_steps=7 format=2]
+
+[ext_resource path="res://src/MiorgaFight/SoundEffect.cs" type="Script" id=1]
+[ext_resource path="res://assets/sound/player/regia/hurt_var1.wav" type="AudioStream" id=2]
+[ext_resource path="res://assets/sound/player/regia/hurt_var4.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sound/player/regia/hurt_var2.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sound/player/regia/hurt_var5_rare.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sound/player/regia/hurt_var3.wav" type="AudioStream" id=6]
 
 [resource]
+script = ExtResource( 1 )
+streams = {
+0: [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ) ]
+}
+volume = 0.0
+repeat = false
