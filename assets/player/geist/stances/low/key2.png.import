@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/transin.png-7e1a5446148b94b4fb93e1c6026a3bb5.stex"
+path="res://.import/key2.png-4451cbab4258bc5711a9b7a2e94c8055.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/geist/stances/obslete/hidden/transin.png"
-dest_files=[ "res://.import/transin.png-7e1a5446148b94b4fb93e1c6026a3bb5.stex" ]
+source_file="res://assets/player/geist/stances/low/key2.png"
+dest_files=[ "res://.import/key2.png-4451cbab4258bc5711a9b7a2e94c8055.stex" ]
 
 [params]
 
