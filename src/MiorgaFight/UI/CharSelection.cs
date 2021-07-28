@@ -55,6 +55,7 @@ public class CharSelection : Control
     private ItemList nodeCharList;
     private CharSelectionDataPanel nodeDataPanel;
     private Label nodeSpectators, nodeHostingOn;
+    private CheckBox nodeHighLatencyButton;
 
     //Player datas
     public PlayerData p1, p2;
@@ -80,6 +81,7 @@ public class CharSelection : Control
         this.nodeQuitButton = GetNode<TextureButton>("bt_quit");
         this.nodeSpectators = GetNode<Label>("la_mp_spectators");
         this.nodeHostingOn = GetNode<Label>("la_mp_hosting_on");
+        this.nodeHighLatencyButton = GetNode<CheckBox>("bt_high_latency");
 
         //This is removed the moment the scene is opened
         //However I left it in the scene as it works as a good visual guide as to where the everything is in engine
@@ -99,6 +101,7 @@ public class CharSelection : Control
         this.nodePlayButton.Connect("pressed", this, nameof(this._OnPlayPressed));
         this.nodeQuitButton.Connect("pressed", Command.lobby, nameof(Command.lobby.Reset));
         this.nodeRoleButton.Connect("pressed", this, nameof(this._OnRolePressed));
+        this.nodeHighLatencyButton.Connect("pressed", this, nameof(this._OnHighLatencyPressed));
 
         this.nodeCharList.Connect("item_selected", this, nameof(this._OnCharSelected));
 
@@ -106,11 +109,13 @@ public class CharSelection : Control
         this.nodeSpectators.Visible = false;
         this.nodeHostingOn.Visible = false;
         this.nodeRoleButton.Visible = false;
+        this.nodeHighLatencyButton.Visible = false;
 
         //Map PackedScenes in charScenes into Control nodes in chars
         this.chars = charScenes.Select(character => character.Instance() as CharSelectionDataPanel).ToArray();
 
-        this.RpcConfig(nameof(this.Confirm), MultiplayerAPI.RPCMode.Remotesync);
+        RpcConfig(nameof(this.Confirm), MultiplayerAPI.RPCMode.Remotesync);
+        RpcConfig(nameof(this.SetHighLatency), MultiplayerAPI.RPCMode.Remotesync);
 
         this.ShowChar(-1);
         this.GrabFocus();
@@ -181,6 +186,15 @@ public class CharSelection : Control
     void _OnRolePressed() {
         //Make the spectate request to the server
         Command.lobby.RpcId(1, nameof(Command.lobby.ChangeRole), new object[] {GetTree().GetNetworkUniqueId()});
+    }
+
+    void _OnHighLatencyPressed() {
+        Rpc(nameof(SetHighLatency), new object[] {this.nodeHighLatencyButton.Pressed});
+    }
+
+    void SetHighLatency(bool enabled) {
+        this.nodeHighLatencyButton.Pressed = enabled;
+        Lobby.highLatency = enabled;
     }
 
     //Sets a player selection to be confirmed
@@ -262,8 +276,12 @@ public class CharSelection : Control
         this.nodeRoleButton.Visible = true;
         this.SetSpectators(Command.lobby.CalcSpectators());
 
+        this.nodeHighLatencyButton.Visible = true;
+        this.nodeHighLatencyButton.Pressed = Lobby.highLatency;
+
         //Show "Hosting on: " text if for the host
-        if (Lobby.IsHost()) {
+        if (Lobby.IsHost) {
+            this.nodeHighLatencyButton.Disabled = false;
             this.nodeHostingOn.Visible = true;
             this.nodeHostingOn.Text = "Hosting on: " + Command.GetLocalIP();
         }

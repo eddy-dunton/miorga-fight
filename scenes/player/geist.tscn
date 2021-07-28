@@ -1,0 +1,157 @@
+[gd_scene load_steps=57 format=2]
+
+[ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/player/geist/walk/key8.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/geist/flinch/key1.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/geist/flinch/key6.png" type="Texture" id=4]
+[ext_resource path="res://assets/player/geist/flinch/key7.png" type="Texture" id=5]
+[ext_resource path="res://assets/player/geist/flinch/key8.png" type="Texture" id=6]
+[ext_resource path="res://assets/player/geist/flinch/key10.png" type="Texture" id=7]
+[ext_resource path="res://assets/player/geist/stances/lax/key1.png" type="Texture" id=8]
+[ext_resource path="res://assets/player/geist/flinch/key5.png" type="Texture" id=9]
+[ext_resource path="res://assets/player/geist/stances/high/key2.png" type="Texture" id=10]
+[ext_resource path="res://assets/player/geist/stances/transition/laxtohigh.png" type="Texture" id=11]
+[ext_resource path="res://assets/player/geist/flinch/key12.png" type="Texture" id=12]
+[ext_resource path="res://assets/player/geist/flinch/key2.png" type="Texture" id=13]
+[ext_resource path="res://assets/player/geist/flinch/key11.png" type="Texture" id=14]
+[ext_resource path="res://assets/player/geist/stances/transition/betweenguard.png" type="Texture" id=15]
+[ext_resource path="res://assets/player/geist/stances/transition/laxtolow.png" type="Texture" id=16]
+[ext_resource path="res://assets/player/geist/walk/key1.png" type="Texture" id=17]
+[ext_resource path="res://assets/player/geist/flinch/key4.png" type="Texture" id=18]
+[ext_resource path="res://assets/player/geist/stances/lax/key2.png" type="Texture" id=19]
+[ext_resource path="res://assets/player/geist/stances/low/key3.png" type="Texture" id=20]
+[ext_resource path="res://assets/player/geist/stances/high/key3.png" type="Texture" id=21]
+[ext_resource path="res://assets/player/geist/stances/low/key2.png" type="Texture" id=22]
+[ext_resource path="res://assets/player/geist/stances/high/key1.png" type="Texture" id=23]
+[ext_resource path="res://assets/player/geist/flinch/key3.png" type="Texture" id=24]
+[ext_resource path="res://assets/player/geist/stances/low/key1.png" type="Texture" id=25]
+[ext_resource path="res://assets/player/geist/flinch/key9.png" type="Texture" id=26]
+[ext_resource path="res://assets/player/geist/walk/key6.png" type="Texture" id=27]
+[ext_resource path="res://assets/player/geist/walk/key2.png" type="Texture" id=28]
+[ext_resource path="res://assets/player/geist/walk/key3.png" type="Texture" id=29]
+[ext_resource path="res://assets/player/geist/walk/key7.png" type="Texture" id=30]
+[ext_resource path="res://assets/player/geist/walk/key4.png" type="Texture" id=31]
+[ext_resource path="res://assets/player/geist/walk/key5.png" type="Texture" id=32]
+[ext_resource path="res://assets/player/particles/bloodmid/2.png" type="Texture" id=60]
+[ext_resource path="res://assets/player/particles/bloodmid/4.png" type="Texture" id=61]
+[ext_resource path="res://assets/player/particles/bloodmid/9.png" type="Texture" id=62]
+[ext_resource path="res://assets/player/particles/bloodmid/5.png" type="Texture" id=63]
+[ext_resource path="res://assets/player/particles/bloodmid/1.png" type="Texture" id=64]
+[ext_resource path="res://assets/player/particles/bloodmid/8.png" type="Texture" id=65]
+[ext_resource path="res://assets/player/particles/bloodmid/3.png" type="Texture" id=66]
+[ext_resource path="res://assets/player/particles/bloodmid/6.png" type="Texture" id=68]
+[ext_resource path="res://resources/sfx/regia/footsteps.tres" type="Resource" id=69]
+[ext_resource path="res://assets/player/particles/bloodmid/7.png" type="Texture" id=70]
+[ext_resource path="res://resources/sfx/regia/hurt.tres" type="Resource" id=71]
+[ext_resource path="res://assets/player/particles/bloodmid/11.png" type="Texture" id=77]
+[ext_resource path="res://assets/player/particles/bloodmid/12.png" type="Texture" id=78]
+[ext_resource path="res://assets/player/particles/bloodmid/13.png" type="Texture" id=79]
+[ext_resource path="res://assets/player/particles/bloodmid/10.png" type="Texture" id=80]
+[ext_resource path="res://assets/player/regia/fight/high/standard/feint/key1.png" type="Texture" id=97]
+[ext_resource path="res://assets/player/regia/fight/high/standard/feint/key3.png" type="Texture" id=98]
+[ext_resource path="res://assets/player/regia/fight/high/standard/feint/key4.png" type="Texture" id=99]
+[ext_resource path="res://assets/player/regia/fight/high/standard/feint/key2.png" type="Texture" id=100]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 23, 46 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 23 ), ExtResource( 10 ), ExtResource( 21 ) ],
+"loop": true,
+"name": "high",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": false,
+"name": "trans_lax->high",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 13 ), ExtResource( 24 ), ExtResource( 18 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 26 ), ExtResource( 7 ), ExtResource( 14 ), ExtResource( 12 ) ],
+"loop": false,
+"name": "flinch",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 16 ) ],
+"loop": false,
+"name": "trans_lax->low",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "walk",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "lax",
+"speed": 1.5
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": false,
+"name": "trans_high->low",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 25 ), ExtResource( 22 ), ExtResource( 20 ) ],
+"loop": true,
+"name": "low",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 14.0135, 14.88 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 64 ), ExtResource( 60 ), ExtResource( 66 ), ExtResource( 61 ), ExtResource( 63 ), ExtResource( 68 ), ExtResource( 70 ), ExtResource( 65 ), ExtResource( 62 ), ExtResource( 62 ), ExtResource( 80 ), ExtResource( 77 ), ExtResource( 78 ), ExtResource( 79 ) ],
+"loop": false,
+"name": "blood_mid",
+"speed": 30.0
+} ]
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ ExtResource( 97 ), ExtResource( 100 ), ExtResource( 98 ), ExtResource( 99 ) ],
+"loop": false,
+"name": "high_main_attack_feint",
+"speed": 15.0
+} ]
+
+[node name="en_player" instance=ExtResource( 1 )]
+actions = [  ]
+SPEED = 100
+HP_MAX = 100
+sfx = {
+"footsteps": ExtResource( 69 ),
+"hurt": ExtResource( 71 )
+}
+
+[node name="collision" parent="." index="1"]
+position = Vector2( 10, 37 )
+shape = SubResource( 1 )
+
+[node name="animate_sprite" parent="." index="2"]
+frames = SubResource( 2 )
+animation = "trans_lax->low"
+data = {
+
+}
+
+[node name="temp" type="CollisionShape2D" parent="animate_sprite" index="0"]
+visible = false
+position = Vector2( -199.681, -29.9895 )
+shape = SubResource( 3 )
+
+[node name="overlay_track" parent="animate_sprite" index="2"]
+frames = SubResource( 4 )
+animation = "blood_mid"
+offsets = {
+"blood_mid": Vector2( 40, 38 )
+}
+
+[node name="overlay_notrack" parent="." index="3"]
+frames = SubResource( 5 )
+animation = "high_main_attack_feint"
+offsets = {
+"high_main_attack_feint": Vector2( 89, -6 )
+}

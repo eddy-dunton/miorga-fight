@@ -362,7 +362,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Passes straight through to ChangeHP_(..) in singleplayer
 	public void ChangeHP(int newhp) {
 		if (Lobby.role != Lobby.MultiplayerRole.OFFLINE) {
-			if (Lobby.IsHost()) { //Only issue commands if host
+			if (Lobby.IsHost) { //Only issue commands if host
 				RpcMaybeReliable(nameof(this.ChangeHP_), new object[] {newhp});
 			}
 		} else {
@@ -430,7 +430,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Passes straight through to Hurt_(..) in singleplayer
 	public void Hurt(int damage, int knockback, bool halting = false) {
 		if (Lobby.role != Lobby.MultiplayerRole.OFFLINE) {
-			if (Lobby.IsHost()) { //Only issue commands if host
+			if (Lobby.IsHost) { //Only issue commands if host
 				RpcMaybeReliable(nameof(this.Hurt_), new object[] {damage, knockback, halting});
 			}
 		} else {
@@ -461,7 +461,7 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	//Passes straight through to Parried_(..) in singleplayer
 	public void Parried(Attack attack, Parry by) {
 		if (Lobby.role != Lobby.MultiplayerRole.OFFLINE) {
-			if (Lobby.IsHost()) { //Only issue calls if host
+			if (Lobby.IsHost) { //Only issue calls if host
 				RpcMaybeReliable(nameof(this.Parried_ByIndex_), new object[] 
 						{this.actions.IndexOf(attack), this.nodeEnemy.actions.IndexOf(by)});
 			}
@@ -607,26 +607,16 @@ public class Player : KinematicBody2D, CameraTrack.Trackable {
 	
 	//Peforms an RPC call, with reliablity depending on Lobby.highLatency
 	private object RpcMaybeReliable(string method, params object[] args) {
-		if (Lobby.highLatency) {
-			return this.Rpc(method, args);
-		} else {
-			return this.RpcUnreliable(method, args);
-		}
+		return Lobby.highLatency ? this.Rpc(method, args) : this.RpcUnreliable(method, args);
 	}
 
 	//Peforms an RPC call on a single peer, with reliablity depending on Lobby.highLatency
 	private object RpcMaybeReliableId(int id, string method, params object[] args) {
-		if (Lobby.highLatency) {
-			return this.RpcId(id, method, args);
-		} else {
-			return this.RpcUnreliableId(id, method, args);
-		}
+		return (Lobby.highLatency) ? this.RpcId(id, method, args) : this.RpcUnreliableId(id, method, args);
 	}
 
-	Node2D CameraTrack.Trackable.GetTrackingNode() {
-		//Gets camera to play nice
-		return this.nodeCollision;
-	}
+	//Gets camera to play nice
+	Node2D CameraTrack.Trackable.GetTrackingNode() => this.nodeCollision;
 
 	public class Stance {
 		public string sprite;

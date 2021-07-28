@@ -64,6 +64,6 @@ public class HUD : CanvasLayer
 	}
 
 	public void ResetToLobby() {
-		Command.lobby.ResetToLobby(Command.lobby.p1Id, Command.lobby.p2Id);
+		Command.lobby.ResetToLobby(Command.lobby.p1Id, Command.lobby.p2Id, Lobby.highLatency);
 	}
 }}

@@ -30,13 +30,11 @@ public class Lobby : Control {
 
 	public static MultiplayerRole role = MultiplayerRole.OFFLINE;
 	public static GameState state = GameState.TITLE;
-	//Whether the 
+	//Whether the game should use highlatency or not
 	public static bool highLatency = false;
 
 	//Returns whether this game is hosting or not
-	public static bool IsHost() {
-		return (Command.lobby.GetTree().GetNetworkUniqueId() == 1);
-	}
+	public static bool IsHost => (Command.lobby.GetTree().GetNetworkUniqueId() == 1);
 
 	LineEdit nodeAddr;
 	Button nodeHostButton, nodeJoinButton, nodeLocalButton, nodeQuitButton;
@@ -111,17 +109,17 @@ public class Lobby : Control {
 		//Don't let the server get in here (I don't think it can anyway tbf)
 		if (id == 1) return;
 
-		if (Lobby.IsHost()) {
+		if (Lobby.IsHost) {
 			//If p1 or p2 change, push changes to all clients
 			if (this.p1Id == 0) {
 				this.p1Id = id;
-				Rpc(nameof(this.ResetToLobby), new object[] {this.p1Id, this.p2Id});
+				Rpc(nameof(this.ResetToLobby), new object[] {this.p1Id, this.p2Id, highLatency});
 			} else if (this.p2Id == 0) {
 				this.p2Id = id;
-				Rpc(nameof(this.ResetToLobby), new object[] {this.p1Id, this.p2Id});
+				Rpc(nameof(this.ResetToLobby), new object[] {this.p1Id, this.p2Id, highLatency});
 			} else {
 				//Otherwise just current ids to new player
-				RpcId(id, nameof(this.SetupClient), new object[] {this.p1Id, this.p2Id});
+				RpcId(id, nameof(this.SetupClient), new object[] {this.p1Id, this.p2Id, highLatency});
 			
 				//Also send through any character selection choices that have been made
 				CharSelection cs = GetTree().Root.GetNode<CharSelection>("char_selection");
@@ -136,7 +134,7 @@ public class Lobby : Control {
 	}
 
 	void _PlayerDisconnected(int id) {
-		if (Lobby.IsHost()) {
+		if (Lobby.IsHost) {
 			//Force everyone back to lobby (if you're the server)
 			if (id == this.p1Id) {
 				Rpc(nameof(this.ResetToLobby), new object[] {0, this.p2Id});
@@ -183,7 +181,8 @@ public class Lobby : Control {
 		Lobby.state = GameState.CHAR_SELECTION;
 		//Hosts should start out as a spectator
 		Lobby.role = MultiplayerRole.P1;
-	
+		Lobby.highLatency = false;
+
 		this.Visible = false;
 
 		//Goto CS as spectator
@@ -310,11 +309,13 @@ public class Lobby : Control {
 	//Called whenever the game has to be setup
 	//This is called internally when the players have changed
 	//Or by the server if you join late as a spectator
-	private void SetupClient(int p1Id, int p2Id) {
+	private void SetupClient(int p1Id, int p2Id, bool highLatency) {
 		//Set the role correctly
 		if (p1Id == GetTree().GetNetworkUniqueId()) Lobby.role = MultiplayerRole.P1;
 		else if (p2Id == GetTree().GetNetworkUniqueId()) Lobby.role = MultiplayerRole.P2;
 		else Lobby.role = MultiplayerRole.SPECTATOR;
+
+		Lobby.highLatency = highLatency;
 
 		//Set the player ids
 		this.p1Id = p1Id;
@@ -335,7 +336,7 @@ public class Lobby : Control {
 	}
 
 	public void ChangeRole(int id) {
-		if (! Lobby.IsHost()) return; //None hosts can fuck off
+		if (! Lobby.IsHost) return; //None hosts can fuck off
 
 		//P1 -> Spectator
 		if (this.p1Id == id) {
@@ -400,7 +401,7 @@ public class Lobby : Control {
 
 	//Called when a player changes, causes the game to reset to character selection or once a game has ended 
 	//Including if this client is one of those players
-	public void ResetToLobby(int p1Id, int p2Id) {
+	public void ResetToLobby(int p1Id, int p2Id, bool highLatency) {
 		GetTree().Paused = false;
 
 		this.RemoveAll();
@@ -413,7 +414,7 @@ public class Lobby : Control {
 			if (GetTree().NetworkPeer != null) GetTree().NetworkPeer.RefuseNewConnections = false;
 			
 			//Reset state and action as if this client has just connected
-			this.SetupClient(p1Id, p2Id);
+			this.SetupClient(p1Id, p2Id, highLatency);
 		} else { //Singleplayer
 			this._OnLocalPressed();
 		}
