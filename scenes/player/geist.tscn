@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=92 format=2]
 
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/player/geist/walk/key8.png" type="Texture" id=2]
@@ -32,6 +32,33 @@
 [ext_resource path="res://assets/player/geist/walk/key7.png" type="Texture" id=30]
 [ext_resource path="res://assets/player/geist/walk/key4.png" type="Texture" id=31]
 [ext_resource path="res://assets/player/geist/walk/key5.png" type="Texture" id=32]
+[ext_resource path="res://resources/animations/geist/default.tres" type="Resource" id=33]
+[ext_resource path="res://resources/action/geist/HighMain.tres" type="Resource" id=34]
+[ext_resource path="res://resources/action/geist/LowMain.tres" type="Resource" id=35]
+[ext_resource path="res://resources/action/geist/LowAlt.tres" type="Resource" id=36]
+[ext_resource path="res://resources/action/geist/HighAlt.tres" type="Resource" id=37]
+[ext_resource path="res://assets/player/geist/fight/high/main/key1.png" type="Texture" id=38]
+[ext_resource path="res://assets/player/geist/fight/high/alternate/key1.png" type="Texture" id=39]
+[ext_resource path="res://assets/player/geist/fight/high/main/key5.png" type="Texture" id=40]
+[ext_resource path="res://assets/player/geist/fight/low/main/key4.png" type="Texture" id=41]
+[ext_resource path="res://assets/player/geist/fight/low/main/key1.png" type="Texture" id=42]
+[ext_resource path="res://assets/player/geist/fight/low/main/key9.png" type="Texture" id=43]
+[ext_resource path="res://assets/player/geist/fight/high/alternate/key2.png" type="Texture" id=44]
+[ext_resource path="res://assets/player/geist/fight/low/main/key3.png" type="Texture" id=45]
+[ext_resource path="res://assets/player/geist/fight/low/alternate/key8.png" type="Texture" id=46]
+[ext_resource path="res://assets/player/geist/fight/low/alternate/key3.png" type="Texture" id=47]
+[ext_resource path="res://assets/player/geist/fight/low/main/key7.png" type="Texture" id=48]
+[ext_resource path="res://assets/player/geist/fight/low/alternate/key5.png" type="Texture" id=49]
+[ext_resource path="res://assets/player/geist/fight/high/alternate/key5.png" type="Texture" id=50]
+[ext_resource path="res://assets/player/geist/fight/low/alternate/key6.png" type="Texture" id=51]
+[ext_resource path="res://assets/player/geist/fight/low/main/key10.png" type="Texture" id=52]
+[ext_resource path="res://assets/player/geist/fight/high/main/key7.png" type="Texture" id=53]
+[ext_resource path="res://assets/player/geist/fight/low/main/key2.png" type="Texture" id=54]
+[ext_resource path="res://assets/player/geist/fight/high/main/key4.png" type="Texture" id=55]
+[ext_resource path="res://assets/player/geist/fight/low/main/key6.png" type="Texture" id=56]
+[ext_resource path="res://assets/player/geist/fight/low/alternate/key7.png" type="Texture" id=57]
+[ext_resource path="res://assets/player/geist/fight/high/main/key3.png" type="Texture" id=58]
+[ext_resource path="res://assets/player/geist/fight/high/alternate/key3.png" type="Texture" id=59]
 [ext_resource path="res://assets/player/particles/bloodmid/2.png" type="Texture" id=60]
 [ext_resource path="res://assets/player/particles/bloodmid/4.png" type="Texture" id=61]
 [ext_resource path="res://assets/player/particles/bloodmid/9.png" type="Texture" id=62]
@@ -39,14 +66,22 @@
 [ext_resource path="res://assets/player/particles/bloodmid/1.png" type="Texture" id=64]
 [ext_resource path="res://assets/player/particles/bloodmid/8.png" type="Texture" id=65]
 [ext_resource path="res://assets/player/particles/bloodmid/3.png" type="Texture" id=66]
+[ext_resource path="res://assets/player/geist/fight/high/main/key6.png" type="Texture" id=67]
 [ext_resource path="res://assets/player/particles/bloodmid/6.png" type="Texture" id=68]
 [ext_resource path="res://resources/sfx/regia/footsteps.tres" type="Resource" id=69]
 [ext_resource path="res://assets/player/particles/bloodmid/7.png" type="Texture" id=70]
 [ext_resource path="res://resources/sfx/regia/hurt.tres" type="Resource" id=71]
+[ext_resource path="res://assets/player/geist/fight/low/alternate/key2.png" type="Texture" id=72]
+[ext_resource path="res://assets/player/geist/fight/low/alternate/key4.png" type="Texture" id=73]
+[ext_resource path="res://assets/player/geist/fight/high/alternate/key4.png" type="Texture" id=74]
+[ext_resource path="res://assets/player/geist/fight/high/main/key2.png" type="Texture" id=75]
+[ext_resource path="res://assets/player/geist/fight/low/main/key5.png" type="Texture" id=76]
 [ext_resource path="res://assets/player/particles/bloodmid/11.png" type="Texture" id=77]
 [ext_resource path="res://assets/player/particles/bloodmid/12.png" type="Texture" id=78]
 [ext_resource path="res://assets/player/particles/bloodmid/13.png" type="Texture" id=79]
 [ext_resource path="res://assets/player/particles/bloodmid/10.png" type="Texture" id=80]
+[ext_resource path="res://assets/player/geist/fight/low/alternate/key1.png" type="Texture" id=81]
+[ext_resource path="res://assets/player/geist/fight/low/main/key8.png" type="Texture" id=82]
 [ext_resource path="res://assets/player/regia/fight/high/standard/feint/key1.png" type="Texture" id=97]
 [ext_resource path="res://assets/player/regia/fight/high/standard/feint/key3.png" type="Texture" id=98]
 [ext_resource path="res://assets/player/regia/fight/high/standard/feint/key4.png" type="Texture" id=99]
@@ -57,6 +92,21 @@ extents = Vector2( 23, 46 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
+"frames": [ ExtResource( 42 ), ExtResource( 54 ), ExtResource( 45 ), ExtResource( 41 ), ExtResource( 76 ), ExtResource( 56 ), ExtResource( 48 ), ExtResource( 82 ), ExtResource( 43 ), ExtResource( 52 ) ],
+"loop": true,
+"name": "low_main",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 38 ), ExtResource( 75 ), ExtResource( 58 ), ExtResource( 55 ), ExtResource( 40 ), ExtResource( 67 ), ExtResource( 53 ) ],
+"loop": true,
+"name": "high_main",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 81 ), ExtResource( 72 ), ExtResource( 47 ), ExtResource( 73 ), ExtResource( 49 ), ExtResource( 51 ), ExtResource( 57 ), ExtResource( 46 ) ],
+"loop": true,
+"name": "low_alt",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 23 ), ExtResource( 10 ), ExtResource( 21 ) ],
 "loop": true,
 "name": "high",
@@ -67,10 +117,20 @@ animations = [ {
 "name": "trans_lax->high",
 "speed": 10.0
 }, {
+"frames": [ ExtResource( 15 ) ],
+"loop": false,
+"name": "trans_high->low",
+"speed": 12.0
+}, {
 "frames": [ ExtResource( 3 ), ExtResource( 13 ), ExtResource( 24 ), ExtResource( 18 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 26 ), ExtResource( 7 ), ExtResource( 14 ), ExtResource( 12 ) ],
 "loop": false,
 "name": "flinch",
 "speed": 20.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "lax",
+"speed": 1.5
 }, {
 "frames": [ ExtResource( 16 ) ],
 "loop": false,
@@ -82,19 +142,14 @@ animations = [ {
 "name": "walk",
 "speed": 8.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 19 ) ],
-"loop": true,
-"name": "lax",
-"speed": 1.5
-}, {
-"frames": [ ExtResource( 15 ) ],
-"loop": false,
-"name": "trans_high->low",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 25 ), ExtResource( 22 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "low",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 39 ), ExtResource( 44 ), ExtResource( 59 ), ExtResource( 74 ), ExtResource( 50 ) ],
+"loop": true,
+"name": "high_alt",
 "speed": 5.0
 } ]
 
@@ -118,9 +173,9 @@ animations = [ {
 } ]
 
 [node name="en_player" instance=ExtResource( 1 )]
-actions = [  ]
-SPEED = 100
-HP_MAX = 100
+actions = [ ExtResource( 37 ), ExtResource( 34 ), ExtResource( 36 ), ExtResource( 35 ) ]
+SPEED = 125
+HP_MAX = 80
 sfx = {
 "footsteps": ExtResource( 69 ),
 "hurt": ExtResource( 71 )
@@ -132,9 +187,9 @@ shape = SubResource( 1 )
 
 [node name="animate_sprite" parent="." index="2"]
 frames = SubResource( 2 )
-animation = "trans_lax->low"
+animation = "high_alt"
 data = {
-
+"default": ExtResource( 33 )
 }
 
 [node name="temp" type="CollisionShape2D" parent="animate_sprite" index="0"]

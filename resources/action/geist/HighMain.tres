@@ -1,0 +1,24 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://src/MiorgaFight/Action/Attack.cs" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[resource]
+script = ExtResource( 1 )
+triggerInput = "action_main"
+triggerAnimation = "high"
+triggerMinFrame = -1
+triggerMaxFrame = -1
+animation = "high_main"
+movement = Vector2( 0, 0 )
+transition = null
+transitionTo = 1
+animateTransition = false
+hitbox = SubResource( 1 )
+hitboxoffset = Vector2( 0, 0 )
+hitframe = 0
+halt = false
+damage = 0
+knockback = 0
+requiresSuccessfulParry = false

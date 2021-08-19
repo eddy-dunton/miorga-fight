@@ -8,18 +8,23 @@ public class PlayerAnimation : AnimatedSprite {
 
     [Export] Dictionary<String, AnimationData> data;
 
+    private AnimationData defaultAnimationData;
+
     private Player parent;
 
     //Data for the current animation, will never be null
     private AnimationData current;
-    public AnimationData Current() {return this.current;}
-
+    public AnimationData Current => this.current;
+  
     public override void _Ready() {
         this.Connect("animation_finished", this, nameof(_AnimationFinished));
         this.Connect("frame_changed", this, nameof(_FrameChanged));
 
         this.parent = GetParent() as Player;
-        this.current = new AnimationData();
+
+        this.data.TryGetValue("default", out this.defaultAnimationData);
+
+        this.current = this.defaultAnimationData;
     }
 
     //Applies offset then calls parent play
@@ -30,7 +35,7 @@ public class PlayerAnimation : AnimatedSprite {
         //Tries to get animation data
         //Resets this.current to a blank value if none is found 
         if (!this.data.TryGetValue(anim, out this.current)) {
-            this.current = new AnimationData();
+            this.current = this.defaultAnimationData;
         }
 
         //Play sfx if present
@@ -41,18 +46,24 @@ public class PlayerAnimation : AnimatedSprite {
     }
 
     private void _AnimationFinished() {
-        //If player has just attacked or parried, return to stance
-        if (this.parent.state == Player.State.ATTACK) {
-            this.parent.attack.End(this.parent);
-        } else if (this.parent.state == Player.State.PARRY) {
-            this.parent.parry.End(this.parent);
-        } else if (this.parent.state == Player.State.TRANS) {
-            this.parent.TransitionEnd();
-        } else if (! this.Frames.GetAnimationLoop(this.Animation)) {
-            //If not repeating, reset sprite
-            this.Reset();
-        }
-    }
+			//If player has just attacked or parried, return to stance
+			switch (parent.state) {
+				case Player.State.ATTACK:
+					parent.attack.End(parent);
+					return;
+				case Player.State.PARRY:
+					parent.parry.End(parent);
+					return;
+				case Player.State.TRANS:
+					parent.TransitionEnd();
+					return;
+			}
+
+            if (!Frames.GetAnimationLoop(Animation)) {
+                //If not repeating, reset sprite
+                Reset();
+            }
+		}
 
     private void _FrameChanged() {
         //If player is attacking this is the hitframe
@@ -60,7 +71,7 @@ public class PlayerAnimation : AnimatedSprite {
             this.parent.attack.Hit(this.parent);
         }
     }
-    
+
 	//Returns this players hitbox as a shape and a transform
 	//Will return a 0 long line with a transform of 0 the player does not have one
 	//Returns value of this.nodeAnimateSprite.GetHitbox(..)

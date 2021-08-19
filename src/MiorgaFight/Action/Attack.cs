@@ -43,7 +43,7 @@ public class Attack : Action {
         PlayerAnimation enemySprite = player.nodeEnemy.nodeAnimateSprite;
 
         //No hitbox, no point trying
-        if (enemySprite.Current().hitboxOffset.Length == 0) return;
+        if (enemySprite.Current.hitboxOffset.Length == 0) return;
 
         (Shape2D enHitbox, Transform2D enXform) = player.nodeEnemy.nodeAnimateSprite.GetHitbox(); 
 

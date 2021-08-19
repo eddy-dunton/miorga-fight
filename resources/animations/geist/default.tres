@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/MiorgaFight/Player/AnimationData.cs" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+offset = Vector2( 0, 19 )
+hitboxOffset = PoolVector2Array(  )
+hitbox = [  ]
