@@ -95,22 +95,17 @@ animations = [ {
 "frames": [ ExtResource( 42 ), ExtResource( 54 ), ExtResource( 45 ), ExtResource( 41 ), ExtResource( 76 ), ExtResource( 56 ), ExtResource( 48 ), ExtResource( 82 ), ExtResource( 43 ), ExtResource( 52 ) ],
 "loop": true,
 "name": "low_main",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 38 ), ExtResource( 75 ), ExtResource( 58 ), ExtResource( 55 ), ExtResource( 40 ), ExtResource( 67 ), ExtResource( 53 ) ],
-"loop": true,
-"name": "high_main",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [ ExtResource( 81 ), ExtResource( 72 ), ExtResource( 47 ), ExtResource( 73 ), ExtResource( 49 ), ExtResource( 51 ), ExtResource( 57 ), ExtResource( 46 ) ],
 "loop": true,
 "name": "low_alt",
-"speed": 5.0
+"speed": 15.0
 }, {
 "frames": [ ExtResource( 23 ), ExtResource( 10 ), ExtResource( 21 ) ],
 "loop": true,
 "name": "high",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [ ExtResource( 11 ) ],
 "loop": false,
@@ -142,15 +137,20 @@ animations = [ {
 "name": "walk",
 "speed": 8.0
 }, {
+"frames": [ ExtResource( 38 ), ExtResource( 75 ), ExtResource( 58 ), ExtResource( 55 ), ExtResource( 40 ), ExtResource( 67 ), ExtResource( 53 ) ],
+"loop": true,
+"name": "high_main",
+"speed": 12.0
+}, {
 "frames": [ ExtResource( 25 ), ExtResource( 22 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "low",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [ ExtResource( 39 ), ExtResource( 44 ), ExtResource( 59 ), ExtResource( 74 ), ExtResource( 50 ) ],
 "loop": true,
 "name": "high_alt",
-"speed": 5.0
+"speed": 12.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=3]
