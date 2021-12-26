@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/key1.png-f20268baa35f364abefdb8ec656b1b93.stex"
+path="res://.import/key4.png-978f19eebdacd6f35c2e55148594e6e4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/geist/fight/high/alternate/key1.png"
-dest_files=[ "res://.import/key1.png-f20268baa35f364abefdb8ec656b1b93.stex" ]
+source_file="res://assets/player/geist/fight/high/alternate/riposte/key4.png"
+dest_files=[ "res://.import/key4.png-978f19eebdacd6f35c2e55148594e6e4.stex" ]
 
 [params]
 
