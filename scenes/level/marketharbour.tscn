@@ -120,6 +120,11 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [  ],
+"loop": false,
+"name": "default",
+"speed": 0.0
+}, {
 "frames": [ ExtResource( 41 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 32 ), ExtResource( 34 ) ],
 "loop": false,
 "name": "b_pre",
@@ -130,19 +135,14 @@ animations = [ {
 "name": "c_post",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 19 ), ExtResource( 25 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 23 ) ],
-"loop": false,
-"name": "a_pre",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 37 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 29 ), ExtResource( 30 ) ],
 "loop": true,
 "name": "c_pre",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 24 ), ExtResource( 17 ), ExtResource( 22 ) ],
+"frames": [ ExtResource( 19 ), ExtResource( 25 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 23 ) ],
 "loop": false,
-"name": "a_post",
+"name": "a_pre",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 40 ), ExtResource( 28 ), ExtResource( 33 ) ],
@@ -150,10 +150,10 @@ animations = [ {
 "name": "b_post",
 "speed": 5.0
 }, {
-"frames": [  ],
+"frames": [ ExtResource( 24 ), ExtResource( 17 ), ExtResource( 22 ) ],
 "loop": false,
-"name": "default",
-"speed": 0.0
+"name": "a_post",
+"speed": 5.0
 } ]
 
 [sub_resource type="ParticlesMaterial" id=2]
@@ -239,6 +239,11 @@ animations = [ {
 
 [sub_resource type="SpriteFrames" id=11]
 animations = [ {
+"frames": [  ],
+"loop": false,
+"name": "default",
+"speed": 0.0
+}, {
 "frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 13 ), ExtResource( 14 ) ],
 "loop": false,
 "name": "a_pre",
@@ -248,11 +253,6 @@ animations = [ {
 "loop": false,
 "name": "a_post",
 "speed": 5.0
-}, {
-"frames": [  ],
-"loop": false,
-"name": "default",
-"speed": 0.0
 } ]
 
 [sub_resource type="LineShape2D" id=12]
