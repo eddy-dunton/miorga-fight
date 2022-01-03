@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=2]
+[gd_scene load_steps=95 format=2]
 
 [ext_resource path="res://scenes/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/player/geist/walk/key8.png" type="Texture" id=2]
@@ -38,13 +38,14 @@
 [ext_resource path="res://resources/action/geist/LowAlt.tres" type="Resource" id=36]
 [ext_resource path="res://resources/action/geist/HighAlt.tres" type="Resource" id=37]
 [ext_resource path="res://assets/player/geist/fight/high/main/key1.png" type="Texture" id=38]
-[ext_resource path="res://assets/player/geist/fight/high/alternate/key1.png" type="Texture" id=39]
+[ext_resource path="res://assets/player/geist/fight/high/alternate/key6.png" type="Texture" id=39]
 [ext_resource path="res://assets/player/geist/fight/high/main/key5.png" type="Texture" id=40]
 [ext_resource path="res://assets/player/geist/fight/low/main/key4.png" type="Texture" id=41]
 [ext_resource path="res://resources/animations/geist/flinch.tres" type="Resource" id=42]
 [ext_resource path="res://assets/player/geist/fight/low/main/key9.png" type="Texture" id=43]
 [ext_resource path="res://assets/player/geist/fight/high/alternate/key2.png" type="Texture" id=44]
 [ext_resource path="res://assets/player/geist/fight/low/main/key3.png" type="Texture" id=45]
+[ext_resource path="res://assets/player/geist/fight/high/alternate/key7.png" type="Texture" id=46]
 [ext_resource path="res://assets/player/geist/fight/low/alternate/key3.png" type="Texture" id=47]
 [ext_resource path="res://assets/player/geist/fight/low/main/key7.png" type="Texture" id=48]
 [ext_resource path="res://assets/player/geist/fight/low/alternate/key5.png" type="Texture" id=49]
@@ -94,11 +95,6 @@ extents = Vector2( 23, 46 )
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
-"frames": [ ExtResource( 39 ), ExtResource( 44 ), ExtResource( 59 ), ExtResource( 74 ), ExtResource( 50 ) ],
-"loop": true,
-"name": "high_alt",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 16 ) ],
 "loop": false,
 "name": "trans_lax->low",
@@ -109,40 +105,45 @@ animations = [ {
 "name": "trans_lax->high",
 "speed": 10.0
 }, {
+"frames": [ ExtResource( 54 ), ExtResource( 45 ), ExtResource( 41 ), ExtResource( 76 ), ExtResource( 56 ), ExtResource( 48 ), ExtResource( 82 ), ExtResource( 43 ) ],
+"loop": true,
+"name": "low_main",
+"speed": 12.0
+}, {
 "frames": [ ExtResource( 3 ), ExtResource( 13 ), ExtResource( 24 ), ExtResource( 18 ), ExtResource( 9 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 26 ), ExtResource( 7 ), ExtResource( 14 ), ExtResource( 12 ) ],
 "loop": false,
 "name": "flinch",
 "speed": 20.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "walk",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 44 ), ExtResource( 59 ), ExtResource( 74 ), ExtResource( 50 ), ExtResource( 39 ), ExtResource( 46 ) ],
+"loop": true,
+"name": "high_alt",
+"speed": 12.0
 }, {
 "frames": [ ExtResource( 25 ), ExtResource( 22 ), ExtResource( 20 ) ],
 "loop": true,
 "name": "low",
 "speed": 4.0
 }, {
-"frames": [ ExtResource( 8 ), ExtResource( 19 ) ],
-"loop": true,
-"name": "lax",
-"speed": 1.5
-}, {
-"frames": [ ExtResource( 54 ), ExtResource( 45 ), ExtResource( 41 ), ExtResource( 76 ), ExtResource( 56 ), ExtResource( 48 ), ExtResource( 82 ), ExtResource( 43 ) ],
-"loop": true,
-"name": "low_main",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 15 ) ],
 "loop": false,
 "name": "trans_high->low",
 "speed": 12.0
 }, {
+"frames": [ ExtResource( 8 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "lax",
+"speed": 1.5
+}, {
 "frames": [ ExtResource( 81 ), ExtResource( 72 ), ExtResource( 47 ), ExtResource( 73 ), ExtResource( 49 ), ExtResource( 51 ), ExtResource( 57 ) ],
 "loop": true,
 "name": "low_alt",
 "speed": 15.0
-}, {
-"frames": [ ExtResource( 17 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 27 ), ExtResource( 30 ), ExtResource( 2 ) ],
-"loop": true,
-"name": "walk",
-"speed": 10.0
 }, {
 "frames": [ ExtResource( 38 ), ExtResource( 75 ), ExtResource( 58 ), ExtResource( 55 ), ExtResource( 40 ), ExtResource( 67 ), ExtResource( 53 ) ],
 "loop": true,
